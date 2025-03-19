@@ -1,4 +1,12 @@
+*.pem
+.cloud/
+.storage/
+.HA_VERSION
 blueprints/automation/homeassistant/
-script/homeassistant/
-template/homeassistant/
+blueprints/script/homeassistant/
+blueprints/template/homeassistant/
+custom_components/
+home-assistant.log*
+home-assistant_v2.db*
+insteon_devices.json
 
