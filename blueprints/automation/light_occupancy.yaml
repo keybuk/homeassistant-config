@@ -1,6 +1,8 @@
 blueprint:
   name: Light Occupancy
-  description: Turn a light on while a room is occupied
+  description: >
+    Turn a light on while a room is occupied during the evening, or during
+    the day while it's cloudy.
   domain: automation
   input:
     light:
@@ -12,7 +14,7 @@ blueprint:
             - domain: light
     sensor:
       name: Sensor
-      description: This is the occupancy sensor that will be used.
+      description: When this sensor detects occupancy.
       selector:
         entity:
           filter:
@@ -25,11 +27,9 @@ triggers:
   - trigger: sun
     event: sunset
     offset: "00:15:00"
-  - trigger: numeric_state
-    entity_id:
-      - weather.forecast_home
-    attribute: cloud_coverage
-    above: 50
+  - trigger: state
+    entity_id: weather.forecast_home
+    to: null
 
 conditions: []
 
@@ -47,10 +47,9 @@ actions:
             conditions:
               - condition: sun
                 after: sunrise
-              - condition: numeric_state
+              - condition: state
                 entity_id: weather.forecast_home
-                attribute: cloud_coverage
-                above: 50
+                state: "cloudy"
     then:
       - action: light.turn_on
         target:
