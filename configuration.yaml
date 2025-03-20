@@ -18,7 +18,6 @@ template:
           {{ is_state('device_tracker.scottys_iphone', 'home')
           and is_state('sensor.scottys_iphone_battery_state', 'Charging')
           and is_state('binary_sensor.scottys_iphone_focus', 'on') }}
-        device_class: presence
         icon: >
           {% if is_state('binary_sensor.scotty_asleep', 'on') %}
             mdi:bed
