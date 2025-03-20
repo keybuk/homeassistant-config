@@ -29,7 +29,7 @@ template:
       - name: "Bedroom Occupancy and Awake"
         unique_id: bedroom_occupancy_awake
         state: >
-          {{ is_state('binary_sensor.bedroom_occupied', 'on')
+          {{ is_state('binary_sensor.bedroom_occupancy', 'on')
           and not is_state('binary_sensor.scotty_asleep', 'on') }}
         device_class: occupancy
         icon: mdi:home-account
