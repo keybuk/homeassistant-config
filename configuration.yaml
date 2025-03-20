@@ -8,3 +8,29 @@ frontend:
 automation: !include automations.yaml
 script: !include scripts.yaml
 scene: !include scenes.yaml
+
+template:
+  - binary_sensor:
+      # I'm probably asleep when home, with my phone on charge, and a focus set.
+      - name: "Scotty Asleep"
+        unique_id: scotty_asleep
+        state: >
+          {{ is_state('device_tracker.scottys_iphone', 'home')
+          and is_state('sensor.scottys_iphone_battery_state', 'Charging')
+          and is_state('binary_sensor.scottys_iphone_focus', 'on') }}
+        device_class: presence
+        icon: >
+          {% if is_state('binary_sensor.scotty_asleep', 'on') %}
+            mdi:bed
+          {% else %}
+            mdi:bed-empty
+          {% endif %}
+
+      # Bedroom occupancy sensor that doesn't trigger while I'm sleeping.
+      - name: "Bedroom Occupancy and Awake"
+        unique_id: bedroom_occupancy_awake
+        state: >
+          {{ is_state('binary_sensor.bedroom_occupied', 'on')
+          and not is_state('binary_sensor.scotty_asleep', 'on') }}
+        device_class: occupancy
+        icon: mdi:home-account
