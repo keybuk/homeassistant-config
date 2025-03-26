@@ -25,11 +25,27 @@ template:
             mdi:bed-empty
           {% endif %}
 
-      # Bedroom occupancy sensor that doesn't trigger while I'm sleeping.
+      # If Shadie is home, and his phone is on charge, he's probably sleeping.
+      - name: "Shadie Asleep"
+        unique_id: shadie_asleep
+        state: >
+          {{ is_state('person.shadie', 'home')
+          and states('sensor.pixel_8_pro_battery_state') in ['charging', 'full'] }}
+        icon: >
+          {% if is_state('binary_sensor.shadie_asleep', 'on') %}
+            mdi:bed
+          {% else %}
+            mdi:bed-empty
+          {% endif %}
+
+      # Bedroom occupancy sensor that doesn't trigger while anyone is sleeping.
       - name: "Bedroom Occupancy and Awake"
         unique_id: bedroom_occupancy_awake
         state: >
           {{ is_state('binary_sensor.bedroom_occupancy', 'on')
-          and not is_state('binary_sensor.scotty_asleep', 'on') }}
+          and not is_state('binary_sensor.scotty_asleep', 'on')
+          and not is_state('binary_sensor.shadie_asleep', 'on') }}
+        device_class: occupancy
+        icon: mdi:home-account
         device_class: occupancy
         icon: mdi:home-account
