@@ -15,8 +15,8 @@ template:
       - name: "Scotty Asleep"
         unique_id: scotty_asleep
         state: >
-          {{ is_state('device_tracker.scottys_iphone', 'home')
-          and is_state('sensor.scottys_iphone_battery_state', 'Charging')
+          {{ is_state('person.scotty', 'home')
+          and states('sensor.scottys_iphone_battery_state') in ['Charging', 'Full']
           and is_state('binary_sensor.scottys_iphone_focus', 'on') }}
         icon: >
           {% if is_state('binary_sensor.scotty_asleep', 'on') %}
