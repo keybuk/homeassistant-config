@@ -47,5 +47,12 @@ template:
           and not is_state('binary_sensor.shadie_asleep', 'on') }}
         device_class: occupancy
         icon: mdi:home-account
+
+      # General Home occupancy sensor based on people.
+      - name: "Household Occupancy"
+        unique_id: household_occupancy
+        state: >
+          {{ is_state('person.scotty', 'home')
+          or is_state('person.shadie', 'home') }}
         device_class: occupancy
         icon: mdi:home-account
