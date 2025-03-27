@@ -46,59 +46,63 @@ triggers:
 variables:
   asleep: !input asleep
   not_asleep: "{{ asleep != none and not is_state(asleep, 'on') }}"
-  cloudy_day: |
+  cloudy_day: >
     {{ states('weather.forecast_home') not in
-       ['clear-night', 'partlycloudy', 'sunny', 'windy' ] }}
+       ['clear-night', 'partlycloudy', 'sunny', 'windy' ]
+    }}
 
 actions:
   - choose:
-      # Light is turned on when there is occupancy in the evening, unless
-      # someone is sleeping.
-      - conditions:
+    # Light is turned on when there is occupancy in the evening, unless
+    # someone is sleeping.
+    - conditions:
+      - condition: state
+        entity_id: !input sensor
+        state: "on"
+      # After sunset, not at night; we don't want occupancy triggering the
+      # lights after midnight.
+      - condition: sun
+        after: sunset
+      - "{{ not_asleep }}"
+      sequence:
+        - action: light.turn_on
+          target:
+            entity_id: !input light
+
+    # Light is turned on when there is occupancy on a cloudy day.
+    - conditions:
+      - condition: state
+        entity_id: sun.sun
+        state: above_horizon
+      - "{{ cloudy_day }}"
+      sequence:
+        - action: light.turn_on
+          target:
+            entity_id: !input light
+
+    # Turn the light off when the sun comes out during the day to save on
+    # power. Doesn't matter whether the room is occupied or not, since we
+    # wouldn't turn the light back on if they came in.
+    - conditions:
+      - condition: state
+        entity_id: sun.sun
+        state: above_horizon
+      - "{{ not cloudy_day }}"
+      sequence:
+        - action: light.turn_off
+          target:
+            entity_id: !input light
+
+    # Light is turned off when there is no longer occupancy. We don't turn it
+    # off at midnight (end of "after sunrise" condition) since that's just
+    # annoying.
+    - conditions:
+      - condition: not
+        conditions:
           - condition: state
             entity_id: !input sensor
             state: "on"
-          # After sunset, not at night; we don't want occupancy triggering the
-          # lights after midnight.
-          - condition: sun
-            after: sunset
-          - "{{ not_asleep }}"
-        sequence:
-          - action: light.turn_on
-            target:
-              entity_id: !input light
-      # Light is turned on when there is occupancy on a cloudy day.
-      - conditions:
-          - condition: state
-            entity_id: sun.sun
-            state: above_horizon
-          - "{{ cloudy_day }}"
-        sequence:
-          - action: light.turn_on
-            target:
-              entity_id: !input light
-      # Turn the light off when the sun comes out during the day to save on
-      # power. Doesn't matter whether the room is occupied or not, since we
-      # wouldn't turn the light back on if they came in.
-      - conditions:
-          - condition: state
-            entity_id: sun.sun
-            state: above_horizon
-          - "{{ not cloudy_day }}"
-        sequence:
-          - action: light.turn_off
-            target:
-              entity_id: !input light
-      # Light is turned off when there is no longer occupancy. We don't turn it
-      # off at midnight (end of "after sunrise" condition) since that's just
-      # annoying.
-      - conditions:
-          - condition: not
-            conditions:
-              - condition: state
-                entity_id: !input sensor
-                state: "on"
-        sequence:
-          - action: light.turn_off
-            target:
-              entity_id: !input light
+      sequence:
+        - action: light.turn_off
+          target:
+            entity_id: !input light
