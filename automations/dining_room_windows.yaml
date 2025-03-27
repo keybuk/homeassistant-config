@@ -1,0 +1,149 @@
+alias: Dining Room Windows
+id: dining_room_windows
+description: >
+  Closes the dining room windows as the sun shines through them, to keep the
+  sun out of the eyes of anyone at the table; and generally to keep the room
+  cool on a sunny day.
+
+mode: single
+
+triggers:
+  # Sun shines through the dining room windows from 220° azimuth.
+  - trigger: numeric_state
+    entity_id: sun.sun
+    attribute: azimuth
+    above: 220
+  # We close the blinds in stages matching the three window panes based on
+  # the elevation of the sun. 55° for the top pane, 45° for the middle pane,
+  # and 24° for the lower pane.
+  - trigger: numeric_state
+    entity_id: sun.sun
+    attribute: elevation
+    below: 55
+  - trigger: numeric_state
+    entity_id: sun.sun
+    attribute: elevation
+    below: 45
+  - trigger: numeric_state
+    entity_id: sun.sun
+    attribute: elevation
+    below: 24
+  # Once the sun elevation drops below around 5.5° it's behind Potrero hill,
+  # so we can open the blinds again in a "daytime" state.
+  - trigger: numeric_state
+    entity_id: sun.sun
+    attribute: elevation
+    below: 5.5
+  # Trigger on sunrise and sunset to switch between daytime and nighttime
+  # scenes.
+  - trigger: state
+    entity_id: sun.sun
+    from: null
+  # Track the weather state, we don't close the windows if it's cloudy to
+  # maintain natural light.
+  - trigger: state
+    entity_id: weather.forecast_home
+    to: null
+  # We're also careful not to close the blinds over parts of the window that
+  # are open, so the wind doesn't blow them around and burn out the motors;
+  # so trigger on those closing.
+  - trigger: state
+    entity_id: binary_sensor.dining_room_top_windows
+    to: "off"
+  - trigger: state
+    entity_id: binary_sensor.dining_room_bottom_windows
+    to: "off"
+
+variables:
+  cloudy_day: >
+    {{ states('weather.forecast_home') not in
+       ['clear-night', 'partlycloudy', 'sunny', 'windy' ]
+    }}
+
+actions:
+  - choose:
+    # When the sun is shining through the first pane, and the window is closed,
+    # cover it.
+    - conditions:
+        - condition: numeric_state
+          entity_id: sun.sun
+          attribute: elevation
+          above: 45
+          below: 55
+        - condition: numeric_state
+          entity_id: sun.sun
+          attribute: azimuth
+          above: 220
+        - condition: state
+          entity_id: binary_sensor.dining_room_top_windows
+          state: "off"
+        - "{{ not cloudy_day }}"
+      sequence:
+        - action: scene.turn_on
+          target:
+            entity_id: scene.afternoon_sun
+
+    # When the sun is shining through the second pane, and the window above
+    # it is closed, cover it.
+    - conditions:
+        - condition: numeric_state
+          entity_id: sun.sun
+          attribute: elevation
+          above: 24
+          below: 45
+        - condition: numeric_state
+          entity_id: sun.sun
+          attribute: azimuth
+          above: 220
+        - condition: state
+          entity_id: binary_sensor.dining_room_top_windows
+          state: "off"
+        - "{{ not cloudy_day }}"
+      sequence:
+        - action: scene.turn_on
+          target:
+            entity_id: scene.late_afternoon_sun
+
+    # When the sun is shining through the third pane, and all of the windows
+    # are closed, cover it.
+    - conditions:
+        - condition: numeric_state
+          entity_id: sun.sun
+          attribute: elevation
+          above: 5.5
+          below: 24
+        - condition: numeric_state
+          entity_id: sun.sun
+          attribute: azimuth
+          above: 220
+        - condition: state
+          entity_id: binary_sensor.dining_room_top_windows
+          state: "off"
+        - condition: state
+          entity_id: binary_sensor.dining_room_bottom_windows
+          state: "off"
+        - "{{ not cloudy_day }}"
+      sequence:
+        - action: scene.turn_on
+          target:
+            entity_id: scene.dining_room_windows_closed
+
+    # When the sun is otherwise above the horizon, set the daytime scene.
+    - conditions:
+        - condition: state
+          entity_id: sun.sun
+          state: above_horizon
+      sequence:
+        - action: scene.turn_on
+          target:
+            entity_id: scene.dining_room_daytime
+
+    # Lastly, when the sun is below the horizon, set the nighttime scene.
+    - conditions:
+        - condition: state
+          entity_id: sun.sun
+          state: below_horizon
+      sequence:
+        - action: scene.turn_on
+          target:
+            entity_id: scene.dining_room_nighttime
