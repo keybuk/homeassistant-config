@@ -1,0 +1,13 @@
+# If Shadie is home, and his phone is on charge, he's probably sleeping.
+name: "Shadie Asleep"
+unique_id: shadie_asleep
+state: >
+  {{ is_state('person.shadie', 'home')
+     and states('sensor.pixel_8_pro_battery_state') in ['charging', 'full']
+  }}
+icon: >
+  {% if is_state('binary_sensor.shadie_asleep', 'on') %}
+    mdi:bed
+  {% else %}
+    mdi:bed-empty
+  {% endif %}
