@@ -1,0 +1,82 @@
+alias: Kitchen Windows
+id: kitchen_windows
+description: >
+  Closes the loft part of the kitchen windows at night, and the full length
+  on a hot sunny day.
+
+mode: single
+
+triggers:
+  # Sun shines through the kitchen windows from 115° azimuth.
+  - trigger: numeric_state
+    entity_id: sun.sun
+    attribute: azimuth
+    above: 115
+  # Sun is no longer shining through the windows from 235° azimith.
+  - trigger: numeric_state
+    entity_id: sun.sun
+    attribute: azimuth
+    above: 235
+  # Also trigger on sunrise and sunset to open and close windows.
+  - trigger: state
+    entity_id: sun.sun
+    from: null
+  # Track both the weather state and forecast temperature, we close the windows
+  # to keep the room cool.
+  - trigger: state
+    entity_id: weather.forecast_home
+    to: null
+  - trigger: numeric_state
+    entity_id: weather.forecast_home
+    attribute: temperature
+    above: 69
+
+variables:
+  cloudy_day: >
+    {{ states('weather.forecast_home') not in
+       ['clear-night', 'partlycloudy', 'sunny', 'windy' ]
+    }}
+
+actions:
+  - choose:
+    # When the sun is above the horizon, shining through the windows, and
+    # it's warm and not cloudy, close the windows completely to keep the room
+    # cool.
+    - conditions:
+      - condition: state
+        entity_id: sun.sun
+        state: above_horizon
+      - condition: numeric_state
+        entity_id: sun.sun
+        attribute: azimuth
+        above: 115
+        below: 235
+      - condition: numeric_state
+        entity_id: weather.forecast_home
+        attribute: temperature
+        above: 69
+      - "{{ not cloudy_day }}"
+      sequence:
+        - action: scene.turn_on
+          target:
+            entity_id: scene.kitchen_windows_closed
+
+    # Otherwise any time the sun is above the horizon, set the daytime scene.
+    - conditions:
+      - condition: state
+        entity_id: sun.sun
+        state: above_horizon
+      sequence:
+        - action: scene.turn_on
+          target:
+            entity_id: scene.kitchen_daytime
+
+    # Once the sun is below the horizon, set the nighttime scene.
+    - conditions:
+      - condition: state
+        entity_id: sun.sun
+        state: below_horizon
+      sequence:
+        - action: scene.turn_on
+          target:
+            entity_id: scene.kitchen_nighttime
