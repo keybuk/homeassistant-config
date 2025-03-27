@@ -9,5 +9,6 @@ automation: !include automations.yaml
 script: !include scripts.yaml
 scene: !include scenes.yaml
 
+automation yaml: !include_dir_list automations/
 template:
   - binary_sensor: !include_dir_list templates/binary_sensor/

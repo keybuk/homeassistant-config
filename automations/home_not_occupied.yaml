@@ -1,0 +1,25 @@
+alias: "Home Not Occupied"
+id: home_not_occupied
+description: >
+  Turns off lights when the home is no longer occupied.
+
+mode: single
+
+triggers:
+  - trigger: state
+    entity_id: binary_sensor.home_occupancy
+    from: "on"
+
+actions:
+  - action: light.turn_off
+    target:
+      area_id:
+        - dining_room
+        - kitchen
+        - office
+        - downstairs_bathroom
+        - bathroom
+        - bedroom
+        - loft
+        - stairs
+        - roof
