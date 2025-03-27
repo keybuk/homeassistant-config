@@ -3,6 +3,7 @@ blueprint:
   description: >
     Turn a light on while a room is occupied during the evening, or during
     the day while it's cloudy.
+  author: Scott James Remnant <scott@netsplit.com>
   domain: automation
   input:
     light:
