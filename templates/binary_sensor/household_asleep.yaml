@@ -1,0 +1,13 @@
+# Sensor when anyone is asleep.
+name: "Household Asleep"
+unique_id: household_asleep
+state: >
+  {{ is_state('binary_sensor.scotty_asleep', 'on')
+     or is_state('binary_sensor.shadie_asleep', 'on')
+  }}
+icon: >
+  {% if is_state('binary_sensor.household_asleep', 'on') %}
+    mdi:bed-king
+  {% else %}
+    mdi:bed-king-outline
+  {% endif %}
