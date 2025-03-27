@@ -43,19 +43,19 @@ actions:
     # it's warm and not cloudy, close the windows completely to keep the room
     # cool.
     - conditions:
-      - condition: state
-        entity_id: sun.sun
-        state: above_horizon
-      - condition: numeric_state
-        entity_id: sun.sun
-        attribute: azimuth
-        above: 115
-        below: 235
-      - condition: numeric_state
-        entity_id: weather.forecast_home
-        attribute: temperature
-        above: 69
-      - "{{ not cloudy_day }}"
+        - condition: state
+          entity_id: sun.sun
+          state: above_horizon
+        - condition: numeric_state
+          entity_id: sun.sun
+          attribute: azimuth
+          above: 115
+          below: 235
+        - condition: numeric_state
+          entity_id: weather.forecast_home
+          attribute: temperature
+          above: 69
+        - "{{ not cloudy_day }}"
       sequence:
         - action: scene.turn_on
           target:
@@ -63,9 +63,9 @@ actions:
 
     # Otherwise any time the sun is above the horizon, set the daytime scene.
     - conditions:
-      - condition: state
-        entity_id: sun.sun
-        state: above_horizon
+        - condition: state
+          entity_id: sun.sun
+          state: above_horizon
       sequence:
         - action: scene.turn_on
           target:
@@ -73,9 +73,9 @@ actions:
 
     # Once the sun is below the horizon, set the nighttime scene.
     - conditions:
-      - condition: state
-        entity_id: sun.sun
-        state: below_horizon
+        - condition: state
+          entity_id: sun.sun
+          state: below_horizon
       sequence:
         - action: scene.turn_on
           target:
