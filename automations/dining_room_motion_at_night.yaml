@@ -1,0 +1,49 @@
+alias: Dining Room Motion at Night
+id: dining_room_motion_at_night
+description: >
+  Turns on the kitchen counter lights at night for midnight snacks.
+
+mode: single
+
+triggers:
+  # Trigger using the Eve Motion, as it's the most reliable.
+  - trigger: state
+    entity_id: binary_sensor.dining_room_motion_occupancy
+    to: "on"
+
+conditions:
+  # Only at night.
+  - condition: state
+    entity_id: sun.sun
+    state: below_horizon
+  # And only when the kitchen counter light is actually off, otherwise we'd
+  # be turning down the brightness on someone already snacking.
+  - condition: state
+    entity_id: light.kitchen_counter
+    state: "off"
+
+actions:
+  # Turn on the kitchen counter at 25%.
+  # Assume that takes a few seconds.
+  - action: light.turn_on
+    data:
+      brightness_pct: 25
+    target:
+      entity_id: light.kitchen_counter
+  - delay:
+      seconds: 5
+
+  # Keep the light on for 15 minutes.
+  # But if the kitchen counter state changes, assume we should leave it alone
+  # and not turn it off in the middle of someone's burrito.
+  - wait_for_trigger:
+      - trigger: state
+        entity_id: light.kitchen_counter
+    timeout:
+      minutes: 15
+  - if:
+      - "{{ not wait.completed }}"
+    then:
+      - action: light.turn_off
+        target:
+          entity_id: light.kitchen_counter
