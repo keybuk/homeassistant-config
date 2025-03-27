@@ -1,0 +1,208 @@
+- id: '1742259737852'
+  alias: Office Switch Button 1
+  description: ''
+  triggers:
+  - trigger: state
+    entity_id:
+    - event.office_switch_button_1
+  conditions: []
+  actions:
+  - action: scene.turn_on
+    metadata: {}
+    data: {}
+    target:
+      entity_id: scene.office_ceiling_natural_light
+  mode: single
+- id: '1742259802006'
+  alias: Office Switch Button 2
+  description: ''
+  triggers:
+  - trigger: state
+    entity_id:
+    - event.office_switch_button_2
+  conditions: []
+  actions:
+  - action: scene.turn_on
+    metadata: {}
+    data: {}
+    target:
+      entity_id: scene.office_ceiling_nightlight
+  mode: single
+- id: '1742259852048'
+  alias: 'Office Switch Button 3 '
+  description: ''
+  triggers:
+  - trigger: state
+    entity_id:
+    - event.office_switch_button_3
+  conditions: []
+  actions:
+  - action: scene.turn_on
+    metadata: {}
+    data: {}
+    target:
+      entity_id: scene.office_ceiling_relax
+  mode: single
+- id: '1742265800631'
+  alias: Bedroom Switch Button 1
+  description: ''
+  triggers:
+  - trigger: state
+    entity_id:
+    - event.bedroom_switch_button_1
+  conditions: []
+  actions:
+  - action: scene.turn_on
+    metadata: {}
+    data: {}
+    target:
+      entity_id: scene.bedroom_bedside_natural_light
+  - action: scene.turn_on
+    metadata: {}
+    data: {}
+    target:
+      entity_id: scene.bedroom_ceiling_natural_light
+  mode: single
+- id: '1742265845066'
+  alias: Bedroom Switch Button 2
+  description: ''
+  triggers:
+  - trigger: state
+    entity_id:
+    - event.bedroom_switch_button_2
+  conditions: []
+  actions:
+  - action: scene.turn_on
+    metadata: {}
+    data: {}
+    target:
+      entity_id: scene.bedroom_bedside_read
+  - action: scene.turn_on
+    metadata: {}
+    data: {}
+    target:
+      entity_id: scene.bedroom_ceiling_mood
+  mode: single
+- id: '1742265919265'
+  alias: Bedroom Switch Button 3
+  description: ''
+  triggers:
+  - trigger: state
+    entity_id:
+    - event.bedroom_switch_button_3
+  conditions: []
+  actions:
+  - action: scene.turn_on
+    metadata: {}
+    data: {}
+    target:
+      entity_id: scene.bedroom_bedside_play
+  - action: scene.turn_on
+    metadata: {}
+    data: {}
+    target:
+      entity_id: scene.bedroom_ceiling_play
+  mode: single
+- id: '1742268121309'
+  alias: Loft Switch Button 1
+  description: ''
+  triggers:
+  - trigger: state
+    entity_id:
+    - event.loft_switch_button_1
+  conditions: []
+  actions:
+  - action: scene.turn_on
+    metadata: {}
+    data: {}
+    target:
+      entity_id: scene.loft_ceiling_natural_light
+  mode: single
+- id: '1742273165518'
+  alias: Loft Switch Button 2
+  description: ''
+  triggers:
+  - trigger: state
+    entity_id:
+    - event.loft_switch_button_2
+  conditions: []
+  actions:
+  - action: scene.turn_on
+    metadata: {}
+    data: {}
+    target:
+      entity_id: scene.loft_ceiling_resplendent
+  mode: single
+- id: '1742273188065'
+  alias: Loft Switch Button 3
+  description: ''
+  triggers:
+  - trigger: state
+    entity_id:
+    - event.loft_switch_button_3
+  conditions: []
+  actions:
+  - action: scene.turn_on
+    metadata: {}
+    data: {}
+    target:
+      entity_id: scene.loft_ceiling_play
+  mode: single
+- id: '1742337005391'
+  alias: Office Lights
+  description: ''
+  use_blueprint:
+    path: light_switch.yaml
+    input:
+      light: light.office_ceiling
+      switch: switch.office_switch
+- id: '1742337248521'
+  alias: Loft Lights
+  description: ''
+  use_blueprint:
+    path: light_switch.yaml
+    input:
+      light: light.loft_ceiling
+      switch: switch.loft_switch
+- id: '1742337280749'
+  alias: Bedroom Lights
+  description: ''
+  use_blueprint:
+    path: light_switch.yaml
+    input:
+      light: light.bedroom
+      switch: switch.bedroom_switch
+- id: '1742337322652'
+  alias: Dining Room Lights
+  description: ''
+  use_blueprint:
+    path: light_switch.yaml
+    input:
+      light: light.dining_room
+      switch: switch.dining_room_switch
+- id: '1742347526685'
+  alias: Bedroom Occupancy
+  description: ''
+  use_blueprint:
+    path: light_occupancy.yaml
+    input:
+      light: light.bedroom
+      sensor: binary_sensor.bedroom_occupancy
+      awake: binary_sensor.household_asleep
+      asleep: binary_sensor.household_asleep
+- id: '1742347574417'
+  alias: Loft Occupancy
+  description: ''
+  use_blueprint:
+    path: light_occupancy.yaml
+    input:
+      light: light.loft_ceiling
+      sensor: binary_sensor.loft_occupancy
+- id: '1742347602151'
+  alias: Office Occupancy
+  description: ''
+  use_blueprint:
+    path: light_occupancy.yaml
+    input:
+      light: light.office_ceiling
+      sensor: binary_sensor.office_occupancy
