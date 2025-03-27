@@ -1,6 +1,10 @@
 blueprint:
   name: Light Switch
-  description: Synchronize a light and switch
+  description: >
+    Synchronize a light and switch so that a physical switch appears to directly
+    control a group of lights; with the switch matching the state of the lights
+    if those are controlled directly.
+  author: Scott James Remnant <scott@netsplit.com>
   domain: automation
   input:
     light:
@@ -32,10 +36,10 @@ variables:
   light: !input light
   switch: !input switch
 
-conditions: []
-
 actions:
   - choose:
+      # When the light is the trigger, if the switch is not in the same state,
+      # set it to the same state.
       - conditions:
           - condition: trigger
             id: light
@@ -49,6 +53,8 @@ actions:
               {% endif %}
             target:
               entity_id: !input switch
+      # When the switch is the trigger, if the light is not in the same state,
+      # set it to the same state.
       - conditions:
           - condition: trigger
             id: switch
