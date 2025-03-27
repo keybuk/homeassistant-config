@@ -1,0 +1,74 @@
+alias: Bedroom Windows
+id: bedroom_windows
+description: >
+  Opens the bedroom window blinds in the morning once we're awake, and closes
+  them at night provided the windows are closed.
+
+mode: single
+
+# Triggers that should open the blinds have an id of "open", while triggers
+# that should close the blinds have an id of "close".
+triggers:
+  # Sunrise can trigger the windows opening if nobody is home.
+  - trigger: sun
+    event: sunrise
+    id: open
+  # Everyone waking up can open the windows.
+  - trigger: state
+    entity_id: binary_sensor.household_asleep
+    to: "off"
+    id: open
+  # Motion in the bedroom should open the windows. We use the Ecobee for this
+  # because the Nest points directly down at the bed.
+  - trigger: state
+    entity_id: binary_sensor.bedroom_ecobee_motion
+    to: "on"
+    id: open
+  # If nothing else has opened the windows, try opening them at 10am.
+  - trigger: time
+    at: "10:00:00"
+    id: open
+  # Sunset triggers the window closing.
+  - trigger: sun
+    event: sunset
+    id: close
+  # We're careful not to close the blinds over open windows, so trigger on the
+  # windows being closed.
+  - trigger: state
+    entity_id: binary_sensor.bedroom_window
+    to: "off"
+    id: close
+
+actions:
+  - choose:
+    # To open the window blinds, the sun has to be above the horizon, and nobody
+    # should be asleep.
+    - conditions:
+        - condition: trigger
+          id: open
+        - condition: state
+          entity_id: sun.sun
+          state: above_horizon
+        - condition: state
+          entity_id: binary_sensor.household_asleep
+          state: "off"
+      sequence:
+        - action: scene.turn_on
+          target:
+            entity_id: scene.bedroom_daytime
+
+    # To close the window blinds, the sun should be below the horizon, and the
+    # windows should be closed.
+    - conditions:
+        - condition: trigger
+          id: close
+        - condition: state
+          entity_id: binary_sensor.bedroom_window
+          state: "off"
+        - condition: state
+          entity_id: sun.sun
+          state: below_horizon
+      sequence:
+        - action: scene.turn_on
+          target:
+            entity_id: scene.bedroom_nighttime
