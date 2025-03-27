@@ -29,6 +29,8 @@ blueprint:
           filter:
             - domain: binary_sensor
 
+mode: queued
+
 triggers:
   - trigger: state
     entity_id: !input sensor
@@ -100,4 +102,3 @@ actions:
           - action: light.turn_off
             target:
               entity_id: !input light
-mode: queued

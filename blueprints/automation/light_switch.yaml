@@ -22,6 +22,8 @@ blueprint:
           filter:
             - domain: switch
 
+mode: queued
+
 triggers:
   - trigger: state
     entity_id: !input light
@@ -68,4 +70,3 @@ actions:
               {% endif %}
             target:
               entity_id: !input light
-mode: queued
