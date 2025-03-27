@@ -1,0 +1,56 @@
+alias: Dining Room Mood Lights
+id: dining_room_mood_lights
+description: >
+  When anybody is (or comes) home in the evening, make sure that the Hue
+  light bars and beams are making the brick work turn pretty colors.
+
+mode: single
+
+# Triggers that should turn the lights on have an id of "on", while triggers
+# that should turn them off have an id of "off". We do this to stop weird
+# events like someone coming home turning them off in the day when they were
+# on for a party.
+triggers:
+  # Generally turn the lights on at sunset.
+  - trigger: sun
+    event: sunset
+    id: "on"
+  # Or when somebody comes home.
+  - trigger: state
+    entity_id: binary_sensor.home_occupancy
+    to: "on"
+    id: "on"
+  # And turn them off again at midnight (which is why we use "sunset" and
+  # "after sunset" instead of below_horizon, we don't want them on at 3am)
+  - trigger: time
+    at: "00:00:00"
+    id: "off"
+
+actions:
+  - choose:
+    # Lights are turned on after sunset if somebody is home.
+    - conditions:
+        - condition: trigger
+          id: "on"
+        - condition: sun
+          after: sunset
+        - condition: state
+          entity_id: binary_sensor.home_occupancy
+          state: "on"
+      sequence:
+        - action: light.turn_on
+          target:
+            entity_id:
+              - light.dining_room
+              - light.dining_room_lego
+
+    # Lights are turned off at midnight, we don't need to check the condition.
+    - conditions:
+        - condition: trigger
+          id: "off"
+      sequence:
+        - action: light.turn_off
+          target:
+            entity_id:
+              - light.dining_room
+              - light.dining_room_lego
