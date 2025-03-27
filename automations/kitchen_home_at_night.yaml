@@ -7,11 +7,12 @@ description: >
 mode: single
 
 triggers:
-  # Trigger on general home occupancy, but also on anyone entering the home
-  # zone.
+  # When the first person arrives home, turn on the lights.
   - trigger: state
     entity_id: binary_sensor.home_occupancy
     to: "on"
+  # But also turn on the lights if known people arrive home, even if the home
+  # is otherwise already occupied.
   - trigger: zone
     entity_id:
       - person.scotty
