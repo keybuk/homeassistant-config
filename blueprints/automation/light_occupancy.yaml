@@ -35,10 +35,9 @@ triggers:
   - trigger: state
     entity_id: !input sensor
     to: null
-  # After sunset, not at night; we don't want occupancy triggering the lights
-  # after midnight.
-  - trigger: sun
-    event: sunset
+  - trigger: state
+    entity_id: sun.sun
+    state: "below_horizon"
   - trigger: state
     entity_id: weather.forecast_home
     to: null

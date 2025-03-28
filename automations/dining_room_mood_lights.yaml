@@ -12,23 +12,26 @@ mode: single
 # on for a party.
 triggers:
   # Generally turn the lights on at sunset.
-  - trigger: sun
-    event: sunset
+  - trigger: state
+    entity_id: sun.sun
+    state: "below_horizon"
     id: "on"
   # Or when somebody comes home.
   - trigger: state
     entity_id: binary_sensor.home_occupancy
     to: "on"
     id: "on"
-  # And turn them off again at midnight (which is why we use "sunset" and
-  # "after sunset" instead of below_horizon, we don't want them on at 3am)
+  # And turn them off again at midnight (which is why we use "after sunset"
+  # instead of "below_horizon" in the conditions below; we don't want them
+  # on at 3am)
   - trigger: time
     at: "00:00:00"
     id: "off"
 
 actions:
   - choose:
-    # Lights are turned on after sunset if somebody is home.
+    # Lights are turned on in the evening (so "after sunset") if somebody
+    # is home.
     - conditions:
         - condition: trigger
           id: "on"
