@@ -12,7 +12,7 @@ triggers:
   # Sunrise can trigger the windows opening if nobody is home.
   - trigger: state
     entity_id: sun.sun
-    state: "above_horizon"
+    to: "above_horizon"
     id: "open"
   # Everyone waking up can open the windows.
   - trigger: state
@@ -32,7 +32,7 @@ triggers:
   # Sunset triggers the window closing.
   - trigger: state
     entity_id: sun.sun
-    state: "below_horizon"
+    to: "below_horizon"
     id: "close"
   # We're careful not to close the blinds over open windows, so trigger on the
   # windows being closed.

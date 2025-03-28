@@ -14,7 +14,7 @@ triggers:
   # Generally turn the lights on at sunset.
   - trigger: state
     entity_id: sun.sun
-    state: "below_horizon"
+    to: "below_horizon"
     id: "on"
   # Or when somebody comes home.
   - trigger: state

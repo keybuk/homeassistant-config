@@ -37,7 +37,7 @@ triggers:
     to: null
   - trigger: state
     entity_id: sun.sun
-    state: "below_horizon"
+    to: "below_horizon"
   - trigger: state
     entity_id: weather.forecast_home
     to: null
