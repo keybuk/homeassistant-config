@@ -104,8 +104,9 @@ actions:
           target:
             entity_id: scene.late_afternoon_sun
 
-    # When the sun is shining through the third pane, and all of the windows
-    # are closed, cover it.
+    # When the sun is shining through the third pane, and the top window
+    # is closed, cover at least the first two panes; and if all of the windows
+    # are closed, cover them all.
     - conditions:
         - condition: numeric_state
           entity_id: sun.sun
@@ -119,14 +120,20 @@ actions:
         - condition: state
           entity_id: binary_sensor.dining_room_top_windows
           state: "off"
-        - condition: state
-          entity_id: binary_sensor.dining_room_bottom_windows
-          state: "off"
         - "{{ not cloudy_day }}"
       sequence:
-        - action: scene.turn_on
-          target:
-            entity_id: scene.dining_room_windows_closed
+        - if:
+            - condition: state
+              entity_id: binary_sensor.dining_room_bottom_windows
+              state: "off"
+          then:
+            - action: scene.turn_on
+              target:
+                entity_id: scene.dining_room_windows_closed
+          else:
+            - action: scene.turn_on
+              target:
+                entity_id: scene.late_afternoon_sun
 
     # When the sun is otherwise above the horizon, set the daytime scene.
     - conditions:
