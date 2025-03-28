@@ -15,7 +15,7 @@ conditions:
   # Only at night.
   - condition: state
     entity_id: sun.sun
-    state: below_horizon
+    state: "below_horizon"
   # And only when the kitchen counter light is actually off, otherwise we'd
   # be turning down the brightness on someone already snacking.
   - condition: state

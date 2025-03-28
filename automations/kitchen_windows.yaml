@@ -45,7 +45,7 @@ actions:
     - conditions:
         - condition: state
           entity_id: sun.sun
-          state: above_horizon
+          state: "above_horizon"
         - condition: numeric_state
           entity_id: sun.sun
           attribute: azimuth
@@ -65,7 +65,7 @@ actions:
     - conditions:
         - condition: state
           entity_id: sun.sun
-          state: above_horizon
+          state: "above_horizon"
       sequence:
         - action: scene.turn_on
           target:
@@ -75,7 +75,7 @@ actions:
     - conditions:
         - condition: state
           entity_id: sun.sun
-          state: below_horizon
+          state: "below_horizon"
       sequence:
         - action: scene.turn_on
           target:

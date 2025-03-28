@@ -73,7 +73,7 @@ actions:
     - conditions:
         - condition: state
           entity_id: sun.sun
-          state: above_horizon
+          state: "above_horizon"
         - "{{ cloudy_day }}"
       sequence:
         - action: light.turn_on
@@ -86,7 +86,7 @@ actions:
     - conditions:
         - condition: state
           entity_id: sun.sun
-          state: above_horizon
+          state: "above_horizon"
         - "{{ not cloudy_day }}"
       sequence:
         - action: light.turn_off

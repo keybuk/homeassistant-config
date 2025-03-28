@@ -24,7 +24,7 @@ conditions:
   # Only at night.
   - condition: state
     entity_id: sun.sun
-    state: below_horizon
+    state: "below_horizon"
 
 actions:
   # Turn on the entrance light and the kitchen counter (at 25%).
