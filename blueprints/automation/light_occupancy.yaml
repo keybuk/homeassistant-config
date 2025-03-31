@@ -39,14 +39,14 @@ triggers:
     entity_id: sun.sun
     to: "below_horizon"
   - trigger: state
-    entity_id: weather.forecast_home
+    entity_id: weather.home
     to: null
 
 variables:
   asleep: !input asleep
   not_asleep: "{{ asleep is not none and not is_state(asleep, 'on') }}"
   cloudy_day: >
-    {{ states('weather.forecast_home') not in
+    {{ states('weather.home') not in
        ['clear-night', 'partlycloudy', 'sunny', 'windy' ]
     }}
 

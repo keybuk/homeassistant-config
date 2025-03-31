@@ -42,7 +42,7 @@ triggers:
   # Track the weather state, we don't close the windows if it's cloudy to
   # maintain natural light.
   - trigger: state
-    entity_id: weather.forecast_home
+    entity_id: weather.home
     to: null
   # We're also careful not to close the blinds over parts of the window that
   # are open, so the wind doesn't blow them around and burn out the motors;
@@ -56,7 +56,7 @@ triggers:
 
 variables:
   cloudy_day: >
-    {{ states('weather.forecast_home') not in
+    {{ states('weather.home') not in
        ['clear-night', 'partlycloudy', 'sunny', 'windy' ]
     }}
 

@@ -24,16 +24,16 @@ triggers:
   # Track both the weather state and forecast temperature, we close the windows
   # to keep the room cool.
   - trigger: state
-    entity_id: weather.forecast_home
+    entity_id: weather.home
     to: null
   - trigger: numeric_state
-    entity_id: weather.forecast_home
+    entity_id: weather.home
     attribute: temperature
     above: 69
 
 variables:
   cloudy_day: >
-    {{ states('weather.forecast_home') not in
+    {{ states('weather.home') not in
        ['clear-night', 'partlycloudy', 'sunny', 'windy' ]
     }}
 
@@ -52,7 +52,7 @@ actions:
           above: 115
           below: 235
         - condition: numeric_state
-          entity_id: weather.forecast_home
+          entity_id: weather.home
           attribute: temperature
           above: 69
         - "{{ not cloudy_day }}"
