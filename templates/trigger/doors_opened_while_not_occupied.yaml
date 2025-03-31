@@ -1,0 +1,25 @@
+# Binary sensor that tracks whether a door was opened while the home was
+# otherwise unoccupied.
+- trigger:
+    # Door opening updates the state to 'on', after checking occupancy sensors.
+    - trigger: state
+      entity_id:
+        - binary_sensor.front_door
+        - binary_sensor.roof_deck_door
+      to: "on"
+      id: "door"
+
+    # Any change to occupancy sensors resets the state back to 'off'.
+    - trigger: state
+      entity_id: binary_sensor.home_occupancy
+      to: "on"
+      id: "occupancy"
+
+  binary_sensor:
+    - name: "Doors Opened While Not Occupied"
+      unique_id: doors_opened_while_not_occupied
+      device_class: "door"
+      state: >
+        {{ 'on' if trigger.id == 'door'
+            and is_state('binary_sensor.home_occupancy', 'off')
+            else 'off' }}
