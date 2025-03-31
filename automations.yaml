@@ -206,3 +206,22 @@
     input:
       light: light.office_ceiling
       sensor: binary_sensor.office_occupancy
+- id: '1743450336120'
+  alias: Door Opened Notification
+  description: ''
+  triggers:
+  - trigger: state
+    entity_id:
+    - binary_sensor.doors_opened_while_not_occupied
+    to: 'on'
+  conditions: []
+  actions:
+  - action: notify.mobile_app_scottys_iphone
+    metadata: {}
+    data:
+      title: Door Opened
+      message: '{% set door = state_attr(''binary_sensor.doors_opened_while_not_occupied'',
+        ''door'') %} {{ state_attr(door, ''friendly_name'') | default(door) }}
+
+        '
+  mode: single

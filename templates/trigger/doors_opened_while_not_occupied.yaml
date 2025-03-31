@@ -9,7 +9,7 @@
       to: "on"
       id: "door"
 
-    # Any change to occupancy resets the state back to 'off'.
+    # Occupancy resets the state back to 'off'.
     - trigger: state
       entity_id: binary_sensor.anyone_home
       to: "on"
@@ -23,3 +23,6 @@
         {{ 'on' if trigger.id == 'door'
             and is_state('binary_sensor.anyone_home', 'off')
             else 'off' }}
+      attributes:
+        door: >
+          {{ trigger.entity_id if trigger.id == 'door' else 'unavailable' }}
