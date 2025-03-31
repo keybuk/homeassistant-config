@@ -19,7 +19,7 @@
     # Trigger on occupancy sensors.
     - trigger: state
       entity_id: binary_sensor.home_occupancy
-      to:
+      to: null
       id: "occupancy"
 
     # Trigger on Home Assistant startup to set initial value.
