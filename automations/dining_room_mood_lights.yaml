@@ -18,7 +18,7 @@ triggers:
     id: "on"
   # Or when somebody comes home.
   - trigger: state
-    entity_id: binary_sensor.home_occupancy
+    entity_id: binary_sensor.anyone_home
     to: "on"
     id: "on"
   # And turn them off again at midnight (which is why we use "after sunset"
@@ -38,7 +38,7 @@ actions:
         - condition: sun
           after: sunset
         - condition: state
-          entity_id: binary_sensor.home_occupancy
+          entity_id: binary_sensor.anyone_home
           state: "on"
       sequence:
         - action: light.turn_on

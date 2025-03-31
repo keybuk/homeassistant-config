@@ -7,7 +7,7 @@ mode: single
 
 triggers:
   - trigger: state
-    entity_id: binary_sensor.home_occupancy
+    entity_id: binary_sensor.anyone_home
     from: "on"
 
 actions:

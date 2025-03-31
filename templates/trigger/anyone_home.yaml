@@ -18,7 +18,7 @@
 
     # Trigger on occupancy sensors.
     - trigger: state
-      entity_id: binary_sensor.temp_occupancy
+      entity_id: binary_sensor.home_occupancy
       to:
       id: "occupancy"
 
@@ -36,14 +36,14 @@
           on
         {% elif trigger.id == 'persons' %}
           {# Last household member left home #}
-          {{ states('binary_sensor.temp_occupancy') }}
+          {{ states('binary_sensor.home_occupancy') }}
         {% elif states('binary_sensor.doors_opened_while_not_occupied') %}
           {# Door has been opened #}
-          {{ states('binary_sensor.temp_occupancy') }}
+          {{ states('binary_sensor.home_occupancy') }}
         {% else %}
           off
         {% endif %}
       attributes:
         persons: "{{ state_attr('zone.home', 'persons') }}"
-        occupancy: "{{ states('binary_sensor.temp_occupancy') }}"
+        occupancy: "{{ states('binary_sensor.home_occupancy') }}"
         door_opened: "{{ states('binary_sensor.doors_opened_while_not_occupied') }}"

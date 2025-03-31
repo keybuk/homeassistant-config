@@ -9,7 +9,7 @@ mode: single
 triggers:
   # When the first person arrives home, turn on the lights.
   - trigger: state
-    entity_id: binary_sensor.home_occupancy
+    entity_id: binary_sensor.anyone_home
     to: "on"
   # But also turn on the lights if known people arrive home, even if the home
   # is otherwise already occupied.
