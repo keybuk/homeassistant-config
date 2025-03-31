@@ -10,5 +10,4 @@ script: !include scripts.yaml
 scene: !include scenes.yaml
 
 automation yaml: !include_dir_list automations/
-template:
-  - binary_sensor: !include_dir_list templates/binary_sensor/
+template: !include_dir_merge_list templates/
