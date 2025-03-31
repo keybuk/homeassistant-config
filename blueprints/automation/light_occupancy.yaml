@@ -44,7 +44,7 @@ triggers:
 
 variables:
   asleep: !input asleep
-  not_asleep: "{{ asleep != none and not is_state(asleep, 'on') }}"
+  not_asleep: "{{ asleep is not none and not is_state(asleep, 'on') }}"
   cloudy_day: >
     {{ states('weather.forecast_home') not in
        ['clear-night', 'partlycloudy', 'sunny', 'windy' ]
@@ -71,9 +71,12 @@ actions:
     # Light is turned on when there is occupancy on a cloudy day.
     - conditions:
         - condition: state
+          entity_id: !input sensor
+          state: "on"
+        - condition: state
           entity_id: sun.sun
           state: "above_horizon"
-        - "{{ cloudy_day }}"
+        - "{{ cloudy_day and not_asleep }}"
       sequence:
         - action: light.turn_on
           target:
