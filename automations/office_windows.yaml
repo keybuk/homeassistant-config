@@ -1,0 +1,58 @@
+alias: Office Windows
+id: office_windows
+initial_state: false
+description: >
+  Opens the office window blinds in the morning, and closes them at night
+  provided the windows are closed.
+
+mode: single
+
+# Triggers that should open the blinds have an id of "open", while triggers
+# that should close the blinds have an id of "close".
+triggers:
+  # Sunrise triggers the windows opening.
+  - trigger: state
+    entity_id: sun.sun
+    to: "above_horizon"
+    id: "open"
+  # Sunset triggers the window closing.
+  - trigger: state
+    entity_id: sun.sun
+    to: "below_horizon"
+    id: "close"
+  # We're careful not to close the blinds over open windows, so trigger on the
+  # windows being closed.
+  - trigger: state
+    entity_id: binary_sensor.office_window
+    to: "off"
+    id: "close"
+
+actions:
+  - choose:
+    # To open the window blinds, the sun has to be above the horizon.
+    - conditions:
+        - condition: trigger
+          id: "open"
+        - condition: state
+          entity_id: sun.sun
+          state: "above_horizon"
+      sequence:
+        - action: scene.turn_on
+          target:
+            entity_id: scene.office_daytime
+
+    # To close the window blinds, the sun should be below the horizon, and the
+    # windows should be closed.
+    - conditions:
+        - condition: trigger
+          id: "close"
+        - condition: state
+          entity_id: binary_sensor.office_window
+          state: "off"
+        - condition: state
+          entity_id: sun.sun
+          state: below_horizon
+      sequence:
+        - action: scene.turn_on
+          target:
+            entity_id: scene.office_nighttime
