@@ -1,0 +1,19 @@
+alias: Door Opened Notification
+id: door_opened_notification
+description: >
+  Notify when a door is opened while nobody is home.
+
+mode: single
+
+triggers:
+  - trigger: state
+    entity_id: binary_sensor.doors_opened_while_not_occupied
+    to: "on"
+
+actions:
+  - action: notify.mobile_app_scottys_iphone
+    data:
+      title: Door Opened
+      message: >
+        {% set door = state_attr('binary_sensor.doors_opened_while_not_occupied', 'door') %}
+        {{ state_attr(door, 'friendly_name') | default(door) }}
