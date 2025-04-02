@@ -41,6 +41,9 @@ triggers:
   - trigger: state
     entity_id: weather.home
     to: null
+  - trigger: state
+    entity_id: !input asleep
+    to: "off"
 
 variables:
   asleep: !input asleep
@@ -97,7 +100,7 @@ actions:
             entity_id: !input light
 
     # Light is turned off when there is no longer occupancy. We don't turn it
-    # off at midnight (end of "after sunrise" condition) since that's just
+    # off at midnight, or when the sleep focus goes on, since that's just
     # annoying.
     - conditions:
         - condition: not
