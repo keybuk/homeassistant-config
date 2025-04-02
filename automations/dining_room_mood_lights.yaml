@@ -21,22 +21,22 @@ triggers:
     entity_id: binary_sensor.anyone_home
     to: "on"
     id: "on"
-  # And turn them off again at midnight (which is why we use "after sunset"
-  # instead of "below_horizon" in the conditions below; we don't want them
-  # on at 3am)
+  # And turn them off again at midnight.
   - trigger: time
     at: "00:00:00"
     id: "off"
 
 actions:
   - choose:
-    # Lights are turned on in the evening (so "after sunset") if somebody
-    # is home.
+    # Lights are turned on in the evening if somebody is home.
     - conditions:
         - condition: trigger
           id: "on"
-        - condition: sun
-          after: sunset
+        - condition: state
+          entity_id: sun.sun
+          state: "below_horizon"
+        - condition: time
+          before: "00:00:00"
         - condition: state
           entity_id: binary_sensor.anyone_home
           state: "on"
