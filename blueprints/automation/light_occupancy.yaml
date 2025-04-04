@@ -58,11 +58,13 @@ actions:
         - condition: state
           entity_id: !input sensor
           state: "on"
+        # "after sunset" triggers before "below_horizon", so we combine both to
+        # mean "evening" since all times are "before midnight".
+        - condition: sun
+          after: sunset
         - condition: state
           entity_id: sun.sun
           state: "below_horizon"
-        - condition: time
-          before: "00:00:00"
         - "{{ not_asleep }}"
       sequence:
         - action: light.turn_on
