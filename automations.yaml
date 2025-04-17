@@ -5,7 +5,11 @@
   - trigger: state
     entity_id:
     - event.office_switch_button_1
-  conditions: []
+  conditions:
+  - condition: state
+    entity_id: event.office_switch_button_1
+    attribute: event_type
+    state: single_press
   actions:
   - action: scene.turn_on
     metadata: {}
@@ -20,7 +24,11 @@
   - trigger: state
     entity_id:
     - event.office_switch_button_2
-  conditions: []
+  conditions:
+  - condition: state
+    entity_id: event.office_switch_button_2
+    attribute: event_type
+    state: single_press
   actions:
   - action: scene.turn_on
     metadata: {}
@@ -35,7 +43,11 @@
   - trigger: state
     entity_id:
     - event.office_switch_button_3
-  conditions: []
+  conditions:
+  - condition: state
+    entity_id: event.office_switch_button_3
+    attribute: event_type
+    state: single_press
   actions:
   - action: scene.turn_on
     metadata: {}
@@ -50,7 +62,11 @@
   - trigger: state
     entity_id:
     - event.bedroom_switch_button_1
-  conditions: []
+  conditions:
+  - condition: state
+    entity_id: event.bedroom_switch_button_1
+    attribute: event_type
+    state: single_press
   actions:
   - action: scene.turn_on
     metadata: {}
@@ -70,7 +86,11 @@
   - trigger: state
     entity_id:
     - event.bedroom_switch_button_2
-  conditions: []
+  conditions:
+  - condition: state
+    entity_id: event.bedroom_switch_button_2
+    attribute: event_type
+    state: single_press
   actions:
   - action: scene.turn_on
     metadata: {}
@@ -90,7 +110,11 @@
   - trigger: state
     entity_id:
     - event.bedroom_switch_button_3
-  conditions: []
+  conditions:
+  - condition: state
+    entity_id: event.bedroom_switch_button_3
+    attribute: event_type
+    state: single_press
   actions:
   - action: scene.turn_on
     metadata: {}
@@ -110,7 +134,11 @@
   - trigger: state
     entity_id:
     - event.loft_switch_button_1
-  conditions: []
+  conditions:
+  - condition: state
+    entity_id: event.loft_switch_button_1
+    attribute: event_type
+    state: single_press
   actions:
   - action: scene.turn_on
     metadata: {}
@@ -125,7 +153,11 @@
   - trigger: state
     entity_id:
     - event.loft_switch_button_2
-  conditions: []
+  conditions:
+  - condition: state
+    entity_id: event.loft_switch_button_2
+    attribute: event_type
+    state: single_press
   actions:
   - action: scene.turn_on
     metadata: {}
@@ -140,7 +172,11 @@
   - trigger: state
     entity_id:
     - event.loft_switch_button_3
-  conditions: []
+  conditions:
+  - condition: state
+    entity_id: event.loft_switch_button_3
+    attribute: event_type
+    state: single_press
   actions:
   - action: scene.turn_on
     metadata: {}
