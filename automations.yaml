@@ -242,3 +242,25 @@
     input:
       light: light.office_ceiling
       sensor: binary_sensor.office_occupancy
+- id: '1744102789672'
+  alias: Dining Room Switch Button 1
+  description: ''
+  triggers:
+  - trigger: state
+    entity_id:
+    - event.dining_room_switch_button_1
+  conditions:
+  - condition: state
+    entity_id: event.dining_room_switch_button_1
+    attribute: event_type
+    state: single_press
+  actions:
+  - action: light.toggle
+    metadata: {}
+    data:
+      brightness_pct: 100
+    target:
+      entity_id:
+      - light.dining_room_chandelier
+      - light.dining_room_spots
+  mode: single
