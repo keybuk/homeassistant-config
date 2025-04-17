@@ -1,189 +1,135 @@
 - id: '1742259737852'
   alias: Office Switch Button 1
   description: ''
-  triggers:
-  - trigger: state
-    entity_id:
-    - event.office_switch_button_1
-  conditions:
-  - condition: state
-    entity_id: event.office_switch_button_1
-    attribute: event_type
-    state: single_press
-  actions:
-  - action: scene.turn_on
-    metadata: {}
-    data: {}
-    target:
-      entity_id: scene.office_ceiling_natural_light
-  mode: single
+  use_blueprint:
+    path: scene_controller_button.yaml
+    input:
+      button: event.office_switch_button_1
+      actions:
+      - action: scene.turn_on
+        metadata: {}
+        data: {}
+        target:
+          entity_id: scene.office_ceiling_natural_light
 - id: '1742259802006'
   alias: Office Switch Button 2
   description: ''
-  triggers:
-  - trigger: state
-    entity_id:
-    - event.office_switch_button_2
-  conditions:
-  - condition: state
-    entity_id: event.office_switch_button_2
-    attribute: event_type
-    state: single_press
-  actions:
-  - action: scene.turn_on
-    metadata: {}
-    data: {}
-    target:
-      entity_id: scene.office_ceiling_nightlight
-  mode: single
+  use_blueprint:
+    path: scene_controller_button.yaml
+    input:
+      button: event.office_switch_button_2
+      actions:
+      - action: scene.turn_on
+        metadata: {}
+        data: {}
+        target:
+          entity_id: scene.office_ceiling_nightlight
 - id: '1742259852048'
   alias: 'Office Switch Button 3 '
   description: ''
-  triggers:
-  - trigger: state
-    entity_id:
-    - event.office_switch_button_3
-  conditions:
-  - condition: state
-    entity_id: event.office_switch_button_3
-    attribute: event_type
-    state: single_press
-  actions:
-  - action: scene.turn_on
-    metadata: {}
-    data: {}
-    target:
-      entity_id: scene.office_ceiling_relax
-  mode: single
+  use_blueprint:
+    path: scene_controller_button.yaml
+    input:
+      button: event.office_switch_button_3
+      actions:
+      - action: scene.turn_on
+        metadata: {}
+        data: {}
+        target:
+          entity_id: scene.office_ceiling_relax
 - id: '1742265800631'
   alias: Bedroom Switch Button 1
   description: ''
-  triggers:
-  - trigger: state
-    entity_id:
-    - event.bedroom_switch_button_1
-  conditions:
-  - condition: state
-    entity_id: event.bedroom_switch_button_1
-    attribute: event_type
-    state: single_press
-  actions:
-  - action: scene.turn_on
-    metadata: {}
-    data: {}
-    target:
-      entity_id: scene.bedroom_bedside_natural_light
-  - action: scene.turn_on
-    metadata: {}
-    data: {}
-    target:
-      entity_id: scene.bedroom_ceiling_natural_light
-  mode: single
+  use_blueprint:
+    path: scene_controller_button.yaml
+    input:
+      button: event.bedroom_switch_button_1
+      actions:
+      - action: scene.turn_on
+        metadata: {}
+        data: {}
+        target:
+          entity_id: scene.bedroom_bedside_natural_light
+      - action: scene.turn_on
+        metadata: {}
+        data: {}
+        target:
+          entity_id: scene.bedroom_ceiling_natural_light
 - id: '1742265845066'
   alias: Bedroom Switch Button 2
   description: ''
-  triggers:
-  - trigger: state
-    entity_id:
-    - event.bedroom_switch_button_2
-  conditions:
-  - condition: state
-    entity_id: event.bedroom_switch_button_2
-    attribute: event_type
-    state: single_press
-  actions:
-  - action: scene.turn_on
-    metadata: {}
-    data: {}
-    target:
-      entity_id: scene.bedroom_bedside_read
-  - action: scene.turn_on
-    metadata: {}
-    data: {}
-    target:
-      entity_id: scene.bedroom_ceiling_mood
-  mode: single
+  use_blueprint:
+    path: scene_controller_button.yaml
+    input:
+      button: event.bedroom_switch_button_2
+      actions:
+      - action: scene.turn_on
+        metadata: {}
+        data: {}
+        target:
+          entity_id: scene.bedroom_bedside_read
+      - action: scene.turn_on
+        metadata: {}
+        data: {}
+        target:
+          entity_id: scene.bedroom_ceiling_mood
 - id: '1742265919265'
   alias: Bedroom Switch Button 3
   description: ''
-  triggers:
-  - trigger: state
-    entity_id:
-    - event.bedroom_switch_button_3
-  conditions:
-  - condition: state
-    entity_id: event.bedroom_switch_button_3
-    attribute: event_type
-    state: single_press
-  actions:
-  - action: scene.turn_on
-    metadata: {}
-    data: {}
-    target:
-      entity_id: scene.bedroom_bedside_play
-  - action: scene.turn_on
-    metadata: {}
-    data: {}
-    target:
-      entity_id: scene.bedroom_ceiling_play
-  mode: single
+  use_blueprint:
+    path: scene_controller_button.yaml
+    input:
+      button: event.bedroom_switch_button_3
+      actions:
+      - action: scene.turn_on
+        metadata: {}
+        data: {}
+        target:
+          entity_id: scene.bedroom_bedside_play
+      - action: scene.turn_on
+        metadata: {}
+        data: {}
+        target:
+          entity_id: scene.bedroom_ceiling_play
 - id: '1742268121309'
   alias: Loft Switch Button 1
   description: ''
-  triggers:
-  - trigger: state
-    entity_id:
-    - event.loft_switch_button_1
-  conditions:
-  - condition: state
-    entity_id: event.loft_switch_button_1
-    attribute: event_type
-    state: single_press
-  actions:
-  - action: scene.turn_on
-    metadata: {}
-    data: {}
-    target:
-      entity_id: scene.loft_ceiling_natural_light
-  mode: single
+  use_blueprint:
+    path: scene_controller_button.yaml
+    input:
+      button: event.loft_switch_button_1
+      actions:
+      - action: scene.turn_on
+        metadata: {}
+        data: {}
+        target:
+          entity_id: scene.loft_ceiling_natural_light
 - id: '1742273165518'
   alias: Loft Switch Button 2
   description: ''
-  triggers:
-  - trigger: state
-    entity_id:
-    - event.loft_switch_button_2
-  conditions:
-  - condition: state
-    entity_id: event.loft_switch_button_2
-    attribute: event_type
-    state: single_press
-  actions:
-  - action: scene.turn_on
-    metadata: {}
-    data: {}
-    target:
-      entity_id: scene.loft_ceiling_resplendent
-  mode: single
+  use_blueprint:
+    path: scene_controller_button.yaml
+    input:
+      button: event.loft_switch_button_2
+      actions:
+      - action: scene.turn_on
+        metadata: {}
+        data: {}
+        target:
+          entity_id: scene.loft_ceiling_resplendent
 - id: '1742273188065'
   alias: Loft Switch Button 3
   description: ''
-  triggers:
-  - trigger: state
-    entity_id:
-    - event.loft_switch_button_3
-  conditions:
-  - condition: state
-    entity_id: event.loft_switch_button_3
-    attribute: event_type
-    state: single_press
-  actions:
-  - action: scene.turn_on
-    metadata: {}
-    data: {}
-    target:
-      entity_id: scene.loft_ceiling_play
-  mode: single
+  use_blueprint:
+    path: scene_controller_button.yaml
+    input:
+      button: event.loft_switch_button_3
+      actions:
+      - action: scene.turn_on
+        metadata: {}
+        data: {}
+        target:
+          entity_id: scene.loft_ceiling_play
 - id: '1742337005391'
   alias: Office Lights
   description: ''
@@ -245,22 +191,16 @@
 - id: '1744102789672'
   alias: Dining Room Switch Button 1
   description: ''
-  triggers:
-  - trigger: state
-    entity_id:
-    - event.dining_room_switch_button_1
-  conditions:
-  - condition: state
-    entity_id: event.dining_room_switch_button_1
-    attribute: event_type
-    state: single_press
-  actions:
-  - action: light.toggle
-    metadata: {}
-    data:
-      brightness_pct: 100
-    target:
-      entity_id:
-      - light.dining_room_chandelier
-      - light.dining_room_spots
-  mode: single
+  use_blueprint:
+    path: scene_controller_button.yaml
+    input:
+      button: event.dining_room_switch_button_1
+      actions:
+      - action: light.toggle
+        metadata: {}
+        data:
+          brightness_pct: 100
+        target:
+          entity_id:
+          - light.dining_room_chandelier
+          - light.dining_room_spots
