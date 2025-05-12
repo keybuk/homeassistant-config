@@ -314,3 +314,25 @@
       target:
         entity_id: scene.hunter_douglas_office_window_open
   mode: single
+- id: '1745249879161'
+  alias: Dining Room Switch Button 3
+  description: ''
+  use_blueprint:
+    path: scene_controller_button.yaml
+    input:
+      button: event.dining_room_switch_button_3
+      actions:
+      - action: scene.turn_on
+        metadata: {}
+        data: {}
+        target:
+          entity_id:
+          - scene.dining_room_beam_lights_play
+          - scene.dining_room_wall_play
+      - action: scene.turn_on
+        metadata: {}
+        data: {}
+        target:
+          entity_id:
+          - scene.dining_room_windows_closed
+          - scene.kitchen_windows_closed
