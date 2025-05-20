@@ -336,3 +336,37 @@
           entity_id:
           - scene.dining_room_windows_closed
           - scene.kitchen_windows_closed
+- id: '1747753451904'
+  alias: Bedroom Play
+  description: ''
+  use_blueprint:
+    path: disable_automations.yaml
+    input:
+      input: input_boolean.bedroom_play
+      automations:
+      - automation.bedroom_occupancy
+      - automation.bedroom_windows
+- id: '1747753518535'
+  alias: Dining Room Play
+  description: ''
+  use_blueprint:
+    path: disable_automations.yaml
+    input:
+      input: input_boolean.dining_room_play
+      automations:
+      - automation.dining_room_motion_at_night
+      - automation.dining_room_windows
+      - automation.dining_room_mood_lights
+- id: '1747754063388'
+  alias: On Vacation
+  description: ''
+  use_blueprint:
+    path: disable_automations.yaml
+    input:
+      input: input_boolean.on_vacation
+      automations:
+      - automation.bedroom_occupancy
+      - automation.dining_room_mood_lights
+      - automation.dining_room_motion_at_night
+      - automation.loft_occupancy
+      - automation.office_occupancy

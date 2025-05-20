@@ -53,22 +53,12 @@ triggers:
   - trigger: state
     entity_id: binary_sensor.dining_room_bottom_windows
     to: "off"
-  # Place shades in their correct state when the manual override is turned off.
-  - trigger: state
-    entity_id: input_boolean.dining_room_manual_override
-    to: "off"
 
 variables:
   cloudy_day: >
     {{ states('weather.home') not in
        ['clear-night', 'partlycloudy', 'sunny', 'windy' ]
     }}
-
-# Automation doesn't run when the manual override is on.
-conditions:
- - condition: state
-   entity_id: input_boolean.dining_room_manual_override
-   state: "off"
 
 actions:
   - choose:

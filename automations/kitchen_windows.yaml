@@ -30,22 +30,12 @@ triggers:
     entity_id: weather.home
     attribute: temperature
     above: 69
-  # Place shades in their correct state when the manual override is turned off.
-  - trigger: state
-    entity_id: input_boolean.kitchen_manual_override
-    to: "off"
 
 variables:
   cloudy_day: >
     {{ states('weather.home') not in
        ['clear-night', 'partlycloudy', 'sunny', 'windy' ]
     }}
-
-# Automation doesn't run when the manual override is on.
-conditions:
- - condition: state
-   entity_id: input_boolean.kitchen_manual_override
-   state: "off"
 
 actions:
   - choose:
