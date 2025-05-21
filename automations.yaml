@@ -357,6 +357,7 @@
       - automation.dining_room_motion_at_night
       - automation.dining_room_windows
       - automation.dining_room_mood_lights
+      - automation.kitchen_windows
 - id: '1747754063388'
   alias: On Vacation
   description: ''
