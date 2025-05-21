@@ -6,32 +6,23 @@ description: >
 
 mode: single
 
-# Triggers that should turn the lights on have an id of "on", while triggers
-# that should turn them off have an id of "off". We do this to stop weird
-# events like someone coming home turning them off in the day when they were
-# on for a party.
 triggers:
   # Generally turn the lights on at sunset.
   - trigger: state
     entity_id: sun.sun
     to: "below_horizon"
-    id: "on"
   # Or when somebody comes home.
   - trigger: state
     entity_id: binary_sensor.anyone_home
     to: "on"
-    id: "on"
   # And turn them off again at midnight.
   - trigger: time
     at: "00:00:00"
-    id: "off"
 
 actions:
   - choose:
     # Lights are turned on in the evening if somebody is home.
     - conditions:
-        - condition: trigger
-          id: "on"
         # "after sunset" triggers before "below_horizon", so we combine both to
         # mean "evening" since all times are "before midnight".
         - condition: sun
@@ -51,8 +42,9 @@ actions:
 
     # Lights are turned off at midnight, we don't need to check the condition.
     - conditions:
-        - condition: trigger
-          id: "off"
+        # "before sunset" triggers all day from "midnight" until sunset.
+        - condition: sun
+          before: sunset
       sequence:
         - action: light.turn_off
           target:
