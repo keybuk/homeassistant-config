@@ -339,13 +339,89 @@
 - id: '1747753451904'
   alias: Bedroom Play
   description: ''
-  use_blueprint:
-    path: disable_automations.yaml
-    input:
-      input: input_boolean.bedroom_play
-      automations:
-      - automation.bedroom_occupancy
-      - automation.bedroom_windows
+  triggers:
+  - trigger: state
+    entity_id: input_boolean.bedroom_play
+    to:
+  actions:
+  - choose:
+    - conditions:
+      - condition: state
+        entity_id: input_boolean.bedroom_play
+        state: 'on'
+      sequence:
+      - action: automation.turn_off
+        target:
+          entity_id:
+          - automation.bedroom_occupancy
+          - automation.bedroom_windows
+        data:
+          stop_actions: true
+      - if:
+        - condition: state
+          entity_id: binary_sensor.bedroom_window
+          state: 'off'
+        then:
+        - action: scene.turn_on
+          metadata: {}
+          data: {}
+          target:
+            entity_id: scene.bedroom_nighttime
+      - action: light.turn_on
+        metadata: {}
+        data: {}
+        target:
+          entity_id:
+          - light.bedroom_ceiling
+          - light.bedroom_bedside
+      - delay:
+          hours: 0
+          minutes: 0
+          seconds: 3
+          milliseconds: 0
+      - action: scene.create
+        metadata: {}
+        data:
+          scene_id: bedroom_play
+          snapshot_entities:
+          - light.bedroom_bedside
+          - light.bedroom_ceiling
+      - action: scene.turn_on
+        metadata: {}
+        data: {}
+        target:
+          entity_id:
+          - scene.bedroom_bedside_play
+          - scene.bedroom_ceiling_play
+    - conditions:
+      - condition: state
+        entity_id: input_boolean.bedroom_play
+        state: 'off'
+      sequence:
+      - action: scene.turn_on
+        metadata: {}
+        data: {}
+        target:
+          entity_id: scene.bedroom_play
+      - action: scene.delete
+        metadata: {}
+        data: {}
+        target:
+          entity_id: scene.bedroom_play
+      - action: automation.trigger
+        target:
+          entity_id:
+          - automation.bedroom_occupancy
+          - automation.bedroom_windows
+        data:
+          skip_condition: true
+      - action: automation.turn_on
+        target:
+          entity_id:
+          - automation.bedroom_occupancy
+          - automation.bedroom_windows
+        data: {}
+  mode: queued
 - id: '1747753518535'
   alias: Dining Room Play
   description: ''
