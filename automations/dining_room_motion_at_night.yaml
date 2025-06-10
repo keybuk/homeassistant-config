@@ -3,7 +3,7 @@ id: dining_room_motion_at_night
 description: >
   Turns on the kitchen counter lights at night for midnight snacks.
 
-mode: single
+mode: restart
 
 triggers:
   # Trigger using the Eve Motion, as it's the most reliable.
@@ -16,22 +16,30 @@ conditions:
   - condition: state
     entity_id: sun.sun
     state: "below_horizon"
-  # And only when the kitchen counter light is actually off, otherwise we'd
-  # be turning down the brightness on someone already snacking.
-  - condition: state
-    entity_id: light.kitchen_counter
-    state: "off"
+  # And only when the kitchen counter light is off, or at low brightness.
+  # That way the script keeps the light on low as long as there is motion,
+  # without turning it off unexpectedly.
+  - or:
+    - condition: state
+      entity_id: light.kitchen_counter
+      state: "off"
+    - "{{ (state_attr('light.kitchen_counter', 'brightness') | int) <= 64 }}"
 
 actions:
-  # Turn on the kitchen counter at 25%.
+  # Turn on the kitchen counter at 25%. but leave it alone if already on.
   # Assume that takes a few seconds.
-  - action: light.turn_on
-    data:
-      brightness_pct: 25
-    target:
-      entity_id: light.kitchen_counter
-  - delay:
-      seconds: 5
+  - if:
+      - condition: state
+        entity_id: light.kitchen_counter
+        state: "off"
+    then:
+      - action: light.turn_on
+        data:
+          brightness_pct: 25
+        target:
+          entity_id: light.kitchen_counter
+      - delay:
+          seconds: 5
 
   # Keep the light on for 15 minutes.
   # But if the kitchen counter state changes, assume we should leave it alone
