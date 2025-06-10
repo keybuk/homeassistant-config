@@ -1,0 +1,94 @@
+alias: Bedroom Play
+id: bedroom_play
+description: >
+  Close window blinds and set scenes while playing in the Bedroom.
+
+mode: queued
+
+triggers:
+- trigger: state
+  entity_id: input_boolean.bedroom_play
+  to: null
+
+actions:
+- choose:
+  # Play time in the Bedroom.
+  - conditions:
+    - condition: state
+      entity_id: input_boolean.bedroom_play
+      state: 'on'
+    sequence:
+    # Turn off the automations for the window blinds and lights so they stay
+    # where we set them.
+    - action: automation.turn_off
+      target:
+        entity_id:
+        - automation.bedroom_occupancy
+        - automation.bedroom_windows
+      data:
+        stop_actions: true
+
+    # If the windows are closed, close the window blinds.
+    - if:
+      - condition: state
+        entity_id: binary_sensor.bedroom_window
+        state: 'off'
+      then:
+      - action: scene.turn_on
+        target:
+          entity_id: scene.bedroom_nighttime
+
+    # Turn on the bedside and ceiling lights, to get their current scene state;
+    # wait a few seconds for it to take effect.
+    - action: light.turn_on
+      target:
+        entity_id:
+        - light.bedroom_ceiling
+        - light.bedroom_bedside
+    - delay:
+        seconds: 3
+    - action: scene.create
+      data:
+        scene_id: bedroom_play
+        snapshot_entities:
+        - light.bedroom_bedside
+        - light.bedroom_ceiling
+
+    # Now change the bedside and ceiling lights scene.
+    - action: scene.turn_on
+      metadata: {}
+      data: {}
+      target:
+        entity_id:
+        - scene.bedroom_bedside_play
+        - scene.bedroom_ceiling_play
+
+  # Play time over.
+  - conditions:
+    - condition: state
+      entity_id: input_boolean.bedroom_play
+      state: 'off'
+    sequence:
+    # Activate and then delete the saved lighting scene to restore the lights
+    # to whatever they were before.
+    - action: scene.turn_on
+      target:
+        entity_id: scene.bedroom_play
+    - action: scene.delete
+      target:
+        entity_id: scene.bedroom_play
+
+    # Trigger the automations for the blinds and lights to set their typical
+    # state at this point in time, then re-enable the automations.
+    - action: automation.trigger
+      target:
+        entity_id:
+        - automation.bedroom_occupancy
+        - automation.bedroom_windows
+      data:
+        skip_condition: true
+    - action: automation.turn_on
+      target:
+        entity_id:
+        - automation.bedroom_occupancy
+        - automation.bedroom_windows
