@@ -371,3 +371,40 @@
       - automation.dining_room_motion_at_night
       - automation.loft_occupancy
       - automation.office_occupancy
+- id: '1749581120674'
+  alias: Gaming Power Limit
+  description: ''
+  triggers:
+  - trigger: state
+    entity_id:
+    - binary_sensor.gaming_power_limit
+    to:
+  conditions: []
+  actions:
+  - if:
+    - condition: state
+      entity_id: binary_sensor.gaming_power_limit
+      state: 'on'
+    then:
+    - action: button.press
+      metadata: {}
+      data: {}
+      target:
+        entity_id: button.vecna_power_limit_enable
+    - action: switch.turn_off
+      metadata: {}
+      data: {}
+      target:
+        entity_id: switch.office_desk_right_switch_1
+    else:
+    - action: button.press
+      metadata: {}
+      data: {}
+      target:
+        entity_id: button.vecna_power_limit_disable
+    - action: switch.turn_on
+      metadata: {}
+      data: {}
+      target:
+        entity_id: switch.office_desk_right_switch_1
+  mode: single
