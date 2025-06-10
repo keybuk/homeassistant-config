@@ -27,36 +27,47 @@ conditions:
     state: "below_horizon"
 
 actions:
-  # Turn on the entrance light and the kitchen counter (at 25%).
-  # Assume that takes a few seconds.
+  # Turn on the entrance light.
   - action: light.turn_on
     target:
       entity_id: light.entrance
-  - action: light.turn_on
-    data:
-      brightness_pct: 25
-    target:
-      entity_id: light.kitchen_counter
-  - delay:
-      seconds: 5
 
-  # Keep the lights on for 15 minutes.
-  # But if the kitchen counter state changes, assume that we should leave that
-  # one alone, and don't turn it off since someone messed with it.
-  - wait_for_trigger:
-      - trigger: state
-        entity_id: light.kitchen_counter
-    timeout:
-      minutes: 15
   - if:
-      - "{{ not wait.completed }}"
+      - condition: state
+        entity_id: light.kitchen_counter
+        state: "off"
     then:
-      - action: light.turn_off
+      # Turn on the kitchen counter (at 25%) if not already on.
+      - action: light.turn_on
+        data:
+          brightness_pct: 25
         target:
           entity_id: light.kitchen_counter
+      # Assume that takes a few seconds.
+      - delay:
+          seconds: 5
+      # Keep the lights on for 15 minutes.
+      # But if the kitchen counter state changes, assume that we should leave
+      # that one alone, and don't turn it off since someone messed with it.
+      - wait_for_trigger:
+          - trigger: state
+            entity_id: light.kitchen_counter
+        timeout:
+          minutes: 15
+      - if:
+          - "{{ not wait.completed }}"
+        then:
+          - action: light.turn_off
+            target:
+              entity_id: light.kitchen_counter
+      # Either way, turn off the entrance light once the time is up.
+      - delay: "{{ wait.remaining }}"
+    else:
+      # Keep the entrance light on for 15 minutes.
+      - delay:
+          minutes: 15
 
-  # Either way, turn off the entrance light once the time is up.
-  - delay: "{{ wait.remaining }}"
+  # Turn off the entrance light.
   - action: light.turn_off
     target:
       entity_id: light.entrance
