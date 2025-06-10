@@ -425,15 +425,103 @@
 - id: '1747753518535'
   alias: Dining Room Play
   description: ''
-  use_blueprint:
-    path: disable_automations.yaml
-    input:
-      input: input_boolean.dining_room_play
-      automations:
-      - automation.dining_room_motion_at_night
-      - automation.dining_room_windows
-      - automation.dining_room_mood_lights
-      - automation.kitchen_windows
+  triggers:
+  - trigger: state
+    entity_id: input_boolean.dining_room_play
+    to:
+  actions:
+  - choose:
+    - conditions:
+      - condition: state
+        entity_id: input_boolean.dining_room_play
+        state: 'on'
+      sequence:
+      - action: automation.turn_off
+        target:
+          entity_id:
+          - automation.dining_room_motion_at_night
+          - automation.dining_room_windows
+          - automation.dining_room_mood_lights
+          - automation.kitchen_windows
+        data:
+          stop_actions: true
+      - if:
+        - condition: state
+          entity_id: binary_sensor.dining_room_top_windows
+          state: 'off'
+        - condition: state
+          entity_id: binary_sensor.dining_room_bottom_windows
+          state: 'off'
+        then:
+        - action: scene.turn_on
+          metadata: {}
+          data: {}
+          target:
+            entity_id: scene.dining_room_windows_closed
+      - action: scene.turn_on
+        metadata: {}
+        data: {}
+        target:
+          entity_id: scene.kitchen_windows_closed
+      - action: light.turn_on
+        metadata: {}
+        data: {}
+        target:
+          entity_id:
+          - light.dining_room_wall
+          - light.dining_room_beam
+      - delay:
+          hours: 0
+          minutes: 0
+          seconds: 3
+          milliseconds: 0
+      - action: scene.create
+        metadata: {}
+        data:
+          scene_id: dining_room_play
+          snapshot_entities:
+          - light.dining_room_wall
+          - light.dining_room_beam
+      - action: scene.turn_on
+        metadata: {}
+        data: {}
+        target:
+          entity_id:
+          - scene.dining_room_wall_play
+          - scene.dining_room_beam_lights_play
+    - conditions:
+      - condition: state
+        entity_id: input_boolean.dining_room_play
+        state: 'off'
+      sequence:
+      - action: scene.turn_on
+        metadata: {}
+        data: {}
+        target:
+          entity_id: scene.dining_room_play
+      - action: scene.delete
+        metadata: {}
+        data: {}
+        target:
+          entity_id: scene.dining_room_play
+      - action: automation.trigger
+        target:
+          entity_id:
+          - automation.dining_room_motion_at_night
+          - automation.dining_room_windows
+          - automation.dining_room_mood_lights
+          - automation.kitchen_windows
+        data:
+          skip_condition: true
+      - action: automation.turn_on
+        target:
+          entity_id:
+          - automation.dining_room_motion_at_night
+          - automation.dining_room_windows
+          - automation.dining_room_mood_lights
+          - automation.kitchen_windows
+        data: {}
+  mode: queued
 - id: '1747754063388'
   alias: On Vacation
   description: ''
