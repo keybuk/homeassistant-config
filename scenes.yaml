@@ -1,0 +1,28 @@
+- id: '1750176615026'
+  name: D&D
+  entities:
+    light.dining_room_chandelier:
+      brightness: 89
+      state: 'on'
+    light.dining_room_spots:
+      brightness: 153
+      state: 'on'
+    light.kitchen_counter:
+      brightness: 127
+      state: 'on'
+    light.dining_room_beam:
+      state: 'on'
+    light.dining_room_wall:
+      state: 'on'
+  icon: mdi:dice-5-outline
+  metadata:
+    light.dining_room_chandelier:
+      entity_only: true
+    light.dining_room_spots:
+      entity_only: true
+    light.kitchen_counter:
+      entity_only: true
+    light.dining_room_beam:
+      entity_only: true
+    light.dining_room_wall:
+      entity_only: true
