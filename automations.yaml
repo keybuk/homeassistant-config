@@ -382,3 +382,16 @@
         entity_id: switch.office_desk_right_switch_1
   mode: queued
   max: 10
+- id: '1750177081187'
+  alias: Dining Room Switch Button 2
+  description: ''
+  use_blueprint:
+    path: scene_controller_button.yaml
+    input:
+      button: event.dining_room_switch_button_2
+      actions:
+      - action: scene.turn_on
+        metadata: {}
+        data: {}
+        target:
+          entity_id: scene.dnd
