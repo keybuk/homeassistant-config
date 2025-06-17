@@ -52,16 +52,24 @@ actions:
     - action: light.turn_on
       target:
         entity_id:
-        - light.dining_room_wall
         - light.dining_room_beam
+        - light.dining_room_south_left
+        - light.dining_room_south_right
+        - light.dining_room_west_left
+        - light.dining_room_west_center
+        - light.dining_room_west_right
     - delay:
         seconds: 3
     - action: scene.create
       data:
         scene_id: dining_room_play
         snapshot_entities:
-        - light.dining_room_wall
         - light.dining_room_beam
+        - light.dining_room_south_left
+        - light.dining_room_south_right
+        - light.dining_room_west_left
+        - light.dining_room_west_center
+        - light.dining_room_west_right
 
     # Now change the wall and beam lights scene.
     - action: scene.turn_on
