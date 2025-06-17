@@ -322,20 +322,11 @@
     input:
       button: event.dining_room_switch_button_3
       actions:
-      - action: scene.turn_on
+      - action: input_boolean.toggle
         metadata: {}
         data: {}
         target:
-          entity_id:
-          - scene.dining_room_beam_lights_play
-          - scene.dining_room_wall_play
-      - action: scene.turn_on
-        metadata: {}
-        data: {}
-        target:
-          entity_id:
-          - scene.dining_room_windows_closed
-          - scene.kitchen_windows_closed
+          entity_id: input_boolean.dining_room_play
 - id: '1747754063388'
   alias: On Vacation
   description: ''
