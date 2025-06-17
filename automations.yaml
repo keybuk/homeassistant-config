@@ -357,6 +357,10 @@
     entity_id:
     - binary_sensor.gaming_power_limit
     to:
+  - trigger: state
+    entity_id:
+    - sensor.vecna_lastsystemstatechange
+    to:
   conditions: []
   actions:
   - if:
@@ -385,4 +389,5 @@
       data: {}
       target:
         entity_id: switch.office_desk_right_switch_1
-  mode: single
+  mode: queued
+  max: 10
