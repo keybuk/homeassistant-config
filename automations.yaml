@@ -170,8 +170,6 @@
     input:
       light: light.bedroom
       sensor: binary_sensor.bedroom_occupancy
-      awake: binary_sensor.household_asleep
-      asleep: binary_sensor.household_asleep
 - id: '1742347574417'
   alias: Loft Occupancy
   description: ''

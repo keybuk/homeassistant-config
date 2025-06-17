@@ -20,14 +20,6 @@ blueprint:
         entity:
           filter:
             - domain: binary_sensor
-    asleep:
-      name: Asleep
-      description: Unless this sensor is on during the evening.
-      default: none
-      selector:
-        entity:
-          filter:
-            - domain: binary_sensor
 
 mode: queued
 
@@ -43,8 +35,6 @@ triggers:
     to: null
 
 variables:
-  asleep: !input asleep
-  not_asleep: "{{ asleep is not none and not is_state(asleep, 'on') }}"
   cloudy_day: >
     {{ states('weather.home') not in
        ['clear-night', 'partlycloudy', 'sunny', 'windy' ]
@@ -52,20 +42,18 @@ variables:
 
 actions:
   - choose:
-    # Light is turned on when there is occupancy in the evening, unless
-    # someone is sleeping.
+    # Light is turned on when there is occupancy at night, unless someone
+    # is sleeping.
     - conditions:
         - condition: state
           entity_id: !input sensor
           state: "on"
-        # "after sunset" triggers before "below_horizon", so we combine both to
-        # mean "evening" since all times are "before midnight".
-        - condition: sun
-          after: sunset
         - condition: state
           entity_id: sun.sun
           state: "below_horizon"
-        - "{{ not_asleep }}"
+        - condition: state
+          entity_id: binary_sensor.household_asleep
+          state: "off"
       sequence:
         - action: light.turn_on
           target:
@@ -79,7 +67,10 @@ actions:
         - condition: state
           entity_id: sun.sun
           state: "above_horizon"
-        - "{{ cloudy_day and not_asleep }}"
+        - condition: state
+          entity_id: binary_sensor.household_asleep
+          state: "off"
+        - "{{ cloudy_day }}"
       sequence:
         - action: light.turn_on
           target:
