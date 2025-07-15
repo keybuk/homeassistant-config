@@ -393,3 +393,58 @@
         data: {}
         target:
           entity_id: scene.dnd
+- id: '1752608748598'
+  alias: Office Pico Lower
+  description: ''
+  triggers:
+  - device_id: beb7140be21d2a179f64ec52b946edca
+    domain: lutron_caseta
+    type: press
+    subtype: lower
+    trigger: device
+  conditions: []
+  actions:
+  - wait_for_trigger:
+    - device_id: beb7140be21d2a179f64ec52b946edca
+      domain: lutron_caseta
+      type: release
+      subtype: lower
+      trigger: device
+    timeout:
+      hours: 0
+      minutes: 0
+      seconds: 0
+      milliseconds: 500
+  - if:
+    - condition: template
+      value_template: '{{ wait.completed }}'
+    then:
+    - action: scene.turn_on
+      metadata: {}
+      data: {}
+      target:
+        entity_id: scene.office_daytime
+    else:
+    - action: scene.turn_on
+      metadata: {}
+      data: {}
+      target:
+        entity_id: scene.office_window_open
+  mode: single
+- id: '1752608870374'
+  alias: Office Pico Raise
+  description: ''
+  triggers:
+  - device_id: beb7140be21d2a179f64ec52b946edca
+    domain: lutron_caseta
+    type: press
+    subtype: raise
+    trigger: device
+  conditions: []
+  actions:
+  - action: scene.turn_on
+    metadata: {}
+    data: {}
+    target:
+      entity_id: scene.office_nighttime
+  mode: single

@@ -1,6 +1,5 @@
 alias: Office Windows
 id: office_windows
-initial_state: false
 description: >
   Opens the office window blinds in the morning, and closes them at night
   provided the windows are closed.
@@ -8,10 +7,17 @@ description: >
 mode: single
 
 triggers:
-  # Sunrise triggers the windows opening.
+  # Sunrise can trigger the windows opening if nobody is home.
   - trigger: state
     entity_id: sun.sun
     to: "above_horizon"
+  # Motion in the office should open the windows.
+  - trigger: state
+    entity_id: binary_sensor.office_occupancy
+    to: "on"
+  # If nothing else has opened the windows, try opening them at 10am.
+  - trigger: time
+    at: "10:00:00"
   # Sunset triggers the window closing.
   - trigger: state
     entity_id: sun.sun
