@@ -48,6 +48,9 @@ actions:
         - action: scene.turn_on
           target:
             entity_id: scene.bedroom_daytime
+        - action: scene.turn_on
+          target:
+            entity_id: scene.bedroom_blackout_open
 
     # To close the window blinds, the sun should be below the horizon, and the
     # windows should be closed.

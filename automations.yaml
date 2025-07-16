@@ -448,3 +448,37 @@
     target:
       entity_id: scene.office_nighttime
   mode: single
+- id: '1752632839285'
+  alias: Bedroom Pico On
+  description: ''
+  triggers:
+  - device_id: b0881bdabe428061b6e34aa09b9386d6
+    domain: lutron_caseta
+    type: press
+    subtype: 'on'
+    trigger: device
+  conditions: []
+  actions:
+  - action: scene.turn_on
+    metadata: {}
+    data: {}
+    target:
+      entity_id: scene.bedroom_blackout
+  mode: single
+- id: '1752632870011'
+  alias: Bedroom Pico Off
+  description: ''
+  triggers:
+  - device_id: b0881bdabe428061b6e34aa09b9386d6
+    domain: lutron_caseta
+    type: press
+    subtype: 'off'
+    trigger: device
+  conditions: []
+  actions:
+  - action: scene.turn_on
+    metadata: {}
+    data: {}
+    target:
+      entity_id: scene.bedroom_blackout_open
+  mode: single
