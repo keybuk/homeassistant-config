@@ -144,7 +144,7 @@
   use_blueprint:
     path: light_switch.yaml
     input:
-      light: light.loft_ceiling
+      light: light.loft
       switch: switch.loft_switch
 - id: '1742337280749'
   alias: Bedroom Lights
@@ -176,7 +176,7 @@
   use_blueprint:
     path: light_occupancy.yaml
     input:
-      light: light.loft_ceiling
+      light: light.loft
       sensor: binary_sensor.loft_occupancy
 - id: '1742347602151'
   alias: Office Occupancy
