@@ -54,6 +54,9 @@ actions:
         - condition: state
           entity_id: binary_sensor.household_asleep
           state: "off"
+        - condition: state
+          entity_id: binary_sensor.anyone_home
+          state: "on"
       sequence:
         - action: light.turn_on
           target:
@@ -70,6 +73,9 @@ actions:
         - condition: state
           entity_id: binary_sensor.household_asleep
           state: "off"
+        - condition: state
+          entity_id: binary_sensor.anyone_home
+          state: "on"
         - "{{ cloudy_day }}"
       sequence:
         - action: light.turn_on
