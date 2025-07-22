@@ -1,8 +1,8 @@
 alias: Kitchen Windows
 id: kitchen_windows
 description: >
-  Closes the loft part of the kitchen windows at night, and the full length
-  on a hot sunny day.
+  Closes the loft part of the kitchen windows at night, while the TV is on
+  during the day, and completely on a hot sunny day.
 
 mode: single
 
@@ -30,6 +30,10 @@ triggers:
     entity_id: weather.home
     attribute: temperature
     above: 69
+  # TV opens and closes windows too.
+  - trigger: state
+    entity_id: media_player.lg_webos_tv
+    from: null
 
 variables:
   cloudy_day: >
@@ -60,6 +64,20 @@ actions:
         - action: scene.turn_on
           target:
             entity_id: scene.kitchen_windows_closed
+
+    # When the sun is above the horizon, and the TV is on, close the top part
+    # of the windows.
+    - conditions:
+        - condition: state
+          entity_id: sun.sun
+          state: "above_horizon"
+        - condition: state
+          entity_id: media_player.lg_webos_tv
+          state: "on"
+      sequence:
+        - action: scene.turn_on
+          target:
+            entity_id: scene.kitchen_nighttime
 
     # Otherwise any time the sun is above the horizon, set the daytime scene.
     - conditions:

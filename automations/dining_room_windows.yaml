@@ -2,8 +2,8 @@ alias: Dining Room Windows
 id: dining_room_windows
 description: >
   Closes the dining room windows as the sun shines through them, to keep the
-  sun out of the eyes of anyone at the table; and generally to keep the room
-  cool on a sunny day.
+  sun out of the eyes of anyone at the table, while the TV is on during the day,
+  and generally to keep the room cool on a sunny day.
 
 mode: single
 
@@ -44,6 +44,10 @@ triggers:
   - trigger: state
     entity_id: weather.home
     to: null
+  # TV opens and closes windows too.
+  - trigger: state
+    entity_id: media_player.lg_webos_tv
+    from: null
   # We're also careful not to close the blinds over parts of the window that
   # are open, so the wind doesn't blow them around and burn out the motors;
   # so trigger on those closing.
@@ -134,6 +138,23 @@ actions:
             - action: scene.turn_on
               target:
                 entity_id: scene.late_afternoon_sun
+
+    # When the sun is above the horizon, and the TV is on, close the top part
+    # of the windows.
+    - conditions:
+        - condition: state
+          entity_id: sun.sun
+          state: "above_horizon"
+        - condition: state
+          entity_id: binary_sensor.dining_room_top_windows
+          state: "off"
+        - condition: state
+          entity_id: media_player.lg_webos_tv
+          state: "on"
+      sequence:
+        - action: scene.turn_on
+          target:
+            entity_id: scene.afternoon_sun
 
     # When the sun is otherwise above the horizon, set the daytime scene.
     - conditions:
