@@ -1,7 +1,7 @@
 alias: Loft Play
 id: loft_play
 description: >
-  Close window blinds and set scenes while playing in the Loft.
+  Set scenes while playing in the Loft.
 
 mode: queued
 
@@ -18,30 +18,14 @@ actions:
       entity_id: input_boolean.loft_play
       state: 'on'
     sequence:
-    # Turn off the automations for the window blinds and lights so they stay
-    # where we set them.
+    # Turn off the occupancy automation for the lights so they stay where we
+    # set them.
     - action: automation.turn_off
       target:
         entity_id:
-        - automation.dining_room_windows
-        - automation.kitchen_windows
         - automation.loft_occupancy
       data:
         stop_actions: true
-
-    # If the dining room windows are closed, close the top of window blinds.
-    - if:
-      - condition: state
-        entity_id: binary_sensor.dining_room_top_windows
-        state: 'off'
-      then:
-      - action: scene.turn_on
-        target:
-          entity_id: scene.afternoon_sun
-    # Close the top of the kitchen window blinds.
-    - action: scene.turn_on
-      target:
-        entity_id: scene.kitchen_nighttime
 
     # Turn on the wall and ceiling lights, to get their current scene state;
     # wait a few seconds for it to take effect.
@@ -97,19 +81,15 @@ actions:
       target:
         entity_id: scene.loft_play
 
-    # Trigger the automations for the blinds and lights to set their typical
-    # state at this point in time, then re-enable the automations.
+    # Trigger the automations for the lights to set their typical state at this
+    # point in time, then re-enable the automations.
     - action: automation.trigger
       target:
         entity_id:
-        - automation.dining_room_windows
-        - automation.kitchen_windows
         - automation.loft_occupancy
       data:
         skip_condition: true
     - action: automation.turn_on
       target:
         entity_id:
-        - automation.dining_room_windows
-        - automation.kitchen_windows
         - automation.loft_occupancy

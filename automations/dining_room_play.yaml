@@ -1,7 +1,7 @@
 alias: Dining Room Play
 id: dining_room_play
 description: >
-  Close window blinds and set scenes while playing in the Dining Room.
+  Set scenes while playing in the Dining Room.
 
 mode: queued
 
@@ -18,34 +18,15 @@ actions:
       entity_id: input_boolean.dining_room_play
       state: 'on'
     sequence:
-    # Turn off the automations for the window blinds and lights so they stay
-    # where we set them.
+    # Turn off the occupancy automation for the lights so they stay where we
+    # set them.
     - action: automation.turn_off
       target:
         entity_id:
         - automation.dining_room_motion_at_night
-        - automation.dining_room_windows
         - automation.dining_room_mood_lights
-        - automation.kitchen_windows
       data:
         stop_actions: true
-
-    # If the dining room windows are closed, close the window blinds.
-    - if:
-      - condition: state
-        entity_id: binary_sensor.dining_room_top_windows
-        state: 'off'
-      - condition: state
-        entity_id: binary_sensor.dining_room_bottom_windows
-        state: 'off'
-      then:
-      - action: scene.turn_on
-        target:
-          entity_id: scene.dining_room_windows_closed
-    # Close the kitchen window blinds.
-    - action: scene.turn_on
-      target:
-        entity_id: scene.kitchen_windows_closed
 
     # Turn on the wall and beam lights, to get their current scene state;
     # wait a few seconds for it to take effect.
@@ -93,21 +74,17 @@ actions:
       target:
         entity_id: scene.dining_room_play
 
-    # Trigger the automations for the blinds and lights to set their typical
-    # state at this point in time, then re-enable the automations.
+    # Trigger the automations for the lights to set their typical state at this
+    # point in time, then re-enable the automations.
     - action: automation.trigger
       target:
         entity_id:
         - automation.dining_room_motion_at_night
-        - automation.dining_room_windows
         - automation.dining_room_mood_lights
-        - automation.kitchen_windows
       data:
         skip_condition: true
     - action: automation.turn_on
       target:
         entity_id:
         - automation.dining_room_motion_at_night
-        - automation.dining_room_windows
         - automation.dining_room_mood_lights
-        - automation.kitchen_windows

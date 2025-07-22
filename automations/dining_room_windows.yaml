@@ -3,7 +3,7 @@ id: dining_room_windows
 description: >
   Closes the dining room windows as the sun shines through them, to keep the
   sun out of the eyes of anyone at the table, while the TV is on during the day,
-  and generally to keep the room cool on a sunny day.
+  while playing, and generally to keep the room cool on a sunny day.
 
 mode: single
 
@@ -44,9 +44,16 @@ triggers:
   - trigger: state
     entity_id: weather.home
     to: null
-  # TV opens and closes windows too.
+  # TV opens and closes windows.
   - trigger: state
     entity_id: media_player.lg_webos_tv
+    from: null
+  # Playing in the dining room or loft opens and closes windows.
+  - trigger: state
+    entity_id: input_boolean.dining_room_play
+    from: null
+  - trigger: state
+    entity_id: input_boolean.loft_play
     from: null
   # We're also careful not to close the blinds over parts of the window that
   # are open, so the wind doesn't blow them around and burn out the motors;
@@ -138,6 +145,43 @@ actions:
             - action: scene.turn_on
               target:
                 entity_id: scene.late_afternoon_sun
+
+    # When playing in the dining room, and the windows are closed, close the
+    # blinds.
+    - conditions:
+        - condition: state
+          entity_id: input_boolean.dining_room_play
+          state: "on"
+        - condition: state
+          entity_id: binary_sensor.dining_room_top_windows
+          state: "off"
+      sequence:
+        - if:
+            - condition: state
+              entity_id: binary_sensor.dining_room_bottom_windows
+              state: "off"
+          then:
+            - action: scene.turn_on
+              target:
+                entity_id: scene.dining_room_windows_closed
+          else:
+            - action: scene.turn_on
+              target:
+                entity_id: scene.late_afternoon_sun
+
+    # When playing in the loft, and the top part of the windows are closed,
+    # close the top part of the blinds.
+    - conditions:
+        - condition: state
+          entity_id: input_boolean.loft_play
+          state: "on"
+        - condition: state
+          entity_id: binary_sensor.dining_room_top_windows
+          state: "off"
+      sequence:
+        - action: scene.turn_on
+          target:
+            entity_id: scene.afternoon_sun
 
     # When the sun is above the horizon, and the TV is on, close the top part
     # of the windows.
