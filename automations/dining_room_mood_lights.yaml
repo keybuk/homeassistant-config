@@ -15,21 +15,17 @@ triggers:
   - trigger: state
     entity_id: binary_sensor.anyone_home
     to: "on"
-  # And turn them off again at midnight.
-  - trigger: time
-    at: "00:00:00"
 
 actions:
   - choose:
-    # Lights are turned on in the evening if somebody is home.
+    # Lights are turned on in the evening if somebody is home, and awake.
     - conditions:
-        # "after sunset" triggers before "below_horizon", so we combine both to
-        # mean "evening" since all times are "before midnight".
-        - condition: sun
-          after: sunset
         - condition: state
           entity_id: sun.sun
           state: "below_horizon"
+        - condition: state
+          entity_id: binary_sensor.household_asleep
+          state: "off"
         - condition: state
           entity_id: binary_sensor.anyone_home
           state: "on"
@@ -41,13 +37,9 @@ actions:
               - light.dining_room_lego
 
     # Lights are turned off at midnight, we don't need to check the condition.
-    - conditions:
-        # "before sunset" triggers all day from "midnight" until sunset.
-        - condition: sun
-          before: sunset
-      sequence:
-        - action: light.turn_off
-          target:
-            entity_id:
-              - light.dining_room
-              - light.dining_room_lego
+    default:
+      - action: light.turn_off
+        target:
+          entity_id:
+            - light.dining_room
+            - light.dining_room_lego
