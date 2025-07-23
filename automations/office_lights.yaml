@@ -1,0 +1,103 @@
+alias: Office Lights
+id: office_lights
+description: >
+  Turn the office lights on and off depending on occupancy and the weather.
+
+mode: queued
+
+triggers:
+  # Occupancy sensor primarily controls the lights.
+  - trigger: state
+    entity_id: binary_sensor.office_occupancy
+    to: null
+  # Sunset turns on the lights when occupied.
+  - trigger: state
+    entity_id: sun.sun
+    to: "below_horizon"
+  # Cloudy days control the lights when occupied.
+  - trigger: state
+    entity_id: weather.home
+    to: null
+  # The last person to leave home turns off the lights.
+  - trigger: state
+    entity_id: binary_sensor.anyone_home
+    to: "off"
+
+variables:
+  cloudy_day: >
+    {{ states('weather.home') not in
+       ['clear-night', 'partlycloudy', 'sunny', 'windy' ]
+    }}
+
+actions:
+  - choose:
+    # Lights are turned on when there is occupancy at night, unless someone
+    # is sleeping.
+    - conditions:
+        - condition: state
+          entity_id: binary_sensor.office_occupancy
+          state: "on"
+        - condition: state
+          entity_id: sun.sun
+          state: "below_horizon"
+        - condition: state
+          entity_id: binary_sensor.household_asleep
+          state: "off"
+        - condition: state
+          entity_id: binary_sensor.anyone_home
+          state: "on"
+      sequence:
+        - action: light.turn_on
+          target:
+            entity_id: light.office
+
+    # Lights are turned on when there is occupancy on a cloudy day, unless
+    # someone is sleeping.
+    - conditions:
+        - condition: state
+          entity_id: binary_sensor.office_occupancy
+          state: "on"
+        - condition: state
+          entity_id: sun.sun
+          state: "above_horizon"
+        - condition: state
+          entity_id: binary_sensor.household_asleep
+          state: "off"
+        - condition: state
+          entity_id: binary_sensor.anyone_home
+          state: "on"
+        - "{{ cloudy_day }}"
+      sequence:
+        - action: light.turn_on
+          target:
+            entity_id: light.office
+
+    # Turn the lights off when the sun comes out during the day to save on
+    # power. Doesn't matter whether the room is occupied or not, since we
+    # wouldn't turn the light back on if they came in.
+    - conditions:
+        - condition: state
+          entity_id: sun.sun
+          state: "above_horizon"
+        - "{{ not cloudy_day }}"
+      sequence:
+        - action: light.turn_off
+          target:
+            entity_id: light.office
+
+    # Lighta are turned off when the room or home is unoccupied, We don't
+    # turn them off when someone goes to sleep, or at a speciifc time,
+    # since that's just annouying,.
+    - conditions:
+        - condition: or
+          conditions:
+            - condition: state
+              entity_id: binary_sensor.office_occupancy
+              state: "off"
+            - condition: state
+              entity_id: binary_sensor.anyone_home
+              state: "off"
+      sequence:
+        - action: light.turn_off
+          target:
+            entity_id: light.office

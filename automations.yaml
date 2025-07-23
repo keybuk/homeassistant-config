@@ -131,7 +131,7 @@
         target:
           entity_id: scene.loft_ceiling_play
 - id: '1742337005391'
-  alias: Office Lights
+  alias: Office Switch
   description: ''
   use_blueprint:
     path: light_switch.yaml
@@ -139,7 +139,7 @@
       light: light.office_ceiling
       switch: switch.office_switch
 - id: '1742337248521'
-  alias: Loft Lights
+  alias: Loft Switch
   description: ''
   use_blueprint:
     path: light_switch.yaml
@@ -147,7 +147,7 @@
       light: light.loft
       switch: switch.loft_switch
 - id: '1742337280749'
-  alias: Bedroom Lights
+  alias: Bedroom Switch
   description: ''
   use_blueprint:
     path: light_switch.yaml
@@ -155,37 +155,13 @@
       light: light.bedroom
       switch: switch.bedroom_switch
 - id: '1742337322652'
-  alias: Dining Room Lights
+  alias: Dining Room Switch
   description: ''
   use_blueprint:
     path: light_switch.yaml
     input:
       light: light.dining_room
       switch: switch.dining_room_switch
-- id: '1742347526685'
-  alias: Bedroom Occupancy
-  description: ''
-  use_blueprint:
-    path: light_occupancy.yaml
-    input:
-      light: light.bedroom
-      sensor: binary_sensor.bedroom_occupancy
-- id: '1742347574417'
-  alias: Loft Occupancy
-  description: ''
-  use_blueprint:
-    path: light_occupancy.yaml
-    input:
-      light: light.loft
-      sensor: binary_sensor.loft_occupancy
-- id: '1742347602151'
-  alias: Office Occupancy
-  description: ''
-  use_blueprint:
-    path: light_occupancy.yaml
-    input:
-      light: light.office_ceiling
-      sensor: binary_sensor.office_occupancy
 - id: '1744102789672'
   alias: Dining Room Switch Button 1
   description: ''
@@ -325,19 +301,6 @@
         data: {}
         target:
           entity_id: input_boolean.dining_room_play
-- id: '1747754063388'
-  alias: On Vacation
-  description: ''
-  use_blueprint:
-    path: disable_automations.yaml
-    input:
-      input: input_boolean.on_vacation
-      automations:
-      - automation.bedroom_occupancy
-      - automation.dining_room_mood_lights
-      - automation.dining_room_motion_at_night
-      - automation.loft_occupancy
-      - automation.office_occupancy
 - id: '1749581120674'
   alias: Gaming Power Limit
   description: ''

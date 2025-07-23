@@ -24,7 +24,7 @@ actions:
       target:
         entity_id:
         - automation.dining_room_motion_at_night
-        - automation.dining_room_mood_lights
+        - automation.dining_room_lights
       data:
         stop_actions: true
 
@@ -80,11 +80,11 @@ actions:
       target:
         entity_id:
         - automation.dining_room_motion_at_night
-        - automation.dining_room_mood_lights
+        - automation.dining_room_lights
       data:
         skip_condition: true
     - action: automation.turn_on
       target:
         entity_id:
         - automation.dining_room_motion_at_night
-        - automation.dining_room_mood_lights
+        - automation.dining_room_lights
