@@ -4,7 +4,7 @@ description: >
   Closes the loft part of the kitchen windows at night, while the TV is on
   during the day, while playing, and completely on a hot sunny day.
 
-mode: single
+mode: queued
 
 triggers:
   # Sun shines through the kitchen windows from 115° azimuth.
@@ -86,7 +86,7 @@ actions:
           target:
             entity_id: scene.kitchen_nighttime
 
-    # When playing in the dining room, close the blinds.
+    # When playing in the dining room or loft, close the blinds.
     - conditions:
         - condition: state
           entity_id: input_boolean.dining_room_play

@@ -4,7 +4,7 @@ description: >
   Opens the bedroom window blinds in the morning once we're awake, and closes
   them at night provided the windows are closed.
 
-mode: single
+mode: queued
 
 triggers:
   # Sunrise can trigger the windows opening if nobody is home.
@@ -32,9 +32,26 @@ triggers:
   - trigger: state
     entity_id: binary_sensor.bedroom_window
     to: "off"
+  # Playing in the bedroom opens and closes windows.
+  - trigger: state
+    entity_id: input_boolean.bedroom_play
+    from: null
 
 actions:
   - choose:
+    # When playing in the bedroom, close the blinds.
+    - conditions:
+        - condition: state
+          entity_id: binary_sensor.bedroom_window
+          state: "off"
+        - condition: state
+          entity_id: input_boolean.bedroom_play
+          state: "on"
+      sequence:
+        - action: scene.turn_on
+          target:
+            entity_id: scene.bedroom_nighttime
+
     # To open the window blinds, the sun has to be above the horizon, and nobody
     # should be asleep.
     - conditions:

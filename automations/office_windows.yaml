@@ -4,7 +4,7 @@ description: >
   Opens the office window blinds in the morning, and closes them at night
   provided the windows are closed.
 
-mode: single
+mode: queued
 
 triggers:
   # Sunrise can trigger the windows opening if nobody is home.

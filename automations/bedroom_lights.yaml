@@ -22,6 +22,10 @@ triggers:
   - trigger: state
     entity_id: binary_sensor.anyone_home
     to: "off"
+  # Playing in the bedroom keeps the lights on.
+  - trigger: state
+    entity_id: input_boolean.bedroom_play
+    to: null
 
 variables:
   cloudy_day: >
@@ -73,21 +77,24 @@ actions:
             entity_id: light.bedroom
 
     # Turn the lights off when the sun comes out during the day to save on
-    # power. Doesn't matter whether the room is occupied or not, since we
-    # wouldn't turn the light back on if they came in.
+    # power, unless we're playing. Doesn't matter whether the room is occupied
+    # or not, since we wouldn't turn the light back on if they came in.
     - conditions:
         - condition: state
           entity_id: sun.sun
           state: "above_horizon"
         - "{{ not cloudy_day }}"
+        - condition: state
+          entity_id: input_boolean.bedroom_play
+          state: 'off'
       sequence:
         - action: light.turn_off
           target:
             entity_id: light.bedroom
 
-    # Lighta are turned off when the room or home is unoccupied, We don't
-    # turn them off when someone goes to sleep, or at a speciifc time,
-    # since that's just annouying,.
+    # Lights are turned off when the room or home is unoccupied, unless we're
+    # playing. We don't turn them off when someone goes to sleep, or at a
+    # speciifc time, since that's just annoying.
     - conditions:
         - condition: or
           conditions:
@@ -97,6 +104,9 @@ actions:
             - condition: state
               entity_id: binary_sensor.anyone_home
               state: "off"
+        - condition: state
+          entity_id: input_boolean.bedroom_play
+          state: 'off'
       sequence:
         - action: light.turn_off
           target:

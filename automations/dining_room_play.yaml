@@ -18,46 +18,36 @@ actions:
       entity_id: input_boolean.dining_room_play
       state: 'on'
     sequence:
-    # Turn off the occupancy automation for the lights so they stay where we
-    # set them.
-    - action: automation.turn_off
-      target:
-        entity_id:
-        - automation.dining_room_motion_at_night
-        - automation.dining_room_lights
-      data:
-        stop_actions: true
+      # Turn on the wall and beam lights, to get their current scene state;
+      # wait a few seconds for it to take effect.
+      - action: light.turn_on
+        target:
+          entity_id:
+          - light.dining_room_beam
+          - light.dining_room_south_left
+          - light.dining_room_south_right
+          - light.dining_room_west_left
+          - light.dining_room_west_center
+          - light.dining_room_west_right
+      - delay:
+          seconds: 3
+      - action: scene.create
+        data:
+          scene_id: dining_room_play
+          snapshot_entities:
+          - light.dining_room_beam
+          - light.dining_room_south_left
+          - light.dining_room_south_right
+          - light.dining_room_west_left
+          - light.dining_room_west_center
+          - light.dining_room_west_right
 
-    # Turn on the wall and beam lights, to get their current scene state;
-    # wait a few seconds for it to take effect.
-    - action: light.turn_on
-      target:
-        entity_id:
-        - light.dining_room_beam
-        - light.dining_room_south_left
-        - light.dining_room_south_right
-        - light.dining_room_west_left
-        - light.dining_room_west_center
-        - light.dining_room_west_right
-    - delay:
-        seconds: 3
-    - action: scene.create
-      data:
-        scene_id: dining_room_play
-        snapshot_entities:
-        - light.dining_room_beam
-        - light.dining_room_south_left
-        - light.dining_room_south_right
-        - light.dining_room_west_left
-        - light.dining_room_west_center
-        - light.dining_room_west_right
-
-    # Now change the wall and beam lights scene.
-    - action: scene.turn_on
-      target:
-        entity_id:
-        - scene.dining_room_wall_play
-        - scene.dining_room_beam_lights_play
+      # Now change the wall and beam lights scene.
+      - action: scene.turn_on
+        target:
+          entity_id:
+          - scene.dining_room_wall_play
+          - scene.dining_room_beam_lights_play
 
   # Play time over.
   - conditions:
@@ -65,26 +55,11 @@ actions:
       entity_id: input_boolean.dining_room_play
       state: 'off'
     sequence:
-    # Activate and then delete the saved lighting scene to restore the lights
-    # to whatever they were before.
-    - action: scene.turn_on
-      target:
-        entity_id: scene.dining_room_play
-    - action: scene.delete
-      target:
-        entity_id: scene.dining_room_play
-
-    # Trigger the automations for the lights to set their typical state at this
-    # point in time, then re-enable the automations.
-    - action: automation.trigger
-      target:
-        entity_id:
-        - automation.dining_room_motion_at_night
-        - automation.dining_room_lights
-      data:
-        skip_condition: true
-    - action: automation.turn_on
-      target:
-        entity_id:
-        - automation.dining_room_motion_at_night
-        - automation.dining_room_lights
+      # Activate and then delete the saved lighting scene to restore the lights
+      # to whatever they were before.
+      - action: scene.turn_on
+        target:
+          entity_id: scene.dining_room_play
+      - action: scene.delete
+        target:
+          entity_id: scene.dining_room_play

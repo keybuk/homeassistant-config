@@ -4,7 +4,7 @@ description: >
   When anybody is (or comes) home in the evening, make sure that the Hue
   light bars and beams are making the brick work turn pretty colors.
 
-mode: single
+mode: queued
 
 triggers:
   # Generally turn the lights on at sunset.

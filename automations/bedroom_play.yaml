@@ -1,7 +1,7 @@
 alias: Bedroom Play
 id: bedroom_play
 description: >
-  Close window blinds and set scenes while playing in the Bedroom.
+  Set scenes while playing in the bedroom.
 
 mode: queued
 
@@ -18,58 +18,38 @@ actions:
       entity_id: input_boolean.bedroom_play
       state: 'on'
     sequence:
-    # Turn off the automations for the window blinds and lights so they stay
-    # where we set them.
-    - action: automation.turn_off
-      target:
-        entity_id:
-        - automation.bedroom_occupancy
-        - automation.bedroom_windows
-      data:
-        stop_actions: true
-
-    # If the windows are closed, close the window blinds.
-    - if:
-      - condition: state
-        entity_id: binary_sensor.bedroom_window
-        state: 'off'
-      then:
-      - action: scene.turn_on
+      # Turn on the bedside and ceiling lights, to get their current scene state;
+      # wait a few seconds for it to take effect.
+      - action: light.turn_on
         target:
-          entity_id: scene.bedroom_nighttime
+          entity_id:
+          - light.bedroom_bed_left
+          - light.bedroom_bed_right
+          - light.bedroom_wall_left
+          - light.bedroom_wall_right
+          - light.bedroom_left_bedside
+          - light.bedroom_right_bedside
+      - delay:
+          seconds: 3
+      - action: scene.create
+        data:
+          scene_id: bedroom_play
+          snapshot_entities:
+          - light.bedroom_bed_left
+          - light.bedroom_bed_right
+          - light.bedroom_wall_left
+          - light.bedroom_wall_right
+          - light.bedroom_left_bedside
+          - light.bedroom_right_bedside
 
-    # Turn on the bedside and ceiling lights, to get their current scene state;
-    # wait a few seconds for it to take effect.
-    - action: light.turn_on
-      target:
-        entity_id:
-        - light.bedroom_bed_left
-        - light.bedroom_bed_right
-        - light.bedroom_wall_left
-        - light.bedroom_wall_right
-        - light.bedroom_left_bedside
-        - light.bedroom_right_bedside
-    - delay:
-        seconds: 3
-    - action: scene.create
-      data:
-        scene_id: bedroom_play
-        snapshot_entities:
-        - light.bedroom_bed_left
-        - light.bedroom_bed_right
-        - light.bedroom_wall_left
-        - light.bedroom_wall_right
-        - light.bedroom_left_bedside
-        - light.bedroom_right_bedside
-
-    # Now change the bedside and ceiling lights scene.
-    - action: scene.turn_on
-      metadata: {}
-      data: {}
-      target:
-        entity_id:
-        - scene.bedroom_bedside_play
-        - scene.bedroom_ceiling_play
+      # Now change the bedside and ceiling lights scene.
+      - action: scene.turn_on
+        metadata: {}
+        data: {}
+        target:
+          entity_id:
+          - scene.bedroom_bedside_play
+          - scene.bedroom_ceiling_play
 
   # Play time over.
   - conditions:
@@ -77,26 +57,11 @@ actions:
       entity_id: input_boolean.bedroom_play
       state: 'off'
     sequence:
-    # Activate and then delete the saved lighting scene to restore the lights
-    # to whatever they were before.
-    - action: scene.turn_on
-      target:
-        entity_id: scene.bedroom_play
-    - action: scene.delete
-      target:
-        entity_id: scene.bedroom_play
-
-    # Trigger the automations for the blinds and lights to set their typical
-    # state at this point in time, then re-enable the automations.
-    - action: automation.trigger
-      target:
-        entity_id:
-        - automation.bedroom_occupancy
-        - automation.bedroom_windows
-      data:
-        skip_condition: true
-    - action: automation.turn_on
-      target:
-        entity_id:
-        - automation.bedroom_occupancy
-        - automation.bedroom_windows
+      # Activate and then delete the saved lighting scene to restore the lights
+      # to whatever they were before.
+      - action: scene.turn_on
+        target:
+          entity_id: scene.bedroom_play
+      - action: scene.delete
+        target:
+          entity_id: scene.bedroom_play

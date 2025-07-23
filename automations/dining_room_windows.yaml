@@ -5,7 +5,7 @@ description: >
   sun out of the eyes of anyone at the table, while the TV is on during the day,
   while playing, and generally to keep the room cool on a sunny day.
 
-mode: single
+mode: queued
 
 triggers:
   # Sun shines through the dining room windows from 220° azimuth.

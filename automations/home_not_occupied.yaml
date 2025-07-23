@@ -14,12 +14,9 @@ actions:
   - action: light.turn_off
     target:
       area_id:
-        - dining_room
+        # dining_room, bedroom, loft, and office have their own automations.
         - kitchen
-        - office
         - downstairs_bathroom
         - bathroom
-        - bedroom
-        - loft
         - stairs
         - roof
