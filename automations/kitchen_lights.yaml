@@ -1,7 +1,9 @@
-alias: Dining Room Motion at Night
-id: dining_room_motion_at_night
+alias: Kitchen Lights
+id: kitchen_lights
 description: >
-  Turns on the kitchen counter lights at night for midnight snacks.
+  Turns on the kitchen counter lights at night when anyone comes home, or for
+  midnight snacks when there's motion in the dining room. The lights stay on
+  for at least 15 minutes.
 
 mode: restart
 
@@ -10,20 +12,35 @@ triggers:
   - trigger: state
     entity_id: binary_sensor.dining_room_motion_occupancy
     to: "on"
+  # When the first person arrives home, turn on the lights.
+  - trigger: state
+    entity_id: binary_sensor.anyone_home
+    to: "on"
+  # But also turn on the lights if known people arrive home, even if the home
+  # is otherwise already occupied.
+  - trigger: zone
+    entity_id:
+      - person.scotty
+      - person.shadie
+    zone: zone.home
+    event: enter
 
 conditions:
   # Only at night.
   - condition: state
     entity_id: sun.sun
     state: "below_horizon"
-  # And only when the kitchen counter light is off, or at low brightness.
-  # That way the script keeps the light on low as long as there is motion,
-  # without turning it off unexpectedly.
+  # And only when the kitchen counter light is off, unless an instance of this
+  # automation is running, which implies a restart check.
   - or:
     - condition: state
       entity_id: light.kitchen_counter
       state: "off"
-    - "{{ (state_attr('light.kitchen_counter', 'brightness') | int) <= 64 }}"
+    - condition: state
+      entity_id: automation.kitchen_lights
+      attribute: current
+      state: "1"
+#- "{{ (state_attr('light.kitchen_counter', 'brightness') | int) <= 64 }}"
 
 actions:
   # Turn on the kitchen counter at 25%. but leave it alone if already on.
@@ -45,8 +62,8 @@ actions:
   # But if the kitchen counter state changes, assume we should leave it alone
   # and not turn it off in the middle of someone's burrito.
   - wait_for_trigger:
-      - trigger: state
-        entity_id: light.kitchen_counter
+    - trigger: state
+      entity_id: light.kitchen_counter
     timeout:
       minutes: 15
   - if:
