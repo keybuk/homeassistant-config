@@ -85,12 +85,9 @@
         metadata: {}
         data: {}
         target:
-          entity_id: scene.bedroom_bedside_play
-      - action: scene.turn_on
-        metadata: {}
-        data: {}
-        target:
-          entity_id: scene.bedroom_ceiling_play
+          entity_id:
+          - scene.bedroom_bedside_play
+          - scene.bedroom_ceiling_play
 - id: '1742268121309'
   alias: Loft Switch Button 1
   description: ''
@@ -129,7 +126,9 @@
         metadata: {}
         data: {}
         target:
-          entity_id: scene.loft_ceiling_play
+          entity_id:
+          - scene.loft_ceiling_play
+          - scene.loft_wall_play
 - id: '1742337005391'
   alias: Office Switch
   description: ''
@@ -296,11 +295,13 @@
     input:
       button: event.dining_room_switch_button_3
       actions:
-      - action: input_boolean.toggle
+      - action: scene.turn_on
         metadata: {}
         data: {}
         target:
-          entity_id: input_boolean.dining_room_play
+          entity_id:
+          - scene.dining_room_wall_play
+          - scene.dining_room_beam_lights_play
 - id: '1749581120674'
   alias: Gaming Power Limit
   description: ''
