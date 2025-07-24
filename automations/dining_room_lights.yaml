@@ -15,6 +15,10 @@ triggers:
   - trigger: state
     entity_id: binary_sensor.anyone_home
     to: "on"
+  # Playing in the dining room keeps the lights on.
+  - trigger: state
+    entity_id: input_boolean.dining_room_play
+    to: null
 
 actions:
   - choose:
@@ -36,10 +40,14 @@ actions:
               - light.dining_room
               - light.dining_room_lego
 
-    # Lights are turned off at midnight, we don't need to check the condition.
-    default:
-      - action: light.turn_off
-        target:
-          entity_id:
-            - light.dining_room
-            - light.dining_room_lego
+    # Otherwise lights are turned off unless we're playing.
+    - conditions:
+        - condition: state
+          entity_id: input_boolean.dining_room_play
+          state: 'off'
+      sequence:
+        - action: light.turn_off
+          target:
+            entity_id:
+              - light.dining_room
+              - light.dining_room_lego
