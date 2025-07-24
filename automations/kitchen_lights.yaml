@@ -39,7 +39,7 @@ conditions:
     - condition: state
       entity_id: automation.kitchen_lights
       attribute: current
-      state: "1"
+      state: 1
 #- "{{ (state_attr('light.kitchen_counter', 'brightness') | int) <= 64 }}"
 
 actions:
