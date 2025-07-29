@@ -13,9 +13,21 @@ triggers:
     to: null
     id: light
   - trigger: state
+    entity_id: light.loft_wall
+    to: null
+  - trigger: state
     entity_id: switch.loft
     to: null
     id: switch
+
+variables:
+  # When the TV is on, only the wall lights are controlled by the switch.
+  light: |
+    {% if is_state('media_player.lg_webos_tv', 'on') %}
+      light.loft_wall
+    {% else %}
+      light.loft
+    {% endif %}
 
 actions:
   - choose:
@@ -24,10 +36,10 @@ actions:
     - conditions:
         - condition: trigger
           id: light
-        - "{{ not is_state(switch.loft, trigger.to_state.state) }}"
+        - "{{ not is_state('switch.loft', states(light)) }}"
       sequence:
-        - action: >
-            {% if trigger.to_state.state == 'on' %}
+        - action: |
+            {% if is_state(light, 'on') %}
               switch.turn_on
             {% else %}
               switch.turn_off
@@ -40,13 +52,13 @@ actions:
     - conditions:
         - condition: trigger
           id: switch
-        - "{{ not is_state(light.loft, trigger.to_state.state) }}"
+        - "{{ not is_state(light, states('switch.loft')) }}"
       sequence:
-        - action: >
-            {% if trigger.to_state.state == 'on' %}
+        - action: |
+            {% if is_state('switch.loft', 'on') %}
               light.turn_on
             {% else %}
               light.turn_off
             {% endif %}
           target:
-            entity_id: light.loft
+            entity_id: "{{ light }}"
