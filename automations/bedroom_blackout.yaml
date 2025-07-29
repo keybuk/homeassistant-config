@@ -1,0 +1,49 @@
+alias: Bedroom Blackout
+id: bedroom_blackout
+description: >
+  Close the bedroom blackout blinds when we're sleeping in.
+
+mode: queued
+
+triggers:
+  # Update blinds when we go to sleep.
+  - trigger: state
+    entity_id: binary_sensor.household_asleep
+    to: "on"
+  # Update blinds when the windows are closed.
+  - trigger: state
+    entity_id: binary_sensor.bedroom_window
+    to: "off"
+
+conditions:
+  # Only when someone is sleeping.
+  - condition: state
+    entity_id: binary_sensor.household_asleep
+    state: "on"
+  # Only when the windows are closed.
+  - condition: state
+    entity_id: binary_sensor.bedroom_window
+    state: "off"
+
+actions:
+  - choose:
+    # Close blackout blinds when we go to sleep during the day.
+    - conditions:
+        - condition: state
+          entity_id: sun.sun
+          state: "above_horizon"
+      sequence:
+        - action: scene.turn_on
+          target:
+            entity_id: scene.bedroom_blackout
+
+    # Close blackout blinds when we go to sleep with less than three hours
+    # before sunrise.
+    - conditions:
+        - condition: sun
+          before: sunrise
+          before_offset: "-03:00:00"
+      sequence:
+        - action: scene.turn_on
+          target:
+            entity_id: scene.bedroom_blackout

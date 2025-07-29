@@ -23,6 +23,12 @@ triggers:
   - trigger: state
     entity_id: binary_sensor.bedroom_window
     to: "off"
+  # Update blinds when Shadie comes home.
+  - trigger: zone
+    entity_id:
+      - person.shadie
+    zone: zone.home
+    event: enter
   # Update blinds when we're playing.
   - trigger: state
     entity_id: input_boolean.bedroom_play
@@ -78,3 +84,12 @@ actions:
         - action: scene.turn_on
           target:
             entity_id: scene.bedroom_nighttime
+        # Close blackout when Shadie is home.
+        - if:
+            - condition: state
+              entity_id: person.shadie
+              state: "home"
+          then:
+            - action: scene.turn_on
+              target:
+                entity_id: scene.bedroom_blackout
