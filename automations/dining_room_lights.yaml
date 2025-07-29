@@ -91,11 +91,16 @@ actions:
               - light.dining_room
               - light.dining_room_lego
 
-    # Turn lights off when nobody is home.
+    # Turn lights off when someone is sleeping, or nobody is home.
     - conditions:
-        - condition: state
-          entity_id: binary_sensor.anyone_home
-          state: "off"
+        - condition: or
+          conditions:
+            - condition: state
+              entity_id: binary_sensor.household_asleep
+              state: "on"
+            - condition: state
+              entity_id: binary_sensor.anyone_home
+              state: "off"
         # Unless we're playing.
         - condition: state
           entity_id: input_boolean.dining_room_play
