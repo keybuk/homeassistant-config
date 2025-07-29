@@ -12,12 +12,12 @@ triggers:
   - trigger: state
     entity_id: binary_sensor.dining_room_motion_occupancy
     to: "on"
-  # When the first person arrives home, turn on the lights.
+  # Trigger when the first person arrives home.
   - trigger: state
     entity_id: binary_sensor.anyone_home
     to: "on"
-  # But also turn on the lights if known people arrive home, even if the home
-  # is otherwise already occupied.
+  # Trigger when known people arrive home, even if the home is otherwise already
+  # occupied.
   - trigger: zone
     entity_id:
       - person.scotty
@@ -30,7 +30,7 @@ conditions:
   - condition: state
     entity_id: sun.sun
     state: "below_horizon"
-  # And only when the kitchen counter light is off, unless an instance of this
+  # Only when the kitchen counter light is off, unless an instance of this
   # automation is running, which implies a restart check.
   - or:
     - condition: state
@@ -40,11 +40,9 @@ conditions:
       entity_id: automation.kitchen_lights
       attribute: current
       state: 1
-#- "{{ (state_attr('light.kitchen_counter', 'brightness') | int) <= 64 }}"
 
 actions:
-  # Turn on the kitchen counter at 25%. but leave it alone if already on.
-  # Assume that takes a few seconds.
+  # Turn lights on at 25% brightness, unless already on.
   - if:
       - condition: state
         entity_id: light.kitchen_counter
@@ -55,8 +53,9 @@ actions:
           brightness_pct: 25
         target:
           entity_id: light.kitchen_counter
+      # Assume it takes a few seconds, avoid triggering our own wait condition.
       - delay:
-          seconds: 5
+          seconds: 3
 
   # Keep the light on for 15 minutes.
   # But if the kitchen counter state changes, assume we should leave it alone

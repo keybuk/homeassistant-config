@@ -1,35 +1,38 @@
 alias: Dining Room Lights
 id: dining_room_lights
 description: >
-  When anybody is (or comes) home in the evening, make sure that the Hue
-  light bars and beams are making the brick work turn pretty colors.
+  Turn the dining room lights on while the home is occupied, making the brick
+  work turn pretty colors.
 
 mode: queued
 
 triggers:
-  # Generally turn the lights on at sunset.
+  # Update lights at sunset and sunrise.
   - trigger: state
     entity_id: sun.sun
-    to: "below_horizon"
-  # Or when somebody comes home.
+    to: null
+  # Update lights when we wake up or go to sleep.
+  - trigger: state
+    entity_id: binary_sensor.household_asleep
+    to: null
+  # Update lights when the first person comes home, or the last person leaves
+  # home.
   - trigger: state
     entity_id: binary_sensor.anyone_home
-    to: "on"
-  # Playing in the dining room keeps the lights on.
-  - trigger: state
-    entity_id: input_boolean.dining_room_play
     to: null
 
 actions:
   - choose:
-    # Lights are turned on in the evening if somebody is home, and awake.
+    # Turn lights on at night.
     - conditions:
         - condition: state
           entity_id: sun.sun
           state: "below_horizon"
+        # Unless someone is sleeping.
         - condition: state
           entity_id: binary_sensor.household_asleep
           state: "off"
+        # Only when someone is home.
         - condition: state
           entity_id: binary_sensor.anyone_home
           state: "on"
@@ -40,11 +43,12 @@ actions:
               - light.dining_room
               - light.dining_room_lego
 
-    # Otherwise lights are turned off unless we're playing.
+    # Otherwise turn lights off.
     - conditions:
+        # Unless we're playing.
         - condition: state
           entity_id: input_boolean.dining_room_play
-          state: 'off'
+          state: "off"
       sequence:
         - action: light.turn_off
           target:
