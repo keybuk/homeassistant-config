@@ -36,7 +36,7 @@
         metadata: {}
         data: {}
         target:
-          entity_id: scene.office_ceiling_relax
+          entity_id: scene.office_ceiling_rest
 - id: '1742265800631'
   alias: Bedroom Switch Button 1
   description: ''
