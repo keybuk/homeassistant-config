@@ -24,10 +24,10 @@ actions:
     - conditions:
         - condition: trigger
           id: light
-        - "{{ not is_state(switch.office, trigger.to_state.state) }}"
+        - "{{ not is_state('switch.office', states('light.office')) }}"
       sequence:
-        - action: >
-            {% if trigger.to_state.state == 'on' %}
+        - action: |
+            {% if is_state('light.office', 'on') %}
               switch.turn_on
             {% else %}
               switch.turn_off
@@ -40,10 +40,10 @@ actions:
     - conditions:
         - condition: trigger
           id: switch
-        - "{{ not is_state(light.office, trigger.to_state.state) }}"
+        - "{{ not is_state('light.office', states('switch.office')) }}"
       sequence:
-        - action: >
-            {% if trigger.to_state.state == 'on' %}
+        - action: |
+            {% if is_state('switch.office', 'on') %}
               light.turn_on
             {% else %}
               light.turn_off
