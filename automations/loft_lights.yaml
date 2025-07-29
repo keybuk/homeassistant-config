@@ -1,7 +1,7 @@
 alias: Loft Lights
 id: loft_lights
 description: >
-  Turn the loft lights on while the room is occupied.
+  Turn the loft lights on and off based on the room occupancy.
 
 mode: queued
 
@@ -105,8 +105,7 @@ actions:
 
     # Turn lights off when the room is unoccupied, or when nobody is home.
     - conditions:
-        - condition: or
-          conditions:
+        - or:
             - condition: state
               entity_id: binary_sensor.loft_occupancy
               state: "off"

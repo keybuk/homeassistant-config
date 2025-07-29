@@ -1,28 +1,29 @@
 alias: Kitchen Windows
 id: kitchen_windows
 description: >
-  Closes the loft part of the kitchen windows at night, while the TV is on
-  during the day, while playing, and completely on a hot sunny day.
+  Open and close the kitchen window blinds based on the time of day,
+  sun position, and weather.
 
 mode: queued
 
 triggers:
-  # Sun shines through the kitchen windows from 115° azimuth.
+  # Update blinds at sunset and sunrise.
+  - trigger: state
+    entity_id: sun.sun
+    from: null
+  # Trigger when sun shines through the kitchen windows by reaching
+  # 115° azimuth.
   - trigger: numeric_state
     entity_id: sun.sun
     attribute: azimuth
     above: 115
-  # Sun is no longer shining through the windows from 235° azimith.
+  # Trigger when sun is no longer shining through the windows by reaching
+  # 235° azimith.
   - trigger: numeric_state
     entity_id: sun.sun
     attribute: azimuth
     above: 235
-  # Also trigger on sunrise and sunset to open and close windows.
-  - trigger: state
-    entity_id: sun.sun
-    from: null
-  # Track both the weather state and forecast temperature, we close the windows
-  # to keep the room cool.
+  # Update blinds based on the weather, and forecast temperature.
   - trigger: state
     entity_id: weather.home
     to: null
@@ -30,11 +31,11 @@ triggers:
     entity_id: weather.home
     attribute: temperature
     above: 69
-  # TV opens and closes windows.
+  # Update blinds when the TV turns on or off.
   - trigger: state
     entity_id: media_player.lg_webos_tv
     from: null
-  # Playing in the dining room or loft opens and closes windows.
+  # Update blinds when we're playing.
   - trigger: state
     entity_id: input_boolean.dining_room_play
     from: null
@@ -50,19 +51,8 @@ variables:
 
 actions:
   - choose:
-    # When playing in the dining room, close the blinds.
-    - conditions:
-        - condition: state
-          entity_id: input_boolean.dining_room_play
-          state: "on"
-      sequence:
-        - action: scene.turn_on
-          target:
-            entity_id: scene.kitchen_windows_closed
-
-    # When the sun is above the horizon, shining through the windows, and
-    # it's warm and not cloudy, close the windows completely to keep the room
-    # cool.
+    # Close the blinds during the day when the sun is shining through the
+    # windows, it's not cloudy, and it's forecast to be warm.
     - conditions:
         - condition: state
           entity_id: sun.sun
@@ -82,8 +72,17 @@ actions:
           target:
             entity_id: scene.kitchen_windows_closed
 
-    # When the sun is above the horizon, and the TV is on, close the top part
-    # of the windows.
+    # Close blinds while we're playing in the dining room.
+    - conditions:
+        - condition: state
+          entity_id: input_boolean.dining_room_play
+          state: "on"
+      sequence:
+        - action: scene.turn_on
+          target:
+            entity_id: scene.kitchen_windows_closed
+
+    # Close the loft part of the blinds during the day when the TV is on.
     - conditions:
         - condition: state
           entity_id: sun.sun
@@ -96,7 +95,7 @@ actions:
           target:
             entity_id: scene.kitchen_nighttime
 
-    # When playing in the loft, close the top part of the blinds.
+    # Close the loft part of the blinds while we're playing in the loft.
     - conditions:
         - condition: state
           entity_id: input_boolean.loft_play
@@ -106,7 +105,7 @@ actions:
           target:
             entity_id: scene.kitchen_nighttime
 
-    # Otherwise any time the sun is above the horizon, set the daytime scene.
+    # Open blinds during the day.
     - conditions:
         - condition: state
           entity_id: sun.sun
@@ -116,7 +115,7 @@ actions:
           target:
             entity_id: scene.kitchen_daytime
 
-    # Once the sun is below the horizon, set the nighttime scene.
+    # Close the loft part of the blinds at night.
     - conditions:
         - condition: state
           entity_id: sun.sun

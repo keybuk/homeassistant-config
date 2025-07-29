@@ -1,8 +1,7 @@
 alias: Dining Room Lights
 id: dining_room_lights
 description: >
-  Turn the dining room lights on while the home is occupied, making the brick
-  work turn pretty colors.
+  Turn the dining room lights on and off based on the home occupancy.
 
 mode: queued
 
@@ -93,8 +92,7 @@ actions:
 
     # Turn lights off when someone is sleeping, or nobody is home.
     - conditions:
-        - condition: or
-          conditions:
+        - or:
             - condition: state
               entity_id: binary_sensor.household_asleep
               state: "on"

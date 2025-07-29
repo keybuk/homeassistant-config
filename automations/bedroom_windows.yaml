@@ -1,65 +1,47 @@
 alias: Bedroom Windows
 id: bedroom_windows
 description: >
-  Opens the bedroom window blinds in the morning once we're awake, and closes
-  them at night provided the windows are closed.
+  Open and close the bedroom window blinds based on the time of day.
 
 mode: queued
 
 triggers:
-  # Sunrise can trigger the windows opening if nobody is home.
+  # Update blinds at sunset and sunrise.
   - trigger: state
     entity_id: sun.sun
-    to: "above_horizon"
-  # Everyone waking up can open the windows.
+    to: null
+  # Update blinds when we wake up or go to sleep.
   - trigger: state
     entity_id: binary_sensor.household_asleep
-    to: "off"
-  # Motion in the bedroom should open the windows. We use the Ecobee for this
-  # because the Nest points directly down at the bed.
+    to: null
+  # Update blinds when there is motion in the bedroom. We use the Ecobee for
+  # this because the Nest points directly down at the bed.
   - trigger: state
     entity_id: binary_sensor.bedroom_ecobee_motion
     to: "on"
-  # If nothing else has opened the windows, try opening them at 10am.
-  - trigger: time
-    at: "10:00:00"
-  # Sunset triggers the window closing.
-  - trigger: state
-    entity_id: sun.sun
-    to: "below_horizon"
-  # We're careful not to close the blinds over open windows, so trigger on the
-  # windows being closed.
+  # Update blinds when the windows are closed.
   - trigger: state
     entity_id: binary_sensor.bedroom_window
     to: "off"
-  # Playing in the bedroom opens and closes windows.
+  # Update blinds when we're playing.
   - trigger: state
     entity_id: input_boolean.bedroom_play
     from: null
 
 actions:
   - choose:
-    # When playing in the bedroom, close the blinds.
-    - conditions:
-        - condition: state
-          entity_id: binary_sensor.bedroom_window
-          state: "off"
-        - condition: state
-          entity_id: input_boolean.bedroom_play
-          state: "on"
-      sequence:
-        - action: scene.turn_on
-          target:
-            entity_id: scene.bedroom_nighttime
-
-    # To open the window blinds, the sun has to be above the horizon, and nobody
-    # should be asleep.
+    # Open blinds during the day.
     - conditions:
         - condition: state
           entity_id: sun.sun
           state: "above_horizon"
+        # Unless someone is sleeping.
         - condition: state
           entity_id: binary_sensor.household_asleep
+          state: "off"
+        # Unless we're playing.
+        - condition: state
+          entity_id: input_boolean.bedroom_play
           state: "off"
       sequence:
         - action: scene.turn_on
@@ -69,15 +51,29 @@ actions:
           target:
             entity_id: scene.bedroom_blackout_open
 
-    # To close the window blinds, the sun should be below the horizon, and the
-    # windows should be closed.
+    # Close blinds while we're playing.
     - conditions:
+        - condition: state
+          entity_id: input_boolean.bedroom_play
+          state: "on"
+        # Only when the windows are closed.
         - condition: state
           entity_id: binary_sensor.bedroom_window
           state: "off"
+      sequence:
+        - action: scene.turn_on
+          target:
+            entity_id: scene.bedroom_nighttime
+
+    # Close blinds at night.
+    - conditions:
         - condition: state
           entity_id: sun.sun
           state: below_horizon
+        # Only when the windows are closed.
+        - condition: state
+          entity_id: binary_sensor.bedroom_window
+          state: "off"
       sequence:
         - action: scene.turn_on
           target:

@@ -1,9 +1,8 @@
 alias: Kitchen Lights
 id: kitchen_lights
 description: >
-  Turns on the kitchen counter lights at night when anyone comes home, or for
-  midnight snacks when there's motion in the dining room. The lights stay on
-  for at least 15 minutes.
+  Turns on the kitchen counter lights for 15 minutes at night when anyone comes
+  home, or for midnight snacks when there's motion in the dining room.
 
 mode: restart
 

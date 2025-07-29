@@ -1,7 +1,7 @@
 alias: Office Lights
 id: office_lights
 description: >
-  Turn the office lights on while the room is occupied.
+  Turn the office lights on and off based on the room occupancy.
 
 mode: queued
 
@@ -94,8 +94,7 @@ actions:
 
     # Turn lights off when the room is unoccupied, or when nobody is home.
     - conditions:
-        - condition: or
-          conditions:
+        - or:
             - condition: state
               entity_id: binary_sensor.office_occupancy
               state: "off"
