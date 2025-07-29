@@ -1,0 +1,52 @@
+alias: Bedroom Switch
+id: bedroom_switch
+description: >
+  Synchronize the bedroom switch with the lights so that the physical switch
+  appears to directly control the lights; and with the switch matching the state
+  of the lights if those are controlled directly.
+
+mode: queued
+
+triggers:
+  - trigger: state
+    entity_id: light.bedroom
+    to: null
+    id: light
+  - trigger: state
+    entity_id: switch.bedroom
+    to: null
+    id: switch
+
+actions:
+  - choose:
+    # When the light is the trigger, if the switch is not in the same state,
+    # set it to the same state.
+    - conditions:
+        - condition: trigger
+          id: light
+        - "{{ not is_state(switch.bedroom, trigger.to_state.state) }}"
+      sequence:
+        - action: >
+            {% if trigger.to_state.state == 'on' %}
+              switch.turn_on
+            {% else %}
+              switch.turn_off
+            {% endif %}
+          target:
+            entity_id: switch.bedroom
+
+    # When the switch is the trigger, if the light is not in the same state,
+    # set it to the same state.
+    - conditions:
+        - condition: trigger
+          id: switch
+        - "{{ not is_state(light.bedroom, trigger.to_state.state) }}"
+      sequence:
+        - action: >
+            {% if trigger.to_state.state == 'on' %}
+              light.turn_on
+            {% else %}
+              light.turn_off
+            {% endif %}
+          target:
+            entity_id: light.bedroom

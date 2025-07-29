@@ -129,38 +129,6 @@
           entity_id:
           - scene.loft_ceiling_play
           - scene.loft_wall_play
-- id: '1742337005391'
-  alias: Office Switch
-  description: ''
-  use_blueprint:
-    path: light_switch.yaml
-    input:
-      light: light.office_ceiling
-      switch: switch.office_switch
-- id: '1742337248521'
-  alias: Loft Switch
-  description: ''
-  use_blueprint:
-    path: light_switch.yaml
-    input:
-      light: light.loft
-      switch: switch.loft_switch
-- id: '1742337280749'
-  alias: Bedroom Switch
-  description: ''
-  use_blueprint:
-    path: light_switch.yaml
-    input:
-      light: light.bedroom
-      switch: switch.bedroom_switch
-- id: '1742337322652'
-  alias: Dining Room Switch
-  description: ''
-  use_blueprint:
-    path: light_switch.yaml
-    input:
-      light: light.dining_room
-      switch: switch.dining_room_switch
 - id: '1744102789672'
   alias: Dining Room Switch Button 1
   description: ''
