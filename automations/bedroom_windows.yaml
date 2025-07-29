@@ -23,6 +23,7 @@ triggers:
   - trigger: state
     entity_id: binary_sensor.bedroom_window
     to: "off"
+    id: closed
   # Update blinds when Shadie comes home.
   - trigger: zone
     entity_id:
@@ -35,6 +36,14 @@ triggers:
     from: null
 
 actions:
+  # Wait a few seconds before closing blinds after windows are closed.
+  - if:
+      - condition: trigger
+        id: closed
+    then:
+      - delay:
+          seconds: 3
+
   - choose:
     # Open blinds during the day.
     - conditions:

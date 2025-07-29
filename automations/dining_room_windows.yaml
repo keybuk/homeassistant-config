@@ -46,6 +46,7 @@ triggers:
   - trigger: state
     entity_id: binary_sensor.dining_room_top_windows
     to: "off"
+    id: closed
   - trigger: state
     entity_id: binary_sensor.dining_room_bottom_windows
     to: "off"
@@ -68,6 +69,14 @@ variables:
     }}
 
 actions:
+  # Wait a few seconds before closing blinds after windows are closed.
+  - if:
+      - condition: trigger
+        id: closed
+    then:
+      - delay:
+          seconds: 3
+
   # Set the target blind state.
   - variables:
       target: none
