@@ -11,6 +11,10 @@ triggers:
   - trigger: state
     entity_id: sun.sun
     to: null
+  # Update lights during the day based on the weather.
+  - trigger: state
+    entity_id: weather.home
+    to: null
   # Update lights when we wake up or go to sleep.
   - trigger: state
     entity_id: binary_sensor.household_asleep
@@ -20,6 +24,12 @@ triggers:
   - trigger: state
     entity_id: binary_sensor.anyone_home
     to: null
+
+variables:
+  cloudy_day: >
+    {{ states('weather.home') not in
+       ['clear-night', 'partlycloudy', 'sunny', 'windy' ]
+    }}
 
 actions:
   - choose:
@@ -43,8 +53,49 @@ actions:
               - light.dining_room
               - light.dining_room_lego
 
-    # Otherwise turn lights off.
+    # Turn lights on during a cloudy day.
     - conditions:
+        - condition: state
+          entity_id: sun.sun
+          state: "above_horizon"
+        - "{{ cloudy_day }}"
+        # Unless someone is sleeping.
+        - condition: state
+          entity_id: binary_sensor.household_asleep
+          state: "off"
+        # Only when someone is home.
+        - condition: state
+          entity_id: binary_sensor.anyone_home
+          state: "on"
+      sequence:
+        - action: light.turn_on
+          target:
+            entity_id:
+              - light.dining_room
+              - light.dining_room_lego
+
+    # Turn lights off when the sun comes out during the day to save on power.
+    - conditions:
+        - condition: state
+          entity_id: sun.sun
+          state: "above_horizon"
+        - "{{ not cloudy_day }}"
+        # Unless we're playing.
+        - condition: state
+          entity_id: input_boolean.dining_room_play
+          state: "off"
+      sequence:
+        - action: light.turn_off
+          target:
+            entity_id:
+              - light.dining_room
+              - light.dining_room_lego
+
+    # Turn lights off when nobody is home.
+    - conditions:
+        - condition: state
+          entity_id: binary_sensor.anyone_home
+          state: "off"
         # Unless we're playing.
         - condition: state
           entity_id: input_boolean.dining_room_play
