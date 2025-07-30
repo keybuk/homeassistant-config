@@ -46,10 +46,13 @@ triggers:
   - trigger: state
     entity_id: binary_sensor.dining_room_top_windows
     to: "off"
-    id: closed
+    for:
+      seconds: 3
   - trigger: state
     entity_id: binary_sensor.dining_room_bottom_windows
     to: "off"
+    for:
+      seconds: 3
   # Update blinds when the TV turns on or off.
   - trigger: state
     entity_id: media_player.lg_webos_tv
@@ -69,14 +72,6 @@ variables:
     }}
 
 actions:
-  # Wait a few seconds before closing blinds after windows are closed.
-  - if:
-      - condition: trigger
-        id: closed
-    then:
-      - delay:
-          seconds: 3
-
   # Set the target blind state.
   - variables:
       target: none

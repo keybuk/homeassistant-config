@@ -14,7 +14,8 @@ triggers:
   - trigger: state
     entity_id: binary_sensor.bedroom_window
     to: "off"
-    id: closed
+    for:
+      seconds: 3
 
 conditions:
   # Only when someone is sleeping.
@@ -27,14 +28,6 @@ conditions:
     state: "off"
 
 actions:
-# Wait a few seconds before closing blinds after windows are closed.
-  - if:
-      - condition: trigger
-        id: closed
-    then:
-      - delay:
-          seconds: 3
-
   - choose:
     # Close blackout blinds when we go to sleep during the day.
     - conditions:

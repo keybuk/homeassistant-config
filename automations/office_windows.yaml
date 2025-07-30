@@ -18,17 +18,10 @@ triggers:
   - trigger: state
     entity_id: binary_sensor.office_window
     to: "off"
-    id: closed
+    for:
+      seconds: 3
 
 actions:
-  # Wait a few seconds before closing blinds after windows are closed.
-  - if:
-      - condition: trigger
-        id: closed
-    then:
-      - delay:
-          seconds: 3
-
   - choose:
     # Open blinds during the day.
     - conditions:
