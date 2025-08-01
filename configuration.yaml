@@ -11,3 +11,8 @@ scene: !include scenes.yaml
 
 automation yaml: !include_dir_list automations/
 template: !include_dir_merge_list templates/
+
+# Enable earthquake entities
+geo_location:
+  - platform: usgs_earthquakes_feed
+    feed_type: "past_day_all_earthquakes"
