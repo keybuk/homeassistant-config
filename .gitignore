@@ -9,4 +9,5 @@ custom_components/
 home-assistant.log*
 home-assistant_v2.db*
 insteon_devices.json
-
+image/
+tts/
