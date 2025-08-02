@@ -21,7 +21,7 @@ triggers:
   # Update lights when we wake up, but not when we go to sleep since that would
   # be annoying.
   - trigger: state
-    entity_id: binary_sensor.household_asleep
+    entity_id: binary_sensor.everyone_asleep
     to: "off"
   # Update lights when the last person leaves home, but not when anyone comes
   # home since we don't want lights to turn on based on false occupancy.
@@ -47,7 +47,7 @@ actions:
           state: "below_horizon"
         # Unless someone is sleeping.
         - condition: state
-          entity_id: binary_sensor.household_asleep
+          entity_id: binary_sensor.everyone_asleep
           state: "off"
         # Only when someone is home.
         - condition: state
@@ -69,7 +69,7 @@ actions:
         - "{{ cloudy_day }}"
         # Unless someone is sleeping.
         - condition: state
-          entity_id: binary_sensor.household_asleep
+          entity_id: binary_sensor.everyone_asleep
           state: "off"
         # Only when someone is home.
         - condition: state

@@ -8,7 +8,7 @@ mode: queued
 triggers:
   # Update blinds when we go to sleep.
   - trigger: state
-    entity_id: binary_sensor.household_asleep
+    entity_id: binary_sensor.anyone_asleep
     to: "on"
   # Update blinds when the windows are closed.
   - trigger: state
@@ -20,7 +20,7 @@ triggers:
 conditions:
   # Only when someone is sleeping.
   - condition: state
-    entity_id: binary_sensor.household_asleep
+    entity_id: binary_sensor.anyone_asleep
     state: "on"
   # Only when the windows are closed.
   - condition: state
