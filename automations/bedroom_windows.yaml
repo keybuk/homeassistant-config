@@ -19,12 +19,14 @@ triggers:
   - trigger: state
     entity_id: binary_sensor.bedroom_ecobee_motion
     to: "on"
+    id: "open"
   # Update blinds when the windows are closed.
   - trigger: state
     entity_id: binary_sensor.bedroom_window
     to: "off"
     for:
       seconds: 3
+    id: "close"
   # Update blinds when Shadie comes home.
   - trigger: zone
     entity_id:
@@ -51,6 +53,10 @@ actions:
         - condition: state
           entity_id: input_boolean.bedroom_play
           state: "off"
+        # Excluding triggers that should only close the windows.
+        - not:
+            - condition: trigger
+              id: "close"
       sequence:
         - action: scene.turn_on
           target:
@@ -68,6 +74,10 @@ actions:
         - condition: state
           entity_id: binary_sensor.bedroom_window
           state: "off"
+        # Excluding triggers that should only open the windows.
+        - not:
+            - condition: trigger
+              id: "open"
       sequence:
         - action: scene.turn_on
           target:
@@ -82,6 +92,10 @@ actions:
         - condition: state
           entity_id: binary_sensor.bedroom_window
           state: "off"
+        # Excluding triggers that should only open the windows.
+        - not:
+            - condition: trigger
+              id: "open"
       sequence:
         - action: scene.turn_on
           target:
