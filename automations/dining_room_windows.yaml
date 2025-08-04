@@ -48,11 +48,13 @@ triggers:
     to: "off"
     for:
       seconds: 3
+    id: "close"
   - trigger: state
     entity_id: binary_sensor.dining_room_bottom_windows
     to: "off"
     for:
       seconds: 3
+    id: "close"
   # Update blinds when the TV turns on or off.
   - trigger: state
     entity_id: media_player.lg_webos_tv
