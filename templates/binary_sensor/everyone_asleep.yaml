@@ -1,11 +1,15 @@
-# Sensor for when everyone is asleep.
+# Sensor for when everyone who is actually home is asleep.
 - binary_sensor:
     name: "Everyone Asleep"
     unique_id: everyone_asleep
     state: >
-      {{ (is_state('person.scotty', 'home') or is_state('person.shadie', 'home'))
-        and (is_state('binary_sensor.scotty_asleep', 'on') or not is_state('person.scotty', 'home'))
-        and (is_state('binary_sensor.shadie_asleep', 'on') or not is_state('person.shadie', 'home')) }}
+      {{ (states('zone.home')|int > 0)
+         and ((is_state('binary_sensor.scotty_asleep', 'on')
+               and is_state('person.scotty', 'home'))
+              or not is_state('person.scotty', 'home'))
+         and ((is_state('binary_sensor.shadie_asleep', 'on')
+               and is_state('person.shadie', 'home'))
+              or not is_state('person.shadie', 'home')) }}
     icon: >
       {% if is_state('binary_sensor.everyone_asleep', 'on') %}
         mdi:bed
