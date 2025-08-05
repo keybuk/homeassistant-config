@@ -1,0 +1,14 @@
+# Sensor for when everyone is asleep.
+- binary_sensor:
+    name: "Everyone Asleep"
+    unique_id: everyone_asleep
+    state: >
+      {{ is_state('binary_sensor.anyone_home', 'on')
+        and (is_state('binary_sensor.scotty_asleep', 'on') or not is_state('person.scotty', 'home'))
+        and (is_state('binary_sensor.shadie_asleep', 'on') or not is_state('person.shadie', 'home')) }}
+    icon: >
+      {% if is_state('binary_sensor.everyone_asleep', 'on') %}
+        mdi:bed
+      {% else %}
+        mdi:bed-empty
+      {% endif %}
