@@ -19,7 +19,7 @@ triggers:
   # Update lights during the day based on the weather.
   - trigger: state
     entity_id: weather.home
-    to: null
+    not_to: 'unavailable'
   # Update lights when we wake up, but not when we go to sleep since that would
   # be annoying.
   - trigger: state
