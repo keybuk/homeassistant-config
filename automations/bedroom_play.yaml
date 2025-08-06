@@ -11,57 +11,57 @@ triggers:
   to: null
 
 actions:
-- choose:
-  # Play time in the Bedroom.
-  - conditions:
-    - condition: state
-      entity_id: input_boolean.bedroom_play
-      state: 'on'
-    sequence:
-      # Turn on the bedside and ceiling lights, to get their current scene state;
-      # wait a few seconds for it to take effect.
-      - action: light.turn_on
-        target:
-          entity_id:
-          - light.bedroom_bed_left
-          - light.bedroom_bed_right
-          - light.bedroom_wall_left
-          - light.bedroom_wall_right
-          - light.bedroom_left_bedside
-          - light.bedroom_right_bedside
-      - delay:
-          seconds: 3
-      - action: scene.create
-        data:
-          scene_id: bedroom_play
-          snapshot_entities:
-          - light.bedroom_bed_left
-          - light.bedroom_bed_right
-          - light.bedroom_wall_left
-          - light.bedroom_wall_right
-          - light.bedroom_left_bedside
-          - light.bedroom_right_bedside
+  - choose:
+    # Play time in the Bedroom.
+    - conditions:
+        - condition: state
+          entity_id: input_boolean.bedroom_play
+          state: 'on'
+      sequence:
+        # Turn on the bedside and ceiling lights, to get their current scene state;
+        # wait a few seconds for it to take effect.
+        - action: light.turn_on
+          target:
+            entity_id:
+            - light.bedroom_bed_left
+            - light.bedroom_bed_right
+            - light.bedroom_wall_left
+            - light.bedroom_wall_right
+            - light.bedroom_left_bedside
+            - light.bedroom_right_bedside
+        - delay:
+            seconds: 3
+        - action: scene.create
+          data:
+            scene_id: bedroom_play
+            snapshot_entities:
+            - light.bedroom_bed_left
+            - light.bedroom_bed_right
+            - light.bedroom_wall_left
+            - light.bedroom_wall_right
+            - light.bedroom_left_bedside
+            - light.bedroom_right_bedside
 
-      # Now change the bedside and ceiling lights scene.
-      - action: scene.turn_on
-        metadata: {}
-        data: {}
-        target:
-          entity_id:
-          - scene.bedroom_bedside_play
-          - scene.bedroom_ceiling_play
+        # Now change the bedside and ceiling lights scene.
+        - action: scene.turn_on
+          metadata: {}
+          data: {}
+          target:
+            entity_id:
+            - scene.bedroom_bedside_play
+            - scene.bedroom_ceiling_play
 
-  # Play time over.
-  - conditions:
-    - condition: state
-      entity_id: input_boolean.bedroom_play
-      state: 'off'
-    sequence:
-      # Activate and then delete the saved lighting scene to restore the lights
-      # to whatever they were before.
-      - action: scene.turn_on
-        target:
-          entity_id: scene.bedroom_play
-      - action: scene.delete
-        target:
-          entity_id: scene.bedroom_play
+    # Play time over.
+    - conditions:
+        - condition: state
+          entity_id: input_boolean.bedroom_play
+          state: 'off'
+      sequence:
+        # Activate and then delete the saved lighting scene to restore the lights
+        # to whatever they were before.
+        - action: scene.turn_on
+          target:
+            entity_id: scene.bedroom_play
+        - action: scene.delete
+          target:
+            entity_id: scene.bedroom_play
