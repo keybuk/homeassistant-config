@@ -1,6 +1,6 @@
 # I'm probably asleep when home, with my phone on charge, and a focus set.
 - binary_sensor:
-    name: "Scotty Asleep"
+    name: Scotty Asleep
     unique_id: scotty_asleep
     state: >
       {{ states('sensor.scottys_iphone_battery_state') in ['Charging', 'Full']

@@ -45,16 +45,16 @@ triggers:
   # Update blinds when the windows are closed.
   - trigger: state
     entity_id: binary_sensor.dining_room_top_windows
-    to: "off"
+    to: 'off'
     for:
       seconds: 3
-    id: "close"
+    id: 'close'
   - trigger: state
     entity_id: binary_sensor.dining_room_bottom_windows
-    to: "off"
+    to: 'off'
     for:
       seconds: 3
-    id: "close"
+    id: 'close'
   # Update blinds when the TV turns on or off.
   - trigger: state
     entity_id: media_player.lg_webos_tv
@@ -99,7 +99,7 @@ actions:
     - conditions:
         - condition: state
           entity_id: input_boolean.dining_room_play
-          state: "on"
+          state: 'on'
       sequence:
         - variables:
             target: 100
@@ -142,7 +142,7 @@ actions:
     - conditions:
         - condition: state
           entity_id: input_boolean.loft_play
-          state: "on"
+          state: 'on'
       sequence:
         - variables:
             target: 33
@@ -151,10 +151,10 @@ actions:
     - conditions:
         - condition: state
           entity_id: sun.sun
-          state: "above_horizon"
+          state: 'above_horizon'
         - condition: state
           entity_id: media_player.lg_webos_tv
-          state: "on"
+          state: 'on'
       sequence:
         - variables:
             target: 33
@@ -163,7 +163,7 @@ actions:
     - conditions:
         - condition: state
           entity_id: sun.sun
-          state: "above_horizon"
+          state: 'above_horizon'
       sequence:
         - variables:
             target: 0
@@ -172,7 +172,7 @@ actions:
     - conditions:
         - condition: state
           entity_id: sun.sun
-          state: "below_horizon"
+          state: 'below_horizon'
       sequence:
         - variables:
             target: -1
@@ -184,10 +184,10 @@ actions:
         - "{{ target >= 100 }}"
         - condition: state
           entity_id: binary_sensor.dining_room_top_windows
-          state: "off"
+          state: 'off'
         - condition: state
           entity_id: binary_sensor.dining_room_bottom_windows
-          state: "off"
+          state: 'off'
       sequence:
         - action: scene.turn_on
           target:
@@ -197,7 +197,7 @@ actions:
         - "{{ target >= 66 }}"
         - condition: state
           entity_id: binary_sensor.dining_room_top_windows
-          state: "off"
+          state: 'off'
       sequence:
         - action: scene.turn_on
           target:
@@ -207,7 +207,7 @@ actions:
         - "{{ target >= 33 }}"
         - condition: state
           entity_id: binary_sensor.dining_room_top_windows
-          state: "off"
+          state: 'off'
       sequence:
         - action: scene.turn_on
           target:

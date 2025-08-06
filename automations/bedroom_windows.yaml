@@ -18,15 +18,15 @@ triggers:
   # this because the Nest points directly down at the bed.
   - trigger: state
     entity_id: binary_sensor.bedroom_ecobee_motion
-    to: "on"
-    id: "open"
+    to: 'on'
+    id: 'open'
   # Update blinds when the windows are closed.
   - trigger: state
     entity_id: binary_sensor.bedroom_window
-    to: "off"
+    to: 'off'
     for:
       seconds: 3
-    id: "close"
+    id: 'close'
   # Update blinds when Shadie comes home.
   - trigger: zone
     entity_id:
@@ -44,19 +44,19 @@ actions:
     - conditions:
         - condition: state
           entity_id: sun.sun
-          state: "above_horizon"
+          state: 'above_horizon'
         # Unless someone is sleeping.
         - condition: state
           entity_id: binary_sensor.anyone_asleep
-          state: "off"
+          state: 'off'
         # Unless we're playing.
         - condition: state
           entity_id: input_boolean.bedroom_play
-          state: "off"
+          state: 'off'
         # Excluding triggers that should only close the windows.
         - not:
             - condition: trigger
-              id: "close"
+              id: 'close'
       sequence:
         - action: scene.turn_on
           target:
@@ -69,15 +69,15 @@ actions:
     - conditions:
         - condition: state
           entity_id: input_boolean.bedroom_play
-          state: "on"
+          state: 'on'
         # Only when the windows are closed.
         - condition: state
           entity_id: binary_sensor.bedroom_window
-          state: "off"
+          state: 'off'
         # Excluding triggers that should only open the windows.
         - not:
             - condition: trigger
-              id: "open"
+              id: 'open'
       sequence:
         - action: scene.turn_on
           target:
@@ -91,11 +91,11 @@ actions:
         # Only when the windows are closed.
         - condition: state
           entity_id: binary_sensor.bedroom_window
-          state: "off"
+          state: 'off'
         # Excluding triggers that should only open the windows.
         - not:
             - condition: trigger
-              id: "open"
+              id: 'open'
       sequence:
         - action: scene.turn_on
           target:
@@ -104,7 +104,7 @@ actions:
         - if:
             - condition: state
               entity_id: person.shadie
-              state: "home"
+              state: 'home'
           then:
             - action: scene.turn_on
               target:

@@ -13,15 +13,15 @@ triggers:
   # Update blinds when there is motion in the office.
   - trigger: state
     entity_id: binary_sensor.office_occupancy
-    to: "on"
-    id: "open"
+    to: 'on'
+    id: 'open'
   # Update blinds when the windows are closed.
   - trigger: state
     entity_id: binary_sensor.office_window
-    to: "off"
+    to: 'off'
     for:
       seconds: 3
-    id: "close"
+    id: 'close'
 
 actions:
   - choose:
@@ -29,11 +29,11 @@ actions:
     - conditions:
         - condition: state
           entity_id: sun.sun
-          state: "above_horizon"
+          state: 'above_horizon'
         # Excluding triggers that should only close the windows.
         - not:
             - condition: trigger
-              id: "close"
+              id: 'close'
       sequence:
         - action: scene.turn_on
           target:
@@ -47,11 +47,11 @@ actions:
         # Only when the windows are closed.
         - condition: state
           entity_id: binary_sensor.office_window
-          state: "off"
+          state: 'off'
         # Excluding triggers that should only open the windows.
         - not:
             - condition: trigger
-              id: "open"
+              id: 'open'
       sequence:
         - action: scene.turn_on
           target:

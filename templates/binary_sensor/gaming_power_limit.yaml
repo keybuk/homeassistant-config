@@ -1,6 +1,6 @@
 # If both gaming PCs are on, we need to limit the GPU power.
 - binary_sensor:
-    name: "Gaming Power Limit"
+    name: Gaming Power Limit
     unique_id: gaming_power_limit
     state: >
       {{ not is_state('button.vecna_power_limit_enable', 'unavailable')

@@ -13,7 +13,7 @@ triggers:
   # Update lights at sunset and sunrise.
   - trigger: state
     entity_id: sun.sun
-    to: "below_horizon"
+    to: 'below_horizon'
   # Update lights during the day based on the weather.
   - trigger: state
     entity_id: weather.home
@@ -22,12 +22,12 @@ triggers:
   # be annoying.
   - trigger: state
     entity_id: binary_sensor.everyone_asleep
-    to: "off"
+    to: 'off'
   # Update lights when the last person leaves home, but not when anyone comes
   # home since we don't want lights to turn on based on false occupancy.
   - trigger: state
     entity_id: binary_sensor.anyone_home
-    to: "off"
+    to: 'off'
 
 variables:
   cloudy_day: >
@@ -48,18 +48,18 @@ actions:
     - conditions:
         - condition: state
           entity_id: binary_sensor.loft_occupancy
-          state: "on"
+          state: 'on'
         - condition: state
           entity_id: sun.sun
-          state: "below_horizon"
+          state: 'below_horizon'
         # Unless someone is sleeping.
         - condition: state
           entity_id: binary_sensor.everyone_asleep
-          state: "off"
+          state: 'off'
         # Only when someone is home.
         - condition: state
           entity_id: binary_sensor.anyone_home
-          state: "on"
+          state: 'on'
       sequence:
         - action: light.turn_on
           target:
@@ -69,19 +69,19 @@ actions:
     - conditions:
         - condition: state
           entity_id: binary_sensor.loft_occupancy
-          state: "on"
+          state: 'on'
         - condition: state
           entity_id: sun.sun
-          state: "above_horizon"
+          state: 'above_horizon'
         - "{{ cloudy_day }}"
         # Unless someone is sleeping.
         - condition: state
           entity_id: binary_sensor.everyone_asleep
-          state: "off"
+          state: 'off'
         # Only when someone is home.
         - condition: state
           entity_id: binary_sensor.anyone_home
-          state: "on"
+          state: 'on'
       sequence:
         - action: light.turn_on
           target:
@@ -92,12 +92,12 @@ actions:
     - conditions:
         - condition: state
           entity_id: sun.sun
-          state: "above_horizon"
+          state: 'above_horizon'
         - "{{ not cloudy_day }}"
         # Unless we're playing.
         - condition: state
           entity_id: input_boolean.loft_play
-          state: "off"
+          state: 'off'
       sequence:
         - action: light.turn_off
           target:
@@ -108,14 +108,14 @@ actions:
         - or:
             - condition: state
               entity_id: binary_sensor.loft_occupancy
-              state: "off"
+              state: 'off'
             - condition: state
               entity_id: binary_sensor.anyone_home
-              state: "off"
+              state: 'off'
         # Unless we're playing.
         - condition: state
           entity_id: input_boolean.loft_play
-          state: "off"
+          state: 'off'
       sequence:
         - action: light.turn_off
           target:

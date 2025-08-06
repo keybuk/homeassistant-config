@@ -17,7 +17,7 @@ actions:
     - conditions:
         - condition: state
           entity_id: media_player.lg_webos_tv
-          state: "on"
+          state: 'on'
       sequence:
         - action: light.turn_off
           target:
@@ -27,11 +27,11 @@ actions:
     - conditions:
         - condition: state
           entity_id: media_player.lg_webos_tv
-          state: "off"
+          state: 'off'
         # Only if the wall lights are on.
         - condition: state
           entity_id: light.loft_wall
-          state: "on"
+          state: 'on'
       sequence:
         - action: light.turn_on
           target:

@@ -1,6 +1,6 @@
 # If Shadie is home, and his phone is on charge, he's probably sleeping.
 - binary_sensor:
-    name: "Shadie Asleep"
+    name: Shadie Asleep
     unique_id: shadie_asleep
     state: >
       {{ states('sensor.pixel_8_pro_battery_state') in ['charging', 'full']

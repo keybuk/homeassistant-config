@@ -1,5 +1,5 @@
 - id: '1750176615026'
-  name: D&D
+  name: "D&D"
   entities:
     light.dining_room_chandelier:
       brightness: 89

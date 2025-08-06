@@ -9,11 +9,11 @@ triggers:
   # Update blinds when we go to sleep.
   - trigger: state
     entity_id: binary_sensor.anyone_asleep
-    to: "on"
+    to: 'on'
   # Update blinds when the windows are closed.
   - trigger: state
     entity_id: binary_sensor.bedroom_window
-    to: "off"
+    to: 'off'
     for:
       seconds: 3
 
@@ -21,11 +21,11 @@ conditions:
   # Only when someone is sleeping.
   - condition: state
     entity_id: binary_sensor.anyone_asleep
-    state: "on"
+    state: 'on'
   # Only when the windows are closed.
   - condition: state
     entity_id: binary_sensor.bedroom_window
-    state: "off"
+    state: 'off'
 
 actions:
   - choose:
@@ -33,7 +33,7 @@ actions:
     - conditions:
         - condition: state
           entity_id: sun.sun
-          state: "above_horizon"
+          state: 'above_horizon'
       sequence:
         - action: scene.turn_on
           target:
@@ -44,7 +44,7 @@ actions:
     - conditions:
         - condition: sun
           after: sunrise
-          after_offset: "-03:00:00"
+          after_offset: '-03:00:00'
       sequence:
         - action: scene.turn_on
           target:

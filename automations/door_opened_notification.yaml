@@ -8,7 +8,7 @@ mode: single
 triggers:
   - trigger: state
     entity_id: binary_sensor.doors_opened_while_not_occupied
-    to: "on"
+    to: 'on'
 
 actions:
   - action: notify.mobile_app_scottys_iphone

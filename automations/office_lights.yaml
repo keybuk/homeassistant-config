@@ -22,12 +22,12 @@ triggers:
   # be annoying.
   - trigger: state
     entity_id: binary_sensor.everyone_asleep
-    to: "off"
+    to: 'off'
   # Update lights when the last person leaves home, but not when anyone comes
   # home since we don't want lights to turn on based on false occupancy.
   - trigger: state
     entity_id: binary_sensor.anyone_home
-    to: "off"
+    to: 'off'
 
 variables:
   cloudy_day: >
@@ -41,18 +41,18 @@ actions:
     - conditions:
         - condition: state
           entity_id: binary_sensor.office_occupancy
-          state: "on"
+          state: 'on'
         - condition: state
           entity_id: sun.sun
-          state: "below_horizon"
+          state: 'below_horizon'
         # Unless someone is sleeping.
         - condition: state
           entity_id: binary_sensor.everyone_asleep
-          state: "off"
+          state: 'off'
         # Only when someone is home.
         - condition: state
           entity_id: binary_sensor.anyone_home
-          state: "on"
+          state: 'on'
       sequence:
         - action: light.turn_on
           target:
@@ -62,19 +62,19 @@ actions:
     - conditions:
         - condition: state
           entity_id: binary_sensor.office_occupancy
-          state: "on"
+          state: 'on'
         - condition: state
           entity_id: sun.sun
-          state: "above_horizon"
+          state: 'above_horizon'
         - "{{ cloudy_day }}"
         # Unless someone is sleeping.
         - condition: state
           entity_id: binary_sensor.everyone_asleep
-          state: "off"
+          state: 'off'
         # Only when someone is home.
         - condition: state
           entity_id: binary_sensor.anyone_home
-          state: "on"
+          state: 'on'
       sequence:
         - action: light.turn_on
           target:
@@ -85,7 +85,7 @@ actions:
     - conditions:
         - condition: state
           entity_id: sun.sun
-          state: "above_horizon"
+          state: 'above_horizon'
         - "{{ not cloudy_day }}"
       sequence:
         - action: light.turn_off
@@ -97,10 +97,10 @@ actions:
         - or:
             - condition: state
               entity_id: binary_sensor.office_occupancy
-              state: "off"
+              state: 'off'
             - condition: state
               entity_id: binary_sensor.anyone_home
-              state: "off"
+              state: 'off'
       sequence:
         - action: light.turn_off
           target:

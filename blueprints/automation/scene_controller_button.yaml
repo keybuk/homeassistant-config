@@ -2,19 +2,21 @@ blueprint:
   name: Scene Controller Button
   description: >
     Perform actions when a button on a scene controller is pressed.
-  author: Scott James Remnant <scott@netsplit.com>
+  author: "Scott James Remnant <scott@netsplit.com>"
   domain: automation
   input:
     button:
       name: Button
-      description: Actions will be performed when this button is pressed.
+      description: >
+        Actions will be performed when this button is pressed.
       selector:
         entity:
           filter:
             - domain: event
     actions:
       name: Actions
-      description: Actions to perform.
+      description: >
+        Actions to perform.
       selector:
         action:
 
@@ -28,6 +30,6 @@ conditions:
   - condition: state
     entity_id: !input button
     attribute: event_type
-    state: single_press
+    state: 'single_press'
 
 actions: !input actions

@@ -10,11 +10,11 @@ triggers:
   # Trigger using the Eve Motion, as it's the most reliable.
   - trigger: state
     entity_id: binary_sensor.dining_room_motion_occupancy
-    to: "on"
+    to: 'on'
   # Trigger when the first person arrives home.
   - trigger: state
     entity_id: binary_sensor.anyone_home
-    to: "on"
+    to: 'on'
   # Trigger when known people arrive home, even if the home is otherwise already
   # occupied.
   - trigger: zone
@@ -28,13 +28,13 @@ conditions:
   # Only at night.
   - condition: state
     entity_id: sun.sun
-    state: "below_horizon"
+    state: 'below_horizon'
   # Only when the kitchen counter light is off, unless an instance of this
   # automation is running, which implies a restart check.
   - or:
     - condition: state
       entity_id: light.kitchen_counter
-      state: "off"
+      state: 'off'
     - condition: state
       entity_id: automation.kitchen_lights
       attribute: current
@@ -45,7 +45,7 @@ actions:
   - if:
       - condition: state
         entity_id: light.kitchen_counter
-        state: "off"
+        state: 'off'
     then:
       - action: light.turn_on
         data:

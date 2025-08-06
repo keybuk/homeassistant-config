@@ -1,6 +1,6 @@
 # Sensor for when everyone who is actually home is asleep.
 - binary_sensor:
-    name: "Everyone Asleep"
+    name: Everyone Asleep
     unique_id: everyone_asleep
     state: >
       {{ (states('zone.home')|int > 0)

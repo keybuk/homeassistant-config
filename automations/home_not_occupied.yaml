@@ -1,4 +1,4 @@
-alias: "Home Not Occupied"
+alias: Home Not Occupied
 id: home_not_occupied
 description: >
   Turns off lights when the home is no longer occupied.

@@ -25,7 +25,7 @@
         target:
           entity_id: scene.office_ceiling_nightlight
 - id: '1742259852048'
-  alias: 'Office Switch Button 3 '
+  alias: Office Switch Button 3
   description: ''
   use_blueprint:
     path: scene_controller_button.yaml

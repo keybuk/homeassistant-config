@@ -36,15 +36,15 @@ actions:
     - conditions:
         - condition: state
           entity_id: sun.sun
-          state: "below_horizon"
+          state: 'below_horizon'
         # Unless someone is sleeping.
         - condition: state
           entity_id: binary_sensor.everyone_asleep
-          state: "off"
+          state: 'off'
         # Only when someone is home.
         - condition: state
           entity_id: binary_sensor.anyone_home
-          state: "on"
+          state: 'on'
       sequence:
         - action: light.turn_on
           target:
@@ -56,16 +56,16 @@ actions:
     - conditions:
         - condition: state
           entity_id: sun.sun
-          state: "above_horizon"
+          state: 'above_horizon'
         - "{{ cloudy_day }}"
         # Unless someone is sleeping.
         - condition: state
           entity_id: binary_sensor.everyone_asleep
-          state: "off"
+          state: 'off'
         # Only when someone is home.
         - condition: state
           entity_id: binary_sensor.anyone_home
-          state: "on"
+          state: 'on'
       sequence:
         - action: light.turn_on
           target:
@@ -77,12 +77,12 @@ actions:
     - conditions:
         - condition: state
           entity_id: sun.sun
-          state: "above_horizon"
+          state: 'above_horizon'
         - "{{ not cloudy_day }}"
         # Unless we're playing.
         - condition: state
           entity_id: input_boolean.dining_room_play
-          state: "off"
+          state: 'off'
       sequence:
         - action: light.turn_off
           target:
@@ -95,14 +95,14 @@ actions:
         - or:
             - condition: state
               entity_id: binary_sensor.everyone_asleep
-              state: "on"
+              state: 'on'
             - condition: state
               entity_id: binary_sensor.anyone_home
-              state: "off"
+              state: 'off'
         # Unless we're playing.
         - condition: state
           entity_id: input_boolean.dining_room_play
-          state: "off"
+          state: 'off'
       sequence:
         - action: light.turn_off
           target:

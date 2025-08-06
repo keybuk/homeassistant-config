@@ -1,6 +1,6 @@
 # Sensor for when anyone is asleep.
 - binary_sensor:
-    name: "Anyone Asleep"
+    name: Anyone Asleep
     unique_id: anyone_asleep
     state: >
       {{ (is_state('binary_sensor.scotty_asleep', 'on') and is_state('person.scotty', 'home'))
