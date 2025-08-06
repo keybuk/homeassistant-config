@@ -21,8 +21,9 @@
       device_class: 'door'
       state: >
         {{ 'on' if trigger.id == 'door'
-            and is_state('binary_sensor.anyone_home', 'off')
-            else 'off' }}
+           and is_state('binary_sensor.anyone_home', 'off')
+           else 'off'
+        }}
       attributes:
         door: >
           {{ trigger.entity_id if trigger.id == 'door' else 'unavailable' }}

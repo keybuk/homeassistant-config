@@ -9,7 +9,8 @@
               or not is_state('person.scotty', 'home'))
          and ((is_state('binary_sensor.shadie_asleep', 'on')
                and is_state('person.shadie', 'home'))
-              or not is_state('person.shadie', 'home')) }}
+              or not is_state('person.shadie', 'home'))
+      }}
     icon: >
       {% if is_state('binary_sensor.everyone_asleep', 'on') %}
         mdi:bed
