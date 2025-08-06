@@ -9,7 +9,9 @@ triggers:
   # Update blinds at sunset and sunrise.
   - trigger: state
     entity_id: sun.sun
-    to: null
+    to:
+      - 'above_horizon'
+      - 'below_horizon'
   # Update blinds when there is motion in the office.
   - trigger: state
     entity_id: binary_sensor.office_occupancy
@@ -43,7 +45,7 @@ actions:
     - conditions:
         - condition: state
           entity_id: sun.sun
-          state: below_horizon
+          state: 'below_horizon'
         # Only when the windows are closed.
         - condition: state
           entity_id: binary_sensor.office_window

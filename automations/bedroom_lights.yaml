@@ -15,7 +15,9 @@ triggers:
   # Update lights at sunset and sunrise.
   - trigger: state
     entity_id: sun.sun
-    to: null
+    to:
+      - 'above_horizon'
+      - 'below_horizon'
   # Update lights during the day based on the weather.
   - trigger: state
     entity_id: weather.home

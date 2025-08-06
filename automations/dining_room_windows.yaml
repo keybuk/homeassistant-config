@@ -10,7 +10,9 @@ triggers:
   # Update blinds at sunset and sunrise.
   - trigger: state
     entity_id: sun.sun
-    from: null
+    to:
+      - 'above_horizon'
+      - 'below_horizon'
   # Trigger when sun shines through the dining room windows by reaching
   # 220° azimuth.
   - trigger: numeric_state

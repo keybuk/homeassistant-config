@@ -9,7 +9,9 @@ triggers:
   # Update blinds at sunset and sunrise.
   - trigger: state
     entity_id: sun.sun
-    to: null
+    to:
+      - 'above_horizon'
+      - 'below_horizon'
   # Update blinds when we wake up or go to sleep.
   - trigger: state
     entity_id: binary_sensor.anyone_asleep
@@ -91,7 +93,7 @@ actions:
     - conditions:
         - condition: state
           entity_id: sun.sun
-          state: below_horizon
+          state: 'below_horizon'
         # Only when the windows are closed.
         - condition: state
           entity_id: binary_sensor.bedroom_window
