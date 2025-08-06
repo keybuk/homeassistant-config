@@ -9,7 +9,9 @@ triggers:
   # Update lights when the room becomes occupied or unoccupied.
   - trigger: state
     entity_id: binary_sensor.loft_occupancy
-    to: null
+    to:
+      - 'on'
+      - 'off'
   # Update lights at sunset and sunrise.
   - trigger: state
     entity_id: sun.sun

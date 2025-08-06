@@ -58,14 +58,20 @@ triggers:
   # Update blinds when the TV turns on or off.
   - trigger: state
     entity_id: media_player.lg_webos_tv
-    from: null
+    to:
+      - 'on'
+      - 'off'
   # Update blinds when we're playing.
   - trigger: state
     entity_id: input_boolean.dining_room_play
-    from: null
+    to:
+      - 'on'
+      - 'off'
   - trigger: state
     entity_id: input_boolean.loft_play
-    from: null
+    to:
+      - 'on'
+      - 'off'
 
 variables:
   cloudy_day: >

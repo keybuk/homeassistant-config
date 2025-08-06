@@ -13,7 +13,9 @@ triggers:
   # Update blinds when we wake up or go to sleep.
   - trigger: state
     entity_id: binary_sensor.anyone_asleep
-    to: null
+    to:
+      - 'on'
+      - 'off'
   # Update blinds when there is motion in the bedroom. We use the Ecobee for
   # this because the Nest points directly down at the bed.
   - trigger: state
@@ -36,7 +38,9 @@ triggers:
   # Update blinds when we're playing.
   - trigger: state
     entity_id: input_boolean.bedroom_play
-    from: null
+    to:
+      - 'on'
+      - 'off'
 
 actions:
   - choose:

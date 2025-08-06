@@ -10,11 +10,15 @@ mode: queued
 triggers:
   - trigger: state
     entity_id: light.dining_room
-    to: null
+    to:
+      - 'on'
+      - 'off'
     id: light
   - trigger: state
     entity_id: switch.dining_room
-    to: null
+    to:
+      - 'on'
+      - 'off'
     id: switch
 
 actions:

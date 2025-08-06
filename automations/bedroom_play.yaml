@@ -6,9 +6,11 @@ description: >
 mode: queued
 
 triggers:
-- trigger: state
-  entity_id: input_boolean.bedroom_play
-  to: null
+  - trigger: state
+    entity_id: input_boolean.bedroom_play
+    to:
+      - 'on'
+      - 'off'
 
 actions:
   - choose:

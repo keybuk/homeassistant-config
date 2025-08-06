@@ -9,7 +9,9 @@ mode: queued
 triggers:
   - trigger: state
     entity_id: media_player.lg_webos_tv
-    from: null
+    to:
+      - 'on'
+      - 'off'
 
 actions:
   - choose:

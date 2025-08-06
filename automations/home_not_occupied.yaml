@@ -8,7 +8,7 @@ mode: single
 triggers:
   - trigger: state
     entity_id: binary_sensor.anyone_home
-    from: "on"
+    to: 'off'
 
 actions:
   - action: light.turn_off

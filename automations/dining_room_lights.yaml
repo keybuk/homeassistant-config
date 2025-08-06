@@ -17,12 +17,16 @@ triggers:
   # Update lights when we wake up or go to sleep.
   - trigger: state
     entity_id: binary_sensor.everyone_asleep
-    to: null
+    to:
+      - 'on'
+      - 'off'
   # Update lights when the first person comes home, or the last person leaves
   # home.
   - trigger: state
     entity_id: binary_sensor.anyone_home
-    to: null
+    to:
+      - 'on'
+      - 'off'
 
 variables:
   cloudy_day: >

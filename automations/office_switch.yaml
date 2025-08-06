@@ -10,11 +10,15 @@ mode: queued
 triggers:
   - trigger: state
     entity_id: light.office
-    to: null
+    to:
+      - 'on'
+      - 'off'
     id: light
   - trigger: state
     entity_id: switch.office
-    to: null
+    to:
+      - 'on'
+      - 'off'
     id: switch
 
 actions:
