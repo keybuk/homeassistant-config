@@ -297,7 +297,8 @@
       metadata: {}
       data: {}
       target:
-        entity_id: switch.office_desk_right_switch_1
+        entity_id:
+        - switch.office_wall_desk_right_switch_top
     else:
     - action: button.press
       metadata: {}
@@ -308,7 +309,8 @@
       metadata: {}
       data: {}
       target:
-        entity_id: switch.office_desk_right_switch_1
+        entity_id:
+        - switch.office_wall_desk_right_switch_top
   mode: queued
   max: 10
 - id: '1750177081187'
