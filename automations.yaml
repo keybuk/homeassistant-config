@@ -10,7 +10,7 @@
         metadata: {}
         data: {}
         target:
-          entity_id: scene.office_ceiling_natural_light
+          entity_id: scene.office_ceiling_energize
 - id: '1742259802006'
   alias: Office Switch Button 2
   description: ''
@@ -36,7 +36,7 @@
         metadata: {}
         data: {}
         target:
-          entity_id: scene.office_ceiling_rest
+          entity_id: scene.office_ceiling_natural_light
 - id: '1742265800631'
   alias: Bedroom Switch Button 1
   description: ''
@@ -49,12 +49,9 @@
         metadata: {}
         data: {}
         target:
-          entity_id: scene.bedroom_bedside_natural_light
-      - action: scene.turn_on
-        metadata: {}
-        data: {}
-        target:
-          entity_id: scene.bedroom_ceiling_natural_light
+          entity_id:
+          - scene.bedroom_bedside_energize
+          - scene.bedroom_ceiling_energize
 - id: '1742265845066'
   alias: Bedroom Switch Button 2
   description: ''
@@ -100,7 +97,7 @@
         metadata: {}
         data: {}
         target:
-          entity_id: scene.loft_ceiling_natural_light
+          entity_id: scene.loft_ceiling_energize
 - id: '1742273165518'
   alias: Loft Switch Button 2
   description: ''
@@ -113,7 +110,9 @@
         metadata: {}
         data: {}
         target:
-          entity_id: scene.loft_ceiling_resplendent
+          entity_id:
+          - scene.loft_ceiling_resplendent
+          - scene.loft_wall_pride
 - id: '1742273188065'
   alias: Loft Switch Button 3
   description: ''
