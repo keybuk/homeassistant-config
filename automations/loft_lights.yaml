@@ -20,16 +20,18 @@ triggers:
   - trigger: state
     entity_id: weather.home
     not_to: 'unavailable'
-  # Update lights when we wake up, but not when we go to sleep since that would
-  # be annoying.
+  # Turn lights off when the last person goes to sleep, but not on just because
+  # we wake up since we don't want lights to turn on based on false occupancy.
   - trigger: state
     entity_id: binary_sensor.everyone_asleep
-    to: 'off'
-  # Update lights when the last person leaves home, but not when anyone comes
-  # home since we don't want lights to turn on based on false occupancy.
+    to: 'on'
+    id: 'off'
+  # Turn lights off when the last person leaves home, but not on when anyone
+  # comes home since we don't want lights to turn on based on false occupancy.
   - trigger: state
     entity_id: binary_sensor.anyone_home
     to: 'off'
+    id: 'off'
 
 variables:
   cloudy_day: >
@@ -62,6 +64,10 @@ actions:
         - condition: state
           entity_id: binary_sensor.anyone_home
           state: 'on'
+        # Excluding triggers that should only turn the lights off.
+        - not:
+            - condition: trigger
+              id: 'off'
       sequence:
         - action: light.turn_on
           target:
@@ -84,6 +90,10 @@ actions:
         - condition: state
           entity_id: binary_sensor.anyone_home
           state: 'on'
+        # Excluding triggers that should only turn the lights off.
+        - not:
+            - condition: trigger
+              id: 'off'
       sequence:
         - action: light.turn_on
           target:
