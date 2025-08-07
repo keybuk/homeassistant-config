@@ -22,16 +22,19 @@ triggers:
   - trigger: state
     entity_id: weather.home
     not_to: 'unavailable'
-  # Update lights when we wake up, but not when we go to sleep since that would
-  # be annoying.
+  # Turn lights on when we wake up, but not off because guests might have them
+  # on (or HA restart). Don't turn lights off when we detect sleep either,
+  # because that's just annoying.
   - trigger: state
     entity_id: binary_sensor.anyone_asleep
     to: 'off'
-  # Update lights when the last person leaves home, but not when anyone comes
-  # home since we don't want lights to turn on based on false occupancy.
+    id: 'on'
+  # Turn lights off when the last person leaves home, but not on when anyone
+  # comes home since we don't want lights to turn on based on false occupancy.
   - trigger: state
     entity_id: binary_sensor.anyone_home
     to: 'off'
+    id: 'off'
 
 variables:
   cloudy_day: >
@@ -57,6 +60,10 @@ actions:
         - condition: state
           entity_id: binary_sensor.anyone_home
           state: 'on'
+        # Excluding triggers that should only turn the lights off.
+        - not:
+            - condition: trigger
+              id: 'off'
       sequence:
         - action: light.turn_on
           target:
@@ -79,6 +86,10 @@ actions:
         - condition: state
           entity_id: binary_sensor.anyone_home
           state: 'on'
+        # Excluding triggers that should only turn the lights on.
+        - not:
+            - condition: trigger
+              id: 'off'
       sequence:
         - action: light.turn_on
           target:
@@ -95,6 +106,10 @@ actions:
         - condition: state
           entity_id: input_boolean.bedroom_play
           state: 'off'
+        # Excluding triggers that should only turn the lights on.
+        - not:
+            - condition: trigger
+              id: 'on'
       sequence:
         - action: light.turn_off
           target:
@@ -113,6 +128,10 @@ actions:
         - condition: state
           entity_id: input_boolean.bedroom_play
           state: 'off'
+        # Excluding triggers that should only turn the lights on.
+        - not:
+            - condition: trigger
+              id: 'on'
       sequence:
         - action: light.turn_off
           target:
