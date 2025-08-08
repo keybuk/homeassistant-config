@@ -1,7 +1,7 @@
 alias: Home Not Occupied
 id: home_not_occupied
 description: >
-  Turns off lights when the home is no longer occupied.
+  Turn things off when the home is no longer occupied.
 
 mode: single
 
@@ -11,12 +11,36 @@ triggers:
     to: 'off'
 
 actions:
+  # Turn lights off that don't have their own automations triggered by the last
+  # person leaving home.
   - action: light.turn_off
     target:
       area_id:
-        # dining_room, bedroom, loft, and office have their own automations.
         - kitchen
         - downstairs_bathroom
         - bathroom
         - stairs
         - roof
+      entity_id:
+        - light.dining_room_chandelier
+        - light.dining_room_spots
+        - light.bedroom_left_closet
+        - light.bedroom_right_closet
+
+  # Stop any Sonos playing music.
+  - action: media_player.media_stop
+    target:
+      entity_id:
+        - media_player.dining_room
+        - media_player.kitchen
+        - media_player.office
+        - media_player.bedroom
+        - media_player.loft
+        - media_player.bathroom
+        - media_player.downstairs_bathroom
+
+  # Turn off the TV.
+  - action: media_player.turn_off
+    target:
+      entity_id:
+        - media_player.lg_webos_tv
