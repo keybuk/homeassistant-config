@@ -1,0 +1,71 @@
+blueprint:
+  name: Pico Remote Button
+  description: >
+    Perform actions when a button on a pico remote is pressed or long pressed.
+  author: "Scott James Remnant <scott@netsplit.com>"
+  domain: automation
+  input:
+    device:
+      name: Device
+      description: >
+        Actions will be performed for this Pico Remote.
+      selector:
+        device:
+          filter:
+            - integration: lutron_caseta
+          entity:
+            - domain: button
+    button:
+      name: Button
+      description: >
+        Actions will be performed when this button is pressed.
+      selector:
+        select:
+          options:
+            - label: 'On'
+              value: 'on'
+            - label: 'Raise'
+              value: 'raise'
+            - label: 'Lower'
+              value: 'lower'
+            - label: 'Off'
+              value: 'off'
+          mode: 'dropdown'
+    press:
+      name: Press
+      description: >
+        Actions to perform on a press.
+      selector:
+        action:
+      default: []
+    long_press:
+      name: Long Press
+      description: >
+        Actions to perform on a long press.
+      selector:
+        action:
+      default: []
+
+mode: queued
+
+triggers:
+  - trigger: device
+    domain: lutron_caseta
+    device_id: !input device
+    type: 'press'
+    subtype: !input button
+
+actions:
+  - wait_for_trigger:
+      - trigger: device
+        domain: lutron_caseta
+        device_id: !input device
+        type: 'release'
+        subtype: !input button
+    timeout:
+      milliseconds: 500
+
+  - if:
+      - "{{ wait.completed }}"
+    then: !input long_press
+    else: !input press
