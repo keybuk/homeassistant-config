@@ -1,13 +1,21 @@
-alias: Home Not Occupied
-id: home_not_occupied
+alias: Home Off
+id: home_off
 description: >
-  Turn things off when the home is no longer occupied.
+  Turn things off when the last person goes to sleep, or the home is no longer
+  occupied.
 
 mode: single
 
 triggers:
+  # Turn things off when occupancy is no longer detected after the last person
+  # leaves home.
   - trigger: state
     entity_id: binary_sensor.anyone_home
+    to: 'off'
+
+  # Turn things off when the last person goes to sleep.
+  - trigger: state
+    entity_id: binary_sensor.everyone_asleep
     to: 'off'
 
 actions:
