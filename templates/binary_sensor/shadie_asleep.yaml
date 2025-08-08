@@ -3,7 +3,9 @@
     name: Shadie Asleep
     unique_id: shadie_asleep
     state: >
-      {{ states('sensor.pixel_8_pro_battery_state') in ['charging', 'full'] }}
+      {{ states('sensor.pixel_8_pro_battery_state') in ['charging', 'full']
+         or states('sensor.pixel_8_pro_sleep_confidence') | int >= 90
+      }}
     delay_off:
       seconds: 1
     icon: >
