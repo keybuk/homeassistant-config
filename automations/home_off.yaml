@@ -11,12 +11,12 @@ triggers:
   # leaves home.
   - trigger: state
     entity_id: binary_sensor.anyone_home
-    to: 'off'
+    to: "off"
 
   # Turn things off when the last person goes to sleep.
   - trigger: state
     entity_id: binary_sensor.everyone_asleep
-    to: 'off'
+    to: "on"
 
 actions:
   # Turn lights off that don't have their own automations triggered by the last
