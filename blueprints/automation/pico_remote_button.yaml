@@ -37,14 +37,14 @@ blueprint:
         Actions to perform on a press.
       selector:
         action:
-      default: []
+      default:
     long_press:
       name: Long Press
       description: >
         Actions to perform on a long press.
       selector:
         action:
-      default: []
+      default:
 
 mode: queued
 
@@ -67,5 +67,5 @@ actions:
 
   - if:
       - "{{ wait.completed }}"
-    then: !input long_press
-    else: !input press
+    then: !input press
+    else: !input long_press
