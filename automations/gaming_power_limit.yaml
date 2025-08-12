@@ -29,6 +29,7 @@ actions:
         target:
           entity_id:
             - switch.office_wall_desk_right_switch_top
+            - switch.loft_wall_south_switch_top
     else:
       - action: button.press
         target:
@@ -37,3 +38,5 @@ actions:
         target:
           entity_id:
             - switch.office_wall_desk_right_switch_top
+            - switch.loft_wall_south_switch_top
+
