@@ -1,0 +1,9 @@
+# Sensor for bedroom temperature.
+- use_blueprint:
+    path: mean_temperature.yaml
+    input:
+      sensors:
+        - sensor.bedroom_ecobee_temperature
+        - sensor.bedroom_eve_temperature
+  name: Bedroom Temperature
+  unique_id: bedroom_temperature

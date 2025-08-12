@@ -1,0 +1,26 @@
+blueprint:
+  name: Mean Temperature
+  description: >
+    Creates a temperature sensor that provides the mean value of input
+    temperature sensors.
+  author: "Scott James Remnant <scott@netsplit.com>"
+  domain: template
+  input:
+    sensors:
+      name: Sensors
+      description: >
+        The mean value will be calculated from these sensors.
+      selector:
+        entity:
+          filter:
+            - domain: sensor
+              device_class: temperature
+          multiple: true
+
+variables:
+  sensors: !input sensors
+
+sensor:
+  device_class: temperature
+  unit_of_measurement: "°F"
+  state: "{{ (sensors | expand | map(attribute='state') | map('float') | list | sum) / (sensors | count) }}"
