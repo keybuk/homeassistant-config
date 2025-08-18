@@ -15,7 +15,6 @@ triggers:
   - trigger: zone
     entity_id:
       - person.scotty
-      - person.shadie
     zone: zone.home
     event: enter
 
