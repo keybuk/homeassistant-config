@@ -26,7 +26,7 @@ triggers:
   # on (or HA restart). Don't turn lights off when we detect sleep either,
   # because that's just annoying.
   - trigger: state
-    entity_id: binary_sensor.anyone_asleep
+    entity_id: binary_sensor.scotty_asleep
     to: 'off'
     id: 'on'
   # Turn lights off when the last person leaves home, but not on when anyone
@@ -54,7 +54,7 @@ actions:
           state: 'below_horizon'
         # Unless someone is sleeping.
         - condition: state
-          entity_id: binary_sensor.anyone_asleep
+          entity_id: binary_sensor.scotty_asleep
           state: 'off'
         # Only when someone is home.
         - condition: state
@@ -80,7 +80,7 @@ actions:
         - "{{ cloudy_day }}"
         # Unless someone is sleeping.
         - condition: state
-          entity_id: binary_sensor.anyone_asleep
+          entity_id: binary_sensor.scotty_asleep
           state: 'off'
         # Only when someone is home.
         - condition: state

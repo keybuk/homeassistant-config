@@ -23,7 +23,7 @@ triggers:
   # Turn lights off when the last person goes to sleep, but not on just because
   # we wake up since we don't want lights to turn on based on false occupancy.
   - trigger: state
-    entity_id: binary_sensor.everyone_asleep
+    entity_id: binary_sensor.scotty_asleep
     to: 'on'
     id: 'off'
   # Turn lights off when the last person leaves home, but not on when anyone
@@ -58,7 +58,7 @@ actions:
           state: 'below_horizon'
         # Unless someone is sleeping.
         - condition: state
-          entity_id: binary_sensor.everyone_asleep
+          entity_id: binary_sensor.scotty_asleep
           state: 'off'
         # Only when someone is home.
         - condition: state
@@ -84,7 +84,7 @@ actions:
         - "{{ cloudy_day }}"
         # Unless someone is sleeping.
         - condition: state
-          entity_id: binary_sensor.everyone_asleep
+          entity_id: binary_sensor.scotty_asleep
           state: 'off'
         # Only when someone is home.
         - condition: state
