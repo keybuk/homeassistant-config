@@ -22,6 +22,7 @@ actions:
   # Turn lights off that don't have their own automations triggered by the last
   # person leaving home.
   - action: light.turn_off
+    continue_on_error: true
     target:
       area_id:
         - kitchen
@@ -36,7 +37,8 @@ actions:
         - light.bedroom_right_closet
 
   # Stop any Sonos playing music.
-  - action: media_player.media_stop
+  - action: media_player.media_pause
+    continue_on_error: true
     target:
       entity_id:
         - media_player.dining_room
@@ -49,6 +51,7 @@ actions:
 
   # Turn off the TV.
   - action: media_player.turn_off
+    continue_on_error: true
     target:
       entity_id:
         - media_player.lg_webos_tv
