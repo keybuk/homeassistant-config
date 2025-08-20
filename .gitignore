@@ -11,3 +11,4 @@ home-assistant_v2.db*
 insteon_devices.json
 image/
 tts/
+zigbee.db*
