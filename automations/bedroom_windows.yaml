@@ -65,7 +65,7 @@ actions:
           target:
             entity_id: scene.bedroom_blackout_open
 
-    # Close blackout blinds when we go to sleep during the day.
+    # Close blinds when we go to sleep during the day.
     - conditions:
         - condition: state
           entity_id: sun.sun
