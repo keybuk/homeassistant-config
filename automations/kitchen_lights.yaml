@@ -1,8 +1,8 @@
 alias: Kitchen Lights
 id: kitchen_lights
 description: >
-  Turns on the kitchen counter lights for 15 minutes at night when anyone comes
-  home, or for midnight snacks when there's motion in the dining room.
+  Turns on the kitchen counter lights for 15 minutes after motion is detected,
+  or when anyone comes home at night.
 
 mode: restart
 
@@ -11,6 +11,11 @@ triggers:
   - trigger: state
     entity_id: binary_sensor.dining_room_motion_occupancy
     to: 'on'
+  # Trigger at sunset.
+  - trigger: state
+    entity_id: sun.sun
+    to:
+      - 'below_horizon'
   # Trigger when the first person arrives home.
   - trigger: state
     entity_id: binary_sensor.anyone_home
@@ -23,13 +28,26 @@ triggers:
     zone: zone.home
     event: enter
 
+variables:
+  cloudy_day: >
+    {{ states('weather.home') not in
+       ['clear-night', 'partlycloudy', 'sunny', 'windy' ]
+    }}
+
 conditions:
-  # Only at night.
-  - condition: state
-    entity_id: sun.sun
-    state: 'below_horizon'
-  # Only when the kitchen counter light is off, unless an instance of this
-  # automation is running, which implies a restart check.
+  - or:
+    # Only turn lights on at night,
+    - condition: state
+      entity_id: sun.sun
+      state: 'below_horizon'
+    # or during a cloudy day.
+    - and:
+      - condition: state
+        entity_id: sun.sun
+        state: 'above_horizon'
+      - "{{ cloudy_day }}"
+  # Only trigger when the kitchen counter light is off, unless an instance of
+  # this automation is running in which case we restart the timer.
   - or:
     - condition: state
       entity_id: light.kitchen_counter
@@ -38,6 +56,10 @@ conditions:
       entity_id: automation.kitchen_lights
       attribute: current
       state: 1
+  # Only when someone is home.
+  - condition: state
+    entity_id: binary_sensor.anyone_home
+    state: 'on'
 
 actions:
   # Turn lights on at 25% brightness, unless already on.
