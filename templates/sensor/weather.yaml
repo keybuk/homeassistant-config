@@ -1,0 +1,27 @@
+# Sensor that combines the day/night state of the sun, with the cloud and
+# temperature state from the weather.
+- sensor:
+    name: Weather
+    unique_id: weather
+    state: >
+      {% if is_state('sun.sun', 'above_horizon') %}
+        {% if states('weather.home') not in ['clear-night', 'partlycloudy', 'sunny', 'windy' ] %}
+          cloudy-day
+        {% elif state_attr('weather.home', 'temperature') | int > 69 %}
+          hot-day
+        {% else %}
+          day
+        {% endif %}
+      {% else %}
+        night
+      {% endif %}
+    icon: >
+      {% if is_state('sensor.weather', 'hot-day') %}
+        mdi:weather-sunny-alert
+      {% elif is_state('sensor.weather', 'day') %}
+        mdi:weather-sunny
+      {% elif is_state('sensor.weather', 'cloudy-day') %}
+        mdi:weather-cloudy
+      {% elif is_state('sensor.weather', 'night') %}
+        mdi:weather-night
+      {% endif %}

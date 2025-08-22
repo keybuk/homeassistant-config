@@ -6,15 +6,9 @@ description: >
 mode: queued
 
 triggers:
-  # Update lights at sunset and sunrise.
+  # Update lights based on the time of day and weather.
   - trigger: state
-    entity_id: sun.sun
-    to:
-      - 'above_horizon'
-      - 'below_horizon'
-  # Update lights during the day based on the weather.
-  - trigger: state
-    entity_id: weather.home
+    entity_id: sensor.weather
     not_to: 'unavailable'
   # Update lights when we wake up or go to sleep.
   - trigger: state
@@ -30,19 +24,13 @@ triggers:
       - 'on'
       - 'off'
 
-variables:
-  cloudy_day: >
-    {{ states('weather.home') not in
-       ['clear-night', 'partlycloudy', 'sunny', 'windy' ]
-    }}
-
 actions:
   - choose:
     # Turn lights on at night.
     - conditions:
         - condition: state
-          entity_id: sun.sun
-          state: 'below_horizon'
+          entity_id: sensor.weather
+          state: 'night'
         # Unless someone is sleeping.
         - condition: state
           entity_id: binary_sensor.scotty_asleep
@@ -61,9 +49,8 @@ actions:
     # Turn lights on during a cloudy day.
     - conditions:
         - condition: state
-          entity_id: sun.sun
-          state: 'above_horizon'
-        - "{{ cloudy_day }}"
+          entity_id: sensor.weather
+          state: 'cloudy-day'
         # Unless someone is sleeping.
         - condition: state
           entity_id: binary_sensor.scotty_asleep
@@ -82,9 +69,13 @@ actions:
     # Turn lights off when the sun comes out during the day to save on power.
     - conditions:
         - condition: state
-          entity_id: sun.sun
-          state: 'above_horizon'
-        - "{{ not cloudy_day }}"
+          entity_id: sensor.weather
+          state:
+            - 'hot-day'
+            - 'day'
+        - condition: state
+          entity_id: binary_sensor.cloudy
+          state: 'off'
         # Unless we're playing.
         - condition: state
           entity_id: input_boolean.dining_room_play

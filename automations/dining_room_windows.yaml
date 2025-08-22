@@ -7,12 +7,6 @@ description: >
 mode: queued
 
 triggers:
-  # Update blinds at sunset and sunrise.
-  - trigger: state
-    entity_id: sun.sun
-    to:
-      - 'above_horizon'
-      - 'below_horizon'
   # Trigger when sun shines through the dining room windows by reaching
   # 220° azimuth.
   - trigger: numeric_state
@@ -40,9 +34,9 @@ triggers:
     entity_id: sun.sun
     attribute: elevation
     below: 5.5
-  # Update the blinds based on the weeather.
+  # Update blinds based on the time of day and weather.
   - trigger: state
-    entity_id: weather.home
+    entity_id: sensor.weather
     not_to: 'unavailable'
   # Update blinds when the windows are closed.
   - trigger: state
@@ -75,12 +69,6 @@ triggers:
       - 'on'
       - 'off'
 
-variables:
-  cloudy_day: >
-    {{ states('weather.home') not in
-       ['clear-night', 'partlycloudy', 'sunny', 'windy' ]
-    }}
-
 actions:
   # Set the target blind state.
   - variables:
@@ -98,7 +86,11 @@ actions:
           attribute: elevation
           above: 5.5
           below: 24
-        - "{{ not cloudy_day }}"
+        - condition: state
+          entity_id: sensor.weather
+          state:
+            - 'hot-day'
+            - 'day'
       sequence:
         - variables:
             target: 100
@@ -124,7 +116,11 @@ actions:
           attribute: elevation
           above: 24
           below: 45
-        - "{{ not cloudy_day }}"
+        - condition: state
+          entity_id: sensor.weather
+          state:
+            - 'hot-day'
+            - 'day'
       sequence:
         - variables:
             target: 66
@@ -141,7 +137,11 @@ actions:
           attribute: elevation
           above: 45
           below: 55
-        - "{{ not cloudy_day }}"
+        - condition: state
+          entity_id: sensor.weather
+          state:
+            - 'hot-day'
+            - 'day'
       sequence:
         - variables:
             target: 33
@@ -157,9 +157,10 @@ actions:
 
     # Close the top of the blinds during the day if the TV is on.
     - conditions:
-        - condition: state
-          entity_id: sun.sun
-          state: 'above_horizon'
+        - not:
+          - condition: state
+            entity_id: sensor.weather
+            state: 'night'
         - condition: state
           entity_id: media_player.lg_webos_tv
           state: 'on'
@@ -169,9 +170,10 @@ actions:
 
     # Open blinds during the day.
     - conditions:
-        - condition: state
-          entity_id: sun.sun
-          state: 'above_horizon'
+        - not:
+          - condition: state
+            entity_id: sensor.weather
+            state: 'night'
       sequence:
         - variables:
             target: 0
@@ -179,8 +181,8 @@ actions:
     # Open blinds (night time scene) at night.
     - conditions:
         - condition: state
-          entity_id: sun.sun
-          state: 'below_horizon'
+          entity_id: sensor.weather
+          state: 'night'
       sequence:
         - variables:
             target: -1

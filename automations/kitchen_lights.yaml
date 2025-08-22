@@ -11,11 +11,6 @@ triggers:
   - trigger: state
     entity_id: binary_sensor.dining_room_motion_occupancy
     to: 'on'
-  # Trigger at sunset.
-  - trigger: state
-    entity_id: sun.sun
-    to:
-      - 'below_horizon'
   # Trigger when the first person arrives home.
   - trigger: state
     entity_id: binary_sensor.anyone_home
@@ -28,24 +23,13 @@ triggers:
     zone: zone.home
     event: enter
 
-variables:
-  cloudy_day: >
-    {{ states('weather.home') not in
-       ['clear-night', 'partlycloudy', 'sunny', 'windy' ]
-    }}
-
 conditions:
-  - or:
-    # Only turn lights on at night,
-    - condition: state
-      entity_id: sun.sun
-      state: 'below_horizon'
-    # or during a cloudy day.
-    - and:
-      - condition: state
-        entity_id: sun.sun
-        state: 'above_horizon'
-      - "{{ cloudy_day }}"
+  # Only turn lights on at night or during a cloudy day.
+  - condition: state
+    entity_id: sensor.weather
+    state:
+      - 'night'
+      - 'cloudy-day'
   # Only trigger when the kitchen counter light is off, unless an instance of
   # this automation is running in which case we restart the timer.
   - or:

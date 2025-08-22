@@ -12,15 +12,9 @@ triggers:
     to:
       - 'on'
       - 'off'
-  # Update lights at sunset and sunrise.
+  # Update blinds based on the time of day and weather.
   - trigger: state
-    entity_id: sun.sun
-    to:
-      - 'above_horizon'
-      - 'below_horizon'
-  # Update lights during the day based on the weather.
-  - trigger: state
-    entity_id: weather.home
+    entity_id: sensor.weather
     not_to: 'unavailable'
   # Turn lights off when the last person goes to sleep, but not on just because
   # we wake up since we don't want lights to turn on based on false occupancy.
@@ -35,12 +29,6 @@ triggers:
     to: 'off'
     id: 'off'
 
-variables:
-  cloudy_day: >
-    {{ states('weather.home') not in
-       ['clear-night', 'partlycloudy', 'sunny', 'windy' ]
-    }}
-
 actions:
   - choose:
     # Turn lights on when the room is occupied at night.
@@ -49,8 +37,8 @@ actions:
           entity_id: binary_sensor.office_occupancy
           state: 'on'
         - condition: state
-          entity_id: sun.sun
-          state: 'below_horizon'
+          entity_id: sensor.weather
+          state: 'night'
         # Unless someone is sleeping.
         - condition: state
           entity_id: binary_sensor.scotty_asleep
@@ -74,9 +62,8 @@ actions:
           entity_id: binary_sensor.office_occupancy
           state: 'on'
         - condition: state
-          entity_id: sun.sun
-          state: 'above_horizon'
-        - "{{ cloudy_day }}"
+          entity_id: sensor.weather
+          state: 'cloudy-day'
         # Unless someone is sleeping.
         - condition: state
           entity_id: binary_sensor.scotty_asleep
@@ -98,9 +85,10 @@ actions:
     # Occupancy doesn't matter since we wouldn't turn lights on if it was.
     - conditions:
         - condition: state
-          entity_id: sun.sun
-          state: 'above_horizon'
-        - "{{ not cloudy_day }}"
+          entity_id: sensor.weather
+          state:
+            - 'hot-day'
+            - 'day'
       sequence:
         - action: light.turn_off
           target:
