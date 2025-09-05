@@ -235,11 +235,9 @@
     input:
       button: event.dining_room_switch_button_2
       actions:
-      - action: scene.turn_on
+      - action: script.dnd
         metadata: {}
         data: {}
-        target:
-          entity_id: scene.dnd
 - id: '1752632839285'
   alias: Bedroom Pico On
   description: ''

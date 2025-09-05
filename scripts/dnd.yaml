@@ -1,0 +1,27 @@
+alias: "D&D"
+icon: mdi:dice-5-outline
+
+sequence:
+  - parallel:
+      - action: light.turn_on
+        target:
+          entity_id: light.dining_room_chandelier
+        data:
+          brightness: 89
+      - action: light.turn_on
+        target:
+          entity_id: light.dining_room_spots
+        data:
+          brightness: 153
+      - action: light.turn_on
+        target:
+          entity_id: light.kitchen_counter
+        data:
+          brightness: 127
+      - action: light.turn_on
+        target:
+          entity_id:
+            - light.dining_room_beam
+            - light.dining_room_wall
+
+
