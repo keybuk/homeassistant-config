@@ -73,9 +73,6 @@ actions:
           state:
             - 'hot-day'
             - 'day'
-        - condition: state
-          entity_id: binary_sensor.cloudy
-          state: 'off'
         # Unless we're playing.
         - condition: state
           entity_id: input_boolean.dining_room_play
