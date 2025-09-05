@@ -1,0 +1,9 @@
+alias: Loft Play
+icon: mdi:hand-extended
+
+sequence:
+  - action: scene.turn_on
+    target:
+      entity_id:
+        - scene.loft_ceiling_play
+        - scene.loft_wall_play

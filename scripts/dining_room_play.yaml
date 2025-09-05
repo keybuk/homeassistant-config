@@ -1,0 +1,9 @@
+alias: Dining Room Play
+icon: mdi:hand-extended
+
+sequence:
+  - action: scene.turn_on
+    target:
+      entity_id:
+        - scene.dining_room_wall_play
+        - scene.dining_room_beam_lights_play

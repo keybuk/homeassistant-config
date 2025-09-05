@@ -53,11 +53,7 @@ actions:
             - light.loft_south_right
 
         # Now change the wall and ceiling lights scene.
-        - action: scene.turn_on
-          target:
-            entity_id:
-            - scene.loft_ceiling_play
-            - scene.loft_wall_play
+        - action: script.loft_play
 
     # Play time over.
     - conditions:

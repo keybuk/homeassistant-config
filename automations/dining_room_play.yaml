@@ -45,11 +45,7 @@ actions:
             - light.dining_room_west_right
 
         # Now change the wall and beam lights scene.
-        - action: scene.turn_on
-          target:
-            entity_id:
-            - scene.dining_room_wall_play
-            - scene.dining_room_beam_lights_play
+        - action: script.dining_room_play
 
     # Play time over.
     - conditions:

@@ -1,0 +1,9 @@
+alias: Bedroom Play
+icon: mdi:hand-extended
+
+sequence:
+  - action: scene.turn_on
+    target:
+      entity_id:
+        - scene.bedroom_bedside_play
+        - scene.bedroom_ceiling_play

@@ -78,13 +78,9 @@
     input:
       button: event.bedroom_switch_button_3
       actions:
-      - action: scene.turn_on
+      - action: script.bedroom_play
         metadata: {}
         data: {}
-        target:
-          entity_id:
-          - scene.bedroom_bedside_play
-          - scene.bedroom_ceiling_play
 - id: '1742268121309'
   alias: Loft Switch Button 1
   description: ''
@@ -121,13 +117,9 @@
     input:
       button: event.loft_switch_button_3
       actions:
-      - action: scene.turn_on
+      - action: script.loft_play
         metadata: {}
         data: {}
-        target:
-          entity_id:
-          - scene.loft_ceiling_play
-          - scene.loft_wall_play
 - id: '1744102789672'
   alias: Dining Room Switch Button 1
   description: ''
@@ -220,13 +212,9 @@
     input:
       button: event.dining_room_switch_button_3
       actions:
-      - action: scene.turn_on
+      - action: script.dining_room_play
         metadata: {}
         data: {}
-        target:
-          entity_id:
-          - scene.dining_room_wall_play
-          - scene.dining_room_beam_lights_play
 - id: '1750177081187'
   alias: Dining Room Switch Button 2
   description: ''
