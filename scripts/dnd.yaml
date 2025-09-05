@@ -23,5 +23,6 @@ sequence:
           entity_id:
             - light.dining_room_beam
             - light.dining_room_wall
-
-
+      - action: light.turn_off
+        target:
+          entity_id: light.kitchen_ceiling
