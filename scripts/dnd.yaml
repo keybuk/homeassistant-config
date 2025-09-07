@@ -1,4 +1,6 @@
 alias: "D&D"
+description: >
+  Set lighting scenes for playing Dungeons and Dragons (D&D) in the Dining Room.
 icon: mdi:dice-5-outline
 
 sequence:

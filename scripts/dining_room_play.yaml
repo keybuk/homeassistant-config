@@ -1,4 +1,6 @@
 alias: Dining Room Play
+description: >
+  Set lighting scenes for playing with guys in the Dining Room.
 icon: mdi:hand-extended
 
 sequence:
