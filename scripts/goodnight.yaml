@@ -1,0 +1,10 @@
+alias: Good Night
+description: >
+  Turn off the bedroom lights when it's time for bed, and we say "Goodnight".
+icon: mdi:weather-night
+
+sequence:
+  - action: light.turn_off
+    target:
+      entity_id:
+        - light.bedroom
