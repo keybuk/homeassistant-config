@@ -31,9 +31,10 @@ actions:
   - choose:
       # Close blackout blinds when we go to sleep during the day.
       - conditions:
-          - condition: state
-            entity_id: sun.sun
-            state: "above_horizon"
+          - not:
+              - condition: state
+                entity_id: sensor.weather
+                state: "night"
         sequence:
           - action: scene.turn_on
             target:
@@ -42,10 +43,9 @@ actions:
       # Close blackout blinds when we go to sleep with less than three hours
       # until sunrise.
       - conditions:
-          # After sunset; otherwise "after sunrise" matches if we go to bed
-          # anytime before midnight since that's after sunrise that day.
-          - condition: sun
-            after: sunset
+          - condition: state
+            entity_id: sensor.weather
+            state: "night"
           - condition: sun
             after: sunrise
             after_offset: "-03:00:00"

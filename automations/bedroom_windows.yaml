@@ -8,116 +8,121 @@ mode: queued
 triggers:
   # Update blinds at sunset and sunrise.
   - trigger: state
-    entity_id: sun.sun
+    entity_id: sensor.weather
     to:
-      - 'above_horizon'
-      - 'below_horizon'
+      - "night"
+  - trigger: state
+    entity_id: sensor.weather
+    from:
+      - "night"
   # Update blinds when we wake up or go to sleep.
   - trigger: state
     entity_id: binary_sensor.scotty_asleep
     to:
-      - 'on'
-      - 'off'
+      - "on"
+      - "off"
   # Update blinds when there is motion in the bedroom. We use the Ecobee for
   # this because the Nest points directly down at the bed.
   - trigger: state
     entity_id: binary_sensor.bedroom_ecobee_motion
-    to: 'on'
-    id: 'open'
+    to: "on"
+    id: "open"
   # Update blinds when the windows are closed.
   - trigger: state
     entity_id: binary_sensor.bedroom_window
-    to: 'off'
+    to: "off"
     for:
       seconds: 3
-    id: 'close'
+    id: "close"
   # Update blinds when we're playing.
   - trigger: state
     entity_id: input_boolean.bedroom_play
     to:
-      - 'on'
-      - 'off'
+      - "on"
+      - "off"
 
 actions:
   - choose:
-    # Open blinds during the day.
-    - conditions:
-        - condition: state
-          entity_id: sun.sun
-          state: 'above_horizon'
-        # Unless someone is sleeping.
-        - condition: state
-          entity_id: binary_sensor.scotty_asleep
-          state: 'off'
-        # Unless we're playing.
-        - condition: state
-          entity_id: input_boolean.bedroom_play
-          state: 'off'
-        # Excluding triggers that should only close the windows.
-        - not:
-            - condition: trigger
-              id: 'close'
-      sequence:
-        - action: scene.turn_on
-          target:
-            entity_id: scene.bedroom_daytime
-        - action: scene.turn_on
-          target:
-            entity_id: scene.bedroom_blackout_open
+      # Open blinds during the day.
+      - conditions:
+          - not:
+              - condition: state
+                entity_id: sensor.weather
+                state: "night"
+          # Unless someone is sleeping.
+          - condition: state
+            entity_id: binary_sensor.scotty_asleep
+            state: "off"
+          # Unless we're playing.
+          - condition: state
+            entity_id: input_boolean.bedroom_play
+            state: "off"
+          # Excluding triggers that should only close the windows.
+          - not:
+              - condition: trigger
+                id: "close"
+        sequence:
+          - action: scene.turn_on
+            target:
+              entity_id: scene.bedroom_daytime
+          - action: scene.turn_on
+            target:
+              entity_id: scene.bedroom_blackout_open
 
-    # Close blinds when we go to sleep during the day.
-    - conditions:
-        - condition: state
-          entity_id: sun.sun
-          state: 'above_horizon'
-        - condition: state
-          entity_id: binary_sensor.scotty_asleep
-          state: 'on'
-        # Only when the windows are closed.
-        - condition: state
-          entity_id: binary_sensor.bedroom_window
-          state: 'off'
-        # Excluding triggers that should only open the windows.
-        - not:
-            - condition: trigger
-              id: 'open'
-      sequence:
-        - action: scene.turn_on
-          target:
-            entity_id: scene.bedroom_nighttime
+      # Close blinds when we go to sleep during the day.
+      - conditions:
+          - not:
+              - condition: state
+                entity_id: sensor.weather
+                state: "night"
+          - condition: state
+            entity_id: binary_sensor.scotty_asleep
+            state: "on"
+          # Only when the windows are closed.
+          - condition: state
+            entity_id: binary_sensor.bedroom_window
+            state: "off"
+          # Excluding triggers that should only open the windows.
+          - not:
+              - condition: trigger
+                id: "open"
+        sequence:
+          - action: scene.turn_on
+            target:
+              entity_id: scene.bedroom_nighttime
 
-    # Close blinds while we're playing.
-    - conditions:
-        - condition: state
-          entity_id: input_boolean.bedroom_play
-          state: 'on'
-        # Only when the windows are closed.
-        - condition: state
-          entity_id: binary_sensor.bedroom_window
-          state: 'off'
-        # Excluding triggers that should only open the windows.
-        - not:
-            - condition: trigger
-              id: 'open'
-      sequence:
-        - action: scene.turn_on
-          target:
-            entity_id: scene.bedroom_nighttime
+      # Close blinds while we're playing.
+      - conditions:
+          - condition: state
+            entity_id: input_boolean.bedroom_play
+            state: "on"
+          # Only when the windows are closed.
+          - condition: state
+            entity_id: binary_sensor.bedroom_window
+            state: "off"
+          # Excluding triggers that should only open the windows.
+          - not:
+              - condition: trigger
+                id: "open"
+        sequence:
+          - action: scene.turn_on
+            target:
+              entity_id: scene.bedroom_nighttime
 
-    # Close blinds at night.
-    - conditions:
-        - condition: state
-          entity_id: sun.sun
-          state: 'below_horizon'
-        # Only when the windows are closed.
-        - condition: state
-          entity_id: binary_sensor.bedroom_window
-          state: 'off'
-        # Excluding triggers that should only open the windows.
-        - not:
-            - condition: trigger
-              id: 'open'
-      sequence:
-        - action: scene.turn_on
-          target:
-            entity_id: scene.bedroom_nighttime
+      # Close blinds at night.
+      - conditions:
+          - condition: state
+            entity_id: sensor.weather
+            state: "night"
+          # Only when the windows are closed.
+          - condition: state
+            entity_id: binary_sensor.bedroom_window
+            state: "off"
+          # Excluding triggers that should only open the windows.
+          - not:
+              - condition: trigger
+                id: "open"
+        sequence:
+          - action: scene.turn_on
+            target:
+              entity_id: scene.bedroom_nighttime
