@@ -10,31 +10,31 @@ triggers:
   - trigger: state
     entity_id: media_player.lg_webos_tv
     to:
-      - 'on'
-      - 'off'
+      - "on"
+      - "off"
 
 actions:
   - choose:
-    # Turn ceiling lights off when the TV turns on.
-    - conditions:
-        - condition: state
-          entity_id: media_player.lg_webos_tv
-          state: 'on'
-      sequence:
-        - action: light.turn_off
-          target:
-            entity_id: light.loft_ceiling
+      # Turn ceiling lights off when the TV turns on.
+      - conditions:
+          - condition: state
+            entity_id: media_player.lg_webos_tv
+            state: "on"
+        sequence:
+          - action: light.turn_off
+            target:
+              entity_id: light.loft_ceiling
 
-    # Turn ceiling lights back on when the TV turns off.
-    - conditions:
-        - condition: state
-          entity_id: media_player.lg_webos_tv
-          state: 'off'
-        # Only if the wall lights are on.
-        - condition: state
-          entity_id: light.loft_wall
-          state: 'on'
-      sequence:
-        - action: light.turn_on
-          target:
-            entity_id: light.loft_ceiling
+      # Turn ceiling lights back on when the TV turns off.
+      - conditions:
+          - condition: state
+            entity_id: media_player.lg_webos_tv
+            state: "off"
+          # Only if the wall lights are on.
+          - condition: state
+            entity_id: light.loft_wall
+            state: "on"
+        sequence:
+          - action: light.turn_on
+            target:
+              entity_id: light.loft_ceiling

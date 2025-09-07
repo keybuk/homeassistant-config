@@ -10,8 +10,8 @@ triggers:
   - trigger: state
     entity_id: binary_sensor.gaming_power_limit
     to:
-      - 'on'
-      - 'off'
+      - "on"
+      - "off"
   - trigger: state
     entity_id: sensor.vecna_lastsystemstatechange
     to: null
@@ -20,7 +20,7 @@ actions:
   - if:
       - condition: state
         entity_id: binary_sensor.gaming_power_limit
-        state: 'on'
+        state: "on"
     then:
       - action: button.press
         target:
@@ -39,4 +39,3 @@ actions:
           entity_id:
             - switch.office_wall_desk_right_switch_top
             - switch.loft_wall_south_switch_top
-

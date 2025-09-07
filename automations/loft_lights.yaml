@@ -10,24 +10,24 @@ triggers:
   - trigger: state
     entity_id: binary_sensor.loft_occupancy
     to:
-      - 'on'
-      - 'off'
+      - "on"
+      - "off"
   # Update blinds based on the time of day and weather.
   - trigger: state
     entity_id: sensor.weather
-    not_to: 'unavailable'
+    not_to: "unavailable"
   # Turn lights off when the last person goes to sleep, but not on just because
   # we wake up since we don't want lights to turn on based on false occupancy.
   - trigger: state
     entity_id: binary_sensor.scotty_asleep
-    to: 'on'
-    id: 'off'
+    to: "on"
+    id: "off"
   # Turn lights off when the last person leaves home, but not on when anyone
   # comes home since we don't want lights to turn on based on false occupancy.
   - trigger: state
     entity_id: binary_sensor.anyone_home
-    to: 'off'
-    id: 'off'
+    to: "off"
+    id: "off"
 
 variables:
   # When the TV is on, only the wall lights are controlled by occupancy.
@@ -40,87 +40,87 @@ variables:
 
 actions:
   - choose:
-    # Turn lights on when the room is occupied at night.
-    - conditions:
-        - condition: state
-          entity_id: binary_sensor.loft_occupancy
-          state: 'on'
-        - condition: state
-          entity_id: sensor.weather
-          state: 'night'
-        # Unless someone is sleeping.
-        - condition: state
-          entity_id: binary_sensor.scotty_asleep
-          state: 'off'
-        # Only when someone is home.
-        - condition: state
-          entity_id: binary_sensor.anyone_home
-          state: 'on'
-        # Excluding triggers that should only turn the lights off.
-        - not:
-            - condition: trigger
-              id: 'off'
-      sequence:
-        - action: light.turn_on
-          target:
-            entity_id: "{{ light }}"
+      # Turn lights on when the room is occupied at night.
+      - conditions:
+          - condition: state
+            entity_id: binary_sensor.loft_occupancy
+            state: "on"
+          - condition: state
+            entity_id: sensor.weather
+            state: "night"
+          # Unless someone is sleeping.
+          - condition: state
+            entity_id: binary_sensor.scotty_asleep
+            state: "off"
+          # Only when someone is home.
+          - condition: state
+            entity_id: binary_sensor.anyone_home
+            state: "on"
+          # Excluding triggers that should only turn the lights off.
+          - not:
+              - condition: trigger
+                id: "off"
+        sequence:
+          - action: light.turn_on
+            target:
+              entity_id: "{{ light }}"
 
-    # Turn lights on when the room is occupied during a cloudy day.
-    - conditions:
-        - condition: state
-          entity_id: binary_sensor.loft_occupancy
-          state: 'on'
-        - condition: state
-          entity_id: sensor.weather
-          state: 'cloudy-day'
-        # Unless someone is sleeping.
-        - condition: state
-          entity_id: binary_sensor.scotty_asleep
-          state: 'off'
-        # Only when someone is home.
-        - condition: state
-          entity_id: binary_sensor.anyone_home
-          state: 'on'
-        # Excluding triggers that should only turn the lights off.
-        - not:
-            - condition: trigger
-              id: 'off'
-      sequence:
-        - action: light.turn_on
-          target:
-            entity_id: "{{ light }}"
+      # Turn lights on when the room is occupied during a cloudy day.
+      - conditions:
+          - condition: state
+            entity_id: binary_sensor.loft_occupancy
+            state: "on"
+          - condition: state
+            entity_id: sensor.weather
+            state: "cloudy-day"
+          # Unless someone is sleeping.
+          - condition: state
+            entity_id: binary_sensor.scotty_asleep
+            state: "off"
+          # Only when someone is home.
+          - condition: state
+            entity_id: binary_sensor.anyone_home
+            state: "on"
+          # Excluding triggers that should only turn the lights off.
+          - not:
+              - condition: trigger
+                id: "off"
+        sequence:
+          - action: light.turn_on
+            target:
+              entity_id: "{{ light }}"
 
-    # Turn lights off when the sun comes out during the day to save on power.
-    # Occupancy doesn't matter since we wouldn't turn lights on if it was.
-    - conditions:
-        - condition: state
-          entity_id: sensor.weather
-          state:
-            - 'hot-day'
-            - 'day'
-        # Unless we're playing.
-        - condition: state
-          entity_id: input_boolean.loft_play
-          state: 'off'
-      sequence:
-        - action: light.turn_off
-          target:
-            entity_id: light.loft
+      # Turn lights off when the sun comes out during the day to save on power.
+      # Occupancy doesn't matter since we wouldn't turn lights on if it was.
+      - conditions:
+          - condition: state
+            entity_id: sensor.weather
+            state:
+              - "hot-day"
+              - "day"
+          # Unless we're playing.
+          - condition: state
+            entity_id: input_boolean.loft_play
+            state: "off"
+        sequence:
+          - action: light.turn_off
+            target:
+              entity_id: light.loft
 
-    # Turn lights off when the room is unoccupied, or when nobody is home.
-    - conditions:
-        - or:
-            - condition: state
-              entity_id: binary_sensor.loft_occupancy
-              state: 'off'
-            - condition: state
-              entity_id: binary_sensor.anyone_home
-              state: 'off'
-        # Unless we're playing.
-        - condition: state
-          entity_id: input_boolean.loft_play
-          state: 'off'
-      sequence:
-        - action: light.turn_off
-          target:
-            entity_id: light.loft
+      # Turn lights off when the room is unoccupied, or when nobody is home.
+      - conditions:
+          - or:
+              - condition: state
+                entity_id: binary_sensor.loft_occupancy
+                state: "off"
+              - condition: state
+                entity_id: binary_sensor.anyone_home
+                state: "off"
+          # Unless we're playing.
+          - condition: state
+            entity_id: input_boolean.loft_play
+            state: "off"
+        sequence:
+          - action: light.turn_off
+            target:
+              entity_id: light.loft

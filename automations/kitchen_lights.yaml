@@ -10,11 +10,11 @@ triggers:
   # Trigger using the Eve Motion, as it's the most reliable.
   - trigger: state
     entity_id: binary_sensor.dining_room_motion_occupancy
-    to: 'on'
+    to: "on"
   # Trigger when the first person arrives home.
   - trigger: state
     entity_id: binary_sensor.anyone_home
-    to: 'on'
+    to: "on"
   # Trigger when known people arrive home, even if the home is otherwise already
   # occupied.
   - trigger: zone
@@ -28,29 +28,29 @@ conditions:
   - condition: state
     entity_id: sensor.weather
     state:
-      - 'night'
-      - 'cloudy-day'
+      - "night"
+      - "cloudy-day"
   # Only trigger when the kitchen counter light is off, unless an instance of
   # this automation is running in which case we restart the timer.
   - or:
-    - condition: state
-      entity_id: light.kitchen_counter
-      state: 'off'
-    - condition: state
-      entity_id: automation.kitchen_lights
-      attribute: current
-      state: 1
+      - condition: state
+        entity_id: light.kitchen_counter
+        state: "off"
+      - condition: state
+        entity_id: automation.kitchen_lights
+        attribute: current
+        state: 1
   # Only when someone is home.
   - condition: state
     entity_id: binary_sensor.anyone_home
-    state: 'on'
+    state: "on"
 
 actions:
   # Turn lights on at 25% brightness, unless already on.
   - if:
       - condition: state
         entity_id: light.kitchen_counter
-        state: 'off'
+        state: "off"
     then:
       - action: light.turn_on
         data:
@@ -65,8 +65,8 @@ actions:
   # But if the kitchen counter state changes, assume we should leave it alone
   # and not turn it off in the middle of someone's burrito.
   - wait_for_trigger:
-    - trigger: state
-      entity_id: light.kitchen_counter
+      - trigger: state
+        entity_id: light.kitchen_counter
     timeout:
       minutes: 15
   - if:

@@ -22,94 +22,94 @@ triggers:
   # Update blinds based on the time of day and weather.
   - trigger: state
     entity_id: sensor.weather
-    not_to: 'unavailable'
+    not_to: "unavailable"
   # Update blinds when the TV turns on or off.
   - trigger: state
     entity_id: media_player.lg_webos_tv
     to:
-      - 'on'
-      - 'off'
+      - "on"
+      - "off"
   # Update blinds when we're playing.
   - trigger: state
     entity_id: input_boolean.dining_room_play
     to:
-      - 'on'
-      - 'off'
+      - "on"
+      - "off"
   - trigger: state
     entity_id: input_boolean.loft_play
     to:
-      - 'on'
-      - 'off'
+      - "on"
+      - "off"
 
 actions:
   - choose:
-    # Close the blinds during the day when the sun is shining through the
-    # windows, it's not cloudy, and it's forecast to be warm.
-    - conditions:
-        - condition: numeric_state
-          entity_id: sun.sun
-          attribute: azimuth
-          above: 115
-          below: 235
-        - condition: state
-          entity_id: sensor.weather
-          state: 'hot-day'
-      sequence:
-        - action: scene.turn_on
-          target:
-            entity_id: scene.kitchen_windows_closed
-
-    # Close blinds while we're playing in the dining room.
-    - conditions:
-        - condition: state
-          entity_id: input_boolean.dining_room_play
-          state: 'on'
-      sequence:
-        - action: scene.turn_on
-          target:
-            entity_id: scene.kitchen_windows_closed
-
-    # Close the loft part of the blinds during the day when the TV is on.
-    - conditions:
-        - not:
+      # Close the blinds during the day when the sun is shining through the
+      # windows, it's not cloudy, and it's forecast to be warm.
+      - conditions:
+          - condition: numeric_state
+            entity_id: sun.sun
+            attribute: azimuth
+            above: 115
+            below: 235
           - condition: state
             entity_id: sensor.weather
-            state: 'night'
-        - condition: state
-          entity_id: media_player.lg_webos_tv
-          state: 'on'
-      sequence:
-        - action: scene.turn_on
-          target:
-            entity_id: scene.kitchen_nighttime
+            state: "hot-day"
+        sequence:
+          - action: scene.turn_on
+            target:
+              entity_id: scene.kitchen_windows_closed
 
-    # Close the loft part of the blinds while we're playing in the loft.
-    - conditions:
-        - condition: state
-          entity_id: input_boolean.loft_play
-          state: 'on'
-      sequence:
-        - action: scene.turn_on
-          target:
-            entity_id: scene.kitchen_nighttime
+      # Close blinds while we're playing in the dining room.
+      - conditions:
+          - condition: state
+            entity_id: input_boolean.dining_room_play
+            state: "on"
+        sequence:
+          - action: scene.turn_on
+            target:
+              entity_id: scene.kitchen_windows_closed
 
-    # Open blinds during the day.
-    - conditions:
-        - not:
+      # Close the loft part of the blinds during the day when the TV is on.
+      - conditions:
+          - not:
+              - condition: state
+                entity_id: sensor.weather
+                state: "night"
+          - condition: state
+            entity_id: media_player.lg_webos_tv
+            state: "on"
+        sequence:
+          - action: scene.turn_on
+            target:
+              entity_id: scene.kitchen_nighttime
+
+      # Close the loft part of the blinds while we're playing in the loft.
+      - conditions:
+          - condition: state
+            entity_id: input_boolean.loft_play
+            state: "on"
+        sequence:
+          - action: scene.turn_on
+            target:
+              entity_id: scene.kitchen_nighttime
+
+      # Open blinds during the day.
+      - conditions:
+          - not:
+              - condition: state
+                entity_id: sensor.weather
+                state: "night"
+        sequence:
+          - action: scene.turn_on
+            target:
+              entity_id: scene.kitchen_daytime
+
+      # Close the loft part of the blinds at night.
+      - conditions:
           - condition: state
             entity_id: sensor.weather
-            state: 'night'
-      sequence:
-        - action: scene.turn_on
-          target:
-            entity_id: scene.kitchen_daytime
-
-    # Close the loft part of the blinds at night.
-    - conditions:
-        - condition: state
-          entity_id: sensor.weather
-          state: 'night'
-      sequence:
-        - action: scene.turn_on
-          target:
-            entity_id: scene.kitchen_nighttime
+            state: "night"
+        sequence:
+          - action: scene.turn_on
+            target:
+              entity_id: scene.kitchen_nighttime

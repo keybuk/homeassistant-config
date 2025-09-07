@@ -37,202 +37,202 @@ triggers:
   # Update blinds based on the time of day and weather.
   - trigger: state
     entity_id: sensor.weather
-    not_to: 'unavailable'
+    not_to: "unavailable"
   # Update blinds when the windows are closed.
   - trigger: state
     entity_id: binary_sensor.dining_room_top_windows
-    to: 'off'
+    to: "off"
     for:
       seconds: 3
-    id: 'close'
+    id: "close"
   - trigger: state
     entity_id: binary_sensor.dining_room_bottom_windows
-    to: 'off'
+    to: "off"
     for:
       seconds: 3
-    id: 'close'
+    id: "close"
   # Update blinds when the TV turns on or off.
   - trigger: state
     entity_id: media_player.lg_webos_tv
     to:
-      - 'on'
-      - 'off'
+      - "on"
+      - "off"
   # Update blinds when we're playing.
   - trigger: state
     entity_id: input_boolean.dining_room_play
     to:
-      - 'on'
-      - 'off'
+      - "on"
+      - "off"
   - trigger: state
     entity_id: input_boolean.loft_play
     to:
-      - 'on'
-      - 'off'
+      - "on"
+      - "off"
 
 actions:
   # Set the target blind state.
   - variables:
       target: none
   - choose:
-    # Close the blinds when the sun is shining through the third pane and it's
-    # not cloudy.
-    - conditions:
-        - condition: numeric_state
-          entity_id: sun.sun
-          attribute: azimuth
-          above: 220
-        - condition: numeric_state
-          entity_id: sun.sun
-          attribute: elevation
-          above: 5.5
-          below: 24
-        - condition: state
-          entity_id: sensor.weather
-          state:
-            - 'hot-day'
-            - 'day'
-      sequence:
-        - variables:
-            target: 100
-
-    # Close the blinds while we're playing in the dining room.
-    - conditions:
-        - condition: state
-          entity_id: input_boolean.dining_room_play
-          state: 'on'
-      sequence:
-        - variables:
-            target: 100
-
-    # Partially close the blinds When the sun is shining through the second
-    # pane and it's not cloudy.
-    - conditions:
-        - condition: numeric_state
-          entity_id: sun.sun
-          attribute: azimuth
-          above: 220
-        - condition: numeric_state
-          entity_id: sun.sun
-          attribute: elevation
-          above: 24
-          below: 45
-        - condition: state
-          entity_id: sensor.weather
-          state:
-            - 'hot-day'
-            - 'day'
-      sequence:
-        - variables:
-            target: 66
-
-    # Close the top of the blinds when the sun is shining through the first
-    # pane and it's not cloudy.
-    - conditions:
-        - condition: numeric_state
-          entity_id: sun.sun
-          attribute: azimuth
-          above: 220
-        - condition: numeric_state
-          entity_id: sun.sun
-          attribute: elevation
-          above: 45
-          below: 55
-        - condition: state
-          entity_id: sensor.weather
-          state:
-            - 'hot-day'
-            - 'day'
-      sequence:
-        - variables:
-            target: 33
-
-    # Close the top of the blinds while we're playing in the loft.
-    - conditions:
-        - condition: state
-          entity_id: input_boolean.loft_play
-          state: 'on'
-      sequence:
-        - variables:
-            target: 33
-
-    # Close the top of the blinds during the day if the TV is on.
-    - conditions:
-        - not:
+      # Close the blinds when the sun is shining through the third pane and it's
+      # not cloudy.
+      - conditions:
+          - condition: numeric_state
+            entity_id: sun.sun
+            attribute: azimuth
+            above: 220
+          - condition: numeric_state
+            entity_id: sun.sun
+            attribute: elevation
+            above: 5.5
+            below: 24
           - condition: state
             entity_id: sensor.weather
-            state: 'night'
-        - condition: state
-          entity_id: media_player.lg_webos_tv
-          state: 'on'
-      sequence:
-        - variables:
-            target: 33
+            state:
+              - "hot-day"
+              - "day"
+        sequence:
+          - variables:
+              target: 100
 
-    # Open blinds during the day.
-    - conditions:
-        - not:
+      # Close the blinds while we're playing in the dining room.
+      - conditions:
+          - condition: state
+            entity_id: input_boolean.dining_room_play
+            state: "on"
+        sequence:
+          - variables:
+              target: 100
+
+      # Partially close the blinds When the sun is shining through the second
+      # pane and it's not cloudy.
+      - conditions:
+          - condition: numeric_state
+            entity_id: sun.sun
+            attribute: azimuth
+            above: 220
+          - condition: numeric_state
+            entity_id: sun.sun
+            attribute: elevation
+            above: 24
+            below: 45
           - condition: state
             entity_id: sensor.weather
-            state: 'night'
-      sequence:
-        - variables:
-            target: 0
+            state:
+              - "hot-day"
+              - "day"
+        sequence:
+          - variables:
+              target: 66
 
-    # Open blinds (night time scene) at night.
-    - conditions:
-        - condition: state
-          entity_id: sensor.weather
-          state: 'night'
-      sequence:
-        - variables:
-            target: -1
+      # Close the top of the blinds when the sun is shining through the first
+      # pane and it's not cloudy.
+      - conditions:
+          - condition: numeric_state
+            entity_id: sun.sun
+            attribute: azimuth
+            above: 220
+          - condition: numeric_state
+            entity_id: sun.sun
+            attribute: elevation
+            above: 45
+            below: 55
+          - condition: state
+            entity_id: sensor.weather
+            state:
+              - "hot-day"
+              - "day"
+        sequence:
+          - variables:
+              target: 33
+
+      # Close the top of the blinds while we're playing in the loft.
+      - conditions:
+          - condition: state
+            entity_id: input_boolean.loft_play
+            state: "on"
+        sequence:
+          - variables:
+              target: 33
+
+      # Close the top of the blinds during the day if the TV is on.
+      - conditions:
+          - not:
+              - condition: state
+                entity_id: sensor.weather
+                state: "night"
+          - condition: state
+            entity_id: media_player.lg_webos_tv
+            state: "on"
+        sequence:
+          - variables:
+              target: 33
+
+      # Open blinds during the day.
+      - conditions:
+          - not:
+              - condition: state
+                entity_id: sensor.weather
+                state: "night"
+        sequence:
+          - variables:
+              target: 0
+
+      # Open blinds (night time scene) at night.
+      - conditions:
+          - condition: state
+            entity_id: sensor.weather
+            state: "night"
+        sequence:
+          - variables:
+              target: -1
 
   # Apply the target blind state, adjusted for whether windows are open or
   # closed.
   - choose:
-    - conditions:
-        - "{{ target >= 100 }}"
-        - condition: state
-          entity_id: binary_sensor.dining_room_top_windows
-          state: 'off'
-        - condition: state
-          entity_id: binary_sensor.dining_room_bottom_windows
-          state: 'off'
-      sequence:
-        - action: scene.turn_on
-          target:
-            entity_id: scene.dining_room_windows_closed
+      - conditions:
+          - "{{ target >= 100 }}"
+          - condition: state
+            entity_id: binary_sensor.dining_room_top_windows
+            state: "off"
+          - condition: state
+            entity_id: binary_sensor.dining_room_bottom_windows
+            state: "off"
+        sequence:
+          - action: scene.turn_on
+            target:
+              entity_id: scene.dining_room_windows_closed
 
-    - conditions:
-        - "{{ target >= 66 }}"
-        - condition: state
-          entity_id: binary_sensor.dining_room_top_windows
-          state: 'off'
-      sequence:
-        - action: scene.turn_on
-          target:
-            entity_id: scene.late_afternoon_sun
+      - conditions:
+          - "{{ target >= 66 }}"
+          - condition: state
+            entity_id: binary_sensor.dining_room_top_windows
+            state: "off"
+        sequence:
+          - action: scene.turn_on
+            target:
+              entity_id: scene.late_afternoon_sun
 
-    - conditions:
-        - "{{ target >= 33 }}"
-        - condition: state
-          entity_id: binary_sensor.dining_room_top_windows
-          state: 'off'
-      sequence:
-        - action: scene.turn_on
-          target:
-            entity_id: scene.afternoon_sun
+      - conditions:
+          - "{{ target >= 33 }}"
+          - condition: state
+            entity_id: binary_sensor.dining_room_top_windows
+            state: "off"
+        sequence:
+          - action: scene.turn_on
+            target:
+              entity_id: scene.afternoon_sun
 
-    - conditions:
-        - "{{ target >= 0 }}"
-      sequence:
-        - action: scene.turn_on
-          target:
-            entity_id: scene.dining_room_daytime
+      - conditions:
+          - "{{ target >= 0 }}"
+        sequence:
+          - action: scene.turn_on
+            target:
+              entity_id: scene.dining_room_daytime
 
-    - conditions:
-        - "{{ target < 0 }}"
-      sequence:
-        - action: scene.turn_on
-          target:
-            entity_id: scene.dining_room_nighttime
+      - conditions:
+          - "{{ target < 0 }}"
+        sequence:
+          - action: scene.turn_on
+            target:
+              entity_id: scene.dining_room_nighttime

@@ -9,7 +9,7 @@ triggers:
   # When the first person arrives home, turn on the lights.
   - trigger: state
     entity_id: binary_sensor.anyone_home
-    to: 'on'
+    to: "on"
   # But also turn on the lights if known people arrive home, even if the home
   # is otherwise already occupied.
   - trigger: zone
@@ -22,7 +22,7 @@ conditions:
   # Only at night.
   - condition: state
     entity_id: sun.sun
-    state: 'below_horizon'
+    state: "below_horizon"
 
 actions:
   # Turn on the entrance light.
