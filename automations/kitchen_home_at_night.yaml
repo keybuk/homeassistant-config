@@ -21,8 +21,8 @@ triggers:
 conditions:
   # Only at night.
   - condition: state
-    entity_id: sun.sun
-    state: "below_horizon"
+    entity_id: sensor.weather
+    state: "night"
 
 actions:
   # Turn on the entrance light.
