@@ -6,21 +6,21 @@
         - person.scotty
       zone: zone.home
       event: enter
-      id: 'persons'
+      id: "persons"
     - trigger: zone
       entity_id:
         - person.scotty
       zone: zone.home
       event: leave
-      id: 'persons'
+      id: "persons"
 
     # Trigger on occupancy sensors.
     - trigger: state
       entity_id: binary_sensor.home_occupancy
       to:
-        - 'on'
-        - 'off'
-      id: 'occupancy'
+        - "on"
+        - "off"
+      id: "occupancy"
 
     # Trigger on Home Assistant startup to set initial value.
     - trigger: homeassistant
@@ -29,7 +29,7 @@
   binary_sensor:
     - name: "Anyone Home"
       unique_id: anyone_home
-      device_class: 'occupancy'
+      device_class: "occupancy"
       state: >
         {% if state_attr('zone.home', 'persons') %}
           {# Household member is at home #}

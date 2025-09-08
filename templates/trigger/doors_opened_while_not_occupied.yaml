@@ -6,19 +6,19 @@
       entity_id:
         - binary_sensor.front_door
         - binary_sensor.roof_deck_door
-      to: 'on'
-      id: 'door'
+      to: "on"
+      id: "door"
 
     # Occupancy resets the state back to 'off'.
     - trigger: state
       entity_id: binary_sensor.anyone_home
-      to: 'on'
-      id: 'occupancy'
+      to: "on"
+      id: "occupancy"
 
   binary_sensor:
     - name: "Doors Opened While Not Occupied"
       unique_id: doors_opened_while_not_occupied
-      device_class: 'door'
+      device_class: "door"
       state: >
         {{ 'on' if trigger.id == 'door'
            and is_state('binary_sensor.anyone_home', 'off')

@@ -22,15 +22,15 @@ blueprint:
       selector:
         select:
           options:
-            - label: 'On'
-              value: 'on'
-            - label: 'Raise'
-              value: 'raise'
-            - label: 'Lower'
-              value: 'lower'
-            - label: 'Off'
-              value: 'off'
-          mode: 'dropdown'
+            - label: "On"
+              value: "on"
+            - label: "Raise"
+              value: "raise"
+            - label: "Lower"
+              value: "lower"
+            - label: "Off"
+              value: "off"
+          mode: "dropdown"
     press:
       name: Press
       description: >
@@ -52,7 +52,7 @@ triggers:
   - trigger: device
     domain: lutron_caseta
     device_id: !input device
-    type: 'press'
+    type: "press"
     subtype: !input button
 
 actions:
@@ -60,7 +60,7 @@ actions:
       - trigger: device
         domain: lutron_caseta
         device_id: !input device
-        type: 'release'
+        type: "release"
         subtype: !input button
     timeout:
       milliseconds: 500

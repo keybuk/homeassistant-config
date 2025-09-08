@@ -30,6 +30,6 @@ conditions:
   - condition: state
     entity_id: !input button
     attribute: event_type
-    state: 'single_press'
+    state: "single_press"
 
 actions: !input actions
