@@ -211,7 +211,7 @@ actions:
         sequence:
           - action: scene.turn_on
             target:
-              entity_id: scene.late_afternoon_sun
+              entity_id: scene.dining_room_late_afternoon_sun
 
       - conditions:
           - "{{ target >= 33 }}"
@@ -221,7 +221,7 @@ actions:
         sequence:
           - action: scene.turn_on
             target:
-              entity_id: scene.afternoon_sun
+              entity_id: scene.dining_room_afternoon_sun
 
       - conditions:
           - "{{ target >= 0 }}"
