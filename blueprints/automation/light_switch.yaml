@@ -1,0 +1,77 @@
+blueprint:
+  name: Light Switch
+  description: >
+    Synchronize lights and a switch so that the switch appears to directly
+    control the lights; with the switch matching the state of the lights
+    if those are controlled directly.
+  author: Scott James Remnant <scott@netsplit.com>
+  domain: automation
+  input:
+    light:
+      name: Light
+      description: This light will be synchronized with the switch.
+      selector:
+        entity:
+          filter:
+            - domain: light
+    switch:
+      name: Switch
+      description: This switch will be synchronized with the light.
+      selector:
+        entity:
+          filter:
+            - domain: switch
+
+mode: queued
+
+triggers:
+  - trigger: state
+    entity_id: !input light
+    to:
+      - "on"
+      - "off"
+    id: light
+  - trigger: state
+    entity_id: !input switch
+    to:
+      - "on"
+      - "off"
+    id: switch
+
+variables:
+  light: !input light
+  switch: !input switch
+
+actions:
+  - choose:
+      # When the light is the trigger, if the switch is not in the same state,
+      # set it to the same state.
+      - conditions:
+          - condition: trigger
+            id: light
+          - "{{ not is_state(switch, states(light)) }}"
+        sequence:
+          - action: |
+              {% if is_state(light, 'on') %}
+                switch.turn_on
+              {% else %}
+                switch.turn_off
+              {% endif %}
+            target:
+              entity_id: !input switch
+
+      # When the switch is the trigger, if the light is not in the same state,
+      # set it to the same state.
+      - conditions:
+          - condition: trigger
+            id: switch
+          - "{{ not is_state(light, states(switch)) }}"
+        sequence:
+          - action: |
+              {% if is_state(switch, 'on') %}
+                light.turn_on
+              {% else %}
+                light.turn_off
+              {% endif %}
+            target:
+              entity_id: !input light

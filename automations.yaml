@@ -1,3 +1,11 @@
+- id: '1742337005391'
+  alias: Office Switch
+  description: ''
+  use_blueprint:
+    path: light_switch.yaml
+    input:
+      light: light.office
+      switch: switch.office
 - id: '1742259737852'
   alias: Office Switch Button 1
   description: ''
@@ -6,11 +14,11 @@
     input:
       button: event.office_switch_button_1
       actions:
-      - action: scene.turn_on
-        metadata: {}
-        data: {}
-        target:
-          entity_id: scene.office_ceiling_energize
+        - action: scene.turn_on
+          metadata: {}
+          data: {}
+          target:
+            entity_id: scene.office_ceiling_energize
 - id: '1742259802006'
   alias: Office Switch Button 2
   description: ''
@@ -19,11 +27,11 @@
     input:
       button: event.office_switch_button_2
       actions:
-      - action: scene.turn_on
-        metadata: {}
-        data: {}
-        target:
-          entity_id: scene.office_ceiling_nightlight
+        - action: scene.turn_on
+          metadata: {}
+          data: {}
+          target:
+            entity_id: scene.office_ceiling_nightlight
 - id: '1742259852048'
   alias: Office Switch Button 3
   description: ''
@@ -32,11 +40,19 @@
     input:
       button: event.office_switch_button_3
       actions:
-      - action: scene.turn_on
-        metadata: {}
-        data: {}
-        target:
-          entity_id: scene.office_ceiling_natural_light
+        - action: scene.turn_on
+          metadata: {}
+          data: {}
+          target:
+            entity_id: scene.office_ceiling_natural_light
+- id: '1742337280749'
+  alias: Bedroom Switch
+  description: ''
+  use_blueprint:
+    path: light_switch.yaml
+    input:
+      light: light.bedroom
+      switch: switch.bedroom
 - id: '1742265800631'
   alias: Bedroom Switch Button 1
   description: ''
@@ -45,13 +61,13 @@
     input:
       button: event.bedroom_switch_button_1
       actions:
-      - action: scene.turn_on
-        metadata: {}
-        data: {}
-        target:
-          entity_id:
-          - scene.bedroom_bedside_energize
-          - scene.bedroom_ceiling_energize
+        - action: scene.turn_on
+          metadata: {}
+          data: {}
+          target:
+            entity_id:
+              - scene.bedroom_bedside_energize
+              - scene.bedroom_ceiling_energize
 - id: '1742265845066'
   alias: Bedroom Switch Button 2
   description: ''
@@ -60,16 +76,16 @@
     input:
       button: event.bedroom_switch_button_2
       actions:
-      - action: scene.turn_on
-        metadata: {}
-        data: {}
-        target:
-          entity_id: scene.bedroom_bedside_read
-      - action: scene.turn_on
-        metadata: {}
-        data: {}
-        target:
-          entity_id: scene.bedroom_ceiling_mood
+        - action: scene.turn_on
+          metadata: {}
+          data: {}
+          target:
+            entity_id: scene.bedroom_bedside_read
+        - action: scene.turn_on
+          metadata: {}
+          data: {}
+          target:
+            entity_id: scene.bedroom_ceiling_mood
 - id: '1742265919265'
   alias: Bedroom Switch Button 3
   description: ''
@@ -78,9 +94,17 @@
     input:
       button: event.bedroom_switch_button_3
       actions:
-      - action: script.bedroom_play
-        metadata: {}
-        data: {}
+        - action: script.bedroom_play
+          metadata: {}
+          data: {}
+- id: '1742337248521'
+  alias: Loft Switch
+  description: ''
+  use_blueprint:
+    path: light_switch.yaml
+    input:
+      light: light.loft_theater
+      switch: switch.loft
 - id: '1742268121309'
   alias: Loft Switch Button 1
   description: ''
@@ -89,11 +113,11 @@
     input:
       button: event.loft_switch_button_1
       actions:
-      - action: scene.turn_on
-        metadata: {}
-        data: {}
-        target:
-          entity_id: scene.loft_ceiling_energize
+        - action: scene.turn_on
+          metadata: {}
+          data: {}
+          target:
+            entity_id: scene.loft_ceiling_energize
 - id: '1742273165518'
   alias: Loft Switch Button 2
   description: ''
@@ -102,13 +126,13 @@
     input:
       button: event.loft_switch_button_2
       actions:
-      - action: scene.turn_on
-        metadata: {}
-        data: {}
-        target:
-          entity_id:
-          - scene.loft_ceiling_resplendent
-          - scene.loft_wall_pride
+        - action: scene.turn_on
+          metadata: {}
+          data: {}
+          target:
+            entity_id:
+              - scene.loft_ceiling_resplendent
+              - scene.loft_wall_pride
 - id: '1742273188065'
   alias: Loft Switch Button 3
   description: ''
@@ -117,9 +141,17 @@
     input:
       button: event.loft_switch_button_3
       actions:
-      - action: script.loft_play
-        metadata: {}
-        data: {}
+        - action: script.loft_play
+          metadata: {}
+          data: {}
+- id: '1742337322652'
+  alias: Dining Room Switch
+  description: ''
+  use_blueprint:
+    path: light_switch.yaml
+    input:
+      light: light.dining_room
+      switch: switch.dining_room
 - id: '1744102789672'
   alias: Dining Room Switch Button 1
   description: ''
@@ -128,14 +160,14 @@
     input:
       button: event.dining_room_switch_button_1
       actions:
-      - action: light.toggle
-        metadata: {}
-        data:
-          brightness_pct: 100
-        target:
-          entity_id:
-          - light.dining_room_chandelier
-          - light.dining_room_spots
+        - action: light.toggle
+          metadata: {}
+          data:
+            brightness_pct: 100
+          target:
+            entity_id:
+              - light.dining_room_chandelier
+              - light.dining_room_spots
 - id: '1745017281980'
   alias: Bedroom Pico Raise
   description: ''
@@ -145,17 +177,17 @@
       device: b0881bdabe428061b6e34aa09b9386d6
       button: 'raise'
       press:
-      - action: scene.turn_on
-        metadata: {}
-        data: {}
-        target:
-          entity_id: scene.bedroom_daytime
+        - action: scene.turn_on
+          metadata: {}
+          data: {}
+          target:
+            entity_id: scene.bedroom_daytime
       long_press:
-      - action: scene.turn_on
-        metadata: {}
-        data: {}
-        target:
-          entity_id: scene.bedroom_window_open
+        - action: scene.turn_on
+          metadata: {}
+          data: {}
+          target:
+            entity_id: scene.bedroom_window_open
 - id: '1745017343700'
   alias: Bedroom Pico Lower
   description: ''
@@ -165,11 +197,11 @@
       device: b0881bdabe428061b6e34aa09b9386d6
       button: 'lower'
       press:
-      - action: scene.turn_on
-        metadata: {}
-        data: {}
-        target:
-          entity_id: scene.bedroom_nighttime
+        - action: scene.turn_on
+          metadata: {}
+          data: {}
+          target:
+            entity_id: scene.bedroom_nighttime
 - id: '1752608870374'
   alias: Office Pico Raise
   description: ''
@@ -179,17 +211,17 @@
       device: beb7140be21d2a179f64ec52b946edca
       button: 'raise'
       press:
-      - action: scene.turn_on
-        metadata: {}
-        data: {}
-        target:
-          entity_id: scene.office_daytime
+        - action: scene.turn_on
+          metadata: {}
+          data: {}
+          target:
+            entity_id: scene.office_daytime
       long_press:
-      - action: scene.turn_on
-        metadata: {}
-        data: {}
-        target:
-          entity_id: scene.office_window_open
+        - action: scene.turn_on
+          metadata: {}
+          data: {}
+          target:
+            entity_id: scene.office_window_open
 - id: '1752608748598'
   alias: Office Pico Lower
   description: ''
@@ -199,11 +231,11 @@
       device: beb7140be21d2a179f64ec52b946edca
       button: 'lower'
       press:
-      - action: scene.turn_on
-        metadata: {}
-        data: {}
-        target:
-          entity_id: scene.office_nighttime
+        - action: scene.turn_on
+          metadata: {}
+          data: {}
+          target:
+            entity_id: scene.office_nighttime
 - id: '1745249879161'
   alias: Dining Room Switch Button 3
   description: ''
@@ -212,9 +244,9 @@
     input:
       button: event.dining_room_switch_button_3
       actions:
-      - action: script.dining_room_play
-        metadata: {}
-        data: {}
+        - action: script.dining_room_play
+          metadata: {}
+          data: {}
 - id: '1750177081187'
   alias: Dining Room Switch Button 2
   description: ''
@@ -223,9 +255,9 @@
     input:
       button: event.dining_room_switch_button_2
       actions:
-      - action: script.dnd
-        metadata: {}
-        data: {}
+        - action: script.dnd
+          metadata: {}
+          data: {}
 - id: '1752632839285'
   alias: Bedroom Pico On
   description: ''
@@ -235,11 +267,11 @@
       device: b0881bdabe428061b6e34aa09b9386d6
       button: 'on'
       press:
-      - action: scene.turn_on
-        metadata: {}
-        data: {}
-        target:
-          entity_id: scene.bedroom_blackout_open
+        - action: scene.turn_on
+          metadata: {}
+          data: {}
+          target:
+            entity_id: scene.bedroom_blackout_open
 - id: '1752632870011'
   alias: Bedroom Pico Off
   description: ''
@@ -249,8 +281,8 @@
       device: b0881bdabe428061b6e34aa09b9386d6
       button: 'off'
       press:
-      - action: scene.turn_on
-        metadata: {}
-        data: {}
-        target:
-          entity_id: scene.bedroom_blackout
+        - action: scene.turn_on
+          metadata: {}
+          data: {}
+          target:
+            entity_id: scene.bedroom_blackout
