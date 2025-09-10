@@ -1,8 +1,8 @@
 blueprint:
   name: Light Switch
   description: >
-    Synchronize lights and a switch so that the switch appears to directly
-    control the lights; with the switch matching the state of the lights
+    Synchronize a light and a switch so that the switch appears to directly
+    control the light; with the switch matching the state of the light
     if those are controlled directly.
   author: Scott James Remnant <scott@netsplit.com>
   domain: automation
