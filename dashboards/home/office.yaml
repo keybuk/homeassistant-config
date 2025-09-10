@@ -1,0 +1,299 @@
+title: Office
+path: office
+icon: mdi:desktop-classic
+
+type: sections
+max_columns: 2
+
+badges:
+  - type: entity
+    entity: binary_sensor.office_nest_smoke_status
+    visibility:
+      - condition: state
+        entity: binary_sensor.office_nest_smoke_status
+        state: "on"
+  - type: entity
+    entity: binary_sensor.office_nest_co_status
+    visibility:
+      - condition: state
+        entity: binary_sensor.office_nest_co_status
+        state: "on"
+  - type: entity
+    entity: sensor.office_ecobee_battery
+    visibility:
+      - condition: state
+        entity: binary_sensor.office_ecobee_battery_low
+        state: "on"
+  - type: entity
+    entity: sensor.office_left_window_battery
+    visibility:
+      - condition: state
+        entity: binary_sensor.office_left_window_battery_low
+        state: "on"
+  - type: entity
+    entity: sensor.office_right_window_battery
+    visibility:
+      - condition: state
+        entity: binary_sensor.office_right_window_battery_low
+        state: "on"
+
+sections:
+  # Media
+  - type: grid
+    cards:
+      - type: heading
+        heading: Media
+        icon: mdi:multimedia
+      - type: media-control
+        entity: media_player.office
+        grid_options:
+          columns: full
+    column_span: 2
+
+  # Actions
+  - type: grid
+    cards:
+      - type: heading
+        heading: Actions
+        icon: mdi:gesture-tap-button
+      - type: tile
+        entity: light.office
+        name: Lights
+        hide_state: true
+      - type: tile
+        entity: script.office_bright
+        name: Bright
+        hide_state: true
+        tap_action:
+          action: toggle
+      - type: tile
+        entity: script.office_nightlight
+        name: Nightlight
+        hide_state: true
+        tap_action:
+          action: toggle
+      - type: tile
+        entity: script.office_natural
+        name: Natural
+        hide_state: true
+        tap_action:
+          action: toggle
+      - type: tile
+        entity: scene.office_daytime
+        name: Daytime
+        hide_state: true
+        color: grey
+        tap_action:
+          action: toggle
+        icon_tap_action:
+          action: none
+    column_span: 2
+
+  # Lights
+  - type: grid
+    cards:
+      - type: heading
+        heading: Lights
+        icon: mdi:lamps
+      - type: tile
+        entity: light.office_desk_left
+        name: Desk Left
+        features:
+          - type: light-brightness
+      - type: tile
+        entity: light.office_desk_center
+        name: Desk Center
+        features:
+          - type: light-brightness
+      - type: tile
+        entity: light.office_desk_right
+        name: Desk Right
+        features:
+          - type: light-brightness
+      - type: tile
+        entity: light.office_wall_left
+        name: Wall Left
+        features:
+          - type: light-brightness
+      - type: tile
+        entity: light.office_wall_center
+        name: Wall Center
+        features:
+          - type: light-brightness
+      - type: tile
+        entity: light.office_wall_right
+        name: Wall Right
+        features:
+          - type: light-brightness
+
+  # Windows
+  - type: grid
+    cards:
+      - type: heading
+        heading: Windows
+        icon: mdi:blinds-horizontal
+      - type: tile
+        entity: cover.office_top
+        name: Top
+        state_content: state
+        features:
+          - type: cover-open-close
+          - type: cover-position
+      - type: tile
+        entity: cover.office_bottom
+        name: Bottom
+        state_content: state
+        features:
+          - type: cover-open-close
+          - type: cover-position
+      - type: glance
+        entities:
+          - entity: binary_sensor.office_left_window
+            name: Left
+          - entity: binary_sensor.office_right_window
+            name: Right
+
+  # Climate
+  - type: grid
+    cards:
+      - type: heading
+        heading: Climate
+        icon: mdi:home-thermometer
+      - type: sensor
+        entity: sensor.office_ecobee_temperature
+        name: Temperature
+        graph: line
+        detail: 2
+        grid_options:
+          columns: full
+          rows: 3
+
+  # Automations
+  - type: grid
+    cards:
+      - type: heading
+        heading: Automations
+        icon: mdi:robot
+        badges:
+          - type: entity
+            entity: binary_sensor.office_occupancy
+            tap_action:
+              action: more-info
+      - type: entities
+        entities:
+          - entity: automation.office_lights
+            name: Lights
+            secondary_info: last-triggered
+            hold_action:
+              action: perform-action
+              perform_action: automation.trigger
+              target:
+                entity_id: automation.office_lights
+          - entity: automation.office_switch
+            name: Switch
+            secondary_info: last-triggered
+            hold_action:
+              action: perform-action
+              perform_action: automation.trigger
+              target:
+                entity_id: automation.office_switch
+          - entity: automation.office_blinds
+            name: Blinds
+            secondary_info: last-triggered
+            hold_action:
+              action: perform-action
+              perform_action: automation.trigger
+              target:
+                entity_id: automation.office_blinds
+          - entity: automation.gaming_power_limit
+            name: Gaming Power Limit
+            secondary_info: last-triggered
+            hold_action:
+              action: perform-action
+              perform_action: automation.trigger
+              target:
+                entity_id: automation.gaming_power_limit
+        show_header_toggle: false
+
+  # Power
+  - type: grid
+    cards:
+      - type: heading
+        heading: Power
+        icon: mdi:power
+      - type: entities
+        title: Desk Left
+        entities:
+          - entity: switch.office_wall_desk_left_switch_top
+            name: Top
+          - entity: switch.office_wall_desk_left_switch_bottom
+            name: Bottom
+          - entity: sensor.office_wall_desk_left_daily_energy
+            name: Energy
+          - entity: sensor.office_wall_desk_left_current
+            name: Current
+        show_header_toggle: false
+        footer:
+          type: graph
+          entity: sensor.office_wall_desk_left_current
+      - type: entities
+        title: Desk Right
+        entities:
+          - entity: switch.office_wall_desk_right_switch_top
+            name: Top
+          - entity: switch.office_wall_desk_right_switch_bottom
+            name: Bottom
+          - entity: sensor.office_wall_desk_right_daily_energy
+            name: Energy
+          - entity: sensor.office_wall_desk_right_current
+            name: Current
+        show_header_toggle: false
+        footer:
+          type: graph
+          entity: sensor.office_wall_desk_right_current
+      - type: entities
+        title: East
+        entities:
+          - entity: switch.office_wall_east_switch_top
+            name: Top
+          - entity: switch.office_wall_east_switch_bottom
+            name: Bottom
+          - entity: sensor.office_wall_east_daily_energy
+            name: Energy
+          - entity: sensor.office_wall_east_current
+            name: Current
+        show_header_toggle: false
+        footer:
+          type: graph
+          entity: sensor.office_wall_east_current
+      - type: entities
+        title: South
+        entities:
+          - entity: switch.office_wall_south_switch_top
+            name: Top
+          - entity: switch.office_wall_south_switch_bottom
+            name: Bottom
+          - entity: sensor.office_wall_south_daily_energy
+            name: Energy
+          - entity: sensor.office_wall_south_current
+            name: Current
+        show_header_toggle: false
+        footer:
+          type: graph
+          entity: sensor.office_wall_south_current
+      - type: entities
+        title: West
+        entities:
+          - entity: switch.office_wall_west_switch_top
+            name: Top
+          - entity: switch.office_wall_west_switch_bottom
+            name: Bottom
+          - entity: sensor.office_wall_west_daily_energy
+            name: Energy
+          - entity: sensor.office_wall_west_current
+            name: Current
+        show_header_toggle: false
+        footer:
+          type: graph
+          entity: sensor.office_wall_west_current
+    column_span: 2

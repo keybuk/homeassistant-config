@@ -1,0 +1,90 @@
+title: Stairs
+path: stairs
+icon: mdi:stairs
+
+type: sections
+max_columns: 2
+
+badges:
+  - type: entity
+    entity: binary_sensor.stairs_nest_smoke_status
+    visibility:
+      - condition: state
+        entity: binary_sensor.stairs_nest_smoke_status
+        state: "on"
+  - type: entity
+    entity: binary_sensor.stairs_nest_co_status
+    visibility:
+      - condition: state
+        entity: binary_sensor.stairs_nest_co_status
+        state: "on"
+
+sections:
+  # Lights
+  - type: grid
+    cards:
+      - type: heading
+        heading: Lights
+        icon: mdi:lamps
+      - type: tile
+        entity: light.stairs
+        features:
+          - type: light-brightness
+      - type: tile
+        entity: light.stairs_landing
+        name: Landing
+        features:
+          - type: light-brightness
+
+  # Climate
+  - type: grid
+    cards:
+      - type: heading
+        heading: Climate
+        icon: mdi:home-thermometer
+        badges:
+          - type: entity
+            entity: binary_sensor.stairs_occupancy
+            tap_action:
+              action: more-info
+      - type: tile
+        entity: climate.upstairs
+        features:
+          - type: target-temperature
+      - type: sensor
+        entity: sensor.upstairs_ecobee_current_temperature
+        name: Temperature
+        graph: line
+        detail: 2
+        grid_options:
+          columns: full
+          rows: 3
+      - type: heading
+        heading_style: subtitle
+        badges:
+          - type: entity
+            entity: sensor.upstairs_ecobee_current_humidity
+            tap_action:
+              action: more-info
+
+  # Power
+  - type: grid
+    cards:
+      - type: heading
+        heading: Power
+        icon: mdi:power
+      - type: entities
+        title: Wall
+        entities:
+          - entity: switch.stairs_wall_switch_top
+            name: Top
+          - entity: switch.stairs_wall_switch_bottom
+            name: Bottom
+          - entity: sensor.stairs_wall_daily_energy
+            name: Energy
+          - entity: sensor.stairs_wall_current
+            name: Current
+        show_header_toggle: false
+        footer:
+          type: graph
+          entity: sensor.stairs_wall_current

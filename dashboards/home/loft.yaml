@@ -1,0 +1,372 @@
+title: Loft
+path: loft
+icon: mdi:theater
+
+type: sections
+max_columns: 2
+
+badges:
+  - type: entity
+    entity: binary_sensor.loft_nest_smoke_status
+    visibility:
+      - condition: state
+        entity: binary_sensor.loft_nest_smoke_status
+        state: "on"
+  - type: entity
+    entity: binary_sensor.loft_nest_co_status
+    visibility:
+      - condition: state
+        entity: binary_sensor.loft_nest_co_status
+        state: "on"
+  - type: entity
+    entity: sensor.loft_ecobee_battery
+    visibility:
+      - condition: state
+        entity: binary_sensor.loft_ecobee_battery_low
+        state: "on"
+
+sections:
+  # Media
+  - type: grid
+    cards:
+      - type: heading
+        heading: Media
+        icon: mdi:multimedia
+        badges:
+          - type: entity
+            entity: media_player.lg_webos_tv_cast
+            tap_action:
+              action: more-info
+          - type: entity
+            entity: media_player.denon_avr_x3800h
+            tap_action:
+              action: more-info
+      - type: media-control
+        entity: media_player.loft
+        grid_options:
+          columns: full
+      - type: media-control
+        entity: media_player.lg_webos_tv
+        visibility:
+          - condition: state
+            entity: media_player.lg_webos_tv
+            state: "on"
+      - type: media-control
+        entity: media_player.denon_avr
+        visibility:
+          - condition: state
+            entity: media_player.denon_avr
+            state: "on"
+      - type: media-control
+        entity: media_player.loft_apple_tv
+    column_span: 2
+
+  # Actions
+  - type: grid
+    cards:
+      - type: heading
+        heading: Actions
+        icon: mdi:gesture-tap-button
+      - type: tile
+        entity: light.loft
+        name: Lights
+        hide_state: true
+      - type: tile
+        entity: light.loft_ceiling
+        name: Ceiling
+        hide_state: true
+      - type: tile
+        entity: light.loft_wall
+        name: Wall
+        hide_state: true
+      - type: tile
+        entity: input_boolean.loft_play
+        name: Play
+        hide_state: true
+      - type: tile
+        entity: script.loft_pride
+        name: Pride
+        hide_state: true
+        tap_action:
+          action: toggle
+      - type: tile
+        entity: script.loft_bright
+        name: Bright
+        hide_state: true
+        tap_action:
+          action: toggle
+      - type: tile
+        entity: script.loft_nightlight
+        name: Nightlight
+        hide_state: true
+        tap_action:
+          action: toggle
+      - type: tile
+        entity: script.loft_natural
+        name: Natural
+        hide_state: true
+        tap_action:
+          action: toggle
+      - type: tile
+        entity: scene.kitchen_nighttime
+        name: Nighttime
+        hide_state: true
+        color: grey
+        tap_action:
+          action: toggle
+        icon_tap_action:
+          action: none
+    column_span: 2
+
+  # Lights
+  - type: grid
+    cards:
+      - type: heading
+        heading: Lights
+        icon: mdi:lamps
+      - type: tile
+        entity: light.loft_wall_left
+        name: Wall Left
+        features:
+          - type: light-brightness
+      - type: tile
+        entity: light.loft_wall_center
+        name: Wall Center
+        features:
+          - type: light-brightness
+      - type: tile
+        entity: light.loft_wall_right
+        name: Wall Right
+        features:
+          - type: light-brightness
+      - type: tile
+        entity: light.loft_balcony_left
+        name: Balcony Left
+        features:
+          - type: light-brightness
+      - type: tile
+        entity: light.loft_balcony_center
+        name: Balcony Center
+        features:
+          - type: light-brightness
+      - type: tile
+        entity: light.loft_balcony_right
+        name: Balcony Right
+        features:
+          - type: light-brightness
+      - type: tile
+        entity: light.loft_east_left
+        name: East Left
+        features:
+          - type: light-brightness
+      - type: tile
+        entity: light.loft_east_right
+        name: East Right
+        features:
+          - type: light-brightness
+      - type: tile
+        entity: light.loft_south_left
+        name: South Left
+        features:
+          - type: light-brightness
+      - type: tile
+        entity: light.loft_south_right
+        name: South Right
+        features:
+          - type: light-brightness
+
+  # Windows
+  - type: grid
+    cards:
+      - type: heading
+        heading: Windows
+        icon: mdi:blinds-horizontal
+      - type: tile
+        entity: cover.kitchen_left
+        name: Left
+        state_content: state
+        features:
+          - type: cover-open-close
+          - type: cover-position
+      - type: tile
+        entity: cover.kitchen_right
+        name: Right
+        state_content: state
+        features:
+          - type: cover-open-close
+          - type: cover-position
+
+  # Climate
+  - type: grid
+    cards:
+      - type: heading
+        heading: Climate
+        icon: mdi:home-thermometer
+      - type: sensor
+        entity: sensor.loft_ecobee_temperature
+        name: Temperature
+        graph: line
+        detail: 2
+        grid_options:
+          columns: full
+          rows: 3
+
+  # Automations
+  - type: grid
+    cards:
+      - type: heading
+        heading: Automations
+        icon: mdi:robot
+        badges:
+          - type: entity
+            entity: binary_sensor.loft_occupancy
+            tap_action:
+              action: more-info
+      - type: entities
+        entities:
+          - entity: automation.loft_lights
+            name: Lights
+            secondary_info: last-triggered
+            hold_action:
+              action: perform-action
+              perform_action: automation.trigger
+              target:
+                entity_id: automation.loft_lights
+          - entity: automation.loft_switch
+            name: Switch
+            secondary_info: last-triggered
+            hold_action:
+              action: perform-action
+              perform_action: automation.trigger
+              target:
+                entity_id: automation.loft_switch
+          - entity: automation.loft_tv
+            name: TV
+            secondary_info: last-triggered
+            hold_action:
+              action: perform-action
+              perform_action: automation.trigger
+              target:
+                entity_id: automation.loft_tv
+          - entity: automation.kitchen_blinds
+            name: Blinds
+            secondary_info: last-triggered
+            hold_action:
+              action: perform-action
+              perform_action: automation.trigger
+              target:
+                entity_id: automation.kitchen_blinds
+        show_header_toggle: false
+
+  # Power
+  - type: grid
+    cards:
+      - type: heading
+        heading: Power
+        icon: mdi:power
+      - type: entities
+        title: East Left
+        entities:
+          - entity: switch.loft_wall_east_left_switch_top
+            name: Top
+          - entity: switch.loft_wall_east_left_switch_bottom
+            name: Bottom
+          - entity: sensor.loft_wall_east_left_daily_energy
+            name: Energy
+          - entity: sensor.loft_wall_east_left_current
+            name: Current
+        show_header_toggle: false
+        footer:
+          type: graph
+          entity: sensor.loft_wall_east_left_current
+      - type: entities
+        title: East Right
+        entities:
+          - entity: switch.loft_wall_east_right_switch_top
+            name: Top
+          - entity: switch.loft_wall_east_right_switch_bottom
+            name: Bottom
+          - entity: sensor.loft_wall_east_right_daily_energy
+            name: Energy
+          - entity: sensor.loft_wall_east_right_current
+            name: Current
+        show_header_toggle: false
+        footer:
+          type: graph
+          entity: sensor.loft_wall_east_right_current
+      - type: entities
+        title: South
+        entities:
+          - entity: switch.loft_wall_south_switch_top
+            name: Top
+          - entity: switch.loft_wall_south_switch_bottom
+            name: Bottom
+          - entity: sensor.loft_wall_south_daily_energy
+            name: Energy
+          - entity: sensor.loft_wall_south_current
+            name: Current
+        show_header_toggle: false
+        footer:
+          type: graph
+          entity: sensor.loft_wall_south_current
+      - type: entities
+        title: West Left
+        entities:
+          - entity: switch.loft_wall_west_left_switch_top
+            name: Top
+          - entity: switch.loft_wall_west_left_switch_bottom
+            name: Bottom
+          - entity: sensor.loft_wall_west_left_daily_energy
+            name: Energy
+          - entity: sensor.loft_wall_west_left_current
+            name: Current
+        show_header_toggle: false
+        footer:
+          type: graph
+          entity: sensor.loft_wall_west_left_current
+      - type: entities
+        title: West Right
+        entities:
+          - entity: switch.loft_wall_west_right_switch_top
+            name: Top
+          - entity: switch.loft_wall_west_right_switch_bottom
+            name: Bottom
+          - entity: sensor.loft_wall_west_right_daily_energy
+            name: Energy
+          - entity: sensor.loft_wall_west_right_current
+            name: Current
+        show_header_toggle: false
+        footer:
+          type: graph
+          entity: sensor.loft_wall_west_right_current
+      - type: entities
+        title: Under Stairs
+        entities:
+          - entity: switch.loft_wall_under_stairs_switch_top
+            name: Top
+          - entity: switch.loft_wall_under_stairs_switch_bottom
+            name: Bottom
+          - entity: sensor.loft_wall_under_stairs_daily_energy
+            name: Energy
+          - entity: sensor.loft_wall_under_stairs_current
+            name: Current
+        show_header_toggle: false
+        footer:
+          type: graph
+          entity: sensor.loft_wall_under_stairs_current
+      - type: entities
+        title: North
+        entities:
+          - entity: switch.loft_wall_north_switch_top
+            name: Top
+          - entity: switch.loft_wall_north_switch_bottom
+            name: Bottom
+          - entity: sensor.loft_wall_north_daily_energy
+            name: Energy
+          - entity: sensor.loft_wall_north_current
+            name: Current
+        show_header_toggle: false
+        footer:
+          type: graph
+          entity: sensor.loft_wall_north_current
+    column_span: 2

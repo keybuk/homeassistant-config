@@ -1,0 +1,267 @@
+title: Home
+
+type: sections
+max_columns: 2
+
+badges:
+  - type: entity
+    entity: conversation.openai_conversation
+    name: Assist
+    show_name: true
+    show_state: false
+    tap_action:
+      action: assist
+      pipeline_id: preferred
+      start_listening: true
+
+sections:
+  # Downstairs
+  - type: grid
+    cards:
+      - type: heading
+        heading: Downstairs
+        icon: mdi:home
+      - type: area
+        area: dining_room
+        display_type: compact
+        navigation_path: /lovelace/dining-room
+        alert_classes:
+          - smoke
+          - carbon_monoxide
+          - moisture
+          - problem
+        sensor_classes:
+          - temperature
+          - humidity
+        features:
+          - type: area-controls
+            controls:
+              - light
+              - fan
+              - cover-shade
+        features_position: inline
+      - type: area
+        area: kitchen
+        display_type: compact
+        navigation_path: /lovelace/kitchen
+        alert_classes:
+          - smoke
+          - carbon_monoxide
+          - problem
+          - door
+        sensor_classes:
+          - temperature
+          - humidity
+        features:
+          - type: area-controls
+            controls:
+              - light
+              - cover-shade
+        features_position: inline
+      - type: area
+        area: office
+        display_type: compact
+        navigation_path: /lovelace/office
+        alert_classes:
+          - smoke
+          - carbon_monoxide
+          - problem
+        sensor_classes:
+          - temperature
+          - humidity
+        features:
+          - type: area-controls
+            controls:
+              - light
+              - cover-shade
+        features_position: inline
+      - type: area
+        area: downstairs_bathroom
+        display_type: compact
+        navigation_path: /lovelace/downstairs-bathroom
+        sensor_classes:
+          - temperature
+          - humidity
+        features:
+          - type: area-controls
+            controls:
+              - light
+        features_position: inline
+
+  # Upstairs
+  - type: grid
+    cards:
+      - type: heading
+        heading: Upstairs
+        icon: mdi:home
+      - type: area
+        area: bedroom
+        display_type: compact
+        navigation_path: /lovelace/bedroom
+        alert_classes:
+          - smoke
+          - carbon_monoxide
+          - moisture
+          - problem
+        sensor_classes:
+          - temperature
+          - humidity
+        features:
+          - type: area-controls
+            controls:
+              - light
+              - fan
+              - cover-shade
+        features_position: inline
+      - type: area
+        area: loft
+        display_type: compact
+        navigation_path: /lovelace/loft
+        alert_classes:
+          - smoke
+          - carbon_monoxide
+          - problem
+        sensor_classes:
+          - temperature
+          - humidity
+        features:
+          - type: area-controls
+            controls:
+              - light
+        features_position: inline
+      - type: area
+        area: stairs
+        display_type: compact
+        navigation_path: /lovelace/stairs
+        alert_classes:
+          - smoke
+          - carbon_monoxide
+        sensor_classes:
+          - temperature
+          - humidity
+        features:
+          - type: area-controls
+            controls:
+              - light
+        features_position: inline
+      - type: area
+        area: bathroom
+        display_type: compact
+        navigation_path: /lovelace/bathroom
+        sensor_classes:
+          - temperature
+          - humidity
+        features:
+          - type: area-controls
+            controls:
+              - light
+        features_position: inline
+
+  # Roof
+  - type: grid
+    cards:
+      - type: heading
+        heading: Roof
+        icon: mdi:home
+      - type: area
+        area: roof
+        display_type: compact
+        navigation_path: /lovelace/roof
+        alert_classes:
+          - smoke
+          - carbon_monoxide
+          - problem
+          - door
+        sensor_classes:
+          - temperature
+          - humidity
+        features:
+          - type: area-controls
+            controls:
+              - light
+        features_position: inline
+
+  # Climate
+  - type: grid
+    cards:
+      - type: heading
+        heading: Climate
+        icon: mdi:home-thermometer
+      - type: weather-forecast
+        entity: weather.home
+        show_forecast: false
+        forecast_type: daily
+
+  # Automations
+  - type: grid
+    cards:
+      - type: heading
+        heading: Automations
+        icon: mdi:robot
+        badges:
+          # Display one of multiple badges to show if I'm asleep, at home, or
+          # the home occupancy state.
+          - type: entity
+            entity: binary_sensor.scotty_asleep
+            name: Scotty
+            icon: mdi:bed
+            state_content: name
+            tap_action:
+              action: more-info
+            visibility:
+              - condition: state
+                entity: person.scotty
+                state: home
+              - condition: state
+                entity: binary_sensor.scotty_asleep
+                state: "on"
+          - type: entity
+            entity: person.scotty
+            icon: mdi:home
+            state_content: name
+            tap_action:
+              action: more-info
+            visibility:
+              - condition: state
+                entity: person.scotty
+                state: home
+              - condition: state
+                entity: binary_sensor.scotty_asleep
+                state_not: "on"
+          - type: entity
+            entity: binary_sensor.anyone_home
+            tap_action:
+              action: more-info
+            visibility:
+              - condition: state
+                entity: person.scotty
+                state_not: home
+
+          # Display the weather condition as used by automations.
+          - type: entity
+            entity: sensor.weather
+            show_state: false
+            tap_action:
+              action: more-info
+
+      - type: entities
+        entities:
+          - entity: automation.home_off
+            secondary_info: last-triggered
+            hold_action:
+              action: perform-action
+              perform_action: automation.trigger
+              target:
+                entity_id: automation.home_off
+        show_header_toggle: false
+
+  # Power
+  - type: grid
+    cards:
+      - type: heading
+        heading: Power
+        icon: mdi:power
+      - type: energy-sankey
+        grid_options:
+          columns: full
+    column_span: 2

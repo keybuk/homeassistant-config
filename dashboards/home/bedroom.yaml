@@ -1,0 +1,407 @@
+title: Bedroom
+path: bedroom
+icon: mdi:bed-king-outline
+
+type: sections
+max_columns: 2
+
+badges:
+  - type: entity
+    entity: binary_sensor.bedroom_nest_smoke_status
+    visibility:
+      - condition: state
+        entity: binary_sensor.bedroom_nest_smoke_status
+        state: "on"
+  - type: entity
+    entity: binary_sensor.bedroom_nest_co_status
+    visibility:
+      - condition: state
+        entity: binary_sensor.bedroom_nest_co_status
+        state: "on"
+  - type: entity
+    entity: binary_sensor.bedroom_left_closet_leak_sensor_water_leak
+    visibility:
+      - condition: state
+        entity: binary_sensor.bedroom_left_closet_leak_sensor_water_leak
+        state: "on"
+  - type: entity
+    entity: binary_sensor.bedroom_right_closet_leak_sensor_water_leak
+    visibility:
+      - condition: state
+        entity: binary_sensor.bedroom_right_closet_leak_sensor_water_leak
+        state: "on"
+  - type: entity
+    entity: sensor.bedroom_ecobee_battery
+    visibility:
+      - condition: state
+        entity: binary_sensor.bedroom_ecobee_battery_low
+        state: ""
+  - type: entity
+    entity: sensor.bedroom_eve_battery
+    visibility:
+      - condition: state
+        entity: binary_sensor.bedroom_eve_battery_low
+        state: "on"
+  - type: entity
+    entity: sensor.bedroom_left_window_battery
+    visibility:
+      - condition: state
+        entity: binary_sensor.bedroom_left_window_battery_low
+        state: "on"
+  - type: entity
+    entity: sensor.bedroom_right_window_battery
+    visibility:
+      - condition: state
+        entity: binary_sensor.bedroom_right_window_battery_low
+        state: "on"
+  - type: entity
+    entity: sensor.bedroom_left_closet_leak_sensor_battery
+    visibility:
+      - condition: state
+        entity: binary_sensor.bedroom_left_closet_leak_sensor_battery_low
+        state: "on"
+  - type: entity
+    entity: sensor.bedroom_right_closet_leak_sensor_battery
+    visibility:
+      - condition: state
+        entity: binary_sensor.bedroom_right_closet_leak_sensor_battery_low
+        state: "on"
+
+sections:
+  # Media
+  - type: grid
+    cards:
+      - type: heading
+        icon: mdi:multimedia
+        heading: Media
+      - type: media-control
+        entity: media_player.bedroom
+        grid_options:
+          columns: full
+    column_span: 2
+
+  # Actions
+  - type: grid
+    cards:
+      - type: heading
+        heading: Actions
+        icon: mdi:gesture-tap-button
+      - type: tile
+        entity: light.bedroom
+        name: Lights
+        hide_state: true
+      - type: tile
+        entity: light.bedroom_ceiling
+        name: Ceiling
+        hide_state: true
+      - type: tile
+        entity: light.bedroom_bedside
+        name: Bedside
+        hide_state: true
+      - type: tile
+        entity: input_boolean.bedroom_play
+        name: Play
+        hide_state: true
+      - type: tile
+        entity: script.goodnight
+        hide_state: true
+        color: grey
+        tap_action:
+          action: toggle
+      - type: tile
+        entity: script.bedroom_bright
+        name: Bright
+        hide_state: true
+        tap_action:
+          action: toggle
+      - type: tile
+        entity: script.bedroom_nightlight
+        name: Nightlight
+        hide_state: true
+        tap_action:
+          action: toggle
+      - type: tile
+        entity: script.bedroom_reading
+        name: Reading
+        hide_state: true
+        tap_action:
+          action: toggle
+      - type: tile
+        entity: script.bedroom_natural
+        name: Natural
+        hide_state: true
+        tap_action:
+          action: toggle
+      - type: tile
+        entity: scene.bedroom_daytime
+        name: Daytime
+        hide_state: true
+        color: grey
+        tap_action:
+          action: toggle
+        icon_tap_action:
+          action: none
+    column_span: 2
+
+  # Lights
+  - type: grid
+    cards:
+      - type: heading
+        heading: Lights
+        icon: mdi:lamps
+      - type: tile
+        entity: light.bedroom_left_bedside
+        name: Left Bedside
+        features:
+          - type: light-brightness
+      - type: tile
+        entity: light.bedroom_right_bedside
+        name: Right Bedside
+        features:
+          - type: light-brightness
+      - type: tile
+        entity: light.bedroom_bed_left
+        name: Bed Left
+        features:
+          - type: light-brightness
+      - type: tile
+        entity: light.bedroom_bed_right
+        name: Bed Right
+        features:
+          - type: light-brightness
+      - type: tile
+        entity: light.bedroom_wall_left
+        name: Wall Left
+        features:
+          - type: light-brightness
+      - type: tile
+        entity: light.bedroom_wall_right
+        name: Wall Right
+        features:
+          - type: light-brightness
+      - type: tile
+        entity: light.bedroom_left_closet
+        name: Left Closet
+      - type: tile
+        entity: light.bedroom_right_closet
+        name: Right Closet
+
+  # Windows
+  - type: grid
+    cards:
+      - type: heading
+        heading: Windows
+        icon: mdi:blinds-horizontal
+      - type: tile
+        entity: cover.bedroom_top
+        name: Top
+        state_content: state
+        features:
+          - type: cover-open-close
+          - type: cover-position
+      - type: tile
+        entity: cover.bedroom_bottom
+        name: Bottom
+        state_content: state
+        features:
+          - type: cover-open-close
+          - type: cover-position
+      - type: tile
+        entity: cover.bedroom_blackout
+        state_content: state
+        features:
+          - type: cover-open-close
+        grid_options:
+          columns: full
+      - type: glance
+        entities:
+          - entity: binary_sensor.bedroom_left_window
+            name: Left
+          - entity: binary_sensor.bedroom_right_window
+            name: Right
+
+  # Climate
+  - type: grid
+    cards:
+      - type: heading
+        heading: Climate
+        icon: mdi:home-thermometer
+      - type: tile
+        entity: fan.bedroom_tower
+        name: Fan
+        features:
+          - type: fan-speed
+          - type: fan-oscillate
+      - type: tile
+        entity: humidifier.bedroom_tower
+        name: Humidifier
+        features:
+          - type: humidifier-toggle
+      - type: sensor
+        entity: sensor.bedroom_temperature
+        name: Temperature
+        graph: line
+        detail: 2
+        grid_options:
+          columns: full
+          rows: 3
+      - type: heading
+        heading_style: subtitle
+        badges:
+          - type: entity
+            entity: sensor.bedroom_eve_humidity
+            tap_action:
+              action: more-info
+          - type: entity
+            entity: sensor.bedroom_eve_air_quality
+            tap_action:
+              action: more-info
+          - type: entity
+            entity: sensor.bedroom_eve_volatile_organic_compound_density
+            tap_action:
+              action: more-info
+
+  # Automations
+  - type: grid
+    cards:
+      - type: heading
+        heading: Automations
+        icon: mdi:robot
+        badges:
+          - type: entity
+            entity: binary_sensor.bedroom_occupancy
+            tap_action:
+              action: more-info
+      - type: entities
+        entities:
+          - entity: automation.bedroom_lights
+            name: Lights
+            secondary_info: last-triggered
+            hold_action:
+              action: perform-action
+              perform_action: automation.trigger
+              target:
+                entity_id: automation.bedroom_lights
+          - entity: automation.bedroom_switch
+            name: Switch
+            secondary_info: last-triggered
+            hold_action:
+              action: perform-action
+              perform_action: automation.trigger
+              target:
+                entity_id: automation.bedroom_switch
+          - entity: automation.bedroom_blinds
+            name: Blinds
+            secondary_info: last-triggered
+            hold_action:
+              action: perform-action
+              perform_action: automation.trigger
+              target:
+                entity_id: automation.bedroom_blinds
+          - entity: automation.bedroom_blackout
+            name: Blackout
+            secondary_info: last-triggered
+            hold_action:
+              action: perform-action
+              perform_action: automation.trigger
+              target:
+                entity_id: automation.bedroom_blackout
+        show_header_toggle: false
+
+  # Power
+  - type: grid
+    cards:
+      - type: heading
+        heading: Power
+        icon: mdi:power
+      - type: entities
+        title: Bedside Left
+        entities:
+          - entity: switch.bedroom_wall_bedside_left_switch_top
+            name: Top
+          - entity: switch.bedroom_wall_bedside_left_switch_bottom
+            name: Bottom
+          - entity: sensor.bedroom_wall_bedside_left_daily_energy
+            name: Energy
+          - entity: sensor.bedroom_wall_bedside_left_current
+            name: Current
+        show_header_toggle: false
+        footer:
+          type: graph
+          entity: sensor.bedroom_wall_bedside_left_current
+      - type: entities
+        title: Bedside Right
+        entities:
+          - entity: switch.bedroom_wall_bedside_right_switch_top
+            name: Top
+          - entity: switch.bedroom_wall_bedside_right_switch_bottom
+            name: Bottom
+          - entity: sensor.bedroom_wall_bedside_right_daily_energy
+            name: Energy
+          - entity: sensor.bedroom_wall_bedside_right_current
+            name: Current
+        show_header_toggle: false
+        footer:
+          type: graph
+          entity: sensor.bedroom_wall_bedside_right_current
+      - type: entities
+        title: South Left
+        entities:
+          - entity: switch.bedroom_wall_south_left_switch_top
+            name: Top
+          - entity: switch.bedroom_wall_south_left_switch_bottom
+            name: Bottom
+          - entity: sensor.bedroom_wall_south_left_daily_energy
+            name: Energy
+          - entity: sensor.bedroom_wall_south_left_current
+            name: Current
+        show_header_toggle: false
+        footer:
+          type: graph
+          entity: sensor.bedroom_wall_south_left_current
+      - type: entities
+        title: South Center
+        entities:
+          - entity: switch.bedroom_wall_south_center_switch_top
+            name: Top
+          - entity: switch.bedroom_wall_south_center_switch_bottom
+            name: Bottom
+          - entity: sensor.bedroom_wall_south_center_daily_energy
+            name: Energy
+          - entity: sensor.bedroom_wall_south_center_current
+            name: Current
+        show_header_toggle: false
+        footer:
+          type: graph
+          entity: sensor.bedroom_wall_south_center_current
+      - type: entities
+        title: West Left
+        entities:
+          - entity: switch.bedroom_wall_west_left_switch_top
+            name: Top
+          - entity: switch.bedroom_wall_west_left_switch_bottom
+            name: Bottom
+          - entity: sensor.bedroom_wall_west_left_daily_energy
+            name: Energy
+          - entity: sensor.bedroom_wall_west_left_current
+            name: Current
+        show_header_toggle: false
+        footer:
+          type: graph
+          entity: sensor.bedroom_wall_west_left_current
+      - type: entities
+        title: West Center
+        entities:
+          - entity: switch.bedroom_wall_west_center_switch_top
+            name: Top
+          - entity: switch.bedroom_wall_west_center_switch_bottom
+            name: Bottom
+          - entity: sensor.bedroom_wall_west_center_daily_energy
+            name: Energy
+          - entity: sensor.bedroom_wall_west_center_current
+            name: Current
+        show_header_toggle: false
+        footer:
+          type: graph
+          entity: sensor.bedroom_wall_west_center_current
+    column_span: 2

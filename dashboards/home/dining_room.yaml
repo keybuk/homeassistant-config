@@ -1,0 +1,318 @@
+title: Dining Room
+path: dining-room
+icon: mdi:table-furniture
+
+type: sections
+max_columns: 2
+
+badges:
+  - type: entity
+    entity: binary_sensor.bedroom_nest_smoke_status
+    visibility:
+      - condition: state
+        entity: binary_sensor.bedroom_nest_smoke_status
+        state: "on"
+  - type: entity
+    entity: binary_sensor.bedroom_nest_co_status
+    visibility:
+      - condition: state
+        entity: binary_sensor.bedroom_nest_co_status
+        state: "on"
+  - type: entity
+    entity: binary_sensor.dining_room_south_leak_sensor_water_leak
+    visibility:
+      - condition: state
+        entity: binary_sensor.dining_room_south_leak_sensor_water_leak
+        state: "on"
+  - type: entity
+    entity: binary_sensor.dining_room_floor_leak_sensor_water_leak
+    visibility:
+      - condition: state
+        entity: binary_sensor.dining_room_floor_leak_sensor_water_leak
+        state: "on"
+  - type: entity
+    entity: sensor.dining_room_ecobee_battery
+    visibility:
+      - condition: state
+        entity: binary_sensor.dining_room_ecobee_battery_low
+        state: "on"
+  - type: entity
+    entity: sensor.dining_room_motion_battery
+    visibility:
+      - condition: state
+        entity: binary_sensor.dining_room_motion_battery_low
+        state: "on"
+  - type: entity
+    entity: sensor.dining_room_eve_battery
+    visibility:
+      - condition: state
+        entity: binary_sensor.dining_room_eve_battery_low
+        state: "on"
+  - type: entity
+    entity: sensor.dining_room_top_left_window_battery
+    visibility:
+      - condition: state
+        entity: binary_sensor.dining_room_top_left_window_battery_low
+        state: "on"
+  - type: entity
+    entity: sensor.dining_room_top_right_window_battery
+    visibility:
+      - condition: state
+        entity: binary_sensor.dining_room_top_right_window_battery_low
+        state: "on"
+  - type: entity
+    entity: sensor.dining_room_bottom_left_window_battery
+    visibility:
+      - condition: state
+        entity: binary_sensor.dining_room_bottom_left_window_battery_low
+        state: "on"
+  - type: entity
+    entity: sensor.dining_room_bottom_right_window_battery
+    visibility:
+      - condition: state
+        entity: binary_sensor.dining_room_bottom_right_window_battery_low
+        state: "on"
+  - type: entity
+    entity: sensor.dining_room_south_leak_sensor_battery
+    visibility:
+      - condition: state
+        entity: binary_sensor.dining_room_south_leak_sensor_battery_low
+        state: "on"
+  - type: entity
+    entity: sensor.dining_room_floor_leak_sensor_battery
+    visibility:
+      - condition: state
+        entity: binary_sensor.dining_room_floor_leak_sensor_battery_low
+        state: "on"
+
+sections:
+  # Media
+  - type: grid
+    cards:
+      - type: heading
+        heading: Media
+        heading_style: title
+        icon: mdi:multimedia
+        badges:
+          - type: entity
+            entity: media_player.nebula_ffff4a
+            tap_action:
+              action: more-info
+          - type: entity
+            entity: media_player.nebula_mars_3_air
+            tap_action:
+              action: more-info
+      - type: media-control
+        entity: media_player.dining_room
+        grid_options:
+          columns: full
+    column_span: 2
+
+  # Actions
+  - type: grid
+    cards:
+      - type: heading
+        heading: Actions
+        icon: mdi:gesture-tap-button
+      - type: tile
+        entity: light.dining_room
+        name: Lights
+        hide_state: true
+      - type: tile
+        entity: input_boolean.dining_room_play
+        name: Play
+        hide_state: true
+      - type: tile
+        entity: script.dnd
+        hide_state: true
+        tap_action:
+          action: toggle
+      - type: tile
+        entity: script.dining_room_pride
+        name: Pride
+        hide_state: true
+        tap_action:
+          action: toggle
+      - type: tile
+        entity: scene.dining_room_afternoon_sun
+        name: Afternoon Sun
+        hide_state: true
+        color: grey
+        tap_action:
+          action: toggle
+        icon_tap_action:
+          action: none
+      - type: tile
+        entity: scene.dining_room_late_afternoon_sun
+        name: Late Afternoon Sun
+        hide_state: true
+        color: grey
+        tap_action:
+          action: toggle
+        icon_tap_action:
+          action: none
+    column_span: 2
+
+  # Lights
+  - type: grid
+    cards:
+      - type: heading
+        heading: Lights
+        icon: mdi:lamps
+      - type: tile
+        entity: light.dining_room_chandelier
+        name: Chandelier
+        features:
+          - type: light-brightness
+      - type: tile
+        entity: light.dining_room_spots
+        name: Spots
+        features:
+          - type: light-brightness
+      - type: tile
+        entity: light.dining_room_south_left
+        name: South Left
+        features:
+          - type: light-brightness
+      - type: tile
+        entity: light.dining_room_south_right
+        name: South Right
+        features:
+          - type: light-brightness
+      - type: tile
+        entity: light.dining_room_west_left
+        name: West Left
+        features:
+          - type: light-brightness
+      - type: tile
+        entity: light.dining_room_west_center
+        name: West Center
+        features:
+          - type: light-brightness
+      - type: tile
+        entity: light.dining_room_west_right
+        name: West Right
+        features:
+          - type: light-brightness
+      - type: tile
+        entity: light.dining_room_beam
+        name: Beam
+      - type: tile
+        entity: light.dining_room_lego
+        name: Lego
+
+  # Windows
+  - type: grid
+    cards:
+      - type: heading
+        heading: Windows
+        icon: mdi:blinds-horizontal
+      - type: tile
+        entity: cover.dining_room_left
+        name: Left
+        state_content: state
+        features:
+          - type: cover-open-close
+          - type: cover-position
+      - type: tile
+        entity: cover.dining_room_right
+        name: Right
+        state_content: state
+        features:
+          - type: cover-open-close
+          - type: cover-position
+      - type: glance
+        entities:
+          - entity: binary_sensor.dining_room_top_left_window
+            name: Top Left
+          - entity: binary_sensor.dining_room_top_right_window
+            name: Top Right
+          - entity: binary_sensor.dining_room_bottom_left_window
+            name: Bottom Left
+          - entity: binary_sensor.dining_room_bottom_right_window
+            name: Bottom Right
+
+  # Climate
+  - type: grid
+    cards:
+      - type: heading
+        heading: Climate
+        icon: mdi:home-thermometer
+      - type: tile
+        entity: fan.dining_room
+        name: Fan
+        state_content: state
+        features:
+          - type: fan-speed
+          - type: fan-preset-modes
+            style: dropdown
+      - type: tile
+        entity: climate.dining_room_fan
+        name: Fan
+        features:
+          - type: target-temperature
+      - type: tile
+        entity: fan.dining_room_fan_whoosh
+        name: Whoosh
+      - type: sensor
+        entity: sensor.dining_room_temperature
+        name: Temperature
+        graph: line
+        detail: 2
+        grid_options:
+          columns: full
+          rows: 3
+      - type: heading
+        heading_style: subtitle
+        badges:
+          - type: entity
+            entity: sensor.dining_room_eve_humidity
+            tap_action:
+              action: more-info
+          - type: entity
+            entity: sensor.dining_room_eve_air_quality
+            tap_action:
+              action: more-info
+          - type: entity
+            entity: sensor.dining_room_eve_volatile_organic_compound_density
+            tap_action:
+              action: more-info
+
+  # Automations
+  - type: grid
+    cards:
+      - type: heading
+        heading: Automations
+        icon: mdi:robot
+        badges:
+          - type: entity
+            entity: binary_sensor.dining_room_occupancy
+            tap_action:
+              action: more-info
+      - type: entities
+        entities:
+          - entity: automation.dining_room_lights
+            name: Lights
+            secondary_info: last-triggered
+            hold_action:
+              action: perform-action
+              perform_action: automation.trigger
+              target:
+                entity_id: automation.dining_room_lights
+          - entity: automation.dining_room_switch
+            name: Switch
+            secondary_info: last-triggered
+            hold_action:
+              action: perform-action
+              perform_action: automation.trigger
+              target:
+                entity_id: automation.dining_room_switch
+          - entity: automation.dining_room_blinds
+            name: Blinds
+            secondary_info: last-triggered
+            hold_action:
+              action: perform-action
+              perform_action: automation.trigger
+              target:
+                entity_id: automation.dining_room_blinds
+        show_header_toggle: false

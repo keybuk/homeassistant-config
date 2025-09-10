@@ -1,0 +1,11 @@
+views:
+  - !include dashboards/home.yaml
+  - !include dashboards/home/dining_room.yaml
+  - !include dashboards/home/kitchen.yaml
+  - !include dashboards/home/office.yaml
+  - !include dashboards/home/bedroom.yaml
+  - !include dashboards/home/loft.yaml
+  - !include dashboards/home/downstairs_bathroom.yaml
+  - !include dashboards/home/stairs.yaml
+  - !include dashboards/home/bathroom.yaml
+  - !include dashboards/home/roof.yaml
