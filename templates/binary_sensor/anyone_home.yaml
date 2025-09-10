@@ -1,5 +1,5 @@
 # Binary sensor that tracks whether anyone is home.
-- trigger:
+- triggers:
     # Trigger on known household members coming and going.
     - trigger: zone
       entity_id:

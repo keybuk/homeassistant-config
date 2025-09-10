@@ -1,6 +1,6 @@
 # Binary sensor that tracks whether a door was opened while the home was
 # otherwise unoccupied.
-- trigger:
+- triggers:
     # Door opening updates the state to 'on', after checking occupancy sensors.
     - trigger: state
       entity_id:
