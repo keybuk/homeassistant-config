@@ -1,5 +1,5 @@
-alias: Kitchen Windows
-id: kitchen_windows
+alias: Kitchen Blinds
+id: kitchen_blinds
 description: >
   Open and close the kitchen window blinds based on the time of day,
   sun position, and weather.
@@ -57,7 +57,7 @@ actions:
         sequence:
           - action: scene.turn_on
             target:
-              entity_id: scene.kitchen_windows_closed
+              entity_id: scene.kitchen_sun
 
       # Close blinds while we're playing in the dining room.
       - conditions:
@@ -67,7 +67,7 @@ actions:
         sequence:
           - action: scene.turn_on
             target:
-              entity_id: scene.kitchen_windows_closed
+              entity_id: scene.kitchen_sun
 
       # Close the loft part of the blinds during the day when the TV is on.
       - conditions:

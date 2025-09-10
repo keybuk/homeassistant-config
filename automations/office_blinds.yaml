@@ -1,5 +1,5 @@
-alias: Office Windows
-id: office_windows
+alias: Office Blinds
+id: office_blinds
 description: >
   Open and close the office window blinds based on the time of day.
 

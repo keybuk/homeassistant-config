@@ -1,5 +1,5 @@
-alias: Bedroom Windows
-id: bedroom_windows
+alias: Bedroom Blinds
+id: bedroom_blinds
 description: >
   Open and close the bedroom window blinds based on the time of day.
 
