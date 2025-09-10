@@ -22,10 +22,6 @@
         - "off"
       id: "occupancy"
 
-    # Trigger on Home Assistant startup to set initial value.
-    - trigger: homeassistant
-      event: start
-
   binary_sensor:
     - name: "Anyone Home"
       unique_id: anyone_home
@@ -36,9 +32,6 @@
           on
         {% elif trigger.id == 'persons' %}
           {# Last household member left home #}
-          {{ states('binary_sensor.home_occupancy') }}
-        {% elif trigger.platform == 'homeassistant' %}
-          {# Home Assistant start #}
           {{ states('binary_sensor.home_occupancy') }}
         {% elif is_state('binary_sensor.doors_opened_while_not_occupied', 'on') %}
           {# Door has been opened #}
