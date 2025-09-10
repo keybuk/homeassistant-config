@@ -2,11 +2,11 @@
 - binary_sensor:
     name: Gaming Power Limit
     unique_id: gaming_power_limit
-    state: >
+    state: |
       {{ not is_state('button.vecna_power_limit_enable', 'unavailable')
          and (states('sensor.office_wall_desk_left_current') | float) >= 1.0
       }}
-    icon: >
+    icon: |
       {% if is_state('binary_sensor.gaming_power_limit', 'on') %}
         mdi:flash-alert
       {% else %}

@@ -26,7 +26,7 @@
     - name: "Anyone Home"
       unique_id: anyone_home
       device_class: "occupancy"
-      state: >
+      state: |
         {% if state_attr('zone.home', 'persons') %}
           {# Household member is at home #}
           on

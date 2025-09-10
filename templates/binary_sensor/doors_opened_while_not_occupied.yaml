@@ -19,11 +19,11 @@
     - name: "Doors Opened While Not Occupied"
       unique_id: doors_opened_while_not_occupied
       device_class: "door"
-      state: >
+      state: |
         {{ 'on' if trigger.id == 'door'
            and is_state('binary_sensor.anyone_home', 'off')
            else 'off'
         }}
       attributes:
-        door: >
+        door: |
           {{ trigger.entity_id if trigger.id == 'door' else 'unavailable' }}

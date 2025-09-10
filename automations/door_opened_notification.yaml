@@ -14,6 +14,6 @@ actions:
   - action: notify.mobile_app_scottys_iphone
     data:
       title: Door Opened
-      message: >
+      message: |
         {% set door = state_attr('binary_sensor.doors_opened_while_not_occupied', 'door') %}
         {{ state_attr(door, 'friendly_name') | default(door) }}

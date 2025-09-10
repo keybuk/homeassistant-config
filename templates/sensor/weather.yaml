@@ -3,7 +3,7 @@
 - sensor:
     name: Weather
     unique_id: weather
-    state: >
+    state: |
       {% if is_state('sun.sun', 'above_horizon') %}
         {% if states('weather.home') not in ['clear-night', 'partlycloudy', 'sunny', 'windy' ] %}
           cloudy-day
@@ -15,7 +15,7 @@
       {% else %}
         night
       {% endif %}
-    icon: >
+    icon: |
       {% if is_state('sensor.weather', 'hot-day') %}
         mdi:weather-sunny-alert
       {% elif is_state('sensor.weather', 'day') %}

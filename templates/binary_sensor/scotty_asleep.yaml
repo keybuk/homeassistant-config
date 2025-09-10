@@ -2,13 +2,13 @@
 - binary_sensor:
     name: Scotty Asleep
     unique_id: scotty_asleep
-    state: >
+    state: |
       {{ states('sensor.scottys_iphone_battery_state') in ['Charging', 'Full']
          and is_state('binary_sensor.scottys_iphone_focus', 'on')
       }}
     delay_off:
       seconds: 1
-    icon: >
+    icon: |
       {% if is_state('binary_sensor.scotty_asleep', 'on') %}
         mdi:bed
       {% else %}
