@@ -1,26 +1,28 @@
 #  When the TV is on, only the wall lights are controlled by occupancy.
-- triggers:
-    - trigger: state
-      entity_id:
-        - media_player.lg_webos_tv
-        - light.loft_wall
-        - light.loft
-
-  variables:
-    light: |
-      {% if is_state('media_player.lg_webos_tv', 'on') %}
-        light.loft_wall
-      {% else %}
-        light.loft
-      {% endif %}
-
-  light:
+- light:
     name: Loft Theater
     unique_id: loft_theater
-    state: "{{ states(light) }}"
+    state: |
+      {% if is_state('media_player.lg_webos_tv', 'on') %}
+        {{ states('light.loft_wall') }}
+      {% else %}
+        {{ states('light.loft') }}
+      {% endif %}
     turn_on:
       action: light.turn_on
-      target: "{{ light }}"
+      target:
+        entity_id: |
+          {% if is_state('media_player.lg_webos_tv', 'on') %}
+            light.loft_wall
+          {% else %}
+            light.loft
+          {% endif %}
     turn_off:
       action: light.turn_off
-      target: "{{ light }}"
+      target:
+        entity_id: |
+          {% if is_state('media_player.lg_webos_tv', 'on') %}
+            light.loft_wall
+          {% else %}
+            light.loft
+          {% endif %}
