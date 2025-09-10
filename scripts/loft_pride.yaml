@@ -1,0 +1,11 @@
+alias: Loft Pride
+description: >
+  Set lighting scenes in the Loft.
+icon: mdi:looks
+
+sequence:
+  - action: scene.turn_on
+    target:
+      entity_id:
+        - scene.loft_ceiling_tyrell
+        - scene.loft_wall_pride

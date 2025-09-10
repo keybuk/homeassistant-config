@@ -1,0 +1,10 @@
+alias: Office Natural
+description: >
+  Set lighting scenes in the Office.
+icon: mdi:palette
+
+sequence:
+  - action: scene.turn_on
+    target:
+      entity_id:
+        - scene.office_ceiling_natural_light

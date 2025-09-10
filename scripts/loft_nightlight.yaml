@@ -1,0 +1,11 @@
+alias: Loft Nightlight
+description: >
+  Set lighting scenes in the Loft.
+icon: mdi:palette
+
+sequence:
+  - action: scene.turn_on
+    target:
+      entity_id:
+        - scene.loft_ceiling_nightlight
+        - scene.loft_wall_nightlight

@@ -1,0 +1,11 @@
+alias: Dining Room Pride
+description: >
+  Set lighting scenes in the Dining Room.
+icon: mdi:looks
+
+sequence:
+  - action: scene.turn_on
+    target:
+      entity_id:
+        - scene.dining_room_wall_pride
+        - scene.dining_room_beam_lights_pride
