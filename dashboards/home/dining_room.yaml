@@ -99,10 +99,8 @@ sections:
           columns: full
       - type: media-control
         entity: media_player.dining_room_tabletop
-        grid_options:
-          columns: full
         visibility:
-          - condition: stat
+          - condition: state
             entity: media_player.dining_room_tabletop
             state: "on"
     column_span: 2
