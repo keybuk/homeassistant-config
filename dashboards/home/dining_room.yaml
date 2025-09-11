@@ -123,7 +123,25 @@ sections:
         name: Play
         hide_state: true
       - type: tile
+        entity: script.dining_room_game_setup
+        name: Game Setup
+        hide_state: true
+        tap_action:
+          action: toggle
+      - type: tile
         entity: script.dining_room_dnd
+        hide_state: true
+        tap_action:
+          action: toggle
+      - type: tile
+        entity: script.dining_room_game
+        name: Game
+        hide_state: true
+        tap_action:
+          action: toggle
+      - type: tile
+        entity: script.dining_room_game_over
+        name: Game Over
         hide_state: true
         tap_action:
           action: toggle

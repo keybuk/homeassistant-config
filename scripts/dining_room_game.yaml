@@ -1,7 +1,7 @@
-alias: "D&D"
+alias: Dining Room Game
 description: >
-  Set lighting scenes for playing Dungeons and Dragons (D&D) in the Dining Room.
-icon: mdi:dice-d20-outline
+  Set lighting scenes for playing board games in the Dining Room.
+icon: mdi:checkerboard
 
 sequence:
   - action: scene.apply
@@ -13,7 +13,7 @@ sequence:
           state: "on"
         light.dining_room_chandelier:
           state: "on"
-          brightness: 89
+          brightness: 153
         light.dining_room_spots:
           state: "on"
           brightness: 153

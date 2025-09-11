@@ -1,0 +1,13 @@
+alias: Game Over
+description: >
+  Set lighting scenes when finishing playing games in the Dining Room.
+icon: mdi:checkerboard-minus
+
+sequence:
+  - action: scene.apply
+    data:
+      entities:
+        light.dining_room_chandelier:
+          state: "off"
+        light.dining_room_spots:
+          state: "off"
