@@ -8,4 +8,4 @@ sequence:
     target:
       entity_id:
         - scene.bedroom_bedside_read
-        - scene.bedroom_ceiling_read
+        - scene.bedroom_ceiling_mood
