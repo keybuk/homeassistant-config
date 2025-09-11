@@ -8,7 +8,7 @@ mode: queued
 
 triggers:
   - trigger: state
-    entity_id: media_player.lg_webos_tv
+    entity_id: media_player.loft_tv
     to:
       - "on"
       - "off"
@@ -18,7 +18,7 @@ actions:
       # Turn ceiling lights off when the TV turns on.
       - conditions:
           - condition: state
-            entity_id: media_player.lg_webos_tv
+            entity_id: media_player.loft_tv
             state: "on"
         sequence:
           - action: light.turn_off
@@ -28,7 +28,7 @@ actions:
       # Turn ceiling lights back on when the TV turns off.
       - conditions:
           - condition: state
-            entity_id: media_player.lg_webos_tv
+            entity_id: media_player.loft_tv
             state: "off"
           # Only if the wall lights are on.
           - condition: state

@@ -54,4 +54,4 @@ actions:
     continue_on_error: true
     target:
       entity_id:
-        - media_player.lg_webos_tv
+        - media_player.loft_tv

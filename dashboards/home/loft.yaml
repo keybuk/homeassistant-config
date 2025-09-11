@@ -37,10 +37,11 @@ sections:
         grid_options:
           columns: full
       - type: media-control
-        entity: media_player.lg_webos_tv
+        entity: media_player.loft_tv
+        name: TV
         visibility:
           - condition: state
-            entity: media_player.lg_webos_tv
+            entity: media_player.loft_tv
             state: "on"
       - type: media-control
         entity: media_player.denon_avr
@@ -50,6 +51,7 @@ sections:
             state: "on"
       - type: media-control
         entity: media_player.loft_apple_tv
+        name: Apple TV
     column_span: 2
 
   # Actions

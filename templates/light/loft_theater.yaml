@@ -3,7 +3,7 @@
     name: Loft Theater
     unique_id: loft_theater
     state: |
-      {% if is_state('media_player.lg_webos_tv', 'on') %}
+      {% if is_state('media_player.loft_tv', 'on') %}
         {{ states('light.loft_wall') }}
       {% else %}
         {{ states('light.loft') }}
@@ -12,7 +12,7 @@
       action: light.turn_on
       target:
         entity_id: |
-          {% if is_state('media_player.lg_webos_tv', 'on') %}
+          {% if is_state('media_player.loft_tv', 'on') %}
             light.loft_wall
           {% else %}
             light.loft
@@ -21,7 +21,7 @@
       action: light.turn_off
       target:
         entity_id: |
-          {% if is_state('media_player.lg_webos_tv', 'on') %}
+          {% if is_state('media_player.loft_tv', 'on') %}
             light.loft_wall
           {% else %}
             light.loft

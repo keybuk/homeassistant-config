@@ -53,7 +53,7 @@ triggers:
     id: "close"
   # Update blinds when the TV turns on or off.
   - trigger: state
-    entity_id: media_player.lg_webos_tv
+    entity_id: media_player.loft_tv
     to:
       - "on"
       - "off"
@@ -162,7 +162,7 @@ actions:
                 entity_id: sensor.weather
                 state: "night"
           - condition: state
-            entity_id: media_player.lg_webos_tv
+            entity_id: media_player.loft_tv
             state: "on"
         sequence:
           - variables:
