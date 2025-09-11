@@ -99,6 +99,7 @@ sections:
           columns: full
       - type: media-control
         entity: media_player.dining_room_tabletop
+        name: Tabletop
         visibility:
           - condition: state
             entity: media_player.dining_room_tabletop
