@@ -1,0 +1,20 @@
+alias: Dining Room Tabletop
+id: dining_room_tabletop
+description: >
+  Set dining room light scenes based on the tabletop TV.
+
+mode: queued
+
+triggers:
+  - trigger: state
+    entity_id: media_player.dining_room_tabletop
+
+actions:
+  - if:
+      - condition: state
+        entity_id: media_player.dining_room_tabletop
+        state: "on"
+    then:
+      - action: script.dining_room_game_setup
+    else:
+      - action: script.dining_room_game_over

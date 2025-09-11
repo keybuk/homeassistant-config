@@ -106,6 +106,14 @@ sections:
         entity: media_player.dining_room
         grid_options:
           columns: full
+      - type: media-control
+        entity: media_player.dining_room_tabletop
+        grid_options:
+          columns: full
+        visibility:
+          - condition: stat
+            entity: media_player.dining_room_tabletop
+            state: "on"
     column_span: 2
 
   # Actions
@@ -333,4 +341,12 @@ sections:
               perform_action: automation.trigger
               target:
                 entity_id: automation.dining_room_blinds
+          - entity: automation.dining_room_tabletop
+            name: Tabletop
+            secondary_info: last-triggered
+            hold_action:
+              action: perform-action
+              perform_action: automation.trigger
+              target:
+                entity_id: automation.dining_room_tabletop
         show_header_toggle: false
