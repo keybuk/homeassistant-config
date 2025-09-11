@@ -232,7 +232,7 @@
     input:
       button: event.dining_room_switch_button_2
       actions:
-      - action: script.dnd
+      - action: script.dining_room_dnd
         metadata: {}
         data: {}
 - id: '1752632839285'

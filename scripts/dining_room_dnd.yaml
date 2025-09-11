@@ -1,0 +1,24 @@
+alias: "D&D"
+description: >
+  Set lighting scenes for playing Dungeons and Dragons (D&D) in the Dining Room.
+icon: mdi:dice-5-outline
+
+sequence:
+  - action: scene.apply
+    data:
+      entities:
+        light.dining_room_beam:
+          state: "on"
+        light.dining_room_wall:
+          state: "on"
+        light.dining_room_chandelier:
+          state: "on"
+          brightness: 89
+        light.dining_room_spots:
+          state: "on"
+          brightness: 153
+        light.kitchen_counter:
+          state: "on"
+          brightness: 127
+        light.kitchen_ceiling:
+          state: "off"
