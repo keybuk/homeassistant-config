@@ -6,15 +6,42 @@ description: >
 mode: queued
 
 triggers:
+  # Trigger when the Tabletop TV changes state. We track any state since it
+  # goes unavailable when we unplug it, which we treat the same as "off".
   - trigger: state
     entity_id: media_player.dining_room_tabletop
+    to: null
+    id: "tabletop"
+  # Trigger when the sun sets.
+  - trigger: state
+    entity_id: sensor.weather
+    to: "night"
 
 actions:
-  - if:
-      - condition: state
-        entity_id: media_player.dining_room_tabletop
-        state: "on"
-    then:
-      - action: script.dining_room_game_setup
-    else:
-      - action: script.dining_room_game_over
+  - choose:
+      # If the TV turns on at night, or sunset happens when the TV is on,
+      # use the lower light D&D scene.
+      - conditions:
+          - condition: state
+            entity_id: media_player.dining_room_tabletop
+            state: "on"
+          - condition: state
+            entity_id: sensor.weather
+            state: "night"
+        sequence:
+          - action: script.dining_room_dnd
+
+      # If the TV turns on, set the Game Setup scene.
+      - conditions:
+          - condition: state
+            entity_id: media_player.dining_room_tabletop
+            state: "on"
+        sequence:
+          - action: script.dining_room_game_setup
+
+      # If the TV is turning off, game over.
+      - conditions:
+          - condition: trigger
+            id: "tabletop"
+        sequence:
+          - action: script.dining_room_game_over
