@@ -93,15 +93,6 @@ sections:
         heading: Media
         heading_style: title
         icon: mdi:multimedia
-        badges:
-          - type: entity
-            entity: media_player.nebula_ffff4a
-            tap_action:
-              action: more-info
-          - type: entity
-            entity: media_player.nebula_mars_3_air
-            tap_action:
-              action: more-info
       - type: media-control
         entity: media_player.dining_room
         grid_options:
