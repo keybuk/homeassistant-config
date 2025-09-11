@@ -29,15 +29,6 @@ triggers:
     to: "off"
     id: "off"
 
-variables:
-  # When the TV is on, only the wall lights are controlled by occupancy.
-  light: |
-    {% if is_state('media_player.lg_webos_tv', 'on') %}
-      light.loft_wall
-    {% else %}
-      light.loft
-    {% endif %}
-
 actions:
   - choose:
       # Turn lights on when the room is occupied at night.
@@ -63,7 +54,7 @@ actions:
         sequence:
           - action: light.turn_on
             target:
-              entity_id: "{{ light }}"
+              entity_id: light.loft_theater
 
       # Turn lights on when the room is occupied during a cloudy day.
       - conditions:
@@ -88,7 +79,7 @@ actions:
         sequence:
           - action: light.turn_on
             target:
-              entity_id: "{{ light }}"
+              entity_id: light.loft_theater
 
       # Turn lights off when the sun comes out during the day to save on power.
       # Occupancy doesn't matter since we wouldn't turn lights on if it was.
