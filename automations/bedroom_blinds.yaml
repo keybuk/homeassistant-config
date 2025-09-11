@@ -9,12 +9,11 @@ triggers:
   # Update blinds at sunset and sunrise.
   - trigger: state
     entity_id: sensor.weather
-    to:
-      - "night"
+    to: "night"
   - trigger: state
     entity_id: sensor.weather
-    from:
-      - "night"
+    from: "night"
+    not_to: "unavailable"
   # Update blinds when we wake up or go to sleep.
   - trigger: state
     entity_id: binary_sensor.scotty_asleep
@@ -40,6 +39,16 @@ triggers:
     to:
       - "on"
       - "off"
+
+conditions:
+  # Not during restatt.
+  - not:
+      - condition: state
+        entity_id:
+          - binary_sensor.scotty_asleep
+          - sensor.weather
+        match: any
+        state: "unavailable"
 
 actions:
   - choose:

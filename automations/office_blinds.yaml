@@ -9,12 +9,11 @@ triggers:
   # Update blinds at sunset and sunrise.
   - trigger: state
     entity_id: sensor.weather
-    to:
-      - "night"
+    to: "night"
   - trigger: state
     entity_id: sensor.weather
-    from:
-      - "night"
+    from: "night"
+    not_to: "unavailable"
   # Update blinds when there is motion in the office.
   - trigger: state
     entity_id: binary_sensor.office_occupancy
