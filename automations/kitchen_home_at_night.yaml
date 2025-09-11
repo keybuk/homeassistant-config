@@ -10,6 +10,7 @@ triggers:
   - trigger: state
     entity_id: binary_sensor.anyone_home
     to: "on"
+    not_from: "unavailable"
   # But also turn on the lights if known people arrive home, even if the home
   # is otherwise already occupied.
   - trigger: zone
