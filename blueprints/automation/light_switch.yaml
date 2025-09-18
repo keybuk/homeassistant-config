@@ -49,10 +49,10 @@ actions:
       - conditions:
           - condition: trigger
             id: light
-          - "{{ not is_state(switch, states(light)) }}"
+          - "{{ not is_state(switch, trigger.to_state.state) }}"
         sequence:
           - action: |
-              {% if is_state(light, 'on') %}
+              {% if trigger.to_state.state == 'on' %}
                 switch.turn_on
               {% else %}
                 switch.turn_off
@@ -65,10 +65,10 @@ actions:
       - conditions:
           - condition: trigger
             id: switch
-          - "{{ not is_state(light, states(switch)) }}"
+          - "{{ not is_state(light, trigger.to_state.state) }}"
         sequence:
           - action: |
-              {% if is_state(switch, 'on') %}
+              {% if trigger.to_state.state == 'on' %}
                 light.turn_on
               {% else %}
                 light.turn_off
