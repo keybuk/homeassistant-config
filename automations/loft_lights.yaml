@@ -12,7 +12,7 @@ triggers:
     to:
       - "on"
       - "off"
-  # Update blinds based on the time of day and weather.
+  # Update lights based on the time of day and weather.
   - trigger: state
     entity_id: sensor.weather
     not_to: "unavailable"
@@ -93,6 +93,10 @@ actions:
           - condition: state
             entity_id: input_boolean.loft_play
             state: "off"
+          # Excluding triggers that should only turn the lights on.
+          - not:
+              - condition: trigger
+                id: "on"
         sequence:
           - action: light.turn_off
             target:
@@ -111,6 +115,10 @@ actions:
           - condition: state
             entity_id: input_boolean.loft_play
             state: "off"
+          # Excluding triggers that should only turn the lights on.
+          - not:
+              - condition: trigger
+                id: "on"
         sequence:
           - action: light.turn_off
             target:

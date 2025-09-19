@@ -73,7 +73,7 @@ actions:
           - condition: state
             entity_id: binary_sensor.anyone_home
             state: "on"
-          # Excluding triggers that should only turn the lights on.
+          # Excluding triggers that should only turn the lights off.
           - not:
               - condition: trigger
                 id: "off"
