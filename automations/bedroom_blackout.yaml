@@ -1,15 +1,26 @@
 alias: Bedroom Blackout
 id: bedroom_blackout
 description: >
-  Close the bedroom blackout blinds when we're sleeping in.
+  Close the bedroom blackout blinds when we're sleeping in, and open when we
+  wake up.
 
 mode: queued
 
 triggers:
-  # Update blinds when we go to sleep.
+  # Update blinds at sunset and sunrise.
+  - trigger: state
+    entity_id: sensor.weather
+    to: "night"
+  - trigger: state
+    entity_id: sensor.weather
+    from: "night"
+    not_to: "unavailable"
+  # Update blinds when we wake up or go to sleep.
   - trigger: state
     entity_id: binary_sensor.scotty_asleep
-    to: "on"
+    to:
+      - "on"
+      - "off"
   # Update blinds when the windows are closed.
   - trigger: state
     entity_id: binary_sensor.bedroom_window
@@ -29,12 +40,34 @@ conditions:
 
 actions:
   - choose:
+      # Open blackout blinds during the day.
+      - conditions:
+          - not:
+              - condition: state
+                entity_id: sensor.weather
+                state: "night"
+          # Unless someone is sleeping.
+          - condition: state
+            entity_id: binary_sensor.scotty_asleep
+            state: "off"
+        sequence:
+          - action: scene.turn_on
+            target:
+              entity_id: scene.bedroom_blackout_open
+
       # Close blackout blinds when we go to sleep during the day.
       - conditions:
           - not:
               - condition: state
                 entity_id: sensor.weather
                 state: "night"
+          - condition: state
+            entity_id: binary_sensor.scotty_asleep
+            state: "on"
+          # Only when the windows are closed.
+          - condition: state
+            entity_id: binary_sensor.bedroom_window
+            state: "off"
         sequence:
           - action: scene.turn_on
             target:
@@ -47,6 +80,13 @@ actions:
             before: sunrise
             after: sunrise
             after_offset: "-03:00:00"
+          - condition: state
+            entity_id: binary_sensor.scotty_asleep
+            state: "on"
+          # Only when the windows are closed.
+          - condition: state
+            entity_id: binary_sensor.bedroom_window
+            state: "off"
         sequence:
           - action: scene.turn_on
             target:
