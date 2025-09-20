@@ -20,35 +20,18 @@ triggers:
     to:
       - "on"
       - "off"
-  # Update blinds when there is motion in the bedroom. We use the Ecobee for
-  # this because the Nest points directly down at the bed.
-  - trigger: state
-    entity_id: binary_sensor.bedroom_ecobee_motion
-    to: "on"
-    id: "open"
   # Update blinds when the windows are closed.
   - trigger: state
     entity_id: binary_sensor.bedroom_window
     to: "off"
     for:
       seconds: 3
-    id: "close"
   # Update blinds when we're playing.
   - trigger: state
     entity_id: input_boolean.bedroom_play
     to:
       - "on"
       - "off"
-
-conditions:
-  # Not during restatt.
-  - not:
-      - condition: state
-        entity_id:
-          - binary_sensor.scotty_asleep
-          - sensor.weather
-        match: any
-        state: "unavailable"
 
 actions:
   - choose:
@@ -66,10 +49,6 @@ actions:
           - condition: state
             entity_id: input_boolean.bedroom_play
             state: "off"
-          # Excluding triggers that should only close the windows.
-          - not:
-              - condition: trigger
-                id: "close"
         sequence:
           - action: scene.turn_on
             target:
@@ -91,10 +70,6 @@ actions:
           - condition: state
             entity_id: binary_sensor.bedroom_window
             state: "off"
-          # Excluding triggers that should only open the windows.
-          - not:
-              - condition: trigger
-                id: "open"
         sequence:
           - action: scene.turn_on
             target:
@@ -109,10 +84,6 @@ actions:
           - condition: state
             entity_id: binary_sensor.bedroom_window
             state: "off"
-          # Excluding triggers that should only open the windows.
-          - not:
-              - condition: trigger
-                id: "open"
         sequence:
           - action: scene.turn_on
             target:
@@ -127,10 +98,6 @@ actions:
           - condition: state
             entity_id: binary_sensor.bedroom_window
             state: "off"
-          # Excluding triggers that should only open the windows.
-          - not:
-              - condition: trigger
-                id: "open"
         sequence:
           - action: scene.turn_on
             target:
