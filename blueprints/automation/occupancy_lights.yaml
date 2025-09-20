@@ -49,7 +49,7 @@ triggers:
     not_to: "unavailable"
   # Update lights when we wake up or go to sleep.
   - trigger: state
-    entity_id: binary_sensor.scotty_asleep
+    entity_id: binary_sensor.anyone_asleep
     to:
       - "on"
       - "off"
@@ -78,7 +78,7 @@ actions:
               - "night"
           # Unless someone is sleeping.
           - condition: state
-            entity_id: binary_sensor.scotty_asleep
+            entity_id: binary_sensor.anyone_asleep
             state: "off"
           # Only when someone is home.
           - condition: state
@@ -110,7 +110,7 @@ actions:
       - conditions:
           - or:
               - "{{ occupancy is not none and is_state(occupancy, 'off') }}"
-              - "{{ occupancy is none and is_state('binary_sensor.scotty_asleep', 'on') }}"
+              - "{{ occupancy is none and is_state('binary_sensor.anyone_asleep', 'on') }}"
               - condition: state
                 entity_id: binary_sensor.anyone_home
                 state: "off"

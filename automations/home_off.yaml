@@ -13,9 +13,9 @@ triggers:
     entity_id: binary_sensor.anyone_home
     to: "off"
 
-  # Turn things off when the last person goes to sleep.
+  # Turn things off when we go to sleep.
   - trigger: state
-    entity_id: binary_sensor.scotty_asleep
+    entity_id: binary_sensor.anyone_asleep
     to: "on"
 
 actions:
