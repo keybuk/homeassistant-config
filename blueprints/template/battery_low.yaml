@@ -1,0 +1,25 @@
+blueprint:
+  name: Battery Low
+  description: >
+    Creates a binary sensor that detects a low battery condition, including the
+    battery state being no longer available/
+  author: "Scott James Remnant <scott@netsplit.com>"
+  domain: template
+  input:
+    sensor:
+      name: Sensor
+      description: >
+        The sensor containing the battery level.
+      selector:
+        entity:
+          filter:
+            - domain: sensor
+              device_class: battery
+
+variables:
+  sensor: !input sensor
+
+binary_sensor:
+  device_class: problem
+  icon: mdi:battery-alert
+  state: "{{ is_state(sensor, 'unavailable') or states(sensor) | float < 25 }}"

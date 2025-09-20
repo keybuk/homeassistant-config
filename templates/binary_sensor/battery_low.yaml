@@ -1,0 +1,147 @@
+# Binary sensors for low battery conditions.
+- use_blueprint:
+    path: battery_low.yaml
+    input:
+      sensor: sensor.bedroom_ecobee_battery
+  name: Bedroom Ecobee Battery Low
+  unique_id: bedroom_ecobee_battery_low
+
+- use_blueprint:
+    path: battery_low.yaml
+    input:
+      sensor: sensor.bedroom_left_closet_leak_sensor_battery
+  name: Bedroom Left Closet Leak Sensor Battery Low
+  unique_id: bedroom_left_closet_leak_sensor_battery_low
+
+- use_blueprint:
+    path: battery_low.yaml
+    input:
+      sensor: sensor.bedroom_right_closet_leak_sensor_battery
+  name: Bedroom Right Closet Leak Sensor Battery Low
+  unique_id: bedroom_right_closet_leak_sensor_battery_low
+
+- use_blueprint:
+    path: battery_low.yaml
+    input:
+      sensor: sensor.bedroom_left_window_battery
+  name: Bedroom Left Window Battery Low
+  unique_id: bedroom_left_window_battery_low
+
+- use_blueprint:
+    path: battery_low.yaml
+    input:
+      sensor: sensor.bedroom_right_window_battery
+  name: Bedroom Right Window Battery Low
+  unique_id: bedroom_right_window_battery_low
+
+- use_blueprint:
+    path: battery_low.yaml
+    input:
+      sensor: sensor.dining_room_ecobee_battery
+  name: Dining Room Ecobee Battery Low
+  unique_id: dining_room_ecobee_battery_low
+
+- use_blueprint:
+    path: battery_low.yaml
+    input:
+      sensor: sensor.dining_room_floor_leak_sensor_battery
+  name: Dining Room Floor Leak Sensor Battery Low
+  unique_id: dining_room_floor_leak_sensor_battery_low
+
+- use_blueprint:
+    path: battery_low.yaml
+    input:
+      sensor: sensor.dining_room_motion_battery
+  name: Dining Room Motion Battery Low
+  unique_id: dining_room_motion_battery_low
+
+- use_blueprint:
+    path: battery_low.yaml
+    input:
+      sensor: sensor.dining_room_south_leak_sensor_battery
+  name: Dining Room South Leak Sensor Battery Low
+  unique_id: dining_room_south_leak_sensor_battery_low
+
+- use_blueprint:
+    path: battery_low.yaml
+    input:
+      sensor: sensor.dining_room_top_left_window_battery
+  name: Dining Room Top Left Window Battery Low
+  unique_id: dining_room_top_left_window_battery_low
+
+- use_blueprint:
+    path: battery_low.yaml
+    input:
+      sensor: sensor.dining_room_top_right_window_battery
+  name: Dining Room Top Right Window Battery Low
+  unique_id: dining_room_top_right_window_battery_low
+
+- use_blueprint:
+    path: battery_low.yaml
+    input:
+      sensor: sensor.dining_room_bottom_left_window_battery
+  name: Dining Room Bottom Left Window Battery Low
+  unique_id: dining_room_bottom_left_window_battery_low
+
+- use_blueprint:
+    path: battery_low.yaml
+    input:
+      sensor: sensor.dining_room_bottom_right_window_battery
+  name: Dining Room Bottom Right Window Battery Low
+  unique_id: dining_room_bottom_right_window_battery_low
+
+- use_blueprint:
+    path: battery_low.yaml
+    input:
+      sensor: sensor.front_door_battery
+  name: Front Door Battery Low
+  unique_id: front_door_battery_low
+
+- use_blueprint:
+    path: battery_low.yaml
+    input:
+      sensor: sensor.loft_ecobee_battery
+  name: Loft Ecobee Battery Low
+  unique_id: loft_ecobee_battery_low
+
+- use_blueprint:
+    path: battery_low.yaml
+    input:
+      sensor: sensor.office_ecobee_battery
+  name: Office Ecobee Battery Low
+  unique_id: office_ecobee_battery_low
+
+- use_blueprint:
+    path: battery_low.yaml
+    input:
+      sensor: sensor.office_left_window_battery
+  name: Office Left Window Battery Low
+  unique_id: office_left_window_battery_low
+
+- use_blueprint:
+    path: battery_low.yaml
+    input:
+      sensor: sensor.office_right_window_battery
+  name: Office Right Window Battery Low
+  unique_id: office_right_window_battery_low
+
+- use_blueprint:
+    path: battery_low.yaml
+    input:
+      sensor: sensor.roof_deck_door_battery
+  name: Roof Deck Door Battery Low
+  unique_id: roof_deck_door_battery_low
+
+- use_blueprint:
+    path: battery_low.yaml
+    input:
+      sensor: sensor.roof_north_window_battery
+  name: Roof North Window Battery Low
+  unique_id: roof_north_window_battery_low
+
+- use_blueprint:
+    path: battery_low.yaml
+    input:
+      sensor: sensor.roof_west_window_battery
+  name: Roof West Window Battery Low
+  unique_id: roof_west_window_battery_low
