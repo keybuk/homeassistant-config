@@ -51,6 +51,17 @@ sections:
         entity: climate.upstairs
         features:
           - type: target-temperature
+      - type: tile
+        entity: fan.stairs_evaporative_cooler
+        name: Evaporative Cooler
+        features:
+          - type: fan-speed
+          - type: fan-oscillate
+      - type: tile
+        entity: humidifier.stairs_evaporative_cooler_humidifier
+        name: Humidifier
+        features:
+          - type: humidifier-toggle
       - type: sensor
         entity: sensor.upstairs_ecobee_current_temperature
         name: Temperature

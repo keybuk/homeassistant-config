@@ -255,7 +255,7 @@ sections:
         heading: Climate
         icon: mdi:home-thermometer
       - type: tile
-        entity: fan.dining_room
+        entity: fan.dining_room_ceiling
         name: Fan
         state_content: state
         features:
@@ -263,13 +263,24 @@ sections:
           - type: fan-preset-modes
             style: dropdown
       - type: tile
-        entity: climate.dining_room_fan
+        entity: climate.dining_room_ceiling_auto_comfort
         name: Fan
         features:
           - type: target-temperature
       - type: tile
-        entity: fan.dining_room_fan_whoosh
+        entity: fan.dining_room_ceiling_whoosh
         name: Whoosh
+      - type: tile
+        entity: fan.dining_room_evaporative_cooler
+        name: Evaporative Cooler
+        features:
+          - type: fan-speed
+          - type: fan-oscillate
+      - type: tile
+        entity: humidifier.dining_room_evaporative_cooler_humidifier
+        name: Humidifier
+        features:
+          - type: humidifier-toggle
       - type: sensor
         entity: sensor.dining_room_temperature
         name: Temperature

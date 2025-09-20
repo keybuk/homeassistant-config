@@ -227,13 +227,13 @@ sections:
         heading: Climate
         icon: mdi:home-thermometer
       - type: tile
-        entity: fan.bedroom_tower
-        name: Fan
+        entity: fan.bedroom_evaporative_cooler
+        name: Evaporative Cooler
         features:
           - type: fan-speed
           - type: fan-oscillate
       - type: tile
-        entity: humidifier.bedroom_tower
+        entity: humidifier.bedroom_evaporative_cooler_humidifier
         name: Humidifier
         features:
           - type: humidifier-toggle

@@ -159,6 +159,17 @@ sections:
       - type: heading
         heading: Climate
         icon: mdi:home-thermometer
+      - type: tile
+        entity: fan.office_evaporative_cooler
+        name: Evaporative Cooler
+        features:
+          - type: fan-speed
+          - type: fan-oscillate
+      - type: tile
+        entity: humidifier.office_evaporative_cooler_humidifier
+        name: Humidifier
+        features:
+          - type: humidifier-toggle
       - type: sensor
         entity: sensor.office_ecobee_temperature
         name: Temperature
