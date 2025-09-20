@@ -302,3 +302,22 @@
       - light.dining_room
       - light.dining_room_lego
       playing: input_boolean.dining_room_play
+- id: '1758395540557'
+  alias: Bedroom Blinds
+  description: ''
+  use_blueprint:
+    path: night_blinds.yaml
+    input:
+      daytime: scene.bedroom_daytime
+      nighttime: scene.bedroom_nighttime
+      window: binary_sensor.bedroom_window
+      playing: input_boolean.bedroom_play
+- id: '1758395564309'
+  alias: Office Blinds
+  description: ''
+  use_blueprint:
+    path: night_blinds.yaml
+    input:
+      daytime: scene.office_daytime
+      nighttime: scene.office_nighttime
+      window: binary_sensor.office_window

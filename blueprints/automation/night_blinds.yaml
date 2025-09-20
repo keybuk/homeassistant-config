@@ -1,9 +1,48 @@
-alias: Bedroom Blinds
-id: bedroom_blinds
-description: >
-  Open and close the bedroom window blinds based on the time of day.
+blueprint:
+  name: Night Blinds
+  description: >
+    Open and close window blinds based on the time of day, and whether anyone is
+    asleep.
+  author: Scott James Remnant <scott@netsplit.com>
+  domain: automation
+  input:
+    daytime:
+      name: Daytime Scene
+      description: This scene will be set during the daytime.
+      selector:
+        entity:
+          filter:
+            - domain: scene
+    nighttime:
+      name: Nighttime Scene
+      description: This scene will be set during the nighttime.
+      selector:
+        entity:
+          filter:
+            - domain: scene
+    window:
+      name: Window
+      description: >
+        Blinds will not be closed until this sensor detects that the windows
+        are closed.
+      selector:
+        entity:
+          filter:
+            - domain: binary_sensor
+              device_class: window
+    playing:
+      name: Playing
+      description: Blinds will not be opened while this input is on.
+      selector:
+        entity:
+          filter:
+            - domain: input_boolean
+      default: null
 
 mode: queued
+
+trigger_variables:
+  playing: !input playing
 
 triggers:
   # Update blinds at sunset and sunrise.
@@ -22,16 +61,18 @@ triggers:
       - "off"
   # Update blinds when the windows are closed.
   - trigger: state
-    entity_id: binary_sensor.bedroom_window
+    entity_id: !input window
     to: "off"
     for:
       seconds: 3
   # Update blinds when we're playing.
-  - trigger: state
-    entity_id: input_boolean.bedroom_play
-    to:
-      - "on"
-      - "off"
+  - trigger: template
+    value_template: "{{ playing is not none and is_state(playing, 'on') }}"
+  - trigger: template
+    value_template: "{{ playing is not none and is_state(playing, 'off') }}"
+
+variables:
+  playing: !input playing
 
 actions:
   - choose:
@@ -46,13 +87,11 @@ actions:
             entity_id: binary_sensor.scotty_asleep
             state: "off"
           # Unless we're playing.
-          - condition: state
-            entity_id: input_boolean.bedroom_play
-            state: "off"
+          - "{{ playing is none or is_state(playing, 'off') }}"
         sequence:
           - action: scene.turn_on
             target:
-              entity_id: scene.bedroom_daytime
+              entity_id: !input daytime
 
       # Close blinds when we go to sleep during the day.
       - conditions:
@@ -65,26 +104,24 @@ actions:
             state: "on"
           # Only when the windows are closed.
           - condition: state
-            entity_id: binary_sensor.bedroom_window
+            entity_id: !input window
             state: "off"
         sequence:
           - action: scene.turn_on
             target:
-              entity_id: scene.bedroom_nighttime
+              entity_id: !input nighttime
 
       # Close blinds while we're playing.
       - conditions:
-          - condition: state
-            entity_id: input_boolean.bedroom_play
-            state: "on"
+          - "{{ playing is not none and is_state(playing, 'on') }}"
           # Only when the windows are closed.
           - condition: state
-            entity_id: binary_sensor.bedroom_window
+            entity_id: !input window
             state: "off"
         sequence:
           - action: scene.turn_on
             target:
-              entity_id: scene.bedroom_nighttime
+              entity_id: !input nighttime
 
       # Close blinds at night.
       - conditions:
@@ -93,9 +130,9 @@ actions:
             state: "night"
           # Only when the windows are closed.
           - condition: state
-            entity_id: binary_sensor.bedroom_window
+            entity_id: !input window
             state: "off"
         sequence:
           - action: scene.turn_on
             target:
-              entity_id: scene.bedroom_nighttime
+              entity_id: !input nighttime
