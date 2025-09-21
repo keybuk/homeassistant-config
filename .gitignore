@@ -1,6 +1,7 @@
 *.pem
 .cloud/
 .storage/
+.vscode/
 .HA_VERSION
 blueprints/automation/homeassistant/
 blueprints/script/homeassistant/
