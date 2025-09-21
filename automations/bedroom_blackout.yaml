@@ -28,16 +28,6 @@ triggers:
     for:
       seconds: 3
 
-conditions:
-  # Only when someone is sleeping.
-  - condition: state
-    entity_id: binary_sensor.anyone_asleep
-    state: "on"
-  # Only when the windows are closed.
-  - condition: state
-    entity_id: binary_sensor.bedroom_window
-    state: "off"
-
 actions:
   - choose:
       # Open blackout blinds during the day.
