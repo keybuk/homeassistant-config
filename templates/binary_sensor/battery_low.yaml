@@ -145,3 +145,10 @@
       sensor: sensor.roof_west_window_battery
   name: Roof West Window Battery Low
   unique_id: roof_west_window_battery_low
+
+- use_blueprint:
+    path: battery_low.yaml
+    input:
+      sensor: sensor.smart_lock_battery
+  name: Smart Lock Battery Low
+  unique_id: smart_lock_battery_low

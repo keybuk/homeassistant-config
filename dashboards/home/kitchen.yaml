@@ -24,6 +24,12 @@ badges:
       - condition: state
         entity: binary_sensor.front_door_battery_low
         state: "on"
+  - type: entity
+    entity: sensor.smart_lock_battery
+    visibility:
+      - condition: state
+        entity: binary_sensor.smart_lock_battery_low
+        state: "on"
 
 sections:
   # Media
