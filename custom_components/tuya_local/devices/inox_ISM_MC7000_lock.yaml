@@ -2,7 +2,7 @@ name: Smart Lock
 products:
   - id: qcpybij6
     manufecturer: INOX
-    model: ISM-MC7000
+    model: "ISM-MC7000"
 entities:
   - entity: lock
     dps:
@@ -17,6 +17,24 @@ entities:
           # Locked
           - dps_val: false
             value: true
+  - entity: switch
+    name: Privacy Mode
+    icon: "mdi:shield-lock"
+    dps:
+      # do_not_disturb
+      - id: 153
+        type: boolean
+        name: switch
+  - entity: switch
+    name: Passage Mode
+    icon: "mdi:shield-lock-open"
+    dps:
+      # passage_way_set
+      - id: 154
+        type: boolean
+        name: switch
+
+  # Diagnostic
   - entity: sensor
     class: battery
     category: diagnostic
@@ -27,19 +45,66 @@ entities:
         name: sensor
         unit: "%"
         class: measurement
+
+  # Configuration
   - entity: switch
-    name: Privacy Mode
+    name: Automatic Lock
     category: config
-    icon: "mdi:shield-lock"
+    icon: "mdi:lock-reset"
     dps:
-      - id: 153
+      - id: 30
         type: boolean
         name: switch
-  - entity: switch
-    name: Passage Mode
+        optional: true
+  - entity: number
+    name: Automatic Lock Delay
+    icon: "mdi:lock-clock"
     category: config
-    icon: "mdi:shield-lock-open"
     dps:
-      - id: 154
-        type: boolean
-        name: switch
+      - id: 31
+        type: integer
+        name: value
+        optional: true
+        unit: s
+        range:
+          min: 1
+          max: 1800
+  - entity: select
+    translation_key: language
+    category: config
+    dps:
+      # language
+      - id: 27
+        type: string
+        name: option
+        optional: true
+        mapping:
+          - dps_val: english
+            value: english
+          - dps_val: spanish
+            value: spanish
+  - entity: number
+    name: Lock volume
+    category: config
+    dps:
+      # doorbell_volume
+      - id: 26
+        type: string
+        name: value
+        unit: "%"
+        range:
+          min: 0
+          max: 100
+        mapping:
+          - dps_val: mute
+            step: 33
+            value: 0
+            icon: "mdi:volume-mute"
+          - dps_val: low
+            step: 50
+            value: 50
+            icon: "mdi:volume-low"
+          - dps_val: high
+            step: 50
+            value: 100
+            icon: "mdi:volume-high"
