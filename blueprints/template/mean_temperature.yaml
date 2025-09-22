@@ -32,3 +32,5 @@ sensor:
                      | list) %}
     {{ (values | sum) / (values | count) }}
   state_class: measurement
+  attributes:
+    entity_id: "{{ sensors }}"

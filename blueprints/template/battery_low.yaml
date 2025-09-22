@@ -23,3 +23,5 @@ binary_sensor:
   device_class: problem
   icon: mdi:battery-alert
   state: "{{ is_state(sensor, 'unavailable') or states(sensor) | float < 25 }}"
+  attributes:
+    entity_id: "{{ [ sensor ] }}"

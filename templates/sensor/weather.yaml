@@ -25,3 +25,7 @@
       {% elif is_state('sensor.weather', 'night') %}
         mdi:weather-night
       {% endif %}
+    attributes:
+      entity_id: |
+        {{ [ 'sun.sun',
+             'weather.home' ] }}

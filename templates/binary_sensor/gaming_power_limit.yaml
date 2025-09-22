@@ -12,3 +12,7 @@
       {% else %}
         mdi:flash-alert-outline
       {% endif %}
+    attributes:
+      entity_id: |
+        {{ [ 'button.vecna_power_limit_enable',
+             'sensor.office_wall_desk_left_current' ] }}

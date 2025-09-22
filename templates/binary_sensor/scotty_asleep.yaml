@@ -15,3 +15,8 @@
       {% else %}
         mdi:bed-empty
       {% endif %}
+    attributes:
+      entity_id: |
+        {{ [ 'binary_sensor.scottys_iphone_focus',
+             'person.scotty',
+             'sensor.scottys_iphone_battery_state' ] }}

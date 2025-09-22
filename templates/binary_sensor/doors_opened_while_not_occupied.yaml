@@ -27,3 +27,7 @@
       attributes:
         door: |
           {{ trigger.entity_id if trigger.id == 'door' else 'unavailable' }}
+        entity_id: |
+          {{ [ 'binary_sensor.anyone_home',
+               'binary_sensor.front_door',
+               'binary_sensor.roof_deck_door' ] }}

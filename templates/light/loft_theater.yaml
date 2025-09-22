@@ -26,3 +26,10 @@
           {% else %}
             light.loft
           {% endif %}
+    # attributes:
+    #   entity_id: |
+    #     {% if is_state('media_player.loft_tv', 'on') %}
+    #       {{ [ 'light.loft_wall' ] }}
+    #     {% else %}
+    #       {{ [ 'light.loft' ] }}
+    #     {% endif %}
