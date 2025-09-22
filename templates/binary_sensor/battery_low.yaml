@@ -149,6 +149,6 @@
 - use_blueprint:
     path: battery_low.yaml
     input:
-      sensor: sensor.smart_lock_battery
-  name: Smart Lock Battery Low
-  unique_id: smart_lock_battery_low
+      sensor: sensor.front_door_lock_battery
+  name: Front Door Lock Battery Low
+  unique_id: front_door_lock_battery
