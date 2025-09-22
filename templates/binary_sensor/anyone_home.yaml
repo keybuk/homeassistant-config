@@ -32,7 +32,11 @@
           on
         {% elif trigger.id == 'persons' %}
           {# Last household member left home #}
-          {{ states('binary_sensor.home_occupancy') }}
+          {% if is_state('lock.front_door', 'locked') %}
+            off
+          {% else %}
+            {{ states('binary_sensor.home_occupancy') }}
+          {% endif %}
         {% elif is_state('binary_sensor.doors_opened_while_not_occupied', 'on') %}
           {# Door has been opened #}
           {{ states('binary_sensor.home_occupancy') }}
@@ -43,3 +47,4 @@
         persons: "{{ state_attr('zone.home', 'persons') }}"
         occupancy: "{{ states('binary_sensor.home_occupancy') }}"
         door_opened: "{{ states('binary_sensor.doors_opened_while_not_occupied') }}"
+        locked: "{{ states('lock.front_door') }}"
