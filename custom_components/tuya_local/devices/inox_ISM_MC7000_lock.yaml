@@ -1,0 +1,45 @@
+name: Smart Lock
+products:
+  - id: qcpybij6
+    manufecturer: INOX
+    model: ISM-MC7000
+entities:
+  - entity: lock
+    dps:
+      # lock_motor_state
+      - id: 110
+        type: boolean
+        name: lock_state
+        mapping:
+          # Unlocked
+          - dps_val: true
+            value: false
+          # Locked
+          - dps_val: false
+            value: true
+  - entity: sensor
+    class: battery
+    category: diagnostic
+    dps:
+      # residual_electricity
+      - id: 106
+        type: integer
+        name: sensor
+        unit: "%"
+        class: measurement
+  - entity: switch
+    name: Privacy Mode
+    category: config
+    icon: "mdi:shield-lock"
+    dps:
+      - id: 153
+        type: boolean
+        name: switch
+  - entity: switch
+    name: Passage Mode
+    category: config
+    icon: "mdi:shield-lock-open"
+    dps:
+      - id: 154
+        type: boolean
+        name: switch
