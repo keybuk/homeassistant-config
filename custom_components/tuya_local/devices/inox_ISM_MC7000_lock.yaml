@@ -68,7 +68,7 @@ entities:
         unit: s
         range:
           min: 1
-          max: 1800
+          max: 300
   - entity: select
     translation_key: language
     category: config
