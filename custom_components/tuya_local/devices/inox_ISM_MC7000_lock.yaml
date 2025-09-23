@@ -83,8 +83,16 @@ entities:
             value: english
           - dps_val: spanish
             value: spanish
+  - entity: light
+    name: Lock Indicator Light
+    category: config
+    dps:
+      # led_enable
+      - id: 158
+        type: boolean
+        name: switch
   - entity: number
-    name: Lock volume
+    name: Lock Volume
     category: config
     dps:
       # doorbell_volume
