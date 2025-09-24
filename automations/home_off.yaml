@@ -18,6 +18,32 @@ triggers:
     entity_id: binary_sensor.anyone_asleep
     to: "on"
 
+  # Turn things off when we're not playing anymore.
+  - trigger: state
+    entity_id:
+      - input_boolean.bedroom_play
+      - input_boolean.dining_room_play
+      - input_boolean.loft_play
+    to: "off"
+
+conditions:
+  - or:
+      - condition: state
+        entity_id: binary_sensor.anyone_home
+        state: "off"
+      - condition: state
+        entity_id: binary_sensor.anyone_asleep
+        state: "on"
+  - condition: state
+    entity_id: input_boolean.bedroom_play
+    state: "off"
+  - condition: state
+    entity_id: input_boolean.dining_room_play
+    state: "off"
+  - condition: state
+    entity_id: input_boolean.loft_play
+    state: "off"
+
 actions:
   # Turn lights off that don't have their own automations triggered by the last
   # person leaving home.
