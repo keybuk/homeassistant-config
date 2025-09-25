@@ -32,29 +32,11 @@ actions:
             target:
               entity_id: scene.bedroom_blackout_open
 
-      # Close blackout blinds when we go to sleep during the day.
-      - conditions:
-          - not:
-              - condition: state
-                entity_id: sensor.weather
-                state: "night"
-          - condition: state
-            entity_id: binary_sensor.anyone_asleep
-            state: "on"
-          # Only when the windows are closed.
-          - condition: state
-            entity_id: binary_sensor.bedroom_window
-            state: "off"
-        sequence:
-          - action: scene.turn_on
-            target:
-              entity_id: scene.bedroom_blackout
-
       # Close blackout blinds when we go to sleep with less than three hours
-      # until sunrise.
+      # until sunrise, or any time during the day.
       - conditions:
           - condition: sun
-            before: sunrise
+            before: sunset
             after: sunrise
             after_offset: "-03:00:00"
           - condition: state
