@@ -191,6 +191,11 @@ sections:
         entity: weather.home
         show_forecast: false
         forecast_type: daily
+      - type: entities
+        entities:
+          - entity: sensor.sun_next_rising
+          - entity: sensor.sun_next_setting
+          - entity: sensor.moon_phase
 
   # Automations
   - type: grid
