@@ -7,14 +7,6 @@ description: >
 mode: queued
 
 triggers:
-  # Update blinds at sunset and sunrise.
-  - trigger: state
-    entity_id: sensor.weather
-    to: "night"
-  - trigger: state
-    entity_id: sensor.weather
-    from: "night"
-    not_to: "unavailable"
   # Update blinds when we wake up or go to sleep.
   - trigger: state
     entity_id: binary_sensor.anyone_asleep
