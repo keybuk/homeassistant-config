@@ -22,13 +22,8 @@ triggers:
 
 actions:
   - choose:
-      # Open blackout blinds during the day.
+      # Open blackout blinds when nobody is sleeping.
       - conditions:
-          - not:
-              - condition: state
-                entity_id: sensor.weather
-                state: "night"
-          # Unless someone is sleeping.
           - condition: state
             entity_id: binary_sensor.anyone_asleep
             state: "off"
