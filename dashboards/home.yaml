@@ -191,11 +191,16 @@ sections:
         entity: weather.home
         show_forecast: false
         forecast_type: daily
-      - type: entities
+      - type: glance
+        show_name: false
         entities:
-          - entity: sensor.sun_next_rising
           - entity: sensor.sun_next_setting
+            format: time
+            icon: mdi:weather-sunset-down
           - entity: sensor.moon_phase
+          - entity: sensor.sun_next_rising
+            format: time
+            icon: mdi:weather-sunset-up
 
   # Automations
   - type: grid
