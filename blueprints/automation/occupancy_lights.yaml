@@ -120,5 +120,5 @@ actions:
           - action: light.turn_off
             target:
               entity_id: !input lights
-            data:
-              transition: 5
+            # data:
+            #   transition: 5
