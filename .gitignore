@@ -1,5 +1,6 @@
 *.pem
 .cloud/
+.ha_run.lock
 .storage/
 .vscode/
 .HA_VERSION
@@ -12,4 +13,5 @@ home-assistant_v2.db*
 insteon_devices.json
 image/
 tts/
+www/
 zigbee.db*
