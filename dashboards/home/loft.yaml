@@ -96,12 +96,6 @@ sections:
         tap_action:
           action: toggle
       - type: tile
-        entity: script.loft_natural
-        name: Natural
-        hide_state: true
-        tap_action:
-          action: toggle
-      - type: tile
         entity: scene.kitchen_nighttime
         name: Nighttime
         hide_state: true

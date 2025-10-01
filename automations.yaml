@@ -36,7 +36,7 @@
     input:
       button: event.office_switch_button_3
       actions:
-      - action: script.office_natural
+      - action: script.office_work
         metadata: {}
         data: {}
 - id: '1742337280749'

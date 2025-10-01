@@ -73,8 +73,8 @@ sections:
         tap_action:
           action: toggle
       - type: tile
-        entity: script.office_natural
-        name: Natural
+        entity: script.office_work
+        name: Work
         hide_state: true
         tap_action:
           action: toggle
