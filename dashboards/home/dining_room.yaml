@@ -276,11 +276,41 @@ sections:
         features:
           - type: fan-speed
           - type: fan-oscillate
-      - type: tile
-        entity: humidifier.dining_room_evaporative_cooler_humidifier
-        name: Humidifier
-        features:
-          - type: humidifier-toggle
+          - type: custom:service-call
+            entries:
+              - type: selector
+                entity_id: switch.dining_room_evaporative_cooler_humidify
+                options:
+                  - option: "off"
+                    icon: mdi:water-off
+                    tap_action:
+                      action: perform-action
+                      perform_action: switch.turn_off
+                      target:
+                        entity_id: switch.dining_room_evaporative_cooler_humidify
+                  - option: "on"
+                    icon: mdi:water
+                    tap_action:
+                      action: perform-action
+                      perform_action: switch.turn_on
+                      target:
+                        entity_id: switch.dining_room_evaporative_cooler_humidify
+          - type: custom:service-call
+            entries:
+              - type: slider
+                entity_id: number.dining_room_evaporative_cooler_humidity_target
+                icon: mdi:water-percent
+                unit: "%"
+                range:
+                  - 40
+                  - 90
+                tap_action:
+                  action: perform-action
+                  perform_action: number.set_value
+                  target:
+                    entity_id: number.dining_room_evaporative_cooler_humidity_target
+                  data:
+                    value: "{{ value | float }}"
       - type: sensor
         entity: sensor.dining_room_temperature
         name: Temperature
