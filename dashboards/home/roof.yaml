@@ -72,11 +72,6 @@ sections:
       - type: heading
         heading: Security
         icon: mdi:cctv
-        badges:
-          - type: entity
-            entity: binary_sensor.roof_occupancy
-            tap_action:
-              action: more-info
       - type: glance
         entities:
           - entity: binary_sensor.roof_deck_door
@@ -88,6 +83,11 @@ sections:
       - type: heading
         heading: Automations
         icon: mdi:robot
+        badges:
+          - type: entity
+            entity: binary_sensor.roof_occupancy
+            tap_action:
+              action: more-info
       - type: entities
         entities:
           - entity: automation.roof_off
