@@ -327,11 +327,14 @@ sections:
             type: custom:mini-graph-card
             entities:
               - entity: sensor.loft_wall_east_left_daily_energy
-            group: true
+            group_by: "hour"
+            aggregate_func: "diff"
             show:
               graph: bar
               icon: false
               name: false
+            align_state: "right"
+            group: true
         show_header_toggle: false
       - type: entities
         title: East Right
@@ -344,11 +347,14 @@ sections:
             type: custom:mini-graph-card
             entities:
               - entity: sensor.loft_wall_east_right_daily_energy
-            group: true
+            group_by: "hour"
+            aggregate_func: "diff"
             show:
               graph: bar
               icon: false
               name: false
+            align_state: "right"
+            group: true
         show_header_toggle: false
       - type: entities
         title: South
@@ -361,11 +367,14 @@ sections:
             type: custom:mini-graph-card
             entities:
               - entity: sensor.loft_wall_south_daily_energy
-            group: true
+            group_by: "hour"
+            aggregate_func: "diff"
             show:
               graph: bar
               icon: false
               name: false
+            align_state: "right"
+            group: true
         show_header_toggle: false
       - type: entities
         title: West Left
@@ -378,11 +387,14 @@ sections:
             type: custom:mini-graph-card
             entities:
               - entity: sensor.loft_wall_west_left_daily_energy
-            group: true
+            group_by: "hour"
+            aggregate_func: "diff"
             show:
               graph: bar
               icon: false
               name: false
+            align_state: "right"
+            group: true
         show_header_toggle: false
       - type: entities
         title: West Right
@@ -395,11 +407,14 @@ sections:
             type: custom:mini-graph-card
             entities:
               - entity: sensor.loft_wall_west_right_daily_energy
-            group: true
+            group_by: "hour"
+            aggregate_func: "diff"
             show:
               graph: bar
               icon: false
               name: false
+            align_state: "right"
+            group: true
         show_header_toggle: false
       - type: entities
         title: Under Stairs
@@ -412,11 +427,14 @@ sections:
             type: custom:mini-graph-card
             entities:
               - entity: sensor.loft_wall_under_stairs_daily_energy
-            group: true
+            group_by: "hour"
+            aggregate_func: "diff"
             show:
               graph: bar
               icon: false
               name: false
+            align_state: "right"
+            group: true
         show_header_toggle: false
       - type: entities
         title: North
@@ -429,10 +447,13 @@ sections:
             type: custom:mini-graph-card
             entities:
               - entity: sensor.loft_wall_north_daily_energy
-            group: true
+            group_by: "hour"
+            aggregate_func: "diff"
             show:
               graph: bar
               icon: false
               name: false
+            align_state: "right"
+            group: true
         show_header_toggle: false
     column_span: 2

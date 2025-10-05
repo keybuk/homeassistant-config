@@ -143,10 +143,13 @@ sections:
             type: custom:mini-graph-card
             entities:
               - entity: sensor.stairs_wall_daily_energy
-            group: true
+            group_by: "hour"
+            aggregate_func: "diff"
             show:
               graph: bar
               icon: false
               name: false
+            align_state: "right"
+            group: true
         show_header_toggle: false
     column_span: 2

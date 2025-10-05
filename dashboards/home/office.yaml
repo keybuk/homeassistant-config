@@ -286,11 +286,14 @@ sections:
             type: custom:mini-graph-card
             entities:
               - entity: sensor.office_wall_desk_left_daily_energy
-            group: true
+            group_by: "hour"
+            aggregate_func: "diff"
             show:
               graph: bar
               icon: false
               name: false
+            align_state: "right"
+            group: true
         show_header_toggle: false
       - type: entities
         title: Desk Right
@@ -303,11 +306,14 @@ sections:
             type: custom:mini-graph-card
             entities:
               - entity: sensor.office_wall_desk_right_daily_energy
-            group: true
+            group_by: "hour"
+            aggregate_func: "diff"
             show:
               graph: bar
               icon: false
               name: false
+            align_state: "right"
+            group: true
         show_header_toggle: false
       - type: entities
         title: East
@@ -320,11 +326,14 @@ sections:
             type: custom:mini-graph-card
             entities:
               - entity: sensor.office_wall_east_daily_energy
-            group: true
+            group_by: "hour"
+            aggregate_func: "diff"
             show:
               graph: bar
               icon: false
               name: false
+            align_state: "right"
+            group: true
         show_header_toggle: false
       - type: entities
         title: South
@@ -337,11 +346,14 @@ sections:
             type: custom:mini-graph-card
             entities:
               - entity: sensor.office_wall_south_daily_energy
-            group: true
+            group_by: "hour"
+            aggregate_func: "diff"
             show:
               graph: bar
               icon: false
               name: false
+            align_state: "right"
+            group: true
         show_header_toggle: false
       - type: entities
         title: West
@@ -354,10 +366,13 @@ sections:
             type: custom:mini-graph-card
             entities:
               - entity: sensor.office_wall_west_daily_energy
-            group: true
+            group_by: "hour"
+            aggregate_func: "diff"
             show:
               graph: bar
               icon: false
               name: false
+            align_state: "right"
+            group: true
         show_header_toggle: false
     column_span: 2
