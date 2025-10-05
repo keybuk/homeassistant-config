@@ -364,6 +364,14 @@ sections:
               perform_action: automation.trigger
               target:
                 entity_id: automation.dining_room_switch
+          - entity: automation.dining_room_off
+            name: "Off"
+            secondary_info: last-triggered
+            hold_action:
+              action: perform-action
+              perform_action: automation.trigger
+              target:
+                entity_id: automation.dining_room_off
           - entity: automation.dining_room_blinds
             name: Blinds
             secondary_info: last-triggered

@@ -31,3 +31,21 @@ sections:
       - type: tile
         entity: light.bathroom_bathroom_mirror
         name: Mirror
+
+  # Automations
+  - type: grid
+    cards:
+      - type: heading
+        heading: Automations
+        icon: mdi:robot
+      - type: entities
+        entities:
+          - entity: automation.bathroom_off
+            name: "Off"
+            secondary_info: last-triggered
+            hold_action:
+              action: perform-action
+              perform_action: automation.trigger
+              target:
+                entity_id: automation.bathroom_off
+        show_header_toggle: false

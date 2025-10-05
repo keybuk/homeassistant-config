@@ -81,3 +81,21 @@ sections:
         entities:
           - entity: binary_sensor.roof_deck_door
             name: Deck Door
+
+  # Automations
+  - type: grid
+    cards:
+      - type: heading
+        heading: Automations
+        icon: mdi:robot
+      - type: entities
+        entities:
+          - entity: automation.roof_off
+            name: "Off"
+            secondary_info: last-triggered
+            hold_action:
+              action: perform-action
+              perform_action: automation.trigger
+              target:
+                entity_id: automation.roof_off
+        show_header_toggle: false

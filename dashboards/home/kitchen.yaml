@@ -175,6 +175,14 @@ sections:
               perform_action: automation.trigger
               target:
                 entity_id: automation.kitchen_home_at_night
+          - entity: automation.kitchen_off
+            name: "Off"
+            secondary_info: last-triggered
+            hold_action:
+              action: perform-action
+              perform_action: automation.trigger
+              target:
+                entity_id: automation.kitchen_off
           - entity: automation.kitchen_blinds
             name: Blinds
             secondary_info: last-triggered

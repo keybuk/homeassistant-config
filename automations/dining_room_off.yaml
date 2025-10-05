@@ -1,5 +1,5 @@
-alias: Home Off
-id: home_off
+alias: Dining Room Off
+id: dining_room_off
 description: >
   Turn things off when the last person goes to sleep, or the home is no longer
   occupied.
@@ -20,10 +20,7 @@ triggers:
 
   # Turn things off when we're not playing anymore.
   - trigger: state
-    entity_id:
-      - input_boolean.bedroom_play
-      - input_boolean.dining_room_play
-      - input_boolean.loft_play
+    entity_id: input_boolean.dining_room_play
     to: "off"
 
 conditions:
@@ -35,49 +32,18 @@ conditions:
         entity_id: binary_sensor.anyone_asleep
         state: "on"
   - condition: state
-    entity_id: input_boolean.bedroom_play
-    state: "off"
-  - condition: state
     entity_id: input_boolean.dining_room_play
-    state: "off"
-  - condition: state
-    entity_id: input_boolean.loft_play
     state: "off"
 
 actions:
-  # Turn lights off that don't have their own automations triggered by the last
-  # person leaving home.
   - action: light.turn_off
     continue_on_error: true
     target:
-      area_id:
-        - kitchen
-        - downstairs_bathroom
-        - bathroom
-        - stairs
-        - roof
       entity_id:
         - light.dining_room_chandelier
         - light.dining_room_spots
-        - light.bedroom_left_closet
-        - light.bedroom_right_closet
 
-  # Stop any Sonos playing music.
   - action: media_player.media_pause
     continue_on_error: true
     target:
-      entity_id:
-        - media_player.dining_room
-        - media_player.kitchen
-        - media_player.office
-        - media_player.bedroom
-        - media_player.loft
-        - media_player.bathroom
-        - media_player.downstairs_bathroom
-
-  # Turn off the TV.
-  - action: media_player.turn_off
-    continue_on_error: true
-    target:
-      entity_id:
-        - media_player.loft_tv
+      entity_id: media_player.dining_room

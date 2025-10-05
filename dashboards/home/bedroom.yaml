@@ -314,6 +314,14 @@ sections:
               perform_action: automation.trigger
               target:
                 entity_id: automation.bedroom_switch
+          - entity: automation.bedroom_off
+            name: "Off"
+            secondary_info: last-triggered
+            hold_action:
+              action: perform-action
+              perform_action: automation.trigger
+              target:
+                entity_id: automation.bedroom_off
           - entity: automation.bedroom_blinds
             name: Blinds
             secondary_info: last-triggered

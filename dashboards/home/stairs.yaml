@@ -108,6 +108,24 @@ sections:
             tap_action:
               action: more-info
 
+  # Automations
+  - type: grid
+    cards:
+      - type: heading
+        heading: Automations
+        icon: mdi:robot
+      - type: entities
+        entities:
+          - entity: automation.stairs_off
+            name: "Off"
+            secondary_info: last-triggered
+            hold_action:
+              action: perform-action
+              perform_action: automation.trigger
+              target:
+                entity_id: automation.stairs_off
+        show_header_toggle: false
+
   # Power
   - type: grid
     cards:

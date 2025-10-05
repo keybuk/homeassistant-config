@@ -269,6 +269,14 @@ sections:
               perform_action: automation.trigger
               target:
                 entity_id: automation.loft_switch
+          - entity: automation.loft_off
+            name: "Off"
+            secondary_info: last-triggered
+            hold_action:
+              action: perform-action
+              perform_action: automation.trigger
+              target:
+                entity_id: automation.loft_off
           - entity: automation.loft_tv
             name: TV
             secondary_info: last-triggered

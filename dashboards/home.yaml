@@ -14,6 +14,51 @@ badges:
       pipeline_id: preferred
       start_listening: true
 
+  # Display one of multiple badges to show if I'm asleep, at home, or
+  # the home occupancy state.
+  - type: entity
+    entity: binary_sensor.scotty_asleep
+    name: Scotty
+    icon: mdi:bed
+    state_content: name
+    tap_action:
+      action: more-info
+    visibility:
+      - condition: state
+        entity: person.scotty
+        state: home
+      - condition: state
+        entity: binary_sensor.scotty_asleep
+        state: "on"
+  - type: entity
+    entity: person.scotty
+    icon: mdi:home
+    state_content: name
+    tap_action:
+      action: more-info
+    visibility:
+      - condition: state
+        entity: person.scotty
+        state: home
+      - condition: state
+        entity: binary_sensor.scotty_asleep
+        state_not: "on"
+  - type: entity
+    entity: binary_sensor.anyone_home
+    tap_action:
+      action: more-info
+    visibility:
+      - condition: state
+        entity: person.scotty
+        state_not: home
+
+  # Display the weather condition as used by automations.
+  - type: entity
+    entity: sensor.weather
+    show_state: false
+    tap_action:
+      action: more-info
+
 sections:
   # Downstairs
   - type: grid
@@ -201,69 +246,7 @@ sections:
           - entity: sensor.sun_next_rising
             format: time
             icon: mdi:weather-sunset-up
-
-  # Automations
-  - type: grid
-    cards:
-      - type: heading
-        heading: Automations
-        icon: mdi:robot
-        badges:
-          # Display one of multiple badges to show if I'm asleep, at home, or
-          # the home occupancy state.
-          - type: entity
-            entity: binary_sensor.scotty_asleep
-            name: Scotty
-            icon: mdi:bed
-            state_content: name
-            tap_action:
-              action: more-info
-            visibility:
-              - condition: state
-                entity: person.scotty
-                state: home
-              - condition: state
-                entity: binary_sensor.scotty_asleep
-                state: "on"
-          - type: entity
-            entity: person.scotty
-            icon: mdi:home
-            state_content: name
-            tap_action:
-              action: more-info
-            visibility:
-              - condition: state
-                entity: person.scotty
-                state: home
-              - condition: state
-                entity: binary_sensor.scotty_asleep
-                state_not: "on"
-          - type: entity
-            entity: binary_sensor.anyone_home
-            tap_action:
-              action: more-info
-            visibility:
-              - condition: state
-                entity: person.scotty
-                state_not: home
-
-          # Display the weather condition as used by automations.
-          - type: entity
-            entity: sensor.weather
-            show_state: false
-            tap_action:
-              action: more-info
-
-      - type: entities
-        entities:
-          - entity: automation.home_off
-            secondary_info: last-triggered
-            hold_action:
-              action: perform-action
-              perform_action: automation.trigger
-              target:
-                entity_id: automation.home_off
-        show_header_toggle: false
+    column_span: 2
 
   # Power
   - type: grid

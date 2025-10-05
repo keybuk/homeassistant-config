@@ -1,0 +1,48 @@
+alias: Bedroom Off
+id: bedroom_off
+description: >
+  Turn things off in the bedroom that don't have their own automations.
+
+mode: single
+
+triggers:
+  # Turn things off when occupancy is no longer detected after the last person
+  # leaves home.
+  - trigger: state
+    entity_id: binary_sensor.anyone_home
+    to: "off"
+
+  # Turn things off when we go to sleep.
+  - trigger: state
+    entity_id: binary_sensor.anyone_asleep
+    to: "on"
+
+  # Turn things off when we're not playing anymore.
+  - trigger: state
+    entity_id: input_boolean.bedroom_play
+    to: "off"
+
+conditions:
+  - or:
+      - condition: state
+        entity_id: binary_sensor.anyone_home
+        state: "off"
+      - condition: state
+        entity_id: binary_sensor.anyone_asleep
+        state: "on"
+  - condition: state
+    entity_id: input_boolean.bedroom_play
+    state: "off"
+
+actions:
+  - action: light.turn_off
+    continue_on_error: true
+    target:
+      entity_id:
+        - light.bedroom_left_closet
+        - light.bedroom_right_closet
+
+  - action: media_player.media_pause
+    continue_on_error: true
+    target:
+      entity_id: media_player.bedroom

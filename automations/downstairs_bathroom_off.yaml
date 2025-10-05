@@ -1,0 +1,39 @@
+alias: Downstairs Bathroom Off
+id: downstairs_bathroom_off
+description: >
+  Turn things off when the last person goes to sleep, or the home is no longer
+  occupied.
+
+mode: single
+
+triggers:
+  # Turn things off when occupancy is no longer detected after the last person
+  # leaves home.
+  - trigger: state
+    entity_id: binary_sensor.anyone_home
+    to: "off"
+
+  # Turn things off when we go to sleep.
+  - trigger: state
+    entity_id: binary_sensor.anyone_asleep
+    to: "on"
+
+conditions:
+  - or:
+      - condition: state
+        entity_id: binary_sensor.anyone_home
+        state: "off"
+      - condition: state
+        entity_id: binary_sensor.anyone_asleep
+        state: "on"
+
+actions:
+  - action: light.turn_off
+    continue_on_error: true
+    target:
+      area_id: downstairs_bathroom
+
+  - action: media_player.media_pause
+    continue_on_error: true
+    target:
+      entity_id: media_player.downstairs_bathroom
