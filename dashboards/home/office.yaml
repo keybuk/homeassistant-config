@@ -278,13 +278,15 @@ sections:
           - entity: switch.office_wall_desk_left_switch_bottom
             name: Bottom
           - entity: sensor.office_wall_desk_left_daily_energy
-            name: Energy
-          - entity: sensor.office_wall_desk_left_current
-            name: Current
+            type: custom:mini-graph-card
+            entities:
+              - entity: sensor.office_wall_desk_left_daily_energy
+            group: true
+            show:
+              graph: bar
+              icon: false
+              name: false
         show_header_toggle: false
-        footer:
-          type: graph
-          entity: sensor.office_wall_desk_left_current
       - type: entities
         title: Desk Right
         entities:
@@ -293,13 +295,15 @@ sections:
           - entity: switch.office_wall_desk_right_switch_bottom
             name: Bottom
           - entity: sensor.office_wall_desk_right_daily_energy
-            name: Energy
-          - entity: sensor.office_wall_desk_right_current
-            name: Current
+            type: custom:mini-graph-card
+            entities:
+              - entity: sensor.office_wall_desk_right_daily_energy
+            group: true
+            show:
+              graph: bar
+              icon: false
+              name: false
         show_header_toggle: false
-        footer:
-          type: graph
-          entity: sensor.office_wall_desk_right_current
       - type: entities
         title: East
         entities:
@@ -308,13 +312,15 @@ sections:
           - entity: switch.office_wall_east_switch_bottom
             name: Bottom
           - entity: sensor.office_wall_east_daily_energy
-            name: Energy
-          - entity: sensor.office_wall_east_current
-            name: Current
+            type: custom:mini-graph-card
+            entities:
+              - entity: sensor.office_wall_east_daily_energy
+            group: true
+            show:
+              graph: bar
+              icon: false
+              name: false
         show_header_toggle: false
-        footer:
-          type: graph
-          entity: sensor.office_wall_east_current
       - type: entities
         title: South
         entities:
@@ -323,13 +329,15 @@ sections:
           - entity: switch.office_wall_south_switch_bottom
             name: Bottom
           - entity: sensor.office_wall_south_daily_energy
-            name: Energy
-          - entity: sensor.office_wall_south_current
-            name: Current
+            type: custom:mini-graph-card
+            entities:
+              - entity: sensor.office_wall_south_daily_energy
+            group: true
+            show:
+              graph: bar
+              icon: false
+              name: false
         show_header_toggle: false
-        footer:
-          type: graph
-          entity: sensor.office_wall_south_current
       - type: entities
         title: West
         entities:
@@ -338,11 +346,13 @@ sections:
           - entity: switch.office_wall_west_switch_bottom
             name: Bottom
           - entity: sensor.office_wall_west_daily_energy
-            name: Energy
-          - entity: sensor.office_wall_west_current
-            name: Current
+            type: custom:mini-graph-card
+            entities:
+              - entity: sensor.office_wall_west_daily_energy
+            group: true
+            show:
+              graph: bar
+              icon: false
+              name: false
         show_header_toggle: false
-        footer:
-          type: graph
-          entity: sensor.office_wall_west_current
     column_span: 2

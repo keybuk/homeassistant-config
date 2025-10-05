@@ -309,13 +309,15 @@ sections:
           - entity: switch.loft_wall_east_left_switch_bottom
             name: Bottom
           - entity: sensor.loft_wall_east_left_daily_energy
-            name: Energy
-          - entity: sensor.loft_wall_east_left_current
-            name: Current
+            type: custom:mini-graph-card
+            entities:
+              - entity: sensor.loft_wall_east_left_daily_energy
+            group: true
+            show:
+              graph: bar
+              icon: false
+              name: false
         show_header_toggle: false
-        footer:
-          type: graph
-          entity: sensor.loft_wall_east_left_current
       - type: entities
         title: East Right
         entities:
@@ -324,13 +326,15 @@ sections:
           - entity: switch.loft_wall_east_right_switch_bottom
             name: Bottom
           - entity: sensor.loft_wall_east_right_daily_energy
-            name: Energy
-          - entity: sensor.loft_wall_east_right_current
-            name: Current
+            type: custom:mini-graph-card
+            entities:
+              - entity: sensor.loft_wall_east_right_daily_energy
+            group: true
+            show:
+              graph: bar
+              icon: false
+              name: false
         show_header_toggle: false
-        footer:
-          type: graph
-          entity: sensor.loft_wall_east_right_current
       - type: entities
         title: South
         entities:
@@ -339,13 +343,15 @@ sections:
           - entity: switch.loft_wall_south_switch_bottom
             name: Bottom
           - entity: sensor.loft_wall_south_daily_energy
-            name: Energy
-          - entity: sensor.loft_wall_south_current
-            name: Current
+            type: custom:mini-graph-card
+            entities:
+              - entity: sensor.loft_wall_south_daily_energy
+            group: true
+            show:
+              graph: bar
+              icon: false
+              name: false
         show_header_toggle: false
-        footer:
-          type: graph
-          entity: sensor.loft_wall_south_current
       - type: entities
         title: West Left
         entities:
@@ -354,13 +360,15 @@ sections:
           - entity: switch.loft_wall_west_left_switch_bottom
             name: Bottom
           - entity: sensor.loft_wall_west_left_daily_energy
-            name: Energy
-          - entity: sensor.loft_wall_west_left_current
-            name: Current
+            type: custom:mini-graph-card
+            entities:
+              - entity: sensor.loft_wall_west_left_daily_energy
+            group: true
+            show:
+              graph: bar
+              icon: false
+              name: false
         show_header_toggle: false
-        footer:
-          type: graph
-          entity: sensor.loft_wall_west_left_current
       - type: entities
         title: West Right
         entities:
@@ -369,13 +377,15 @@ sections:
           - entity: switch.loft_wall_west_right_switch_bottom
             name: Bottom
           - entity: sensor.loft_wall_west_right_daily_energy
-            name: Energy
-          - entity: sensor.loft_wall_west_right_current
-            name: Current
+            type: custom:mini-graph-card
+            entities:
+              - entity: sensor.loft_wall_west_right_daily_energy
+            group: true
+            show:
+              graph: bar
+              icon: false
+              name: false
         show_header_toggle: false
-        footer:
-          type: graph
-          entity: sensor.loft_wall_west_right_current
       - type: entities
         title: Under Stairs
         entities:
@@ -384,13 +394,15 @@ sections:
           - entity: switch.loft_wall_under_stairs_switch_bottom
             name: Bottom
           - entity: sensor.loft_wall_under_stairs_daily_energy
-            name: Energy
-          - entity: sensor.loft_wall_under_stairs_current
-            name: Current
+            type: custom:mini-graph-card
+            entities:
+              - entity: sensor.loft_wall_under_stairs_daily_energy
+            group: true
+            show:
+              graph: bar
+              icon: false
+              name: false
         show_header_toggle: false
-        footer:
-          type: graph
-          entity: sensor.loft_wall_under_stairs_current
       - type: entities
         title: North
         entities:
@@ -399,11 +411,13 @@ sections:
           - entity: switch.loft_wall_north_switch_bottom
             name: Bottom
           - entity: sensor.loft_wall_north_daily_energy
-            name: Energy
-          - entity: sensor.loft_wall_north_current
-            name: Current
+            type: custom:mini-graph-card
+            entities:
+              - entity: sensor.loft_wall_north_daily_energy
+            group: true
+            show:
+              graph: bar
+              icon: false
+              name: false
         show_header_toggle: false
-        footer:
-          type: graph
-          entity: sensor.loft_wall_north_current
     column_span: 2

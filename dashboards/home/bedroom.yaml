@@ -354,13 +354,15 @@ sections:
           - entity: switch.bedroom_wall_bedside_left_switch_bottom
             name: Bottom
           - entity: sensor.bedroom_wall_bedside_left_daily_energy
-            name: Energy
-          - entity: sensor.bedroom_wall_bedside_left_current
-            name: Current
+            type: custom:mini-graph-card
+            entities:
+              - entity: sensor.bedroom_wall_bedside_left_daily_energy
+            group: true
+            show:
+              graph: bar
+              icon: false
+              name: false
         show_header_toggle: false
-        footer:
-          type: graph
-          entity: sensor.bedroom_wall_bedside_left_current
       - type: entities
         title: Bedside Right
         entities:
@@ -369,13 +371,15 @@ sections:
           - entity: switch.bedroom_wall_bedside_right_switch_bottom
             name: Bottom
           - entity: sensor.bedroom_wall_bedside_right_daily_energy
-            name: Energy
-          - entity: sensor.bedroom_wall_bedside_right_current
-            name: Current
+            type: custom:mini-graph-card
+            entities:
+              - entity: sensor.bedroom_wall_bedside_right_daily_energy
+            group: true
+            show:
+              graph: bar
+              icon: false
+              name: false
         show_header_toggle: false
-        footer:
-          type: graph
-          entity: sensor.bedroom_wall_bedside_right_current
       - type: entities
         title: South Left
         entities:
@@ -384,13 +388,15 @@ sections:
           - entity: switch.bedroom_wall_south_left_switch_bottom
             name: Bottom
           - entity: sensor.bedroom_wall_south_left_daily_energy
-            name: Energy
-          - entity: sensor.bedroom_wall_south_left_current
-            name: Current
+            type: custom:mini-graph-card
+            entities:
+              - entity: sensor.bedroom_wall_south_left_daily_energy
+            group: true
+            show:
+              graph: bar
+              icon: false
+              name: false
         show_header_toggle: false
-        footer:
-          type: graph
-          entity: sensor.bedroom_wall_south_left_current
       - type: entities
         title: South Center
         entities:
@@ -399,13 +405,15 @@ sections:
           - entity: switch.bedroom_wall_south_center_switch_bottom
             name: Bottom
           - entity: sensor.bedroom_wall_south_center_daily_energy
-            name: Energy
-          - entity: sensor.bedroom_wall_south_center_current
-            name: Current
+            type: custom:mini-graph-card
+            entities:
+              - entity: sensor.bedroom_wall_south_center_daily_energy
+            group: true
+            show:
+              graph: bar
+              icon: false
+              name: false
         show_header_toggle: false
-        footer:
-          type: graph
-          entity: sensor.bedroom_wall_south_center_current
       - type: entities
         title: West Left
         entities:
@@ -414,13 +422,15 @@ sections:
           - entity: switch.bedroom_wall_west_left_switch_bottom
             name: Bottom
           - entity: sensor.bedroom_wall_west_left_daily_energy
-            name: Energy
-          - entity: sensor.bedroom_wall_west_left_current
-            name: Current
+            type: custom:mini-graph-card
+            entities:
+              - entity: sensor.bedroom_wall_west_left_daily_energy
+            group: true
+            show:
+              graph: bar
+              icon: false
+              name: false
         show_header_toggle: false
-        footer:
-          type: graph
-          entity: sensor.bedroom_wall_west_left_current
       - type: entities
         title: West Center
         entities:
@@ -429,11 +439,13 @@ sections:
           - entity: switch.bedroom_wall_west_center_switch_bottom
             name: Bottom
           - entity: sensor.bedroom_wall_west_center_daily_energy
-            name: Energy
-          - entity: sensor.bedroom_wall_west_center_current
-            name: Current
+            type: custom:mini-graph-card
+            entities:
+              - entity: sensor.bedroom_wall_west_center_daily_energy
+            group: true
+            show:
+              graph: bar
+              icon: false
+              name: false
         show_header_toggle: false
-        footer:
-          type: graph
-          entity: sensor.bedroom_wall_west_center_current
     column_span: 2

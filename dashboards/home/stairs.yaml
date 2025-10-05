@@ -140,10 +140,13 @@ sections:
           - entity: switch.stairs_wall_switch_bottom
             name: Bottom
           - entity: sensor.stairs_wall_daily_energy
-            name: Energy
-          - entity: sensor.stairs_wall_current
-            name: Current
+            type: custom:mini-graph-card
+            entities:
+              - entity: sensor.stairs_wall_daily_energy
+            group: true
+            show:
+              graph: bar
+              icon: false
+              name: false
         show_header_toggle: false
-        footer:
-          type: graph
-          entity: sensor.stairs_wall_current
+    column_span: 2
