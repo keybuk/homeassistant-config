@@ -62,18 +62,6 @@ sections:
         heading: Actions
         icon: mdi:gesture-tap-button
       - type: tile
-        entity: light.loft
-        name: Lights
-        hide_state: true
-      - type: tile
-        entity: light.loft_ceiling
-        name: Ceiling
-        hide_state: true
-      - type: tile
-        entity: light.loft_wall
-        name: Wall
-        hide_state: true
-      - type: tile
         entity: input_boolean.loft_play
         name: Play
         hide_state: true
@@ -113,6 +101,24 @@ sections:
         heading: Lights
         icon: mdi:lamps
       - type: tile
+        entity: light.loft
+        name: Lights
+        hide_state: true
+        features:
+          - type: light-brightness
+        features_position: inline
+        grid_options:
+          columns: full
+      - type: tile
+        entity: light.loft_ceiling
+        name: Ceiling
+        hide_state: true
+        features:
+          - type: light-brightness
+        features_position: inline
+        grid_options:
+          columns: full
+      - type: tile
         entity: light.loft_wall_left
         name: Wall Left
         features:
@@ -142,6 +148,15 @@ sections:
         name: Balcony Right
         features:
           - type: light-brightness
+      - type: tile
+        entity: light.loft_wall
+        name: Wall
+        hide_state: true
+        features:
+          - type: light-brightness
+        features_position: inline
+        grid_options:
+          columns: full
       - type: tile
         entity: light.loft_east_left
         name: East Left

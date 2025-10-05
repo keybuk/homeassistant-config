@@ -57,10 +57,6 @@ sections:
         heading: Actions
         icon: mdi:gesture-tap-button
       - type: tile
-        entity: light.office
-        name: Lights
-        hide_state: true
-      - type: tile
         entity: script.office_bright
         name: Bright
         hide_state: true
@@ -95,6 +91,15 @@ sections:
       - type: heading
         heading: Lights
         icon: mdi:lamps
+      - type: tile
+        entity: light.office
+        name: Lights
+        hide_state: true
+        features:
+          - type: light-brightness
+        features_position: inline
+        grid_options:
+          columns: full
       - type: tile
         entity: light.office_desk_left
         name: Desk Left

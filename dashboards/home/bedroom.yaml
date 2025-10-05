@@ -87,18 +87,6 @@ sections:
         heading: Actions
         icon: mdi:gesture-tap-button
       - type: tile
-        entity: light.bedroom
-        name: Lights
-        hide_state: true
-      - type: tile
-        entity: light.bedroom_ceiling
-        name: Ceiling
-        hide_state: true
-      - type: tile
-        entity: light.bedroom_bedside
-        name: Bedside
-        hide_state: true
-      - type: tile
         entity: input_boolean.bedroom_play
         name: Play
         hide_state: true
@@ -144,6 +132,24 @@ sections:
         heading: Lights
         icon: mdi:lamps
       - type: tile
+        entity: light.bedroom
+        name: Lights
+        hide_state: true
+        features:
+          - type: light-brightness
+        features_position: inline
+        grid_options:
+          columns: full
+      - type: tile
+        entity: light.bedroom_bedside
+        name: Bedside
+        hide_state: true
+        features:
+          - type: light-brightness
+        features_position: inline
+        grid_options:
+          columns: full
+      - type: tile
         entity: light.bedroom_left_bedside
         name: Left Bedside
         features:
@@ -153,6 +159,15 @@ sections:
         name: Right Bedside
         features:
           - type: light-brightness
+      - type: tile
+        entity: light.bedroom_ceiling
+        name: Ceiling
+        hide_state: true
+        features:
+          - type: light-brightness
+        features_position: inline
+        grid_options:
+          columns: full
       - type: tile
         entity: light.bedroom_bed_left
         name: Bed Left

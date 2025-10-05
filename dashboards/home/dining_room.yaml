@@ -113,10 +113,6 @@ sections:
         heading: Actions
         icon: mdi:gesture-tap-button
       - type: tile
-        entity: light.dining_room
-        name: Lights
-        hide_state: true
-      - type: tile
         entity: input_boolean.dining_room_play
         name: Play
         hide_state: true
@@ -185,6 +181,20 @@ sections:
         name: Spots
         features:
           - type: light-brightness
+      - type: tile
+        entity: light.dining_room
+        name: Lights
+        hide_state: true
+        features:
+          - type: light-brightness
+        features_position: inline
+      - type: tile
+        entity: light.dining_room_wall
+        name: Wall
+        hide_state: true
+        features:
+          - type: light-brightness
+        features_position: inline
       - type: tile
         entity: light.dining_room_south_left
         name: South Left
