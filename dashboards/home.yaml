@@ -4,16 +4,6 @@ type: sections
 max_columns: 2
 
 badges:
-  - type: entity
-    entity: conversation.openai_conversation
-    name: Assist
-    show_name: true
-    show_state: false
-    tap_action:
-      action: assist
-      pipeline_id: preferred
-      start_listening: true
-
   # Display one of multiple badges to show if I'm asleep, at home, or
   # the home occupancy state.
   - type: entity
