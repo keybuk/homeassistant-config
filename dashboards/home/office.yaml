@@ -219,6 +219,14 @@ sections:
         grid_options:
           columns: full
           rows: 3
+      - type: sensor
+        entity: sensor.office_humidity
+        name: Humidity
+        graph: line
+        detail: 2
+        grid_options:
+          columns: full
+          rows: 3
 
   # Automations
   - type: grid

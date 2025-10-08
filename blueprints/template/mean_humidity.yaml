@@ -1,0 +1,38 @@
+blueprint:
+  name: Mean Humidity
+  description: >
+    Creates a humidity sensor that provides the mean value of input
+    humidity sensors.
+  author: "Scott James Remnant <scott@netsplit.com>"
+  domain: template
+  input:
+    sensors:
+      name: Sensors
+      description: >
+        The mean value will be calculated from these sensors.
+      selector:
+        entity:
+          filter:
+            - domain: sensor
+              device_class: humidity
+          multiple: true
+
+variables:
+  sensors: !input sensors
+
+sensor:
+  device_class: humidity
+  unit_of_measurement: "%"
+  state: |
+    {% set values = (sensors
+                     | expand
+                     | selectattr('state', 'is_number')
+                     | map(attribute='state')
+                     | map('float')
+                     | list) %}
+    {{ (values | sum) / (values | count) }}
+  state_class: measurement
+  attributes:
+    entity_id: |
+      {{ sensors | expand | selectattr('state', 'is_number')
+         | map(attribute='entity_id') | list }}

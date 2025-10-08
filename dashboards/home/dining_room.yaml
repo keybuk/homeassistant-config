@@ -335,13 +335,17 @@ sections:
         grid_options:
           columns: full
           rows: 3
+      - type: sensor
+        entity: sensor.dining_room_humidity
+        name: Humidity
+        graph: line
+        detail: 2
+        grid_options:
+          columns: full
+          rows: 3
       - type: heading
         heading_style: subtitle
         badges:
-          - type: entity
-            entity: sensor.dining_room_eve_room_humidity
-            tap_action:
-              action: more-info
           - type: entity
             entity: sensor.dining_room_eve_room_air_quality
             tap_action:

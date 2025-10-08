@@ -1,0 +1,51 @@
+# Sensors for mean humidities.
+- use_blueprint:
+    path: mean_humidity.yaml
+    input:
+      sensors:
+        - sensor.bedroom_evaporative_cooler_humidity
+        - sensor.bedroom_eve_room_humidity
+  name: Bedroom Humidity
+  unique_id: bedroom_humidity
+
+- use_blueprint:
+    path: mean_humidity.yaml
+    input:
+      sensors:
+        - sensor.dining_room_evaporative_cooler_humidity
+        - sensor.dining_room_eve_room_humidity
+  name: Dining Room Humidity
+  unique_id: dining_room_humidity
+
+- use_blueprint:
+    path: mean_humidity.yaml
+    input:
+      sensors:
+        - sensor.downstairs_ecobee_current_humidity
+  name: Kitchen Humidity
+  unique_id: kitchen_humidity
+
+- use_blueprint:
+    path: mean_humidity.yaml
+    input:
+      sensors:
+        - sensor.loft_evaporative_cooler_humidity
+  name: Loft Humidity
+  unique_id: loft_humidity
+
+- use_blueprint:
+    path: mean_humidity.yaml
+    input:
+      sensors:
+        - sensor.office_evaporative_cooler_humidity
+  name: Office Humidity
+  unique_id: office_humidity
+
+- use_blueprint:
+    path: mean_humidity.yaml
+    input:
+      sensors:
+        - sensor.stairs_evaporative_cooler_humidity
+        - sensor.upstairs_ecobee_current_humidity
+  name: Stairs Humidity
+  unique_id: stairs_humidity

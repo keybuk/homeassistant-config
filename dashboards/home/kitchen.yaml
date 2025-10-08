@@ -133,13 +133,14 @@ sections:
         grid_options:
           columns: full
           rows: 3
-      - type: heading
-        heading_style: subtitle
-        badges:
-          - type: entity
-            entity: sensor.downstairs_ecobee_current_humidity
-            tap_action:
-              action: more-info
+      - type: sensor
+        entity: sensor.kitchen_humidity
+        name: Humidity
+        graph: line
+        detail: 2
+        grid_options:
+          columns: full
+          rows: 3
 
   # Security
   - type: grid
