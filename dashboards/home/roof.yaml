@@ -10,13 +10,13 @@ badges:
     entity: binary_sensor.roof_nest_smoke_status
     visibility:
       - condition: state
-        entity: binary_sensor.bedroom_nest_smoke_status
+        entity: binary_sensor.roof_nest_smoke_status
         state: "on"
   - type: entity
     entity: binary_sensor.roof_nest_co_status
     visibility:
       - condition: state
-        entity: binary_sensor.bedroom_nest_co_status
+        entity: binary_sensor.roof_nest_co_status
         state: "on"
   - type: entity
     entity: sensor.roof_deck_door_battery
