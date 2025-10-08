@@ -1,4 +1,4 @@
-# Sensor for mean temperatures.
+# Sensors for mean temperatures.
 - use_blueprint:
     path: mean_temperature.yaml
     input:
@@ -17,3 +17,35 @@
         - sensor.dining_room_eve_temperature
   name: Dining Room Temperature
   unique_id: dining_room_temperature
+
+- use_blueprint:
+    path: mean_temperature.yaml
+    input:
+      sensors:
+        - sensor.downstairs_ecobee_current_temperature
+  name: Kitchen Temperature
+  unique_id: kitchen_temperature
+
+- use_blueprint:
+    path: mean_temperature.yaml
+    input:
+      sensors:
+        - sensor.loft_ecobee_temperature
+  name: Loft Temperature
+  unique_id: loft_temperature
+
+- use_blueprint:
+    path: mean_temperature.yaml
+    input:
+      sensors:
+        - sensor.office_ecobee_temperature
+  name: Office Temperature
+  unique_id: office_temperature
+
+- use_blueprint:
+    path: mean_temperature.yaml
+    input:
+      sensors:
+        - sensor.upstairs_ecobee_current_temperature
+  name: Stairs Temperature
+  unique_id: stairs_temperature
