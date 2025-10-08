@@ -4,7 +4,7 @@
     input:
       sensors:
         - sensor.bedroom_ecobee_temperature
-        - sensor.bedroom_eve_temperature
+        - sensor.bedroom_eve_room_temperature
   name: Bedroom Temperature
   unique_id: bedroom_temperature
 
@@ -14,7 +14,7 @@
       sensors:
         - sensor.dining_room_ceiling_temperature
         - sensor.dining_room_ecobee_temperature
-        - sensor.dining_room_eve_temperature
+        - sensor.dining_room_eve_room_temperature
   name: Dining Room Temperature
   unique_id: dining_room_temperature
 

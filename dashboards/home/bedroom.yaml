@@ -42,12 +42,12 @@ badges:
       - condition: state
         entity: binary_sensor.bedroom_ecobee_battery_low
         state: "on"
-  # - type: entity
-  #   entity: sensor.bedroom_eve_battery
-  #   visibility:
-  #     - condition: state
-  #       entity: binary_sensor.bedroom_eve_battery_low
-  #       state: "on"
+  - type: entity
+    entity: sensor.bedroom_eve_room_battery
+    visibility:
+      - condition: state
+        entity: binary_sensor.bedroom_eve_room_battery_low
+        state: "on"
   - type: entity
     entity: sensor.bedroom_left_window_battery
     visibility:
@@ -290,21 +290,21 @@ sections:
         grid_options:
           columns: full
           rows: 3
-      # - type: heading
-      #   heading_style: subtitle
-      #   badges:
-      #     - type: entity
-      #       entity: sensor.bedroom_eve_humidity
-      #       tap_action:
-      #         action: more-info
-      #     - type: entity
-      #       entity: sensor.bedroom_eve_air_quality
-      #       tap_action:
-      #         action: more-info
-      #     - type: entity
-      #       entity: sensor.bedroom_eve_volatile_organic_compound_density
-      #       tap_action:
-      #         action: more-info
+      - type: heading
+        heading_style: subtitle
+        badges:
+          - type: entity
+            entity: sensor.bedroom_eve_room_humidity
+            tap_action:
+              action: more-info
+          - type: entity
+            entity: sensor.bedroom_eve_room_air_quality
+            tap_action:
+              action: more-info
+          - type: entity
+            entity: sensor.bedroom_eve_room_volatile_organic_compound_density
+            tap_action:
+              action: more-info
 
   # Automations
   - type: grid

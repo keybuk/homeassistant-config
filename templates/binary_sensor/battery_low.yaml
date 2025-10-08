@@ -9,6 +9,13 @@
 - use_blueprint:
     path: battery_low.yaml
     input:
+      sensor: sensor.bedroom_eve_room_battery
+  name: Bedroom Eve Room Battery Low
+  unique_id: bedroom_eve_room_battery_low
+
+- use_blueprint:
+    path: battery_low.yaml
+    input:
       sensor: sensor.bedroom_left_closet_leak_sensor_battery
   name: Bedroom Left Closet Leak Sensor Battery Low
   unique_id: bedroom_left_closet_leak_sensor_battery_low
@@ -40,6 +47,13 @@
       sensor: sensor.dining_room_ecobee_battery
   name: Dining Room Ecobee Battery Low
   unique_id: dining_room_ecobee_battery_low
+
+- use_blueprint:
+    path: battery_low.yaml
+    input:
+      sensor: sensor.dining_room_eve_room_battery
+  name: Dining Room Eve Room Battery Low
+  unique_id: dining_room_eve_room_battery_low
 
 - use_blueprint:
     path: battery_low.yaml
