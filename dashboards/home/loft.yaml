@@ -253,7 +253,7 @@ sections:
                   data:
                     value: "{{ value | float }}"
       - type: sensor
-        entity: sensor.loft_ecobee_temperature
+        entity: sensor.loft_temperature
         name: Temperature
         graph: line
         detail: 2

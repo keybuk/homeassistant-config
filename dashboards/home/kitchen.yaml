@@ -126,7 +126,7 @@ sections:
         features:
           - type: target-temperature
       - type: sensor
-        entity: sensor.downstairs_ecobee_current_temperature
+        entity: sensor.kitchen_temperature
         name: Temperature
         graph: line
         detail: 2

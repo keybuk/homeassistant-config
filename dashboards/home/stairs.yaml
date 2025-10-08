@@ -94,7 +94,7 @@ sections:
                   data:
                     value: "{{ value | float }}"
       - type: sensor
-        entity: sensor.upstairs_ecobee_current_temperature
+        entity: sensor.stairs_temperature
         name: Temperature
         graph: line
         detail: 2
