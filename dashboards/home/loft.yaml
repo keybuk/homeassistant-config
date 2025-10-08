@@ -7,6 +7,12 @@ max_columns: 2
 
 badges:
   - type: entity
+    entity: binary_sensor.loft_occupancy
+    visibility:
+      - condition: state
+        entity: binary_sensor.loft_occupancy
+        state: "on"
+  - type: entity
     entity: binary_sensor.loft_nest_smoke_status
     visibility:
       - condition: state
@@ -261,11 +267,6 @@ sections:
       - type: heading
         heading: Automations
         icon: mdi:robot
-        badges:
-          - type: entity
-            entity: binary_sensor.loft_occupancy
-            tap_action:
-              action: more-info
       - type: entities
         entities:
           - entity: automation.loft_lights

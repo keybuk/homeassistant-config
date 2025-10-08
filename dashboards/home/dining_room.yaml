@@ -7,6 +7,12 @@ max_columns: 2
 
 badges:
   - type: entity
+    entity: binary_sensor.dining_room_occupancy
+    visibility:
+      - condition: state
+        entity: binary_sensor.dining_room_occupancy
+        state: "on"
+  - type: entity
     entity: binary_sensor.dining_room_nest_smoke_status
     visibility:
       - condition: state
