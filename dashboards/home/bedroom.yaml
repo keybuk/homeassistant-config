@@ -41,7 +41,7 @@ badges:
     visibility:
       - condition: state
         entity: binary_sensor.bedroom_ecobee_battery_low
-        state: ""
+        state: "on"
   # - type: entity
   #   entity: sensor.bedroom_eve_battery
   #   visibility:
