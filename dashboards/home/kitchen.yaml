@@ -125,22 +125,14 @@ sections:
         entity: climate.downstairs
         features:
           - type: target-temperature
-      - type: sensor
-        entity: sensor.kitchen_temperature
-        name: Temperature
-        graph: line
-        detail: 2
-        grid_options:
-          columns: full
-          rows: 3
-      - type: sensor
-        entity: sensor.kitchen_humidity
-        name: Humidity
-        graph: line
-        detail: 2
-        grid_options:
-          columns: full
-          rows: 3
+      - type: custom:mini-graph-card
+        entities:
+          - entity: sensor.kitchen_temperature
+            name: Temperature
+      - type: custom:mini-graph-card
+        entities:
+          - entity: sensor.kitchen_humidity
+            name: Humidity
 
   # Security
   - type: grid

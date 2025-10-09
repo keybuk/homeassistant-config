@@ -93,22 +93,14 @@ sections:
                     entity_id: number.stairs_evaporative_cooler_humidity_target
                   data:
                     value: "{{ value | float }}"
-      - type: sensor
-        entity: sensor.stairs_temperature
-        name: Temperature
-        graph: line
-        detail: 2
-        grid_options:
-          columns: full
-          rows: 3
-      - type: sensor
-        entity: sensor.stairs_humidity
-        name: Humidity
-        graph: line
-        detail: 2
-        grid_options:
-          columns: full
-          rows: 3
+      - type: custom:mini-graph-card
+        entities:
+          - entity: sensor.stairs_temperature
+            name: Temperature
+      - type: custom:mini-graph-card
+        entities:
+          - entity: sensor.stairs_humidity
+            name: Humidity
 
   # Automations
   - type: grid
