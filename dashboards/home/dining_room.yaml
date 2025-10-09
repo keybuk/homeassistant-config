@@ -335,17 +335,19 @@ sections:
         entities:
           - entity: sensor.dining_room_humidity
             name: Humidity
-      - type: heading
-        heading_style: subtitle
-        badges:
-          - type: entity
-            entity: sensor.dining_room_eve_room_air_quality
-            tap_action:
-              action: more-info
-          - type: entity
-            entity: sensor.dining_room_eve_room_volatile_organic_compound_density
-            tap_action:
-              action: more-info
+      - type: gauge
+        entity: sensor.dining_room_eve_room_air_quality
+        name: Air Quality
+        min: 0
+        max: 5
+        severity:
+          red: 0
+          yellow: 2
+          green: 4
+      - type: entities
+        entities:
+          - entity: sensor.dining_room_eve_room_volatile_organic_compound_density
+            name: Volatile Organic Compound Density
 
   # Automations
   - type: grid
