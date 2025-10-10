@@ -278,14 +278,22 @@ sections:
           - type: fan-speed
           - type: fan-preset-modes
             style: dropdown
+          - type: custom:service-call
+            entries:
+              - type: toggle
+                entity_id: switch.dining_room_ceiling_whoosh
+                tap_action:
+                  action: perform-action
+                  perform_action: switch.toggle
+                  target:
+                    entity_id: switch.dining_room_ceiling_whoosh
+                checked_icon: mdi:wind-power
+                unchecked_icon: mdi:fan
       - type: tile
         entity: climate.dining_room_ceiling_auto_comfort
         name: Fan
         features:
           - type: target-temperature
-      - type: tile
-        entity: fan.dining_room_ceiling_whoosh
-        name: Whoosh
       - type: tile
         entity: fan.dining_room_evaporative_cooler
         name: Evaporative Cooler
