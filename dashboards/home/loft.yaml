@@ -71,75 +71,7 @@ sections:
         entity: input_boolean.loft_play
         name: Play
         hide_state: true
-      - type: tile
-        entity: script.loft_pride
-        name: Pride
-        hide_state: true
-        tap_action:
-          action: toggle
-      - type: tile
-        entity: script.loft_bright
-        name: Bright
-        hide_state: true
-        tap_action:
-          action: toggle
-      - type: tile
-        entity: script.loft_nightlight
-        name: Nightlight
-        hide_state: true
-        tap_action:
-          action: toggle
-      - type: tile
-        entity: script.loft_play
-        name: Play
-        hide_state: true
-        tap_action:
-          action: toggle
-      - type: tile
-        entity: scene.loft_ceiling_disturbia
-        name: Disturbia
-        hide_state: true
-        color: grey
-        tap_action:
-          action: toggle
-        icon_tap_action:
-          action: none
-      - type: tile
-        entity: scene.loft_ceiling_pride
-        name: Pride
-        hide_state: true
-        color: grey
-        tap_action:
-          action: toggle
-        icon_tap_action:
-          action: none
-      - type: tile
-        entity: scene.loft_ceiling_resplendent
-        name: Resplendent
-        hide_state: true
-        color: grey
-        tap_action:
-          action: toggle
-        icon_tap_action:
-          action: none
-      - type: tile
-        entity: scene.loft_ceiling_tyrell
-        name: Tyrell
-        hide_state: true
-        color: grey
-        tap_action:
-          action: toggle
-        icon_tap_action:
-          action: none
-      - type: tile
-        entity: scene.kitchen_nighttime
-        name: Nighttime
-        hide_state: true
-        color: grey
-        tap_action:
-          action: toggle
-        icon_tap_action:
-          action: none
+
     column_span: 2
 
   # Lights
@@ -148,6 +80,26 @@ sections:
       - type: heading
         heading: Lights
         icon: mdi:lamps
+      - type: glance
+        entities:
+          - entity: script.loft_play
+            name: Play
+            tap_action:
+              action: toggle
+          - entity: script.loft_pride
+            name: Pride
+            tap_action:
+              action: toggle
+          - entity: script.loft_bright
+            name: Bright
+            tap_action:
+              action: toggle
+          - entity: script.loft_nightlight
+            name: Nightlight
+            tap_action:
+              action: toggle
+        show_state: false
+        state_color: false
       - type: tile
         entity: light.loft
         name: Lights
@@ -196,6 +148,30 @@ sections:
         name: Balcony Right
         features:
           - type: light-brightness
+      - type: glance
+        entities:
+          - entity: scene.loft_ceiling_disturbia
+            name: Disturbia
+            tap_action:
+              action: toggle
+          - entity: scene.loft_ceiling_play
+            name: Play
+            tap_action:
+              action: toggle
+          - entity: scene.loft_ceiling_pride
+            name: Pride
+            tap_action:
+              action: toggle
+          - entity: scene.loft_ceiling_resplendent
+            name: Resplendent
+            tap_action:
+              action: toggle
+          - entity: scene.loft_ceiling_tyrell
+            name: Tyrell
+            tap_action:
+              action: toggle
+        show_state: false
+        state_color: false
       - type: tile
         entity: light.loft_wall
         name: Wall
@@ -225,6 +201,18 @@ sections:
         name: South Right
         features:
           - type: light-brightness
+      - type: glance
+        entities:
+          - entity: scene.loft_wall_play
+            name: Play
+            tap_action:
+              action: toggle
+          - entity: scene.loft_wall_pride
+            name: Pride
+            tap_action:
+              action: toggle
+        show_state: false
+        state_color: false
 
   # Windows
   - type: grid
@@ -232,6 +220,22 @@ sections:
       - type: heading
         heading: Windows
         icon: mdi:blinds-horizontal
+      - type: glance
+        entities:
+          - entity: scene.kitchen_daytime
+            name: Daytime
+            tap_action:
+              action: toggle
+          - entity: scene.kitchen_sun
+            name: Sun
+            tap_action:
+              action: toggle
+          - entity: scene.kitchen_nighttime
+            name: Nighttime
+            tap_action:
+              action: toggle
+        show_state: false
+        state_color: false
       - type: tile
         entity: cover.kitchen_left
         name: Left

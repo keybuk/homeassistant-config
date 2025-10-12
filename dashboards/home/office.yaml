@@ -57,48 +57,12 @@ sections:
     column_span: 2
 
   # Actions
-  - type: grid
-    cards:
-      - type: heading
-        heading: Actions
-        icon: mdi:gesture-tap-button
-      - type: tile
-        entity: script.office_bright
-        name: Bright
-        hide_state: true
-        tap_action:
-          action: toggle
-      - type: tile
-        entity: script.office_nightlight
-        name: Nightlight
-        hide_state: true
-        tap_action:
-          action: toggle
-      - type: tile
-        entity: script.office_work
-        name: Work
-        hide_state: true
-        tap_action:
-          action: toggle
-      - type: tile
-        entity: scene.office_ceiling_dreamy_dusk
-        name: Dreamy Dusk
-        hide_state: true
-        color: grey
-        tap_action:
-          action: toggle
-        icon_tap_action:
-          action: none
-      - type: tile
-        entity: scene.office_daytime
-        name: Daytime
-        hide_state: true
-        color: grey
-        tap_action:
-          action: toggle
-        icon_tap_action:
-          action: none
-    column_span: 2
+  # - type: grid
+  #   cards:
+  #     - type: heading
+  #       heading: Actions
+  #       icon: mdi:gesture-tap-button
+  #   column_span: 2
 
   # Lights
   - type: grid
@@ -106,6 +70,29 @@ sections:
       - type: heading
         heading: Lights
         icon: mdi:lamps
+      - type: glance
+        entities:
+          - entity: script.office_bright
+            name: Bright
+            tap_action:
+              action: toggle
+          - type: tile
+            entity: script.office_nightlight
+            name: Nightlight
+            tap_action:
+              action: toggle
+          - type: tile
+            entity: script.office_work
+            name: Work
+            tap_action:
+              action: toggle
+          - type: tile
+            entity: scene.office_ceiling_dreamy_dusk
+            name: Dreamy Dusk
+            tap_action:
+              action: toggle
+        show_state: false
+        state_color: false
       - type: tile
         entity: light.office
         name: Lights
@@ -152,6 +139,18 @@ sections:
       - type: heading
         heading: Windows
         icon: mdi:blinds-horizontal
+      - type: glance
+        entities:
+          - entity: scene.office_daytime
+            name: Daytime
+            tap_action:
+              action: toggle
+          - entity: scene.office_nighttime
+            name: Nighttime
+            tap_action:
+              action: toggle
+        show_state: false
+        state_color: false
       - type: tile
         entity: cover.office_top
         name: Top

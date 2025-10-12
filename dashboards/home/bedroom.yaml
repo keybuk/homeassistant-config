@@ -102,39 +102,6 @@ sections:
         color: grey
         tap_action:
           action: toggle
-      - type: tile
-        entity: script.bedroom_bright
-        name: Bright
-        hide_state: true
-        tap_action:
-          action: toggle
-      - type: tile
-        entity: script.bedroom_nightlight
-        name: Nightlight
-        hide_state: true
-        tap_action:
-          action: toggle
-      - type: tile
-        entity: script.bedroom_reading
-        name: Reading
-        hide_state: true
-        tap_action:
-          action: toggle
-      - type: tile
-        entity: script.bedroom_play
-        name: Play
-        hide_state: true
-        tap_action:
-          action: toggle
-      - type: tile
-        entity: scene.bedroom_daytime
-        name: Daytime
-        hide_state: true
-        color: grey
-        tap_action:
-          action: toggle
-        icon_tap_action:
-          action: none
     column_span: 2
 
   # Lights
@@ -143,6 +110,26 @@ sections:
       - type: heading
         heading: Lights
         icon: mdi:lamps
+      - type: glance
+        entities:
+          - entity: script.bedroom_play
+            name: Play
+            tap_action:
+              action: toggle
+          - entity: script.bedroom_bright
+            name: Bright
+            tap_action:
+              action: toggle
+          - entity: script.bedroom_nightlight
+            name: Nightlight
+            tap_action:
+              action: toggle
+          - entity: script.bedroom_reading
+            name: Reading
+            tap_action:
+              action: toggle
+        show_state: false
+        state_color: false
       - type: tile
         entity: light.bedroom
         name: Lights
@@ -171,6 +158,18 @@ sections:
         name: Right Bedside
         features:
           - type: light-brightness
+      - type: glance
+        entities:
+          - entity: scene.bedroom_bedside_play
+            name: Play
+            tap_action:
+              action: toggle
+          - entity: scene.bedroom_bedside_read
+            name: Reading
+            tap_action:
+              action: toggle
+        show_state: false
+        state_color: false
       - type: tile
         entity: light.bedroom_ceiling
         name: Ceiling
@@ -200,6 +199,18 @@ sections:
         name: Wall Right
         features:
           - type: light-brightness
+      - type: glance
+        entities:
+          - entity: scene.bedroom_ceiling_mood
+            name: Mood
+            tap_action:
+              action: toggle
+          - entity: scene.bedroom_ceiling_play
+            name: Play
+            tap_action:
+              action: toggle
+        show_state: false
+        state_color: false
       - type: tile
         entity: light.bedroom_left_closet
         name: Left Closet
@@ -213,6 +224,18 @@ sections:
       - type: heading
         heading: Windows
         icon: mdi:blinds-horizontal
+      - type: glance
+        entities:
+          - entity: scene.bedroom_daytime
+            name: Daytime
+            tap_action:
+              action: toggle
+          - entity: scene.bedroom_nighttime
+            name: Nighttime
+            tap_action:
+              action: toggle
+        show_state: false
+        state_color: false
       - type: tile
         entity: cover.bedroom_top
         name: Top

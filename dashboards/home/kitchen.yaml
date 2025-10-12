@@ -52,30 +52,12 @@ sections:
     column_span: 2
 
   # Actions
-  - type: grid
-    cards:
-      - type: heading
-        heading: Actions
-        icon: mdi:gesture-tap-button
-      - type: tile
-        entity: scene.kitchen_nighttime
-        name: Nighttime
-        hide_state: true
-        color: grey
-        tap_action:
-          action: toggle
-        icon_tap_action:
-          action: none
-      - type: tile
-        entity: scene.kitchen_sun
-        name: Sun
-        hide_state: true
-        color: grey
-        tap_action:
-          action: toggle
-        icon_tap_action:
-          action: none
-    column_span: 2
+  # - type: grid
+  #   cards:
+  #     - type: heading
+  #       heading: Actions
+  #       icon: mdi:gesture-tap-button
+  #   column_span: 2
 
   # Lights
   - type: grid
@@ -100,6 +82,22 @@ sections:
       - type: heading
         heading: Windows
         icon: mdi:blinds-horizontal
+      - type: glance
+        entities:
+          - entity: scene.kitchen_daytime
+            name: Daytime
+            tap_action:
+              action: toggle
+          - entity: scene.kitchen_sun
+            name: Sun
+            tap_action:
+              action: toggle
+          - entity: scene.kitchen_nighttime
+            name: Nighttime
+            tap_action:
+              action: toggle
+        show_state: false
+        state_color: false
       - type: tile
         entity: cover.kitchen_left
         name: Left
