@@ -121,6 +121,12 @@ sections:
         tap_action:
           action: toggle
       - type: tile
+        entity: script.bedroom_play
+        name: Play
+        hide_state: true
+        tap_action:
+          action: toggle
+      - type: tile
         entity: scene.bedroom_daytime
         name: Daytime
         hide_state: true

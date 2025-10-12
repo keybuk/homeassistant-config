@@ -152,6 +152,21 @@ sections:
         tap_action:
           action: toggle
       - type: tile
+        entity: script.dining_room_play
+        name: Play
+        hide_state: true
+        tap_action:
+          action: toggle
+      - type: tile
+        entity: scene.dining_room_wall_world_of_color
+        name: World of Color
+        hide_state: true
+        color: grey
+        tap_action:
+          action: toggle
+        icon_tap_action:
+          action: none
+      - type: tile
         entity: scene.dining_room_afternoon_sun
         name: Afternoon Sun
         hide_state: true
