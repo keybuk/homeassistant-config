@@ -3,6 +3,7 @@
     path: mean_temperature.yaml
     input:
       sensors:
+        - sensor.bedroom_airgradient_one_temperature
         - sensor.bedroom_ecobee_temperature
         - sensor.bedroom_evaporative_cooler_temperature
         - sensor.bedroom_eve_room_temperature
@@ -25,6 +26,7 @@
     input:
       sensors:
         - sensor.downstairs_ecobee_current_temperature
+        - sensor.kitchen_airgradient_one_temperature
   name: Kitchen Temperature
   unique_id: kitchen_temperature
 

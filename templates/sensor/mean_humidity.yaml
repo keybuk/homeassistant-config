@@ -3,6 +3,7 @@
     path: mean_humidity.yaml
     input:
       sensors:
+        - sensor.bedroom_airgradient_one_humidity
         - sensor.bedroom_evaporative_cooler_humidity
         - sensor.bedroom_eve_room_humidity
   name: Bedroom Humidity
@@ -22,6 +23,7 @@
     input:
       sensors:
         - sensor.downstairs_ecobee_current_humidity
+        - sensor.kitchen_airgradient_one_humidity
   name: Kitchen Humidity
   unique_id: kitchen_humidity
 
