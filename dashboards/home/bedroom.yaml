@@ -330,6 +330,16 @@ sections:
           green: 4
       - type: entities
         entities:
+          - entity: sensor.bedroom_airgradient_one_carbon_dioxide
+            name: Carbon Dioxide
+          - entity: sensor.bedroom_airgradient_one_pm0_3
+            name: PM0.3
+          - entity: sensor.bedroom_airgradient_one_pm1
+            name: PM1
+          - entity: sensor.bedroom_airgradient_one_pm2_5
+            name: PM2.5
+          - entity: sensor.bedroom_airgradient_one_pm10
+            name: PM10
           - entity: sensor.bedroom_eve_room_volatile_organic_compound_density
             name: Volatile Organic Compound Density
 

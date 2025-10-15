@@ -131,6 +131,18 @@ sections:
         entities:
           - entity: sensor.kitchen_humidity
             name: Humidity
+      - type: entities
+        entities:
+          - entity: sensor.kitchen_airgradient_one_carbon_dioxide
+            name: Carbon Dioxide
+          - entity: sensor.kitchen_airgradient_one_pm0_3
+            name: PM0.3
+          - entity: sensor.kitchen_airgradient_one_pm1
+            name: PM1
+          - entity: sensor.kitchen_airgradient_one_pm2_5
+            name: PM2.5
+          - entity: sensor.kitchen_airgradient_one_pm10
+            name: PM10
 
   # Security
   - type: grid
