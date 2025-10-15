@@ -5,7 +5,6 @@
       sensors:
         - sensor.bedroom_airgradient_one_temperature
         - sensor.bedroom_ecobee_temperature
-        - sensor.bedroom_evaporative_cooler_temperature
         - sensor.bedroom_eve_room_temperature
   name: Bedroom Temperature
   unique_id: bedroom_temperature
@@ -16,7 +15,6 @@
       sensors:
         - sensor.dining_room_ceiling_temperature
         - sensor.dining_room_ecobee_temperature
-        - sensor.dining_room_evaporative_cooler_temperature
         - sensor.dining_room_eve_room_temperature
   name: Dining Room Temperature
   unique_id: dining_room_temperature
@@ -35,7 +33,6 @@
     input:
       sensors:
         - sensor.loft_ecobee_temperature
-        - sensor.loft_evaporative_cooler_temperature
   name: Loft Temperature
   unique_id: loft_temperature
 
@@ -44,7 +41,6 @@
     input:
       sensors:
         - sensor.office_ecobee_temperature
-        - sensor.office_evaporative_cooler_temperature
   name: Office Temperature
   unique_id: office_temperature
 
@@ -52,7 +48,6 @@
     path: mean_temperature.yaml
     input:
       sensors:
-        - sensor.stairs_evaporative_cooler_temperature
         - sensor.upstairs_ecobee_current_temperature
   name: Stairs Temperature
   unique_id: stairs_temperature
