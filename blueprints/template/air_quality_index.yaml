@@ -42,3 +42,19 @@ sensor:
     {% endif %}
   attributes:
     entity_id: "{{ [ sensor ] }}"
+    aqi_category: |
+      {% if is_number(this.state) %}
+        {% if this.state | int <= 50 %}
+          Good
+        {% elif this.state | int <= 100 %}
+          Moderate
+        {% elif this.state | int <= 150 %}
+          Unhealthy for Sensitive Groups
+        {% elif this.state | int <= 200 %}
+          Unhealthy
+        {% elif this.state | int <= 300 %}
+          Very Unhealthy
+        {% else %}
+          Hazardous
+        {% endif %}
+      {% endif %}
