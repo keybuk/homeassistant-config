@@ -1,0 +1,14 @@
+# Sensors for AQI.
+- use_blueprint:
+    path: air_quality_index.yaml
+    input:
+      sensor: sensor.bedroom_airgradient_one_pm2_5_daily
+  name: Bedroom AirGradient One AQI
+  unique_id: bedroom_airgradient_one_aqi
+
+- use_blueprint:
+    path: air_quality_index.yaml
+    input:
+      sensor: sensor.kitchen_airgradient_one_pm2_5_daily
+  name: Kitchen AirGradient One AQI
+  unique_id: kitchen_airgradient_one_aqi

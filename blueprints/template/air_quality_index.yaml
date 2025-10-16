@@ -1,0 +1,44 @@
+blueprint:
+  name: Air Quality Index
+  description: >
+    Creates a sensor that provides an Air Quality Index (AQI) value derived
+    from a partical sensor.
+  author: "Scott James Remnant <scott@netsplit.com>"
+  domain: template
+  input:
+    sensor:
+      name: Sensor
+      description: >
+        The AQI value will be calculated from this sensor.
+      selector:
+        entity:
+          filter:
+            - domain: sensor
+              device_class: pm25
+
+variables:
+  sensor: !input sensor
+
+sensor:
+  device_class: aqi
+  state: |
+    {% set pm2_5 = states(sensor) | float %}
+    {% if pm2_5 <= 12.0 %}
+      {{ ((50 - 0) / (12.0 - 0) * (pm2_5 - 0) + 0) | int }}
+    {% elif pm2_5 <= 35.4 %}
+      {{ ((100 - 50) / (35.4 - 12.0) * (pm2_5 - 12.0) + 50) | int }}
+    {% elif pm2_5 <= 55.4 %}
+      {{ ((150 - 100) / (55.4 - 35.4) * (pm2_5 - 35.4) + 100) | int }}
+    {% elif pm2_5 <= 150.4 %}
+      {{ ((200 - 150) / (150.4 - 55.4) * (pm2_5 - 55.4) + 150) | int }}
+    {% elif pm2_5 <= 250.4 %}
+      {{ ((300 - 200) / (250.4 - 150.4) * (pm2_5 - 150.4) + 200) | int }}
+    {% elif pm2_5 <= 350.4 %}
+      {{ ((400 - 300) / (350.4 - 250.4) * (pm2_5 - 250.4) + 300) | int }}
+    {% elif pm2_5 <= 500.4 %}
+      {{ ((500 - 400) / (500.4 - 350.4) * (pm2_5 - 350.4) + 400) | int }}
+    {% else %}
+      500
+    {% endif %}
+  attributes:
+    entity_id: "{{ [ sensor ] }}"
