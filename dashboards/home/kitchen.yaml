@@ -131,18 +131,28 @@ sections:
         entities:
           - entity: sensor.kitchen_humidity
             name: Humidity
-      - type: entities
+      - type: custom:mini-graph-card
+        name: Air Quality
+        icon: mdi:air-filter
         entities:
-          - entity: sensor.kitchen_airgradient_one_carbon_dioxide
-            name: Carbon Dioxide
-          - entity: sensor.kitchen_airgradient_one_pm0_3
-            name: PM0.3
-          - entity: sensor.kitchen_airgradient_one_pm1
-            name: PM1
-          - entity: sensor.kitchen_airgradient_one_pm2_5
-            name: PM2.5
+          - entity: sensor.kitchen_airgradient_one_aqi
+            show_graph: false
+            #attribute: aqi_category
           - entity: sensor.kitchen_airgradient_one_pm10
-            name: PM10
+            y_axis: secondary
+          - entity: sensor.kitchen_airgradient_one_pm2_5
+            y_axis: secondary
+          - entity: sensor.kitchen_airgradient_one_pm1
+            y_axis: secondary
+          - entity: sensor.kitchen_airgradient_one_pm0_3
+          - entity: sensor.kitchen_airgradient_one_carbon_dioxide
+          - entity: sensor.kitchen_airgradient_one_nox_index
+          - entity: sensor.kitchen_airgradient_one_voc_index
+            color: orange
+        points_per_hour: 12
+        show:
+          fill: false
+          legend: false
 
   # Security
   - type: grid

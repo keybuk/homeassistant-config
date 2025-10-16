@@ -319,29 +319,27 @@ sections:
         entities:
           - entity: sensor.bedroom_humidity
             name: Humidity
-      - type: gauge
-        entity: sensor.bedroom_eve_room_air_quality
+      - type: custom:mini-graph-card
         name: Air Quality
-        min: 0
-        max: 5
-        severity:
-          red: 0
-          yellow: 2
-          green: 4
-      - type: entities
+        icon: mdi:air-filter
         entities:
-          - entity: sensor.bedroom_airgradient_one_carbon_dioxide
-            name: Carbon Dioxide
-          - entity: sensor.bedroom_airgradient_one_pm0_3
-            name: PM0.3
-          - entity: sensor.bedroom_airgradient_one_pm1
-            name: PM1
-          - entity: sensor.bedroom_airgradient_one_pm2_5
-            name: PM2.5
+          - entity: sensor.bedroom_airgradient_one_aqi
+            show_graph: false
           - entity: sensor.bedroom_airgradient_one_pm10
-            name: PM10
-          - entity: sensor.bedroom_eve_room_volatile_organic_compound_density
-            name: Volatile Organic Compound Density
+            y_axis: secondary
+          - entity: sensor.bedroom_airgradient_one_pm2_5
+            y_axis: secondary
+          - entity: sensor.bedroom_airgradient_one_pm1
+            y_axis: secondary
+          - entity: sensor.bedroom_airgradient_one_pm0_3
+          - entity: sensor.bedroom_airgradient_one_carbon_dioxide
+          - entity: sensor.bedroom_airgradient_one_nox_index
+          - entity: sensor.bedroom_airgradient_one_voc_index
+            color: orange
+        points_per_hour: 12
+        show:
+          fill: false
+          legend: false
 
   # Automations
   - type: grid
