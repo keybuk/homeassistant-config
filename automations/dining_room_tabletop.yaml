@@ -6,12 +6,17 @@ description: >
 mode: queued
 
 triggers:
-  # Trigger when the Tabletop TV changes state. We track any state since it
-  # goes unavailable when we unplug it, which we treat the same as "off".
+  # Trigger when the Tabletop TV changes state; and since we unplug it,
+  # treat "unavailable" and "unknown" as "off".
   - trigger: state
     entity_id: media_player.dining_room_tabletop
-    to: null
-    id: "tabletop"
+    to: "on"
+  - trigger: state
+    entity_id: media_player.dining_room_tabletop
+    to: "off"
+    id: "tabletop_off"
+    for:
+      minutes: 15
   # Trigger when the sun sets.
   - trigger: state
     entity_id: sensor.weather
@@ -42,6 +47,6 @@ actions:
       # If the TV is turning off, game over.
       - conditions:
           - condition: trigger
-            id: "tabletop"
+            id: "tabletop_off"
         sequence:
           - action: script.dining_room_game_over
