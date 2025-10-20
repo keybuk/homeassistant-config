@@ -1,0 +1,38 @@
+# Binary sensor that tracks whether my iPhone is charging, ignoring the brief
+# "Not Charging" periods between each report.
+- triggers:
+    - trigger: state
+      entity_id: sensor.scottys_iphone_battery_state
+      to:
+        - "Charging"
+        - "Full"
+      id: "on"
+    - trigger: state
+      entity_id: sensor.scottys_iphone_battery_state
+      to: "Not Charging"
+      for:
+        seconds: 30
+      id: "off"
+
+    # Set initial state when reloaded.
+    - trigger: event
+      event_type: event_template_reloaded
+      id: "reload"
+
+  binary_sensor:
+    - name: "Scotty’s iPhone Battery Charging"
+      unique_id: scottys_iphone_battery_charging
+      device_class: "battery_charging"
+      state: |
+        {% if trigger.id == 'on' %}
+          on
+        {% elif trigger.id == 'off' %}
+          off
+        {% elif states('sensor.scottys_iphone_battery_state') in ['Charging', 'Full'] %}
+          on
+        {% else %}
+          off
+        {% endif %}
+      attributes:
+        entity_id: |
+          {{ [ 'sensor.scottys_iphone_battery_state' ] }}
