@@ -262,7 +262,7 @@
         metadata: {}
         data: {}
         target:
-          entity_id: scene.bedroom_blackout
+          entity_id: scene.bedroom_blackout_close
 - id: '1758341059232'
   alias: Office Lights
   description: ''
