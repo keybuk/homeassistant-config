@@ -6,6 +6,12 @@ products:
 entities:
   - entity: lock
     dps:
+      # remote_no_dp_key
+      - id: 9
+        type: base64
+        optional: true
+        sensitive: true
+        name: code_unlock
       # lock_motor_state
       - id: 110
         type: boolean
