@@ -57,6 +57,7 @@ triggers:
     to:
       - "on"
       - "off"
+      - "unavailable"
   # Update blinds when we're playing.
   - trigger: state
     entity_id: input_boolean.dining_room_play

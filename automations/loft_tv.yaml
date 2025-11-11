@@ -12,6 +12,7 @@ triggers:
     to:
       - "on"
       - "off"
+      - "unavailable"
 
 actions:
   - choose:
@@ -27,9 +28,10 @@ actions:
 
       # Turn ceiling lights back on when the TV turns off.
       - conditions:
-          - condition: state
-            entity_id: media_player.loft_tv
-            state: "off"
+          - not:
+              - condition: state
+                entity_id: media_player.loft_tv
+                state: "on"
           # Only if the wall lights are on.
           - condition: state
             entity_id: light.loft_wall
