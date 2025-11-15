@@ -6,13 +6,12 @@
         - person.scotty
       zone: zone.home
       event: enter
-      id: "persons"
     - trigger: zone
       entity_id:
         - person.scotty
       zone: zone.home
       event: leave
-      id: "persons"
+      id: "left_home"
 
     # Trigger on occupancy sensors.
     - trigger: state
@@ -20,7 +19,6 @@
       to:
         - "on"
         - "off"
-      id: "occupancy"
 
   binary_sensor:
     - name: "Anyone Home"
@@ -30,8 +28,9 @@
         {% if state_attr('zone.home', 'persons') %}
           {# Household member is at home #}
           on
-        {% elif trigger.id == 'persons' %}
-          {# Last household member left home #}
+        {% elif trigger.id == 'left_home' %}
+          {# Last household member left home, if door is locked, then go
+             go straight to unoccupied, otherwise home_occupancy is sticky #}
           {% if is_state('lock.front_door', 'locked') %}
             off
           {% else %}
