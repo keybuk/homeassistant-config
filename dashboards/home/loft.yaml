@@ -68,8 +68,8 @@ sections:
         heading: Actions
         icon: mdi:gesture-tap-button
       - type: tile
-        entity: input_boolean.loft_play
-        name: Play
+        entity: input_boolean.loft_privacy
+        name: Privacy
         hide_state: true
 
     column_span: 2

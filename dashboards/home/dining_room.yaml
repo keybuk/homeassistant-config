@@ -119,8 +119,8 @@ sections:
         heading: Actions
         icon: mdi:gesture-tap-button
       - type: tile
-        entity: input_boolean.dining_room_play
-        name: Play
+        entity: input_boolean.dining_room_privacy
+        name: Privacy
         hide_state: true
     column_span: 2
 

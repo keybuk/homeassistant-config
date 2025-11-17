@@ -23,8 +23,8 @@ blueprint:
             - domain: binary_sensor
               device_class: occupancy
       default: null
-    playing:
-      name: Playing
+    privacy:
+      name: Privacy
       description: Lights will not be turned off while this input is on.
       selector:
         entity:
@@ -63,7 +63,7 @@ triggers:
 
 variables:
   occupancy: !input occupancy
-  playing: !input playing
+  privacy: !input privacy
 
 actions:
   - choose:
@@ -98,8 +98,8 @@ actions:
             state:
               - "hot-day"
               - "day"
-          # Unless we're playing.
-          - "{{ playing is none or is_state(playing, 'off') }}"
+          # Unless we need privacy.
+          - "{{ privacy is none or is_state(privacy, 'off') }}"
         sequence:
           - action: light.turn_off
             target:
@@ -114,8 +114,8 @@ actions:
               - condition: state
                 entity_id: binary_sensor.anyone_home
                 state: "off"
-          # Unless we're playing.
-          - "{{ playing is none or is_state(playing, 'off') }}"
+          # Unless we need privacy.
+          - "{{ privacy is none or is_state(privacy, 'off') }}"
         sequence:
           - action: light.turn_off
             target:

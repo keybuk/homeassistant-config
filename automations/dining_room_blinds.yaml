@@ -58,14 +58,14 @@ triggers:
       - "on"
       - "off"
       - "unavailable"
-  # Update blinds when we're playing.
+  # Update blinds when we need privacy.
   - trigger: state
-    entity_id: input_boolean.dining_room_play
+    entity_id: input_boolean.dining_room_privacy
     to:
       - "on"
       - "off"
   - trigger: state
-    entity_id: input_boolean.loft_play
+    entity_id: input_boolean.loft_privacy
     to:
       - "on"
       - "off"
@@ -96,10 +96,10 @@ actions:
           - variables:
               target: 100
 
-      # Close the blinds while we're playing in the dining room.
+      # Close the blinds while we need privacy in the dining room.
       - conditions:
           - condition: state
-            entity_id: input_boolean.dining_room_play
+            entity_id: input_boolean.dining_room_privacy
             state: "on"
         sequence:
           - variables:
@@ -147,10 +147,10 @@ actions:
           - variables:
               target: 33
 
-      # Close the top of the blinds while we're playing in the loft.
+      # Close the top of the blinds while we need privacy in the loft.
       - conditions:
           - condition: state
-            entity_id: input_boolean.loft_play
+            entity_id: input_boolean.loft_privacy
             state: "on"
         sequence:
           - variables:

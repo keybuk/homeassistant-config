@@ -30,8 +30,8 @@ blueprint:
           filter:
             - domain: binary_sensor
               device_class: window
-    playing:
-      name: Playing
+    privacy:
+      name: Privacy
       description: Blinds will not be opened while this input is on.
       selector:
         entity:
@@ -42,7 +42,7 @@ blueprint:
 mode: queued
 
 trigger_variables:
-  playing: !input playing
+  privacy: !input privacy
 
 triggers:
   # Update blinds at sunset and sunrise.
@@ -65,14 +65,14 @@ triggers:
     to: "off"
     for:
       seconds: 3
-  # Update blinds when we're playing.
+  # Update blinds when we need privacy.
   - trigger: template
-    value_template: "{{ playing is not none and is_state(playing, 'on') }}"
+    value_template: "{{ privacy is not none and is_state(privacy, 'on') }}"
   - trigger: template
-    value_template: "{{ playing is not none and is_state(playing, 'off') }}"
+    value_template: "{{ privacy is not none and is_state(privacy, 'off') }}"
 
 variables:
-  playing: !input playing
+  privacy: !input privacy
 
 actions:
   - choose:
@@ -86,8 +86,8 @@ actions:
           - condition: state
             entity_id: binary_sensor.anyone_asleep
             state: "off"
-          # Unless we're playing.
-          - "{{ playing is none or is_state(playing, 'off') }}"
+          # Unless we need privacy.
+          - "{{ privacy is none or is_state(privacy, 'off') }}"
         sequence:
           - action: scene.turn_on
             target:
@@ -111,9 +111,9 @@ actions:
             target:
               entity_id: !input nighttime
 
-      # Close blinds while we're playing.
+      # Close blinds while we need privacy.
       - conditions:
-          - "{{ playing is not none and is_state(playing, 'on') }}"
+          - "{{ privacy is not none and is_state(privacy, 'on') }}"
           # Only when the windows are closed.
           - condition: state
             entity_id: !input window

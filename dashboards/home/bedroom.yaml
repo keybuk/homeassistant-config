@@ -93,8 +93,8 @@ sections:
         heading: Actions
         icon: mdi:gesture-tap-button
       - type: tile
-        entity: input_boolean.bedroom_play
-        name: Play
+        entity: input_boolean.bedroom_privacy
+        name: Privacy
         hide_state: true
       - type: tile
         entity: script.goodnight

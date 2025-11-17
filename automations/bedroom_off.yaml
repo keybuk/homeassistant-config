@@ -17,9 +17,9 @@ triggers:
     entity_id: binary_sensor.anyone_asleep
     to: "on"
 
-  # Turn things off when we're not playing anymore.
+  # Turn things off when we don't need privacy anymore.
   - trigger: state
-    entity_id: input_boolean.bedroom_play
+    entity_id: input_boolean.bedroom_privacy
     to: "off"
 
 conditions:
@@ -31,7 +31,7 @@ conditions:
         entity_id: binary_sensor.anyone_asleep
         state: "on"
   - condition: state
-    entity_id: input_boolean.bedroom_play
+    entity_id: input_boolean.bedroom_privacy
     state: "off"
 
 actions:
