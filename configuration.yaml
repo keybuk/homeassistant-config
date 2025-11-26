@@ -1,6 +1,10 @@
 # Loads default set of integrations. Do not remove.
 default_config:
 
+http:
+  ssl_certificate: /config/homeassistant-cert.pem
+  ssl_key: /config/homeassistant-key.pem
+
 # Load frontend themes from the themes folder
 frontend:
   themes: !include_dir_merge_named themes
