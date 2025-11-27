@@ -1,6 +1,7 @@
 {
     "recommendations": [
         "keesschollaart.vscode-home-assistant",
-        "lukas-tr.materialdesignicons-intellisense"
+        "lukas-tr.materialdesignicons-intellisense",
+        "redhat.vscode-yaml"
     ]
 }
