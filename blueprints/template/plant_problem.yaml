@@ -1,0 +1,26 @@
+blueprint:
+  name: Plant Problem
+  description: >
+    Creates a binary sensor that flags a problem condition with a plant.
+  author: "Scott James Remnant <scott@netsplit.com>"
+  domain: template
+  input:
+    plant:
+      name: Plant
+      description: >
+        The plant to monitor.
+      selector:
+        entity:
+          filter:
+            - domain: plant
+              device_class: plant
+
+variables:
+  plant: !input plant
+
+binary_sensor:
+  device_class: problem
+  icon: mdi:leaf
+  state: "{{ is_state(plant, 'problem') }}"
+  attributes:
+    entity_id: "{{ [ plant ] }}"

@@ -1,0 +1,44 @@
+# Binary sensors for plant problem conditions.
+- use_blueprint:
+    path: plant_problem.yaml
+    input:
+      plant: plant.parlor_palm
+  name: Parlor Palm Problem
+  unique_id: parlor_palm_problem
+
+- use_blueprint:
+    path: plant_problem.yaml
+    input:
+      plant: plant.rubber_plant_ruby
+  name: Rubber Plant Ruby Problem
+  unique_id: rubber_plant_ruby_problem
+
+- use_blueprint:
+    path: plant_problem.yaml
+    input:
+      plant: plant.swiss_cheese_plant
+  name: Swiss Cheese Plant Problem
+  unique_id: swiss_cheese_plant_problem
+
+- use_blueprint:
+    path: plant_problem.yaml
+    input:
+      plant: plant.peace_lily
+  name: Peace Lily Problem
+  unique_id: peace_lily_problem
+
+- use_blueprint:
+    path: plant_problem.yaml
+    input:
+      plant: plant.never_never_plant
+  name: Never Never Plant Problem
+  unique_id: never_never_plant_problem
+
+- use_blueprint:
+    path: plant_problem.yaml
+    input:
+      plant: plant.rattlesnake_plant
+  name: Rattlesnake Plant Problem
+  unique_id: rattlesnake_plant_problem
+
+
