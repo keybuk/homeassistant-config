@@ -166,3 +166,38 @@
       sensor: sensor.front_door_lock_battery
   name: Front Door Lock Battery Low
   unique_id: front_door_lock_battery
+
+- use_blueprint:
+    path: battery_low.yaml
+    input:
+      sensor: sensor.smart_plant_43209c_smart_plant_battery
+  name: Smart Plant 43209C Battery Low
+  unique_id: smart_plant_43209c_battery_low
+
+- use_blueprint:
+    path: battery_low.yaml
+    input:
+      sensor: sensor.smart_plant_43677a_smart_plant_battery
+  name: Smart Plant 43677A Battery Low
+  unique_id: smart_plant_43677a_battery_low
+
+- use_blueprint:
+    path: battery_low.yaml
+    input:
+      sensor: sensor.smart_plant_43678a_smart_plant_battery
+  name: Smart Plant 43678A Battery Low
+  unique_id: smart_plant_43678a_battery_low
+
+- use_blueprint:
+    path: battery_low.yaml
+    input:
+      sensor: sensor.smart_plant_43930a_smart_plant_battery
+  name: Smart Plant 43930A Battery Low
+  unique_id: smart_plant_43930a_battery_low
+
+- use_blueprint:
+    path: battery_low.yaml
+    input:
+      sensor: sensor.smart_plant_43f4fc_smart_plant_battery
+  name: Smart Plant 43F4FC Battery Low
+  unique_id: smart_plant_43f4fc_battery_low
