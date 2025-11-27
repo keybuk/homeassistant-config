@@ -154,6 +154,29 @@ sections:
           fill: false
           legend: false
 
+  # Plants
+  - type: grid
+    cards:
+      - type: heading
+        heading: Plants
+        icon: mdi:flower
+      - type: custom:flower-card
+        entity: plant.parlor_palm
+        show_bars:
+        - illuminance
+        - humidity
+        - moisture
+        - temperature
+        battery_sensor: sensor.smart_plant_43f4fc_smart_plant_battery
+      - type: custom:flower-card
+        entity: plant.rubber_plant_ruby
+        show_bars:
+        - illuminance
+        - humidity
+        - moisture
+        - temperature
+        battery_sensor: sensor.smart_plant_43209c_smart_plant_battery
+
   # Security
   - type: grid
     cards:
