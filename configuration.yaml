@@ -28,6 +28,8 @@ automation yaml: !include_dir_list automations/
 script yaml: !include_dir_named scripts/
 template: !include_dir_merge_list templates/
 
+media_player: !include_dir_list media_players/
+
 # Enable earthquake entities
 geo_location:
   - platform: usgs_earthquakes_feed

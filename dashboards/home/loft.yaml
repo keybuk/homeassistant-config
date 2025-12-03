@@ -52,10 +52,6 @@ sections:
       - type: media-control
         entity: media_player.loft_avr
         name: AVR
-        visibility:
-          - condition: state
-            entity: media_player.loft_avr
-            state: "on"
       - type: media-control
         entity: media_player.loft_apple_tv
         name: Apple TV
