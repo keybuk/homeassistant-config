@@ -59,7 +59,7 @@ sections:
       - type: area
         area: dining_room
         display_type: compact
-        navigation_path: /lovelace/dining-room
+        navigation_path: /lovelace-home/dining-room
         alert_classes:
           - smoke
           - carbon_monoxide
@@ -79,7 +79,7 @@ sections:
       - type: area
         area: kitchen
         display_type: compact
-        navigation_path: /lovelace/kitchen
+        navigation_path: /lovelace-home/kitchen
         alert_classes:
           - smoke
           - carbon_monoxide
@@ -98,7 +98,7 @@ sections:
       - type: area
         area: office
         display_type: compact
-        navigation_path: /lovelace/office
+        navigation_path: /lovelace-home/office
         alert_classes:
           - smoke
           - carbon_monoxide
@@ -116,7 +116,7 @@ sections:
       - type: area
         area: downstairs_bathroom
         display_type: compact
-        navigation_path: /lovelace/downstairs-bathroom
+        navigation_path: /lovelace-home/downstairs-bathroom
         sensor_classes:
           - temperature
           - humidity
@@ -135,7 +135,7 @@ sections:
       - type: area
         area: bedroom
         display_type: compact
-        navigation_path: /lovelace/bedroom
+        navigation_path: /lovelace-home/bedroom
         alert_classes:
           - smoke
           - carbon_monoxide
@@ -155,7 +155,7 @@ sections:
       - type: area
         area: loft
         display_type: compact
-        navigation_path: /lovelace/loft
+        navigation_path: /lovelace-home/loft
         alert_classes:
           - smoke
           - carbon_monoxide
@@ -172,7 +172,7 @@ sections:
       - type: area
         area: stairs
         display_type: compact
-        navigation_path: /lovelace/stairs
+        navigation_path: /lovelace-home/stairs
         alert_classes:
           - smoke
           - carbon_monoxide
@@ -188,7 +188,7 @@ sections:
       - type: area
         area: bathroom
         display_type: compact
-        navigation_path: /lovelace/bathroom
+        navigation_path: /lovelace-home/bathroom
         sensor_classes:
           - temperature
           - humidity
@@ -207,7 +207,7 @@ sections:
       - type: area
         area: roof
         display_type: compact
-        navigation_path: /lovelace/roof
+        navigation_path: /lovelace-home/roof
         alert_classes:
           - smoke
           - carbon_monoxide
