@@ -1,0 +1,2 @@
+person.scotty:
+  asleep: binary_sensor.scotty_asleep

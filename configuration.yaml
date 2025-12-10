@@ -1,6 +1,9 @@
 # Loads default set of integrations. Do not remove.
 default_config:
 
+homeassistant:
+  customize: !include customize.yaml
+
 http:
   ssl_certificate: /config/homeassistant-cert.pem
   ssl_key: /config/homeassistant-key.pem
