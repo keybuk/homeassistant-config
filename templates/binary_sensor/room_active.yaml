@@ -1,0 +1,49 @@
+# Occupancy sensors for rooms, checking for anyone home and awake.
+- use_blueprint:
+    path: room_active.yaml
+    input:
+      occupancy: binary_sensor.bedroom_occupancy
+  name: Bedroom Active
+  unique_id: bedroom_active
+
+- use_blueprint:
+    path: room_active.yaml
+    input:
+      occupancy: binary_sensor.dining_room_occupancy
+  name: Dining Room Active
+  unique_id: dining_room_active
+
+- use_blueprint:
+    path: room_active.yaml
+    input:
+      occupancy: binary_sensor.kitchen_occupancy
+  name: Kitchen Active
+  unique_id: kitchen_active
+
+- use_blueprint:
+    path: room_active.yaml
+    input:
+      occupancy: binary_sensor.loft_occupancy
+  name: Loft Active
+  unique_id: loft_active
+
+- use_blueprint:
+    path: room_active.yaml
+    input:
+      occupancy: binary_sensor.office_occupancy
+  name: Office Active
+  unique_id: office_active
+
+- use_blueprint:
+    path: room_active.yaml
+    input:
+      occupancy: binary_sensor.roof_occupancy
+  name: Roof Active
+  unique_id: roof_active
+
+- use_blueprint:
+    path: room_active.yaml
+    input:
+      occupancy: binary_sensor.stairs_occupancy
+  name: Stairs Active
+  unique_id: stairs_active

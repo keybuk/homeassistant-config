@@ -1,0 +1,50 @@
+blueprint:
+  name: Room Active
+  description: >
+    Creates an occupancy sensor that combines room occuapncy with home occupancy
+    to filter out false positives when no-one is home, while also keeping lights
+    off while everyone is asleep without turning them off immediately.
+  author: "Scott James Remnant <scott@netsplit.com>"
+  domain: template
+  input:
+    occupancy:
+      name: Occupancy
+      description: >
+        The occupancy sensor.
+      selector:
+        entity:
+          filter:
+            - domain: binary_sensor
+              device_class: occupancy
+
+triggers:
+  - trigger: state
+    entity_id: !input occupancy
+    to:
+      - "on"
+      - "off"
+  - trigger: state
+    entity_id: binary_sensor.anyone_home
+    to:
+      - "on"
+      - "off"
+  # Only update when somebody wakes up, not when they go to sleep; holding the
+  # sensor at its previous value.
+  - trigger: state
+    entity_id: binary_sensor.everyone_asleep
+    to: "off"
+
+variables:
+  occupancy: !input occupancy
+
+binary_sensor:
+  device_class: occupancy
+  state: |
+    {{ 'on' if is_state(occupancy, 'on')
+        and is_state('binary_sensor.anyone_home', 'on')
+        and is_state('binary_sensor.everyone_asleep', 'off') else 'off' }}
+  attributes:
+    entity_id: |
+      {{ [ occupancy,
+           'binary_sensor.anyone_home',
+           'binary_sensor.everyone_asleep' ] }}"
