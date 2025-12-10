@@ -7,11 +7,7 @@ max_columns: 2
 
 badges:
   - type: entity
-    entity: binary_sensor.roof_occupancy
-    visibility:
-      - condition: state
-        entity: binary_sensor.roof_occupancy
-        state: "on"
+    entity: binary_sensor.roof_active
   - type: entity
     entity: binary_sensor.roof_nest_smoke_status
     visibility:
