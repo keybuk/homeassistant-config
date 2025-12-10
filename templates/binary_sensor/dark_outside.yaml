@@ -1,0 +1,17 @@
+# Binary sensor that reports whether it's dark outside, either because it's
+# night time, or a cloudy day.
+- binary_sensor:
+    name: Dark Outside
+    unique_id: dark_outside
+    state: |
+      {{ 'on' if is_state('sensor.weather', 'night')
+         or is_state('sensor.weather', 'cloudy-day') else 'off' }}
+    icon: >
+      {% if is_state('binary_sensor.dark_outside', 'on') %}
+        mdi:weather-night
+      {% else %}
+        mdi:weather-sunny
+      {% endif %}
+    attributes:
+      entity_id: |
+        {{ ['sensor.weather'] }}
