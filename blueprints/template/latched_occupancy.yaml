@@ -1,0 +1,50 @@
+blueprint:
+  name: Latched Occupancy
+  description: >
+    Creates an occupancy sensors that reports occupied while all of the input
+    occupancy sensors are occupied, and remains occupied while an input boolean
+    is true.
+  author: "Scott James Remnant <scott@netsplit.com>"
+  domain: template
+  input:
+    sensors:
+      name: Sensors
+      description: >
+        Occupancy sensors to monitor, all must be occupied for occupancy to be
+        true.
+      selector:
+        entity:
+          filter:
+            - domain: binary_sensor
+          multiple: true
+    latch:
+      name: Latch
+      description: >
+        The input that causes the sensor to remain occupied.
+      selector:
+        entity:
+          filter:
+            - domain: input_boolean
+
+triggers:
+  - trigger: state
+    entity_id: !input sensors
+    to:
+      - "on"
+      - "off"
+  # Update only when the latch is turned off.
+  - trigger: state
+    entity_id: !input latch
+    to: "off"
+
+variables:
+  sensors: !input sensors
+  latch: !input latch
+
+binary_sensor:
+  device_class: occupancy
+  state: |
+    {{ 'off' if sensors | select('is_state', 'off') | list
+       and is_state(latch, 'off') else 'on' }}
+  attributes:
+    entity_id: "{{ sensors + [ latch ] }}"
