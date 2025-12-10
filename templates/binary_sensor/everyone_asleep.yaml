@@ -1,0 +1,21 @@
+# Binary sensor that tracks whether everyone at home is asleep.
+#
+# Add 'asleep' attribute to each person in customize.yaml to link to their
+# individual asleep binary_sensor.
+- binary_sensor:
+    name: Everyone Asleep
+    unique_id: everyone_asleep
+    state: |
+      {% set home = state_attr('zone.home', 'persons') | select('is_state', 'home') | list %}
+      {% set awake = home | map('state_attr', 'asleep') | select('is_state', 'off') | list %}
+      {{ 'on' if home | length > 0 and awake | length == 0 else 'off' }}
+    icon: >
+      {% if is_state('binary_sensor.everyone_asleep', 'on') %}
+        mdi:bed
+      {% else %}
+        mdi:bed-empty
+      {% endif %}
+    attributes:
+      entity_id: |
+        {{ state_attr('zone.home', 'persons') | select('is_state', 'home')
+           | map('state_attr', 'asleep') | list + ['zone.home'] }}
