@@ -1,4 +1,4 @@
-# Binary sensor that matches when I'm asleep based on location and phone status.
+# Binary sensor that infers whether I'm asleep based on phone status.
 - triggers:
     # Trigger when the phone focus state changes. This ignores any focus where
     # Home Assistant can send notifications, so just matches the "Sleep" focus.
@@ -13,24 +13,18 @@
       entity_id: binary_sensor.scottys_iphone_battery_charging
       to: "on"
 
-    # Trigger when we leave home in case we're sleeping in the car and drive
-    # away or something.
-    - trigger: state
-      entity_id: person.scotty
-      to: "not_home"
-
     # Set initial state when reloaded.
+    - platform: homeassistant
+      event: start
     - trigger: event
       event_type: event_template_reloaded
-      id: "reload"
 
   binary_sensor:
     name: Scotty Asleep
     unique_id: scotty_asleep
     state: |
-      {{ is_state('person.scotty', 'home')
-         and is_state('binary_sensor.scottys_iphone_battery_charging', 'on')
-         and is_state('binary_sensor.scottys_iphone_focus', 'on')
+      {{ 'on' if is_state('binary_sensor.scottys_iphone_battery_charging', 'on')
+         and is_state('binary_sensor.scottys_iphone_focus', 'on') else 'off'
       }}
     icon: |
       {% if is_state('binary_sensor.scotty_asleep', 'on') %}
@@ -39,7 +33,7 @@
         mdi:bed-empty
       {% endif %}
     attributes:
+      person: person.scotty
       entity_id: |
         {{ [ 'binary_sensor.scottys_iphone_battery_charging',
-             'binary_sensor.scottys_iphone_focus',
-             'person.scotty' ] }}
+             'binary_sensor.scottys_iphone_focus' ] }}
