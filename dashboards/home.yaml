@@ -4,50 +4,8 @@ type: sections
 max_columns: 2
 
 badges:
-  # Display one of multiple badges to show if I'm asleep, at home, or
-  # the home occupancy state.
   - type: entity
-    entity: binary_sensor.scotty_asleep
-    name: Scotty
-    icon: mdi:bed
-    state_content: name
-    tap_action:
-      action: more-info
-    visibility:
-      - condition: state
-        entity: person.scotty
-        state: home
-      - condition: state
-        entity: binary_sensor.scotty_asleep
-        state: "on"
-  - type: entity
-    entity: person.scotty
-    icon: mdi:home
-    state_content: name
-    tap_action:
-      action: more-info
-    visibility:
-      - condition: state
-        entity: person.scotty
-        state: home
-      - condition: state
-        entity: binary_sensor.scotty_asleep
-        state_not: "on"
-  - type: entity
-    entity: binary_sensor.anyone_home
-    tap_action:
-      action: more-info
-    visibility:
-      - condition: state
-        entity: person.scotty
-        state_not: home
-
-  # Display the weather condition as used by automations.
-  - type: entity
-    entity: sensor.weather
-    show_state: false
-    tap_action:
-      action: more-info
+    entity: binary_sensor.home_active
 
 sections:
   # Downstairs
