@@ -271,7 +271,7 @@
     input:
       lights:
       - light.office
-      occupancy: binary_sensor.office_occupancy
+      occupancy: binary_sensor.office_aziz
 - id: '1758341121396'
   alias: Bedroom Lights
   description: ''
@@ -280,8 +280,7 @@
     input:
       lights:
       - light.bedroom
-      occupancy: binary_sensor.bedroom_occupancy
-      privacy: input_boolean.bedroom_privacy
+      occupancy: binary_sensor.bedroom_aziz
 - id: '1758341153495'
   alias: Loft Lights
   description: ''
@@ -290,8 +289,7 @@
     input:
       lights:
       - light.loft_theater
-      occupancy: binary_sensor.loft_occupancy
-      privacy: input_boolean.loft_privacy
+      occupancy: binary_sensor.loft_aziz
 - id: '1758341469250'
   alias: Dining Room Lights
   description: ''
@@ -301,7 +299,7 @@
       lights:
       - light.dining_room
       - light.dining_room_lego
-      privacy: input_boolean.dining_room_privacy
+      occupancy: binary_sensor.dining_room_aziz
 - id: '1758395540557'
   alias: Bedroom Blinds
   description: ''

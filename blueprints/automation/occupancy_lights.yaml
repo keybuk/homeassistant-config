@@ -1,8 +1,7 @@
 blueprint:
   name: Occupancy Lights
   description: >
-    Turn lights on and off based on room occupancy, weather conditions, and
-    whether anyone is home or asleep.
+    Turn lights on and off based on room occupancy.
   author: Scott James Remnant <scott@netsplit.com>
   domain: automation
   input:
@@ -23,102 +22,26 @@ blueprint:
             - domain: binary_sensor
               device_class: occupancy
       default: null
-    privacy:
-      name: Privacy
-      description: Lights will not be turned off while this input is on.
-      selector:
-        entity:
-          filter:
-            - domain: input_boolean
-      default: null
 
 mode: queued
 
-trigger_variables:
-  occupancy: !input occupancy
-
 triggers:
-  # Update lights when the room becomes occupied or unoccupied.
-  - trigger: template
-    value_template: "{{ occupancy is not none and is_state(occupancy, 'on') }}"
-  - trigger: template
-    value_template: "{{ occupancy is not none and is_state(occupancy, 'off') }}"
-  # Update lights based on the time of day and weather.
   - trigger: state
-    entity_id: sensor.weather
-    not_to: "unavailable"
-  # Update lights when we wake up or go to sleep.
-  - trigger: state
-    entity_id: binary_sensor.anyone_asleep
+    entity_id: !input occupancy
     to:
       - "on"
       - "off"
-  # Update lights when the first person comes home, or the last person leaves
-  # home.
-  - trigger: state
-    entity_id: binary_sensor.anyone_home
-    to:
-      - "on"
-      - "off"
-
-variables:
-  occupancy: !input occupancy
-  privacy: !input privacy
 
 actions:
-  - choose:
-      # Turn lights on when the room is occupied during a cloudy day,
-      # or at night,
-      - conditions:
-          - "{{ occupancy is none or is_state(occupancy, 'on') }}"
-          - condition: state
-            entity_id: sensor.weather
-            state:
-              - "cloudy-day"
-              - "night"
-          # Unless someone is sleeping.
-          - condition: state
-            entity_id: binary_sensor.anyone_asleep
-            state: "off"
-          # Only when someone is home.
-          - condition: state
-            entity_id: binary_sensor.anyone_home
-            state: "on"
-        sequence:
-          - action: light.turn_on
-            target:
-              entity_id: !input lights
-
-      # Turn lights off when the sun comes out during the day to save on power.
-      # It doesn't matter if the room is occupied or not, since we wouldn't turn
-      # lights on if it was.
-      - conditions:
-          - condition: state
-            entity_id: sensor.weather
-            state:
-              - "hot-day"
-              - "day"
-          # Unless we need privacy.
-          - "{{ privacy is none or is_state(privacy, 'off') }}"
-        sequence:
-          - action: light.turn_off
-            target:
-              entity_id: !input lights
-
-      # Turn lights off when the room is unoccupied (or if no occupancy sensor,
-      # when we go to sleep), or when nobody is home.
-      - conditions:
-          - or:
-              - "{{ occupancy is not none and is_state(occupancy, 'off') }}"
-              - "{{ occupancy is none and is_state('binary_sensor.anyone_asleep', 'on') }}"
-              - condition: state
-                entity_id: binary_sensor.anyone_home
-                state: "off"
-          # Unless we need privacy.
-          - "{{ privacy is none or is_state(privacy, 'off') }}"
-        sequence:
-          - action: light.turn_off
-            target:
-              entity_id: !input lights
-            # data:
-            #   transition: 5
+  - if:
+      - condition: state
+        entity_id: !input occupancy
+        state: "on"
+    then:
+      - action: light.turn_on
+        target:
+          entity_id: !input lights
+    else:
+      - action: light.turn_off
+        target:
+          entity_id: !input lights
