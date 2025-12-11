@@ -319,3 +319,14 @@
       daytime: scene.office_daytime
       nighttime: scene.office_nighttime
       window: binary_sensor.office_window
+- id: '1765411645826'
+  alias: Christmas Lights
+  description: ''
+  use_blueprint:
+    path: occupancy_lights.yaml
+    input:
+      lights:
+      - light.balcony_icicles
+      - light.beam_icicles
+      - light.tree_lights
+      occupancy: binary_sensor.home_active
