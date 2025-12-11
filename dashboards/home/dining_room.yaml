@@ -143,6 +143,10 @@ sections:
             name: Game Over
             tap_action:
               action: toggle
+          - entity: script.dining_room_christmas
+            name: Christmas
+            tap_action:
+              action: toggle
           - entity: script.dining_room_play
             name: Play
             tap_action:
@@ -212,6 +216,12 @@ sections:
       - type: tile
         entity: light.dining_room_lego
         name: Lego
+      - type: tile
+        entity: light.beam_icicles
+        name: Beam Icicles
+      - type: tile
+        entity: light.balcony_icicles
+        name: Balcony Icicles
 
   # Windows
   - type: grid
@@ -448,4 +458,12 @@ sections:
               perform_action: automation.trigger
               target:
                 entity_id: automation.dining_room_tabletop
+          - entity: automation.christmas_lights
+            name: Christmas Lights
+            secondary_info: last-triggered
+            hold_action:
+              action: perform-action
+              perform_action: automation.trigger
+              target:
+                entity_id: automation.christmas_lights
         show_header_toggle: false

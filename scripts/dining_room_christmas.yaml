@@ -1,0 +1,11 @@
+alias: Dining Room Christmas
+description: >
+  Set lighting scenes in the Dining Room.
+icon: mdi:pine-tree
+
+sequence:
+  - action: scene.turn_on
+    target:
+      entity_id:
+        - scene.dining_room_wall_christmas
+        - scene.dining_room_beam_lights_christmas

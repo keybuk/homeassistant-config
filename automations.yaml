@@ -86,7 +86,7 @@
   use_blueprint:
     path: light_switch.yaml
     input:
-      light: light.loft_theater
+      light: light.loft_wall
       switch: switch.loft
 - id: '1742268121309'
   alias: Loft Switch Button 1
@@ -107,7 +107,7 @@
     input:
       button: event.loft_switch_button_2
       actions:
-      - action: script.loft_pride
+      - action: script.loft_christmas
         metadata: {}
         data: {}
 - id: '1742273188065'
@@ -288,7 +288,7 @@
     path: occupancy_lights.yaml
     input:
       lights:
-      - light.loft_theater
+      - light.loft_wall
       occupancy: binary_sensor.loft_aziz
 - id: '1758341469250'
   alias: Dining Room Lights

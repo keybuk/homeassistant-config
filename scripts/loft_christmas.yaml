@@ -1,0 +1,11 @@
+alias: Loft Christmas
+description: >
+  Set lighting scenes in the Loft.
+icon: mdi:pine-tree
+
+sequence:
+  - action: scene.turn_on
+    target:
+      entity_id:
+        - scene.loft_ceiling_golden_star
+        - scene.loft_wall_under_the_tree

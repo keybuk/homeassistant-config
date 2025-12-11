@@ -74,6 +74,10 @@ sections:
         icon: mdi:lamps
       - type: glance
         entities:
+          - entity: script.loft_christmas
+            name: Christmas
+            tap_action:
+              action: toggle
           - entity: script.loft_play
             name: Play
             tap_action:
@@ -205,6 +209,9 @@ sections:
               action: toggle
         show_state: false
         state_color: false
+      - type: tile
+        entity: light.tree_lights
+        name: Tree Lights
 
   # Windows
   - type: grid
@@ -347,6 +354,14 @@ sections:
               perform_action: automation.trigger
               target:
                 entity_id: automation.kitchen_blinds
+          - entity: automation.christmas_lights
+            name: Christmas Lights
+            secondary_info: last-triggered
+            hold_action:
+              action: perform-action
+              perform_action: automation.trigger
+              target:
+                entity_id: automation.christmas_lights
         show_header_toggle: false
 
   # Power
