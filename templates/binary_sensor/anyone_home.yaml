@@ -43,12 +43,8 @@
           off
         {% endif %}
       attributes:
-        door_opened: "{{ states('binary_sensor.doors_opened_while_not_occupied') }}"
         entity_id: |
           {{ [  'binary_sensor.home_occupancy',
                 'binary_sensor.doors_opened_while_not_occupied',
                 'lock.front_door',
                 'zone.home' ] }}
-        locked: "{{ states('lock.front_door') }}"
-        occupancy: "{{ states('binary_sensor.home_occupancy') }}"
-        persons: "{{ state_attr('zone.home', 'persons') }}"
