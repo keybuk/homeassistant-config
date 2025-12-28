@@ -53,12 +53,17 @@ sections:
     column_span: 2
 
   # Actions
-  # - type: grid
-  #   cards:
-  #     - type: heading
-  #       heading: Actions
-  #       icon: mdi:gesture-tap-button
-  #   column_span: 2
+  - type: grid
+    cards:
+      - type: heading
+        heading: Actions
+        icon: mdi:gesture-tap-button
+      - type: tile
+        entity: input_boolean.office_privacy
+        name: Privacy
+        hide_state: true
+
+    column_span: 2
 
   # Lights
   - type: grid

@@ -29,3 +29,13 @@
       latch: input_boolean.loft_privacy
   name: Loft Aziz
   unique_id: loft_aziz
+
+- use_blueprint:
+    path: latched_occupancy.yaml
+    input:
+      sensors:
+        - binary_sensor.office_active
+        - binary_sensor.dark_outside
+      latch: input_boolean.office_privacy
+  name: Office Aziz
+  unique_id: office_aziz

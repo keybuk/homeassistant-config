@@ -319,6 +319,7 @@
       daytime: scene.office_daytime
       nighttime: scene.office_nighttime
       window: binary_sensor.office_window
+      privacy: input_boolean.office_privacy
 - id: '1765411645826'
   alias: Christmas Lights
   description: ''

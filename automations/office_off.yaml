@@ -18,6 +18,11 @@ triggers:
     entity_id: binary_sensor.anyone_asleep
     to: "on"
 
+  # Turn things off when we don't need privacy anymore.
+  - trigger: state
+    entity_id: input_boolean.office_privacy
+    to: "off"
+
 conditions:
   - or:
       - condition: state
@@ -26,6 +31,9 @@ conditions:
       - condition: state
         entity_id: binary_sensor.anyone_asleep
         state: "on"
+  - condition: state
+    entity_id: input_boolean.office_privacy
+    state: "off"
 
 actions:
   - action: media_player.media_pause
