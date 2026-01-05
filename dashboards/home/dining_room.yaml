@@ -380,34 +380,34 @@ sections:
       - type: custom:flower-card
         entity: plant.never_never_plant
         show_bars:
-        - illuminance
-        - humidity
-        - moisture
-        - temperature
+          - illuminance
+          - humidity
+          - moisture
+          - temperature
         battery_sensor: sensor.smart_plant_43678a_smart_plant_battery
       - type: custom:flower-card
         entity: plant.peace_lily
         show_bars:
-        - illuminance
-        - humidity
-        - moisture
-        - temperature
+          - illuminance
+          - humidity
+          - moisture
+          - temperature
         battery_sensor: sensor.smart_plant_43677a_smart_plant_battery
       - type: custom:flower-card
         entity: plant.rattlesnake_plant
         show_bars:
-        - illuminance
-        - humidity
-        - moisture
-        - temperature
+          - illuminance
+          - humidity
+          - moisture
+          - temperature
         battery_sensor: sensor.smart_plant_436784_smart_plant_battery
       - type: custom:flower-card
         entity: plant.swiss_cheese_plant
         show_bars:
-        - illuminance
-        - humidity
-        - moisture
-        - temperature
+          - illuminance
+          - humidity
+          - moisture
+          - temperature
         battery_sensor: sensor.smart_plant_43930a_smart_plant_battery
 
   # Automations
