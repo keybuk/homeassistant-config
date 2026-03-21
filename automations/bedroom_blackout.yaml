@@ -19,13 +19,22 @@ triggers:
     to: "off"
     for:
       seconds: 3
+  # Update blinds when we need privacy.
+  - trigger: state
+    entity_id: input_boolean.bedroom_privacy
+    to:
+      - "on"
+      - "off"
 
 actions:
   - choose:
-      # Open blackout blinds when nobody is sleeping.
+      # Open blackout blinds when nobody is sleeping and we don't need privacy.
       - conditions:
           - condition: state
             entity_id: binary_sensor.anyone_asleep
+            state: "off"
+          - condition: state
+            entity_id: input_boolean.bedroom_privacy
             state: "off"
         sequence:
           - action: scene.turn_on
