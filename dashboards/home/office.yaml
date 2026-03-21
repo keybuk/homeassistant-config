@@ -87,11 +87,6 @@ sections:
             name: Work
             tap_action:
               action: toggle
-          - type: tile
-            entity: scene.office_ceiling_dreamy_dusk
-            name: Dreamy Dusk
-            tap_action:
-              action: toggle
         show_state: false
         state_color: false
       - type: tile
@@ -133,6 +128,21 @@ sections:
         name: Wall Right
         features:
           - type: light-brightness
+      - type: custom:auto-entities
+        card:
+          type: glance
+          show_state: false
+          state_color: false
+        filter:
+          include:
+            - domain: scene
+              area: "office"
+              device: "Office Ceiling"
+              options:
+                name:
+                  type: entity
+                tap_action:
+                  action: toggle
 
   # Windows
   - type: grid

@@ -151,10 +151,6 @@ sections:
             name: Pride
             tap_action:
               action: toggle
-          - entity: scene.dining_room_wall_world_of_color
-            name: World of Color
-            tap_action:
-              action: toggle
         show_state: false
         state_color: false
       - type: tile
@@ -206,9 +202,43 @@ sections:
         name: West Right
         features:
           - type: light-brightness
+      - type: custom:auto-entities
+        card:
+          type: glance
+          show_state: false
+          state_color: false
+        filter:
+          include:
+            - domain: scene
+              area: "dining_room"
+              device: "Dining Room Wall"
+              options:
+                name:
+                  type: entity
+                tap_action:
+                  action: toggle
       - type: tile
         entity: light.dining_room_beam
         name: Beam
+        hide_state: true
+        features:
+          - type: light-brightness
+        features_position: inline
+      - type: custom:auto-entities
+        card:
+          type: glance
+          show_state: false
+          state_color: false
+        filter:
+          include:
+            - domain: scene
+              area: "dining_room"
+              device: "Dining Room Beam Lights"
+              options:
+                name:
+                  type: entity
+                tap_action:
+                  action: toggle
       - type: tile
         entity: light.dining_room_lego
         name: Lego

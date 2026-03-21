@@ -140,30 +140,21 @@ sections:
         name: Balcony Right
         features:
           - type: light-brightness
-      - type: glance
-        entities:
-          - entity: scene.loft_ceiling_disturbia
-            name: Disturbia
-            tap_action:
-              action: toggle
-          - entity: scene.loft_ceiling_play
-            name: Play
-            tap_action:
-              action: toggle
-          - entity: scene.loft_ceiling_pride
-            name: Pride
-            tap_action:
-              action: toggle
-          - entity: scene.loft_ceiling_resplendent
-            name: Resplendent
-            tap_action:
-              action: toggle
-          - entity: scene.loft_ceiling_tyrell
-            name: Tyrell
-            tap_action:
-              action: toggle
-        show_state: false
-        state_color: false
+      - type: custom:auto-entities
+        card:
+          type: glance
+          show_state: false
+          state_color: false
+        filter:
+          include:
+            - domain: scene
+              area: "loft"
+              device: "Loft Ceiling"
+              options:
+                name:
+                  type: entity
+                tap_action:
+                  action: toggle
       - type: tile
         entity: light.loft_wall
         name: Wall
@@ -193,18 +184,21 @@ sections:
         name: South Right
         features:
           - type: light-brightness
-      - type: glance
-        entities:
-          - entity: scene.loft_wall_play
-            name: Play
-            tap_action:
-              action: toggle
-          - entity: scene.loft_wall_pride
-            name: Pride
-            tap_action:
-              action: toggle
-        show_state: false
-        state_color: false
+      - type: custom:auto-entities
+        card:
+          type: glance
+          show_state: false
+          state_color: false
+        filter:
+          include:
+            - domain: scene
+              area: "loft"
+              device: "Loft Wall"
+              options:
+                name:
+                  type: entity
+                tap_action:
+                  action: toggle
 
   # Windows
   - type: grid

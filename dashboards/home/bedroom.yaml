@@ -154,18 +154,21 @@ sections:
         name: Right Bedside
         features:
           - type: light-brightness
-      - type: glance
-        entities:
-          - entity: scene.bedroom_bedside_play
-            name: Play
-            tap_action:
-              action: toggle
-          - entity: scene.bedroom_bedside_read
-            name: Reading
-            tap_action:
-              action: toggle
-        show_state: false
-        state_color: false
+      - type: custom:auto-entities
+        card:
+          type: glance
+          show_state: false
+          state_color: false
+        filter:
+          include:
+            - domain: scene
+              area: "bedroom"
+              device: "Bedroom Bedside"
+              options:
+                name:
+                  type: entity
+                tap_action:
+                  action: toggle
       - type: tile
         entity: light.bedroom_ceiling
         name: Ceiling
@@ -195,18 +198,21 @@ sections:
         name: Wall Right
         features:
           - type: light-brightness
-      - type: glance
-        entities:
-          - entity: scene.bedroom_ceiling_mood
-            name: Mood
-            tap_action:
-              action: toggle
-          - entity: scene.bedroom_ceiling_play
-            name: Play
-            tap_action:
-              action: toggle
-        show_state: false
-        state_color: false
+      - type: custom:auto-entities
+        card:
+          type: glance
+          show_state: false
+          state_color: false
+        filter:
+          include:
+            - domain: scene
+              area: "bedroom"
+              device: "Bedroom Ceiling"
+              options:
+                name:
+                  type: entity
+                tap_action:
+                  action: toggle
       - type: tile
         entity: light.bedroom_left_closet
         name: Left Closet
