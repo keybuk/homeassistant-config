@@ -320,3 +320,844 @@
       nighttime: scene.office_nighttime
       window: binary_sensor.office_window
       privacy: input_boolean.office_privacy
+- id: '1783216934492'
+  alias: Bathroom Off
+  description: Turn things off when the last person goes to sleep, or the home is
+    no longer occupied.
+  triggers:
+  - trigger: state
+    entity_id: binary_sensor.anyone_home
+    to: 'off'
+  - trigger: state
+    entity_id: binary_sensor.anyone_asleep
+    to: 'on'
+  conditions:
+  - condition: or
+    conditions:
+    - condition: state
+      entity_id: binary_sensor.anyone_home
+      state:
+      - 'off'
+    - condition: state
+      entity_id: binary_sensor.anyone_asleep
+      state:
+      - 'on'
+  actions:
+  - action: light.turn_off
+    continue_on_error: true
+    target:
+      area_id: bathroom
+  - action: media_player.media_pause
+    continue_on_error: true
+    target:
+      entity_id: media_player.bathroom
+  mode: single
+- id: '1783217502651'
+  alias: Kitchen Lights
+  description: 'Turns on the kitchen counter lights for 15 minutes after motion is
+    detected, or when anyone comes home at night.
+
+    '
+  triggers:
+  - note: Trigger using the Eve Motion, as it's the most reliable.
+    trigger: state
+    entity_id:
+    - binary_sensor.dining_room_motion_occupancy
+    to:
+    - 'on'
+  - trigger: state
+    entity_id: binary_sensor.anyone_home
+    to: 'on'
+    not_from: unavailable
+    note: Trigger when the first person arrives home.
+  - trigger: zone
+    entity_id:
+    - person.scotty
+    zone: zone.home
+    event: enter
+    note: Trigger when known people arrive home, even if the home is otherwise already
+      occupied.
+  conditions:
+  - condition: state
+    entity_id: sensor.weather
+    state:
+    - night
+    - cloudy-day
+    note: Only turn lights on at night or during a cloudy day.
+  - note: "Only trigger when the kitchen counter light is off, unless an instance
+      of this automation is running in which case we restart the timer.           \n"
+    condition: or
+    conditions:
+    - condition: state
+      entity_id: light.kitchen_counter
+      state:
+      - 'off'
+    - condition: state
+      entity_id: automation.kitchen_lights
+      state:
+      - '1'
+      attribute: current
+  - condition: state
+    entity_id: binary_sensor.anyone_home
+    state: 'on'
+    note: Only when someone is home.
+  actions:
+  - note: Turn lights on at 25% brightness, unless already on.
+    if:
+    - condition: state
+      entity_id: light.kitchen_counter
+      state: 'off'
+    then:
+    - action: light.turn_on
+      data:
+        brightness_pct: 25
+      target:
+        entity_id: light.kitchen_counter
+    - delay:
+        seconds: 3
+      note: Assume it takes a few seconds, avoid triggering our own wait condition.
+  - wait_for_trigger:
+    - trigger: state
+      entity_id: light.kitchen_counter
+    timeout:
+      minutes: 15
+    note: "Keep the light on for 15 minutes.                                          \nBut
+      if the kitchen counter state changes, assume we should leave it alone and not
+      turn it off in the middle of someone's burrito.                    \n"
+  - if:
+    - condition: template
+      value_template: '{{ not wait.completed }}'
+    then:
+    - action: light.turn_off
+      target:
+        entity_id: light.kitchen_counter
+  mode: restart
+- id: '1783369377035'
+  alias: Bedroom Blackout
+  description: Close the bedroom blackout blinds when we're sleeping in, and open
+    when we wake up.
+  triggers:
+  - trigger: state
+    entity_id: binary_sensor.anyone_asleep
+    to:
+    - 'on'
+    - 'off'
+  - trigger: state
+    entity_id: binary_sensor.bedroom_window
+    to: 'off'
+    for:
+      seconds: 3
+  - trigger: state
+    entity_id: input_boolean.bedroom_privacy
+    to:
+    - 'on'
+    - 'off'
+  conditions: []
+  actions:
+  - choose:
+    - conditions:
+      - condition: state
+        entity_id: binary_sensor.anyone_asleep
+        state: 'off'
+      - condition: state
+        entity_id: input_boolean.bedroom_privacy
+        state: 'off'
+      sequence:
+      - action: scene.turn_on
+        target:
+          entity_id: scene.bedroom_blackout_open
+    - conditions:
+      - condition: sun
+        before: sunset
+        after: sunrise
+        after_offset: -03:00:00
+      - condition: state
+        entity_id: binary_sensor.anyone_asleep
+        state: 'on'
+      - condition: state
+        entity_id: binary_sensor.bedroom_window
+        state: 'off'
+      sequence:
+      - action: scene.turn_on
+        target:
+          entity_id: scene.bedroom_blackout_close
+  mode: queued
+- id: '1783369489950'
+  alias: Bedroom Off
+  description: Turn things off in the bedroom that don't have their own automations.
+  triggers:
+  - trigger: state
+    entity_id: binary_sensor.anyone_home
+    to: 'off'
+  - trigger: state
+    entity_id: binary_sensor.anyone_asleep
+    to: 'on'
+  - trigger: state
+    entity_id: input_boolean.bedroom_privacy
+    to: 'off'
+  conditions:
+  - condition: or
+    conditions:
+    - condition: state
+      entity_id: binary_sensor.anyone_home
+      state: 'off'
+    - condition: state
+      entity_id: binary_sensor.anyone_asleep
+      state: 'on'
+  - condition: state
+    entity_id: input_boolean.bedroom_privacy
+    state: 'off'
+  actions:
+  - action: light.turn_off
+    continue_on_error: true
+    target:
+      entity_id:
+      - light.bedroom_left_closet
+      - light.bedroom_right_closet
+  - action: media_player.media_pause
+    continue_on_error: true
+    target:
+      entity_id: media_player.bedroom
+  mode: single
+- id: '1783369660478'
+  alias: Dining Room Off
+  description: Turn things off when the last person goes to sleep, or the home is
+    no longer occupied.
+  triggers:
+  - trigger: state
+    entity_id: binary_sensor.anyone_home
+    to: 'off'
+  - trigger: state
+    entity_id: binary_sensor.anyone_asleep
+    to: 'on'
+  - trigger: state
+    entity_id: input_boolean.dining_room_privacy
+    to: 'off'
+  conditions:
+  - condition: or
+    conditions:
+    - condition: state
+      entity_id: binary_sensor.anyone_home
+      state: 'off'
+    - condition: state
+      entity_id: binary_sensor.anyone_asleep
+      state: 'on'
+  - condition: state
+    entity_id: input_boolean.dining_room_privacy
+    state: 'off'
+  actions:
+  - action: light.turn_off
+    continue_on_error: true
+    target:
+      entity_id:
+      - light.dining_room_chandelier
+      - light.dining_room_spots
+  - action: media_player.media_pause
+    continue_on_error: true
+    target:
+      entity_id: media_player.dining_room
+  mode: single
+- id: '1783369934660'
+  alias: Dining Room Tabletop
+  description: Set dining room light scenes based on the tabletop TV.
+  triggers:
+  - trigger: state
+    entity_id: media_player.dining_room_tabletop
+    to: 'on'
+  - trigger: state
+    entity_id: media_player.dining_room_tabletop
+    to: 'off'
+    id: tabletop_off
+    for:
+      minutes: 15
+  - trigger: state
+    entity_id: sensor.weather
+    to: night
+  conditions: []
+  actions:
+  - choose:
+    - conditions:
+      - condition: state
+        entity_id: media_player.dining_room_tabletop
+        state: 'on'
+      - condition: state
+        entity_id: sensor.weather
+        state: night
+      sequence:
+      - action: script.dining_room_dnd
+    - conditions:
+      - condition: state
+        entity_id: media_player.dining_room_tabletop
+        state: 'on'
+      sequence:
+      - action: script.dining_room_game_setup
+    - conditions:
+      - condition: trigger
+        id: tabletop_off
+      sequence:
+      - action: script.dining_room_game_over
+  mode: queued
+- id: '1783369983676'
+  alias: Downstairs Bathroom Off
+  description: Turn things off when the last person goes to sleep, or the home is
+    no longer occupied.
+  triggers:
+  - trigger: state
+    entity_id: binary_sensor.anyone_home
+    to: 'off'
+  - trigger: state
+    entity_id: binary_sensor.anyone_asleep
+    to: 'on'
+  conditions:
+  - condition: or
+    conditions:
+    - condition: state
+      entity_id: binary_sensor.anyone_home
+      state: 'off'
+    - condition: state
+      entity_id: binary_sensor.anyone_asleep
+      state: 'on'
+  actions:
+  - action: light.turn_off
+    continue_on_error: true
+    target:
+      area_id: downstairs_bathroom
+  - action: media_player.media_pause
+    continue_on_error: true
+    target:
+      entity_id: media_player.downstairs_bathroom
+  mode: single
+- id: '1783370044973'
+  alias: Door Opened Notification
+  description: Notify when a door is opened while nobody is home.
+  triggers:
+  - trigger: state
+    entity_id: binary_sensor.doors_opened_while_not_occupied
+    to: 'on'
+  conditions: []
+  actions:
+  - action: notify.mobile_app_scottys_iphone
+    data:
+      title: Door Opened
+      message: '{% set door = state_attr(''binary_sensor.doors_opened_while_not_occupied'',
+        ''door'') %}
+
+        {{ state_attr(door, ''friendly_name'') | default(door) }}
+
+        '
+  mode: single
+- id: '1783370103733'
+  alias: Kitchen Home at Night
+  description: Turns on the entrance lights when anyone comes home late at night.
+  triggers:
+  - trigger: state
+    entity_id: binary_sensor.anyone_home
+    to: 'on'
+    not_from: unavailable
+  - trigger: zone
+    entity_id:
+    - person.scotty
+    zone: zone.home
+    event: enter
+  conditions:
+  - condition: state
+    entity_id: sensor.weather
+    state: night
+  actions:
+  - action: light.turn_on
+    target:
+      entity_id: light.entrance
+  - delay:
+      minutes: 15
+  - action: light.turn_off
+    target:
+      entity_id: light.entrance
+  mode: restart
+- id: '1783370159944'
+  alias: Kitchen Off
+  description: Turn things off when the last person goes to sleep, or the home is
+    no longer occupied.
+  triggers:
+  - trigger: state
+    entity_id: binary_sensor.anyone_home
+    to: 'off'
+  - trigger: state
+    entity_id: binary_sensor.anyone_asleep
+    to: 'on'
+  conditions:
+  - condition: or
+    conditions:
+    - condition: state
+      entity_id: binary_sensor.anyone_home
+      state: 'off'
+    - condition: state
+      entity_id: binary_sensor.anyone_asleep
+      state: 'on'
+  actions:
+  - action: light.turn_off
+    continue_on_error: true
+    target:
+      area_id: kitchen
+  - action: media_player.media_pause
+    continue_on_error: true
+    target:
+      entity_id: media_player.kitchen
+  mode: single
+- id: '1783370234814'
+  alias: Loft Off
+  description: Turn things off when the last person goes to sleep, or the home is
+    no longer occupied.
+  triggers:
+  - trigger: state
+    entity_id: binary_sensor.anyone_home
+    to: 'off'
+  - trigger: state
+    entity_id: binary_sensor.anyone_asleep
+    to: 'on'
+  - trigger: state
+    entity_id: input_boolean.loft_privacy
+    to: 'off'
+  conditions:
+  - condition: or
+    conditions:
+    - condition: state
+      entity_id: binary_sensor.anyone_home
+      state: 'off'
+    - condition: state
+      entity_id: binary_sensor.anyone_asleep
+      state: 'on'
+  - condition: state
+    entity_id: input_boolean.loft_privacy
+    state: 'off'
+  actions:
+  - action: media_player.media_pause
+    continue_on_error: true
+    target:
+      entity_id: media_player.loft
+  - action: media_player.turn_off
+    continue_on_error: true
+    target:
+      entity_id: media_player.loft_tv
+  mode: single
+- id: '1783370287576'
+  alias: Loft TV
+  description: Turn loft ceiling lights off while the TV is on, and back on again
+    when TV is turned off.
+  triggers:
+  - trigger: state
+    entity_id: media_player.loft_tv
+    to:
+    - 'on'
+    - 'off'
+    - unavailable
+  conditions: []
+  actions:
+  - choose:
+    - conditions:
+      - condition: state
+        entity_id: media_player.loft_tv
+        state: 'on'
+      sequence:
+      - action: light.turn_off
+        target:
+          entity_id: light.loft_ceiling
+    - conditions:
+      - condition: not
+        conditions:
+        - condition: state
+          entity_id: media_player.loft_tv
+          state: 'on'
+      - condition: state
+        entity_id: light.loft_wall
+        state: 'on'
+      sequence:
+      - action: light.turn_on
+        target:
+          entity_id: light.loft_ceiling
+  mode: queued
+- id: '1783370329563'
+  alias: Office Off
+  description: Turn things off when the last person goes to sleep, or the home is
+    no longer occupied.
+  triggers:
+  - trigger: state
+    entity_id: binary_sensor.anyone_home
+    to: 'off'
+  - trigger: state
+    entity_id: binary_sensor.anyone_asleep
+    to: 'on'
+  - trigger: state
+    entity_id: input_boolean.office_privacy
+    to: 'off'
+  conditions:
+  - condition: or
+    conditions:
+    - condition: state
+      entity_id: binary_sensor.anyone_home
+      state: 'off'
+    - condition: state
+      entity_id: binary_sensor.anyone_asleep
+      state: 'on'
+  - condition: state
+    entity_id: input_boolean.office_privacy
+    state: 'off'
+  actions:
+  - action: media_player.media_pause
+    continue_on_error: true
+    target:
+      entity_id: media_player.office
+  mode: single
+- id: '1783370384948'
+  alias: Roof Off
+  description: Turn things off when the last person goes to sleep, or the home is
+    no longer occupied.
+  triggers:
+  - trigger: state
+    entity_id: binary_sensor.anyone_home
+    to: 'off'
+  - trigger: state
+    entity_id: binary_sensor.anyone_asleep
+    to: 'on'
+  conditions:
+  - condition: or
+    conditions:
+    - condition: state
+      entity_id: binary_sensor.anyone_home
+      state: 'off'
+    - condition: state
+      entity_id: binary_sensor.anyone_asleep
+      state: 'on'
+  actions:
+  - action: light.turn_off
+    continue_on_error: true
+    target:
+      area_id: roof
+  mode: single
+- id: '1783370418828'
+  alias: Stairs Off
+  description: Turn things off when the last person goes to sleep, or the home is
+    no longer occupied.
+  triggers:
+  - trigger: state
+    entity_id: binary_sensor.anyone_home
+    to: 'off'
+  - trigger: state
+    entity_id: binary_sensor.anyone_asleep
+    to: 'on'
+  conditions:
+  - condition: or
+    conditions:
+    - condition: state
+      entity_id: binary_sensor.anyone_home
+      state: 'off'
+    - condition: state
+      entity_id: binary_sensor.anyone_asleep
+      state: 'on'
+  actions:
+  - action: light.turn_off
+    continue_on_error: true
+    target:
+      area_id: stairs
+  mode: single
+- id: '1783370582497'
+  alias: Kitchen Blinds
+  description: Open and close the kitchen window blinds based on the time of day,
+    sun position, and weather.
+  triggers:
+  - trigger: numeric_state
+    entity_id: sun.sun
+    attribute: azimuth
+    above: 115
+  - trigger: numeric_state
+    entity_id: sun.sun
+    attribute: azimuth
+    above: 235
+  - trigger: state
+    entity_id: sensor.weather
+    not_to: unavailable
+  - trigger: state
+    entity_id: media_player.loft_tv
+    to:
+    - 'on'
+    - 'off'
+    - unavailable
+  - trigger: state
+    entity_id: input_boolean.dining_room_privacy
+    to:
+    - 'on'
+    - 'off'
+  - trigger: state
+    entity_id: input_boolean.loft_privacy
+    to:
+    - 'on'
+    - 'off'
+  conditions: []
+  actions:
+  - choose:
+    - conditions:
+      - condition: numeric_state
+        entity_id: sun.sun
+        attribute: azimuth
+        above: 115
+        below: 235
+      - condition: state
+        entity_id: sensor.weather
+        state: hot-day
+      sequence:
+      - action: scene.turn_on
+        target:
+          entity_id: scene.kitchen_sun
+    - conditions:
+      - condition: state
+        entity_id: input_boolean.dining_room_privacy
+        state: 'on'
+      sequence:
+      - action: scene.turn_on
+        target:
+          entity_id: scene.kitchen_sun
+    - conditions:
+      - condition: not
+        conditions:
+        - condition: state
+          entity_id: sensor.weather
+          state: night
+      - condition: state
+        entity_id: media_player.loft_tv
+        state: 'on'
+      sequence:
+      - action: scene.turn_on
+        target:
+          entity_id: scene.kitchen_nighttime
+    - conditions:
+      - condition: state
+        entity_id: input_boolean.loft_privacy
+        state: 'on'
+      sequence:
+      - action: scene.turn_on
+        target:
+          entity_id: scene.kitchen_nighttime
+    - conditions:
+      - condition: not
+        conditions:
+        - condition: state
+          entity_id: sensor.weather
+          state: night
+      sequence:
+      - action: scene.turn_on
+        target:
+          entity_id: scene.kitchen_daytime
+    - conditions:
+      - condition: state
+        entity_id: sensor.weather
+        state: night
+      sequence:
+      - action: scene.turn_on
+        target:
+          entity_id: scene.kitchen_nighttime
+  mode: queued
+- id: '1783370684607'
+  alias: Dining Room Blinds
+  description: Open and close the dining room window blinds based on the time of day,
+    sun position, and weather.
+  triggers:
+  - trigger: numeric_state
+    entity_id: sun.sun
+    attribute: azimuth
+    above: 220
+  - trigger: numeric_state
+    entity_id: sun.sun
+    attribute: elevation
+    below: 55
+  - trigger: numeric_state
+    entity_id: sun.sun
+    attribute: elevation
+    below: 45
+  - trigger: numeric_state
+    entity_id: sun.sun
+    attribute: elevation
+    below: 24
+  - trigger: numeric_state
+    entity_id: sun.sun
+    attribute: elevation
+    below: 5.5
+  - trigger: state
+    entity_id: sensor.weather
+    not_to: unavailable
+  - trigger: state
+    entity_id: binary_sensor.dining_room_top_windows
+    to: 'off'
+    for:
+      seconds: 3
+    id: close
+  - trigger: state
+    entity_id: binary_sensor.dining_room_bottom_windows
+    to: 'off'
+    for:
+      seconds: 3
+    id: close
+  - trigger: state
+    entity_id: media_player.loft_tv
+    to:
+    - 'on'
+    - 'off'
+    - unavailable
+  - trigger: state
+    entity_id: input_boolean.dining_room_privacy
+    to:
+    - 'on'
+    - 'off'
+  - trigger: state
+    entity_id: input_boolean.loft_privacy
+    to:
+    - 'on'
+    - 'off'
+  conditions: []
+  actions:
+  - variables:
+      target: none
+  - choose:
+    - conditions:
+      - condition: numeric_state
+        entity_id: sun.sun
+        attribute: azimuth
+        above: 220
+      - condition: numeric_state
+        entity_id: sun.sun
+        attribute: elevation
+        above: 5.5
+        below: 24
+      - condition: state
+        entity_id: sensor.weather
+        state:
+        - hot-day
+        - day
+      sequence:
+      - variables:
+          target: 100
+    - conditions:
+      - condition: state
+        entity_id: input_boolean.dining_room_privacy
+        state: 'on'
+      sequence:
+      - variables:
+          target: 100
+    - conditions:
+      - condition: numeric_state
+        entity_id: sun.sun
+        attribute: azimuth
+        above: 220
+      - condition: numeric_state
+        entity_id: sun.sun
+        attribute: elevation
+        above: 24
+        below: 45
+      - condition: state
+        entity_id: sensor.weather
+        state:
+        - hot-day
+        - day
+      sequence:
+      - variables:
+          target: 66
+    - conditions:
+      - condition: numeric_state
+        entity_id: sun.sun
+        attribute: azimuth
+        above: 220
+      - condition: numeric_state
+        entity_id: sun.sun
+        attribute: elevation
+        above: 45
+        below: 55
+      - condition: state
+        entity_id: sensor.weather
+        state:
+        - hot-day
+        - day
+      sequence:
+      - variables:
+          target: 33
+    - conditions:
+      - condition: state
+        entity_id: input_boolean.loft_privacy
+        state: 'on'
+      sequence:
+      - variables:
+          target: 33
+    - conditions:
+      - condition: not
+        conditions:
+        - condition: state
+          entity_id: sensor.weather
+          state: night
+      - condition: state
+        entity_id: media_player.loft_tv
+        state: 'on'
+      sequence:
+      - variables:
+          target: 33
+    - conditions:
+      - condition: not
+        conditions:
+        - condition: state
+          entity_id: sensor.weather
+          state: night
+      sequence:
+      - variables:
+          target: 0
+    - conditions:
+      - condition: state
+        entity_id: sensor.weather
+        state: night
+      sequence:
+      - variables:
+          target: -1
+  - choose:
+    - conditions:
+      - condition: template
+        value_template: '{{ target >= 100 }}'
+      - condition: state
+        entity_id: binary_sensor.dining_room_top_windows
+        state: 'off'
+      - condition: state
+        entity_id: binary_sensor.dining_room_bottom_windows
+        state: 'off'
+      sequence:
+      - action: scene.turn_on
+        target:
+          entity_id: scene.dining_room_evening_sun
+    - conditions:
+      - condition: template
+        value_template: '{{ target >= 66 }}'
+      - condition: state
+        entity_id: binary_sensor.dining_room_top_windows
+        state: 'off'
+      sequence:
+      - action: scene.turn_on
+        target:
+          entity_id: scene.dining_room_late_afternoon_sun
+    - conditions:
+      - condition: template
+        value_template: '{{ target >= 33 }}'
+      - condition: state
+        entity_id: binary_sensor.dining_room_top_windows
+        state: 'off'
+      sequence:
+      - action: scene.turn_on
+        target:
+          entity_id: scene.dining_room_afternoon_sun
+    - conditions:
+      - condition: template
+        value_template: '{{ target >= 0 }}'
+      sequence:
+      - action: scene.turn_on
+        target:
+          entity_id: scene.dining_room_daytime
+    - conditions:
+      - condition: template
+        value_template: '{{ target < 0 }}'
+      sequence:
+      - action: scene.turn_on
+        target:
+          entity_id: scene.dining_room_nighttime
+  mode: queued
