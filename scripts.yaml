@@ -1,0 +1,216 @@
+bedroom_bright:
+  sequence:
+  - action: scene.turn_on
+    target:
+      entity_id:
+      - scene.bedroom_bedside_energize
+      - scene.bedroom_ceiling_energize
+  alias: Bedroom Bright
+  description: Set lighting scenes in the Bedroom.
+  icon: mdi:palette
+bedroom_nightlight:
+  sequence:
+  - action: scene.turn_on
+    target:
+      entity_id:
+      - scene.bedroom_bedside_nightlight
+      - scene.bedroom_ceiling_nightlight
+  alias: Bedroom Nightlight
+  description: Set lighting scenes in the Bedroom.
+  icon: mdi:palette
+bedroom_play:
+  sequence:
+  - action: scene.turn_on
+    target:
+      entity_id:
+      - scene.bedroom_bedside_play
+      - scene.bedroom_ceiling_play
+  alias: Bedroom Play
+  description: Set lighting scenes for playing with guys in the Bedroom.
+  icon: mdi:hand-extended
+bedroom_reading:
+  sequence:
+  - action: scene.turn_on
+    target:
+      entity_id:
+      - scene.bedroom_bedside_read
+      - scene.bedroom_ceiling_mood
+  alias: Bedroom Reading
+  description: Set lighting scenes in the Bedroom.
+  icon: mdi:palette
+dining_room_dnd:
+  sequence:
+  - action: scene.apply
+    data:
+      entities:
+        light.dining_room_beam:
+          state: 'on'
+        light.dining_room_wall:
+          state: 'on'
+        light.dining_room_chandelier:
+          state: 'on'
+          brightness: 89
+        light.dining_room_spots:
+          state: 'on'
+          brightness: 153
+        light.kitchen_counter:
+          state: 'on'
+          brightness: 127
+        light.kitchen_ceiling:
+          state: 'off'
+  alias: D&D
+  description: Set lighting scenes for playing Dungeons and Dragons (D&D) in the Dining
+    Room.
+  icon: mdi:dice-d20-outline
+dining_room_game:
+  sequence:
+  - action: scene.apply
+    data:
+      entities:
+        light.dining_room_beam:
+          state: 'on'
+        light.dining_room_wall:
+          state: 'on'
+        light.dining_room_chandelier:
+          state: 'on'
+          brightness: 153
+        light.dining_room_spots:
+          state: 'on'
+          brightness: 153
+        light.kitchen_counter:
+          state: 'on'
+          brightness: 127
+        light.kitchen_ceiling:
+          state: 'off'
+  alias: Dining Room Game
+  description: Set lighting scenes for playing board games in the Dining Room.
+  icon: mdi:checkerboard
+dining_room_play:
+  sequence:
+  - action: scene.turn_on
+    target:
+      entity_id:
+      - scene.dining_room_wall_play
+      - scene.dining_room_beam_lights_play
+  alias: Dining Room Play
+  description: Set lighting scenes for playing with guys in the Dining Room.
+  icon: mdi:hand-extended
+dining_room_pride:
+  sequence:
+  - action: scene.turn_on
+    target:
+      entity_id:
+      - scene.dining_room_wall_pride
+      - scene.dining_room_beam_lights_pride
+  alias: Dining Room Pride
+  description: Set lighting scenes in the Dining Room.
+  icon: mdi:looks
+dining_room_game_over:
+  sequence:
+  - action: scene.apply
+    data:
+      entities:
+        light.dining_room_chandelier:
+          state: 'off'
+        light.dining_room_spots:
+          state: 'off'
+  alias: Game Over
+  description: Set lighting scenes when finishing playing games in the Dining Room.
+  icon: mdi:checkerboard-minus
+dining_room_game_setup:
+  sequence:
+  - action: scene.apply
+    data:
+      entities:
+        light.dining_room_beam:
+          state: 'on'
+        light.dining_room_wall:
+          state: 'on'
+        light.dining_room_chandelier:
+          state: 'on'
+          brightness: 255
+        light.dining_room_spots:
+          state: 'on'
+          brightness: 255
+        light.kitchen_counter:
+          state: 'on'
+          brightness: 127
+  alias: Game Setup
+  description: Set lighting scenes for setting up games in the Dining Room.
+  icon: mdi:checkerboard-plus
+goodnight:
+  sequence:
+  - action: light.turn_off
+    target:
+      entity_id:
+      - light.bedroom
+  alias: Good Night
+  description: Turn off the bedroom lights when it's time for bed, and we say "Goodnight".
+  icon: mdi:weather-night
+loft_bright:
+  sequence:
+  - action: scene.turn_on
+    target:
+      entity_id:
+      - scene.loft_ceiling_energize
+      - scene.loft_wall_energize
+  alias: Loft Bright
+  description: Set lighting scenes in the Loft.
+  icon: mdi:palette
+loft_nightlight:
+  sequence:
+  - action: scene.turn_on
+    target:
+      entity_id:
+      - scene.loft_ceiling_nightlight
+      - scene.loft_wall_nightlight
+  alias: Loft Nightlight
+  description: Set lighting scenes in the Loft.
+  icon: mdi:palette
+loft_play:
+  sequence:
+  - action: scene.turn_on
+    target:
+      entity_id:
+      - scene.loft_ceiling_play
+      - scene.loft_wall_play
+  alias: Loft Play
+  description: Set lighting scenes for playing with guys in the Loft.
+  icon: mdi:hand-extended
+loft_pride:
+  sequence:
+  - action: scene.turn_on
+    target:
+      entity_id:
+      - scene.loft_ceiling_tyrell
+      - scene.loft_wall_pride
+  alias: Loft Pride
+  description: Set lighting scenes in the Loft.
+  icon: mdi:looks
+office_bright:
+  sequence:
+  - action: scene.turn_on
+    target:
+      entity_id:
+      - scene.office_ceiling_energize
+  alias: Office Bright
+  description: Set lighting scenes in the Office.
+  icon: mdi:palette
+office_nightlight:
+  sequence:
+  - action: scene.turn_on
+    target:
+      entity_id:
+      - scene.office_ceiling_nightlight
+  alias: Office Nightlight
+  description: Set lighting scenes in the Office.
+  icon: mdi:palette
+office_work:
+  sequence:
+  - action: scene.turn_on
+    target:
+      entity_id:
+      - scene.office_ceiling_dreamy_dusk
+  alias: Office Work
+  description: Set lighting scenes in the Office.
+  icon: mdi:palette
