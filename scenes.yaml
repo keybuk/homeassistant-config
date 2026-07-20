@@ -1,1 +1,490 @@
-[]
+- id: '1784348833276'
+  name: Picture
+  entities:
+    light.bedroom_wall_left:
+      min_color_temp_kelvin: 2000
+      max_color_temp_kelvin: 6535
+      effect_list:
+      - 'off'
+      - candle
+      - fire
+      - prism
+      - sparkle
+      - opal
+      - glisten
+      - underwater
+      - cosmos
+      - sunbeam
+      - enchant
+      - sunrise
+      - sunset
+      supported_color_modes:
+      - color_temp
+      - xy
+      effect: 'off'
+      color_mode: color_temp
+      brightness: 122
+      color_temp_kelvin: 2242
+      hs_color:
+      - 29.65
+      - 82.775
+      rgb_color:
+      - 255
+      - 148
+      - 44
+      xy_color:
+      - 0.574
+      - 0.388
+      mode: normal
+      dynamics: none
+      icon: mdi:light-recessed
+      friendly_name: Bedroom Wall Left
+      supported_features: 44
+      state: 'on'
+    light.bedroom_wall_right:
+      min_color_temp_kelvin: 2000
+      max_color_temp_kelvin: 6535
+      effect_list:
+      - 'off'
+      - candle
+      - fire
+      - prism
+      - sparkle
+      - opal
+      - glisten
+      - underwater
+      - cosmos
+      - sunbeam
+      - enchant
+      - sunrise
+      - sunset
+      supported_color_modes:
+      - color_temp
+      - xy
+      effect: 'off'
+      color_mode: color_temp
+      brightness: 122
+      color_temp_kelvin: 2242
+      hs_color:
+      - 29.65
+      - 82.775
+      rgb_color:
+      - 255
+      - 148
+      - 44
+      xy_color:
+      - 0.574
+      - 0.388
+      mode: normal
+      dynamics: none
+      icon: mdi:light-recessed
+      friendly_name: Bedroom Wall Right
+      supported_features: 44
+      state: 'on'
+    light.bedroom_bed_left:
+      min_color_temp_kelvin: 2000
+      max_color_temp_kelvin: 6535
+      effect_list:
+      - 'off'
+      - candle
+      - fire
+      - prism
+      - sparkle
+      - opal
+      - glisten
+      - underwater
+      - cosmos
+      - sunbeam
+      - enchant
+      - sunrise
+      - sunset
+      supported_color_modes:
+      - color_temp
+      - xy
+      effect: 'off'
+      color_mode: color_temp
+      brightness: 122
+      color_temp_kelvin: 2242
+      hs_color:
+      - 29.65
+      - 82.775
+      rgb_color:
+      - 255
+      - 148
+      - 44
+      xy_color:
+      - 0.574
+      - 0.388
+      mode: normal
+      dynamics: none
+      icon: mdi:light-recessed
+      friendly_name: Bedroom Bed Left
+      supported_features: 44
+      state: 'on'
+    light.bedroom_bed_right:
+      min_color_temp_kelvin: 2000
+      max_color_temp_kelvin: 6535
+      effect_list:
+      - 'off'
+      - candle
+      - fire
+      - prism
+      - sparkle
+      - opal
+      - glisten
+      - underwater
+      - cosmos
+      - sunbeam
+      - enchant
+      - sunrise
+      - sunset
+      supported_color_modes:
+      - color_temp
+      - xy
+      effect: 'off'
+      color_mode: color_temp
+      brightness: 122
+      color_temp_kelvin: 2242
+      hs_color:
+      - 29.65
+      - 82.775
+      rgb_color:
+      - 255
+      - 148
+      - 44
+      xy_color:
+      - 0.574
+      - 0.388
+      mode: normal
+      dynamics: none
+      icon: mdi:light-recessed
+      friendly_name: Bedroom Bed Right
+      supported_features: 44
+      state: 'on'
+    light.bedroom_left_bedside:
+      min_color_temp_kelvin: 2000
+      max_color_temp_kelvin: 6535
+      effect_list:
+      - 'off'
+      - candle
+      - fire
+      - prism
+      - sparkle
+      - opal
+      - glisten
+      - underwater
+      - cosmos
+      - sunbeam
+      - enchant
+      - sunrise
+      - sunset
+      supported_color_modes:
+      - color_temp
+      - xy
+      effect: 'off'
+      color_mode: xy
+      brightness: 128
+      color_temp_kelvin:
+      hs_color:
+      - 10.118
+      - 100
+      rgb_color:
+      - 255
+      - 43
+      - 0
+      xy_color:
+      - 0.6911
+      - 0.3081
+      mode: normal
+      dynamics: none
+      icon: mdi:lamp
+      friendly_name: Bedroom Left Bedside
+      supported_features: 44
+      state: 'on'
+    light.bedroom_right_bedside:
+      min_color_temp_kelvin: 2000
+      max_color_temp_kelvin: 6535
+      effect_list:
+      - 'off'
+      - candle
+      - fire
+      - prism
+      - sparkle
+      - opal
+      - glisten
+      - underwater
+      - cosmos
+      - sunbeam
+      - enchant
+      - sunrise
+      - sunset
+      supported_color_modes:
+      - color_temp
+      - xy
+      effect: 'off'
+      color_mode: xy
+      brightness: 128
+      color_temp_kelvin:
+      hs_color:
+      - 244.078
+      - 80.784
+      rgb_color:
+      - 63
+      - 49
+      - 255
+      xy_color:
+      - 0.1535
+      - 0.0596
+      mode: normal
+      dynamics: none
+      icon: mdi:lamp
+      friendly_name: Bedroom Right Bedside
+      supported_features: 44
+      state: 'on'
+  metadata: {}
+  icon: mdi:camera
+- id: '1784354313016'
+  name: Deep Play
+  entities:
+    light.bedroom_wall_left:
+      min_color_temp_kelvin: 2000
+      max_color_temp_kelvin: 6535
+      effect_list:
+      - 'off'
+      - candle
+      - fire
+      - prism
+      - sparkle
+      - opal
+      - glisten
+      - underwater
+      - cosmos
+      - sunbeam
+      - enchant
+      - sunrise
+      - sunset
+      supported_color_modes:
+      - color_temp
+      - xy
+      effect: 'off'
+      color_mode: xy
+      brightness: 65
+      color_temp_kelvin:
+      hs_color:
+      - 354.34
+      - 83.137
+      rgb_color:
+      - 255
+      - 43
+      - 63
+      xy_color:
+      - 0.6614
+      - 0.2937
+      mode: normal
+      dynamics: none
+      icon: mdi:light-recessed
+      friendly_name: Bedroom Wall Left
+      supported_features: 44
+      state: 'on'
+    light.bedroom_wall_right:
+      min_color_temp_kelvin: 2000
+      max_color_temp_kelvin: 6535
+      effect_list:
+      - 'off'
+      - candle
+      - fire
+      - prism
+      - sparkle
+      - opal
+      - glisten
+      - underwater
+      - cosmos
+      - sunbeam
+      - enchant
+      - sunrise
+      - sunset
+      supported_color_modes:
+      - color_temp
+      - xy
+      effect: 'off'
+      color_mode: xy
+      brightness: 65
+      color_temp_kelvin:
+      hs_color:
+      - 244.078
+      - 80.784
+      rgb_color:
+      - 63
+      - 49
+      - 255
+      xy_color:
+      - 0.1535
+      - 0.0596
+      mode: normal
+      dynamics: none
+      icon: mdi:light-recessed
+      friendly_name: Bedroom Wall Right
+      supported_features: 44
+      state: 'on'
+    light.bedroom_bed_left:
+      min_color_temp_kelvin: 2000
+      max_color_temp_kelvin: 6535
+      effect_list:
+      - 'off'
+      - candle
+      - fire
+      - prism
+      - sparkle
+      - opal
+      - glisten
+      - underwater
+      - cosmos
+      - sunbeam
+      - enchant
+      - sunrise
+      - sunset
+      supported_color_modes:
+      - color_temp
+      - xy
+      effect: 'off'
+      color_mode: xy
+      brightness: 65
+      color_temp_kelvin:
+      hs_color:
+      - 244.078
+      - 80.784
+      rgb_color:
+      - 63
+      - 49
+      - 255
+      xy_color:
+      - 0.1535
+      - 0.0596
+      mode: normal
+      dynamics: none
+      icon: mdi:light-recessed
+      friendly_name: Bedroom Bed Left
+      supported_features: 44
+      state: 'on'
+    light.bedroom_bed_right:
+      min_color_temp_kelvin: 2000
+      max_color_temp_kelvin: 6535
+      effect_list:
+      - 'off'
+      - candle
+      - fire
+      - prism
+      - sparkle
+      - opal
+      - glisten
+      - underwater
+      - cosmos
+      - sunbeam
+      - enchant
+      - sunrise
+      - sunset
+      supported_color_modes:
+      - color_temp
+      - xy
+      effect: 'off'
+      color_mode: xy
+      brightness: 65
+      color_temp_kelvin:
+      hs_color:
+      - 354.34
+      - 83.137
+      rgb_color:
+      - 255
+      - 43
+      - 63
+      xy_color:
+      - 0.6614
+      - 0.2937
+      mode: normal
+      dynamics: none
+      icon: mdi:light-recessed
+      friendly_name: Bedroom Bed Right
+      supported_features: 44
+      state: 'on'
+    light.bedroom_left_bedside:
+      min_color_temp_kelvin: 2000
+      max_color_temp_kelvin: 6535
+      effect_list:
+      - 'off'
+      - candle
+      - fire
+      - prism
+      - sparkle
+      - opal
+      - glisten
+      - underwater
+      - cosmos
+      - sunbeam
+      - enchant
+      - sunrise
+      - sunset
+      supported_color_modes:
+      - color_temp
+      - xy
+      effect: 'off'
+      color_mode: xy
+      brightness: 89
+      color_temp_kelvin:
+      hs_color:
+      - 10.118
+      - 100
+      rgb_color:
+      - 255
+      - 43
+      - 0
+      xy_color:
+      - 0.6911
+      - 0.3081
+      mode: normal
+      dynamics: none
+      icon: mdi:lamp
+      friendly_name: Bedroom Left Bedside
+      supported_features: 44
+      state: 'on'
+    light.bedroom_right_bedside:
+      min_color_temp_kelvin: 2000
+      max_color_temp_kelvin: 6535
+      effect_list:
+      - 'off'
+      - candle
+      - fire
+      - prism
+      - sparkle
+      - opal
+      - glisten
+      - underwater
+      - cosmos
+      - sunbeam
+      - enchant
+      - sunrise
+      - sunset
+      supported_color_modes:
+      - color_temp
+      - xy
+      effect: 'off'
+      color_mode: xy
+      brightness: 89
+      color_temp_kelvin:
+      hs_color:
+      - 244.078
+      - 80.784
+      rgb_color:
+      - 63
+      - 49
+      - 255
+      xy_color:
+      - 0.1535
+      - 0.0596
+      mode: normal
+      dynamics: none
+      icon: mdi:lamp
+      friendly_name: Bedroom Right Bedside
+      supported_features: 44
+      state: 'on'
+  metadata: {}
+  icon: mdi:arm-flex
