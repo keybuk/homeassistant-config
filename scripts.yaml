@@ -144,7 +144,7 @@ goodnight:
     target:
       entity_id:
       - light.bedroom
-      - light.bedroom_bedroom_muscle
+      - light.bedroom_muscle
     data: {}
     continue_on_error: true
   alias: Good Night

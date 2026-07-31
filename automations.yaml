@@ -48,7 +48,7 @@
     input:
       lights:
         - light.bedroom
-        - light.bedroom_bedroom_muscle
+        - light.bedroom_muscle
       switch: switch.bedroom
 - id: '1742265800631'
   alias: Bedroom Switch Button 1
@@ -286,7 +286,7 @@
     input:
       lights:
       - light.bedroom
-      - light.bedroom_bedroom_muscle
+      - light.bedroom_muscle
       occupancy: binary_sensor.bedroom_aziz
 - id: '1758341153495'
   alias: Loft Lights
@@ -296,7 +296,7 @@
     input:
       lights:
       - light.loft_theater
-      - light.loft_loft_muscle
+      - light.loft_muscle
       occupancy: binary_sensor.loft_aziz
 - id: '1758341469250'
   alias: Dining Room Lights
