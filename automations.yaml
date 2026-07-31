@@ -280,6 +280,7 @@
     input:
       lights:
       - light.bedroom
+      - light.bedroom_bedroom_muscle
       occupancy: binary_sensor.bedroom_aziz
 - id: '1758341153495'
   alias: Loft Lights
@@ -289,6 +290,7 @@
     input:
       lights:
       - light.loft_theater
+      - light.loft_loft_muscle
       occupancy: binary_sensor.loft_aziz
 - id: '1758341469250'
   alias: Dining Room Lights
