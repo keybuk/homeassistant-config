@@ -4,7 +4,8 @@
   use_blueprint:
     path: light_switch.yaml
     input:
-      light: light.office
+      lights:
+        - light.office
       switch: switch.office
 - id: '1742259737852'
   alias: Office Switch Button 1
@@ -45,7 +46,9 @@
   use_blueprint:
     path: light_switch.yaml
     input:
-      light: light.bedroom
+      lights:
+        - light.bedroom
+        - light.bedroom_bedroom_muscle
       switch: switch.bedroom
 - id: '1742265800631'
   alias: Bedroom Switch Button 1
@@ -86,7 +89,8 @@
   use_blueprint:
     path: light_switch.yaml
     input:
-      light: light.loft_theater
+      lights:
+        - light.loft_theater
       switch: switch.loft
 - id: '1742268121309'
   alias: Loft Switch Button 1
@@ -127,7 +131,9 @@
   use_blueprint:
     path: light_switch.yaml
     input:
-      light: light.dining_room
+      lights:
+        - light.dining_room
+        - light.dining_room_lego
       switch: switch.dining_room
 - id: '1744102789672'
   alias: Dining Room Switch Button 1

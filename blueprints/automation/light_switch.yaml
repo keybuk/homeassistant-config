@@ -1,22 +1,23 @@
 blueprint:
   name: Light Switch
   description: >
-    Synchronize a light and a switch so that the switch appears to directly
-    control the light; with the switch matching the state of the light
-    if those are controlled directly.
+    Synchronize lights and a switch so that the switch appears to directly
+    control the lights; with the switch matching the state of the lights
+    as if those are controlled directly.
   author: Scott James Remnant <scott@netsplit.com>
   domain: automation
   input:
-    light:
-      name: Light
-      description: This light will be synchronized with the switch.
+    lights:
+      name: Lights
+      description: These lights will be synchronized with the switch.
       selector:
         entity:
           filter:
             - domain: light
+          multiple: true
     switch:
       name: Switch
-      description: This switch will be synchronized with the light.
+      description: This switch will be synchronized with the lights.
       selector:
         entity:
           filter:
@@ -26,7 +27,7 @@ mode: queued
 
 triggers:
   - trigger: state
-    entity_id: !input light
+    entity_id: !input lights
     to:
       - "on"
       - "off"
@@ -39,7 +40,7 @@ triggers:
     id: switch
 
 variables:
-  light: !input light
+  lights: !input lights
   switch: !input switch
 
 actions:
@@ -60,12 +61,12 @@ actions:
             target:
               entity_id: !input switch
 
-      # When the switch is the trigger, if the light is not in the same state,
-      # set it to the same state.
+      # When the switch is the trigger, if no lights are in the same state,
+      # set them to the same state.
       - conditions:
           - condition: trigger
             id: switch
-          - "{{ not is_state(light, trigger.to_state.state) }}"
+          - "{{ lights | select('is_state', trigger.to_state.state) | list | length == 0 }}"
         sequence:
           - action: |
               {% if trigger.to_state.state == 'on' %}
@@ -74,4 +75,4 @@ actions:
                 light.turn_off
               {% endif %}
             target:
-              entity_id: !input light
+              entity_id: !input lights
