@@ -90,7 +90,8 @@
     path: light_switch.yaml
     input:
       lights:
-        - light.loft_theater
+      - light.loft_theater
+      - light.loft_muscle
       switch: switch.loft
 - id: '1742268121309'
   alias: Loft Switch Button 1
