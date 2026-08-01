@@ -403,7 +403,7 @@
     - condition: state
       entity_id: automation.kitchen_lights
       state:
-      - '1'
+      - 1
       attribute: current
   - condition: state
     entity_id: binary_sensor.anyone_home
