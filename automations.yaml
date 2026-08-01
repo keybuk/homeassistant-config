@@ -5,7 +5,7 @@
     path: light_switch.yaml
     input:
       lights:
-        - light.office
+      - light.office
       switch: switch.office
 - id: '1742259737852'
   alias: Office Switch Button 1
@@ -47,8 +47,8 @@
     path: light_switch.yaml
     input:
       lights:
-        - light.bedroom
-        - light.bedroom_muscle
+      - light.bedroom
+      - light.bedroom_muscle
       switch: switch.bedroom
 - id: '1742265800631'
   alias: Bedroom Switch Button 1
@@ -133,8 +133,8 @@
     path: light_switch.yaml
     input:
       lights:
-        - light.dining_room
-        - light.dining_room_lego
+      - light.dining_room
+      - light.dining_room_lego
       switch: switch.dining_room
 - id: '1744102789672'
   alias: Dining Room Switch Button 1
