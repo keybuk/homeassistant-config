@@ -488,3 +488,406 @@
       state: 'on'
   metadata: {}
   icon: mdi:arm-flex
+- id: '1785612777408'
+  name: D&D
+  entities:
+    light.dining_room_chandelier:
+      supported_color_modes:
+      - brightness
+      color_mode:
+      brightness: 89
+      insteon_address: 54.3F.B6
+      insteon_group: 1
+      icon: mdi:chandelier
+      friendly_name: Dining Room Chandelier
+      supported_features: 0
+      state: 'on'
+    light.dining_room_spots:
+      supported_color_modes:
+      - brightness
+      color_mode:
+      brightness: 153
+      insteon_address: 2C.76.03
+      insteon_group: 1
+      icon: mdi:lightbulb-spot
+      friendly_name: Dining Room Spots
+      supported_features: 0
+      state: 'on'
+    light.dining_room_beam:
+      min_color_temp_kelvin: 2000
+      max_color_temp_kelvin: 6535
+      effect_list:
+      - 'off'
+      - candle
+      - fire
+      - prism
+      - sparkle
+      - opal
+      - glisten
+      - underwater
+      - cosmos
+      - sunbeam
+      - enchant
+      - sunrise
+      - sunset
+      supported_color_modes:
+      - color_temp
+      - xy
+      effect: 'off'
+      color_mode: xy
+      brightness: 255
+      color_temp_kelvin:
+      hs_color:
+      - 356.887
+      - 83.137
+      rgb_color:
+      - 255
+      - 43
+      - 54
+      xy_color:
+      - 0.6694
+      - 0.2976
+      mode: normal
+      dynamics: none
+      icon: mdi:led-strip-variant
+      friendly_name: Dining Room Beam
+      supported_features: 44
+      state: 'on'
+    light.dining_room_wall:
+      min_color_temp_kelvin: 2000
+      max_color_temp_kelvin: 6535
+      supported_color_modes:
+      - color_temp
+      - xy
+      color_mode: xy
+      brightness: 255
+      color_temp_kelvin:
+      hs_color:
+      - 333.396
+      - 83.137
+      rgb_color:
+      - 255
+      - 43
+      - 137
+      xy_color:
+      - 0.5623
+      - 0.2457
+      is_hue_group: true
+      hue_scenes:
+      - Pride
+      - Christmas
+      - World of Color
+      - Play
+      hue_type: zone
+      lights:
+      - Dining Room West Right
+      - Dining Room West Center
+      - Dining Room South Right
+      - Dining Room South Left
+      - Dining Room West Left
+      entity_id:
+      - light.dining_room_west_center
+      - light.dining_room_south_right
+      - light.dining_room_south_left
+      - light.dining_room_west_right
+      - light.dining_room_west_left
+      dynamics: false
+      friendly_name: Dining Room Wall
+      supported_features: 40
+      state: 'on'
+    light.kitchen_counter:
+      supported_color_modes:
+      - brightness
+      color_mode: brightness
+      brightness: 127
+      device_id: '18'
+      zone_id: '15'
+      icon: mdi:light-recessed
+      friendly_name: Kitchen Counter
+      supported_features: 32
+      state: 'on'
+    light.kitchen_ceiling:
+      supported_color_modes:
+      - onoff
+      icon: mdi:light-recessed
+      friendly_name: Kitchen Ceiling
+      supported_features: 0
+      color_mode:
+      state: 'off'
+  metadata: {}
+  icon: mdi:dice-d20-outline
+- id: '1785616003769'
+  name: Game
+  entities:
+    light.dining_room_beam:
+      min_color_temp_kelvin: 2000
+      max_color_temp_kelvin: 6535
+      effect_list:
+      - 'off'
+      - candle
+      - fire
+      - prism
+      - sparkle
+      - opal
+      - glisten
+      - underwater
+      - cosmos
+      - sunbeam
+      - enchant
+      - sunrise
+      - sunset
+      supported_color_modes:
+      - color_temp
+      - xy
+      effect: 'off'
+      color_mode: xy
+      brightness: 255
+      color_temp_kelvin:
+      hs_color:
+      - 356.887
+      - 83.137
+      rgb_color:
+      - 255
+      - 43
+      - 54
+      xy_color:
+      - 0.6694
+      - 0.2976
+      mode: normal
+      dynamics: none
+      icon: mdi:led-strip-variant
+      friendly_name: Dining Room Beam
+      supported_features: 44
+      state: 'on'
+    light.dining_room_wall:
+      min_color_temp_kelvin: 2000
+      max_color_temp_kelvin: 6535
+      supported_color_modes:
+      - color_temp
+      - xy
+      color_mode: xy
+      brightness: 255
+      color_temp_kelvin:
+      hs_color:
+      - 333.396
+      - 83.137
+      rgb_color:
+      - 255
+      - 43
+      - 137
+      xy_color:
+      - 0.5623
+      - 0.2457
+      is_hue_group: true
+      hue_scenes:
+      - Pride
+      - Christmas
+      - World of Color
+      - Play
+      hue_type: zone
+      lights:
+      - Dining Room West Right
+      - Dining Room West Center
+      - Dining Room South Right
+      - Dining Room South Left
+      - Dining Room West Left
+      entity_id:
+      - light.dining_room_west_center
+      - light.dining_room_south_right
+      - light.dining_room_south_left
+      - light.dining_room_west_right
+      - light.dining_room_west_left
+      dynamics: false
+      friendly_name: Dining Room Wall
+      supported_features: 40
+      state: 'on'
+    light.dining_room_chandelier:
+      supported_color_modes:
+      - brightness
+      color_mode:
+      brightness: 153
+      insteon_address: 54.3F.B6
+      insteon_group: 1
+      icon: mdi:chandelier
+      friendly_name: Dining Room Chandelier
+      supported_features: 0
+      state: 'on'
+    light.dining_room_spots:
+      supported_color_modes:
+      - brightness
+      color_mode:
+      brightness: 153
+      insteon_address: 2C.76.03
+      insteon_group: 1
+      icon: mdi:lightbulb-spot
+      friendly_name: Dining Room Spots
+      supported_features: 0
+      state: 'on'
+    light.kitchen_counter:
+      supported_color_modes:
+      - brightness
+      color_mode: brightness
+      brightness: 127
+      device_id: '18'
+      zone_id: '15'
+      icon: mdi:light-recessed
+      friendly_name: Kitchen Counter
+      supported_features: 32
+      state: 'on'
+    light.kitchen_ceiling:
+      supported_color_modes:
+      - onoff
+      icon: mdi:light-recessed
+      friendly_name: Kitchen Ceiling
+      supported_features: 0
+      color_mode:
+      state: 'off'
+  metadata: {}
+  icon: mdi:checkerboard
+- id: '1785616142612'
+  name: Game Over
+  entities:
+    light.dining_room_spots:
+      supported_color_modes:
+      - brightness
+      color_mode:
+      brightness:
+      insteon_address: 2C.76.03
+      insteon_group: 1
+      icon: mdi:lightbulb-spot
+      friendly_name: Dining Room Spots
+      supported_features: 0
+      state: 'off'
+    light.dining_room_chandelier:
+      supported_color_modes:
+      - brightness
+      color_mode:
+      brightness:
+      insteon_address: 54.3F.B6
+      insteon_group: 1
+      icon: mdi:chandelier
+      friendly_name: Dining Room Chandelier
+      supported_features: 0
+      state: 'off'
+  metadata: {}
+  icon: mdi:checkerboard-minus
+- id: '1785616212929'
+  name: Game Setup
+  entities:
+    light.dining_room_beam:
+      min_color_temp_kelvin: 2000
+      max_color_temp_kelvin: 6535
+      effect_list:
+      - 'off'
+      - candle
+      - fire
+      - prism
+      - sparkle
+      - opal
+      - glisten
+      - underwater
+      - cosmos
+      - sunbeam
+      - enchant
+      - sunrise
+      - sunset
+      supported_color_modes:
+      - color_temp
+      - xy
+      effect: 'off'
+      color_mode: xy
+      brightness: 255
+      color_temp_kelvin:
+      hs_color:
+      - 356.887
+      - 83.137
+      rgb_color:
+      - 255
+      - 43
+      - 54
+      xy_color:
+      - 0.6694
+      - 0.2976
+      mode: normal
+      dynamics: none
+      icon: mdi:led-strip-variant
+      friendly_name: Dining Room Beam
+      supported_features: 44
+      state: 'on'
+    light.dining_room_wall:
+      min_color_temp_kelvin: 2000
+      max_color_temp_kelvin: 6535
+      supported_color_modes:
+      - color_temp
+      - xy
+      color_mode: xy
+      brightness: 255
+      color_temp_kelvin:
+      hs_color:
+      - 333.396
+      - 83.137
+      rgb_color:
+      - 255
+      - 43
+      - 137
+      xy_color:
+      - 0.5623
+      - 0.2457
+      is_hue_group: true
+      hue_scenes:
+      - Pride
+      - Christmas
+      - World of Color
+      - Play
+      hue_type: zone
+      lights:
+      - Dining Room West Right
+      - Dining Room West Center
+      - Dining Room South Right
+      - Dining Room South Left
+      - Dining Room West Left
+      entity_id:
+      - light.dining_room_west_center
+      - light.dining_room_south_right
+      - light.dining_room_south_left
+      - light.dining_room_west_right
+      - light.dining_room_west_left
+      dynamics: false
+      friendly_name: Dining Room Wall
+      supported_features: 40
+      state: 'on'
+    light.dining_room_chandelier:
+      supported_color_modes:
+      - brightness
+      color_mode:
+      brightness: 255
+      insteon_address: 54.3F.B6
+      insteon_group: 1
+      icon: mdi:chandelier
+      friendly_name: Dining Room Chandelier
+      supported_features: 0
+      state: 'on'
+    light.dining_room_spots:
+      supported_color_modes:
+      - brightness
+      color_mode:
+      brightness: 255
+      insteon_address: 2C.76.03
+      insteon_group: 1
+      icon: mdi:lightbulb-spot
+      friendly_name: Dining Room Spots
+      supported_features: 0
+      state: 'on'
+    light.kitchen_counter:
+      supported_color_modes:
+      - brightness
+      color_mode: brightness
+      brightness: 127
+      device_id: '18'
+      zone_id: '15'
+      icon: mdi:light-recessed
+      friendly_name: Kitchen Counter
+      supported_features: 32
+      state: 'on'
+  metadata: {}
+  icon: mdi:checkerboard-plus

@@ -40,48 +40,22 @@ bedroom_reading:
   icon: mdi:palette
 dining_room_dnd:
   sequence:
-  - action: scene.apply
-    data:
-      entities:
-        light.dining_room_beam:
-          state: 'on'
-        light.dining_room_wall:
-          state: 'on'
-        light.dining_room_chandelier:
-          state: 'on'
-          brightness: 89
-        light.dining_room_spots:
-          state: 'on'
-          brightness: 153
-        light.kitchen_counter:
-          state: 'on'
-          brightness: 127
-        light.kitchen_ceiling:
-          state: 'off'
+  - action: scene.turn_on
+    metadata: {}
+    target:
+      entity_id: scene.dnd
+    data: {}
   alias: D&D
   description: Set lighting scenes for playing Dungeons and Dragons (D&D) in the Dining
     Room.
   icon: mdi:dice-d20-outline
 dining_room_game:
   sequence:
-  - action: scene.apply
-    data:
-      entities:
-        light.dining_room_beam:
-          state: 'on'
-        light.dining_room_wall:
-          state: 'on'
-        light.dining_room_chandelier:
-          state: 'on'
-          brightness: 153
-        light.dining_room_spots:
-          state: 'on'
-          brightness: 153
-        light.kitchen_counter:
-          state: 'on'
-          brightness: 127
-        light.kitchen_ceiling:
-          state: 'off'
+  - action: scene.turn_on
+    metadata: {}
+    data: {}
+    target:
+      entity_id: scene.game
   alias: Dining Room Game
   description: Set lighting scenes for playing board games in the Dining Room.
   icon: mdi:checkerboard
@@ -107,34 +81,21 @@ dining_room_pride:
   icon: mdi:looks
 dining_room_game_over:
   sequence:
-  - action: scene.apply
-    data:
-      entities:
-        light.dining_room_chandelier:
-          state: 'off'
-        light.dining_room_spots:
-          state: 'off'
+  - action: scene.turn_on
+    metadata: {}
+    target:
+      entity_id: scene.game_over
+    data: {}
   alias: Game Over
   description: Set lighting scenes when finishing playing games in the Dining Room.
   icon: mdi:checkerboard-minus
 dining_room_game_setup:
   sequence:
-  - action: scene.apply
-    data:
-      entities:
-        light.dining_room_beam:
-          state: 'on'
-        light.dining_room_wall:
-          state: 'on'
-        light.dining_room_chandelier:
-          state: 'on'
-          brightness: 255
-        light.dining_room_spots:
-          state: 'on'
-          brightness: 255
-        light.kitchen_counter:
-          state: 'on'
-          brightness: 127
+  - action: scene.turn_on
+    metadata: {}
+    target:
+      entity_id: scene.game_setup
+    data: {}
   alias: Game Setup
   description: Set lighting scenes for setting up games in the Dining Room.
   icon: mdi:checkerboard-plus
