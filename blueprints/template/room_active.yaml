@@ -47,4 +47,4 @@ binary_sensor:
     entity_id: |
       {{ [ occupancy,
            'binary_sensor.anyone_home',
-           'binary_sensor.everyone_asleep' ] }}"
+           'binary_sensor.everyone_asleep' ] }}
