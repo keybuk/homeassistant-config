@@ -1,7 +1,7 @@
 blueprint:
-  name: Room Active
+  name: Room Astir
   description: >
-    Creates an occupancy sensor that combines room occuapncy with home occupancy
+    Creates an occupancy sensor that combines room occupancy with home occupancy
     to filter out false positives when no-one is home, while also keeping lights
     off while everyone is asleep without turning them off immediately.
   author: "Scott James Remnant <scott@netsplit.com>"

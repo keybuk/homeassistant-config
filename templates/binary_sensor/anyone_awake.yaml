@@ -1,7 +1,7 @@
-# Binary sensor that tracks whether the home is active (anyone home and awake).
+# Binary sensor that tracks whether anyone is home and awake.
 - binary_sensor:
-    name: Home Active
-    unique_id: home_active
+    name: Anyone Awake
+    unique_id: anyone_awake
     device_class: "occupancy"
     state: |
       {{ 'on' if is_state('binary_sensor.anyone_home', 'on')

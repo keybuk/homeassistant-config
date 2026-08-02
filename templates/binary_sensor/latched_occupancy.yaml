@@ -4,38 +4,38 @@
     path: latched_occupancy.yaml
     input:
       sensors:
-        - binary_sensor.bedroom_active
+        - binary_sensor.bedroom_astir
         - binary_sensor.dark_outside
       latch: input_boolean.bedroom_privacy
-  name: Bedroom Aziz
+  name: Aziz
   unique_id: bedroom_aziz
 
 - use_blueprint:
     path: latched_occupancy.yaml
     input:
       sensors:
-        - binary_sensor.home_active
+        - binary_sensor.anyone_awake
         - binary_sensor.dark_outside
       latch: input_boolean.dining_room_privacy
-  name: Dining Room Aziz
+  name: Aziz
   unique_id: dining_room_aziz
 
 - use_blueprint:
     path: latched_occupancy.yaml
     input:
       sensors:
-        - binary_sensor.loft_active
+        - binary_sensor.loft_astir
         - binary_sensor.dark_outside
       latch: input_boolean.loft_privacy
-  name: Loft Aziz
+  name: Aziz
   unique_id: loft_aziz
 
 - use_blueprint:
     path: latched_occupancy.yaml
     input:
       sensors:
-        - binary_sensor.office_active
+        - binary_sensor.office_astir
         - binary_sensor.dark_outside
       latch: input_boolean.office_privacy
-  name: Office Aziz
+  name: Aziz
   unique_id: office_aziz
