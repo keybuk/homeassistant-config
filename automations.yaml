@@ -1,5 +1,5 @@
 - id: '1742337005391'
-  alias: Office Switch
+  alias: Switch
   description: ''
   use_blueprint:
     path: light_switch.yaml
@@ -41,7 +41,7 @@
         metadata: {}
         data: {}
 - id: '1742337280749'
-  alias: Bedroom Switch
+  alias: Switch
   description: ''
   use_blueprint:
     path: light_switch.yaml
@@ -84,7 +84,7 @@
         metadata: {}
         data: {}
 - id: '1742337248521'
-  alias: Loft Switch
+  alias: Switch
   description: ''
   use_blueprint:
     path: light_switch.yaml
@@ -127,7 +127,7 @@
         metadata: {}
         data: {}
 - id: '1742337322652'
-  alias: Dining Room Switch
+  alias: Switch
   description: ''
   use_blueprint:
     path: light_switch.yaml
@@ -153,7 +153,7 @@
           - light.dining_room_chandelier
           - light.dining_room_spots
 - id: '1745017281980'
-  alias: Bedroom Pico Raise
+  alias: Pico Raise
   description: ''
   use_blueprint:
     path: pico_remote_button.yaml
@@ -173,7 +173,7 @@
         target:
           entity_id: scene.bedroom_open
 - id: '1745017343700'
-  alias: Bedroom Pico Lower
+  alias: Pico Lower
   description: ''
   use_blueprint:
     path: pico_remote_button.yaml
@@ -187,7 +187,7 @@
         target:
           entity_id: scene.bedroom_daytime
 - id: '1752608870374'
-  alias: Office Pico Raise
+  alias: Pico Raise
   description: ''
   use_blueprint:
     path: pico_remote_button.yaml
@@ -207,7 +207,7 @@
         target:
           entity_id: scene.office_open
 - id: '1752608748598'
-  alias: Office Pico Lower
+  alias: Pico Lower
   description: ''
   use_blueprint:
     path: pico_remote_button.yaml
@@ -243,7 +243,7 @@
         metadata: {}
         data: {}
 - id: '1752632839285'
-  alias: Bedroom Pico On
+  alias: Pico On
   description: ''
   use_blueprint:
     path: pico_remote_button.yaml
@@ -257,7 +257,7 @@
         target:
           entity_id: scene.bedroom_blackout_open
 - id: '1752632870011'
-  alias: Bedroom Pico Off
+  alias: Pico Off
   description: ''
   use_blueprint:
     path: pico_remote_button.yaml
@@ -271,7 +271,7 @@
         target:
           entity_id: scene.bedroom_blackout_close
 - id: '1758341059232'
-  alias: Office Lights
+  alias: Lights
   description: ''
   use_blueprint:
     path: occupancy_lights.yaml
@@ -280,7 +280,7 @@
       - light.office
       occupancy: binary_sensor.office_aziz
 - id: '1758341121396'
-  alias: Bedroom Lights
+  alias: Lights
   description: ''
   use_blueprint:
     path: occupancy_lights.yaml
@@ -290,7 +290,7 @@
       - light.bedroom_muscle
       occupancy: binary_sensor.bedroom_aziz
 - id: '1758341153495'
-  alias: Loft Lights
+  alias: Lights
   description: ''
   use_blueprint:
     path: occupancy_lights.yaml
@@ -300,7 +300,7 @@
       - light.loft_muscle
       occupancy: binary_sensor.loft_aziz
 - id: '1758341469250'
-  alias: Dining Room Lights
+  alias: Lights
   description: ''
   use_blueprint:
     path: occupancy_lights.yaml
@@ -310,7 +310,7 @@
       - light.dining_room_lego
       occupancy: binary_sensor.dining_room_aziz
 - id: '1758395540557'
-  alias: Bedroom Blinds
+  alias: Blinds
   description: ''
   use_blueprint:
     path: night_blinds.yaml
@@ -320,7 +320,7 @@
       window: binary_sensor.bedroom_window
       privacy: input_boolean.bedroom_privacy
 - id: '1758395564309'
-  alias: Office Blinds
+  alias: Blinds
   description: ''
   use_blueprint:
     path: night_blinds.yaml
@@ -330,7 +330,7 @@
       window: binary_sensor.office_window
       privacy: input_boolean.office_privacy
 - id: '1783216934492'
-  alias: Bathroom Off
+  alias: 'Off'
   description: Turn things off when the last person goes to sleep, or the home is
     no longer occupied.
   triggers:
@@ -362,7 +362,7 @@
       entity_id: media_player.bathroom
   mode: single
 - id: '1783217502651'
-  alias: Kitchen Lights
+  alias: Lights
   description: 'Turns on the kitchen counter lights for 15 minutes after motion is
     detected, or when anyone comes home at night.
 
@@ -442,7 +442,7 @@
         entity_id: light.kitchen_counter
   mode: restart
 - id: '1783369377035'
-  alias: Bedroom Blackout
+  alias: Blackout
   description: Close the bedroom blackout blinds when we're sleeping in, and open
     when we wake up.
   triggers:
@@ -492,7 +492,7 @@
           entity_id: scene.bedroom_blackout_close
   mode: queued
 - id: '1783369489950'
-  alias: Bedroom Off
+  alias: 'Off'
   description: Turn things off in the bedroom that don't have their own automations.
   triggers:
   - trigger: state
@@ -529,7 +529,7 @@
       entity_id: media_player.bedroom
   mode: single
 - id: '1783369660478'
-  alias: Dining Room Off
+  alias: 'Off'
   description: Turn things off when the last person goes to sleep, or the home is
     no longer occupied.
   triggers:
@@ -567,7 +567,7 @@
       entity_id: media_player.dining_room
   mode: single
 - id: '1783369934660'
-  alias: Dining Room Tabletop
+  alias: Tabletop
   description: Set dining room light scenes based on the tabletop TV.
   triggers:
   - trigger: state
@@ -607,7 +607,7 @@
       - action: script.dining_room_game_over
   mode: queued
 - id: '1783369983676'
-  alias: Downstairs Bathroom Off
+  alias: 'Off'
   description: Turn things off when the last person goes to sleep, or the home is
     no longer occupied.
   triggers:
@@ -656,7 +656,7 @@
         '
   mode: single
 - id: '1783370103733'
-  alias: Kitchen Home at Night
+  alias: Home at Night
   description: Turns on the entrance lights when anyone comes home late at night.
   triggers:
   - trigger: state
@@ -683,7 +683,7 @@
       entity_id: light.entrance
   mode: restart
 - id: '1783370159944'
-  alias: Kitchen Off
+  alias: 'Off'
   description: Turn things off when the last person goes to sleep, or the home is
     no longer occupied.
   triggers:
@@ -713,7 +713,7 @@
       entity_id: media_player.kitchen
   mode: single
 - id: '1783370234814'
-  alias: Loft Off
+  alias: 'Off'
   description: Turn things off when the last person goes to sleep, or the home is
     no longer occupied.
   triggers:
@@ -749,7 +749,7 @@
       entity_id: media_player.loft_tv
   mode: single
 - id: '1783370287576'
-  alias: Loft TV
+  alias: Theater Lights
   description: Turn loft ceiling lights off while the TV is on, and back on again
     when TV is turned off.
   triggers:
@@ -785,7 +785,7 @@
           entity_id: light.loft_ceiling
   mode: queued
 - id: '1783370329563'
-  alias: Office Off
+  alias: 'Off'
   description: Turn things off when the last person goes to sleep, or the home is
     no longer occupied.
   triggers:
@@ -817,7 +817,7 @@
       entity_id: media_player.office
   mode: single
 - id: '1783370384948'
-  alias: Roof Off
+  alias: 'Off'
   description: Turn things off when the last person goes to sleep, or the home is
     no longer occupied.
   triggers:
@@ -843,7 +843,7 @@
       area_id: roof
   mode: single
 - id: '1783370418828'
-  alias: Stairs Off
+  alias: 'Off'
   description: Turn things off when the last person goes to sleep, or the home is
     no longer occupied.
   triggers:
@@ -869,7 +869,7 @@
       area_id: stairs
   mode: single
 - id: '1783370582497'
-  alias: Kitchen Blinds
+  alias: Blinds
   description: Open and close the kitchen window blinds based on the time of day,
     sun position, and weather.
   triggers:
@@ -965,7 +965,7 @@
           entity_id: scene.kitchen_nighttime
   mode: queued
 - id: '1783370684607'
-  alias: Dining Room Blinds
+  alias: Blinds
   description: Open and close the dining room window blinds based on the time of day,
     sun position, and weather.
   triggers:
