@@ -21,7 +21,7 @@ blueprint:
       selector:
         entity:
           filter:
-            - domain: switch
+            - domain: light
 
 mode: queued
 
@@ -45,28 +45,40 @@ variables:
 
 actions:
   - choose:
-      # When the light is the trigger, if the switch is not in the same state,
-      # set it to the same state.
+      # When a light is the trigger, turn on the switch if any are on, or turn
+      # off the switch if all are off.
       - conditions:
           - condition: trigger
             id: light
-          - "{{ not is_state(switch, trigger.to_state.state) }}"
+          - condition: template
+            value_template: |
+              {% if trigger.to_state.state == 'on' %}
+                {{ lights | select('is_state', 'on') | list | length > 0 }}
+              {% else %}
+                {{ lights | select('is_state', 'on') | list | length == 0 }}
+              {% endif %}
         sequence:
           - action: |
               {% if trigger.to_state.state == 'on' %}
-                switch.turn_on
+                light.turn_on
               {% else %}
-                switch.turn_off
+                light.turn_off
               {% endif %}
             target:
               entity_id: !input switch
 
-      # When the switch is the trigger, if no lights are in the same state,
-      # set them to the same state.
+      # When the switch is the trigger, turn on lights if none are on, or turn
+      # off lights if any are on.
       - conditions:
           - condition: trigger
             id: switch
-          - "{{ lights | select('is_state', trigger.to_state.state) | list | length == 0 }}"
+          - condition: template
+            value_template: |
+              {% if trigger.to_state.state == 'on' %}
+                {{ lights | select('is_state', 'on') | list | length == 0 }}
+              {% else %}
+                {{ lights | select('is_state', 'on') | list | length > 0 }}
+              {% endif %}
         sequence:
           - action: |
               {% if trigger.to_state.state == 'on' %}
