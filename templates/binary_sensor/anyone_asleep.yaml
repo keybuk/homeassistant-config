@@ -19,3 +19,11 @@
       entity_id: |
         {{ state_attr('zone.home', 'persons') | select('is_state', 'home')
            | map('state_attr', 'asleep') | list + ['zone.home'] }}
+      asleep: |
+        {% set ns = namespace(persons=[]) %}
+        {% for person in state_attr('zone.home', 'persons') | select('is_state', 'home') %}
+          {% if is_state(state_attr(person, 'asleep'), 'on') %}
+            {% set ns.persons = ns.persons + [person] %}
+          {% endif %}
+        {% endfor %}
+        {{ ns.persons | map('state_attr', 'friendly_name') | list }}
