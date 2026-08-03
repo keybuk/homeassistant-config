@@ -6,7 +6,7 @@
         - sensor.bedroom_airgradient_one_humidity
         - sensor.bedroom_evaporative_cooler_humidity
         - sensor.bedroom_eve_room_humidity
-  name: Bedroom Humidity
+  name: Humidity
   unique_id: bedroom_humidity
 
 - use_blueprint:
@@ -15,7 +15,7 @@
       sensors:
         - sensor.dining_room_evaporative_cooler_humidity
         - sensor.dining_room_eve_room_humidity
-  name: Dining Room Humidity
+  name: Humidity
   unique_id: dining_room_humidity
 
 - use_blueprint:
@@ -24,7 +24,7 @@
       sensors:
         - sensor.downstairs_ecobee_current_humidity
         - sensor.kitchen_airgradient_one_humidity
-  name: Kitchen Humidity
+  name: Humidity
   unique_id: kitchen_humidity
 
 - use_blueprint:
@@ -32,7 +32,7 @@
     input:
       sensors:
         - sensor.loft_evaporative_cooler_humidity
-  name: Loft Humidity
+  name: Humidity
   unique_id: loft_humidity
 
 - use_blueprint:
@@ -40,7 +40,7 @@
     input:
       sensors:
         - sensor.office_evaporative_cooler_humidity
-  name: Office Humidity
+  name: Humidity
   unique_id: office_humidity
 
 - use_blueprint:
@@ -49,5 +49,5 @@
       sensors:
         - sensor.stairs_evaporative_cooler_humidity
         - sensor.upstairs_ecobee_current_humidity
-  name: Stairs Humidity
+  name: Humidity
   unique_id: stairs_humidity

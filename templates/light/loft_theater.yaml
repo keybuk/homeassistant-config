@@ -1,6 +1,6 @@
 #  When the TV is on, only the wall lights are controlled by occupancy.
 - light:
-    name: Loft Theater
+    name: Theater
     unique_id: loft_theater
     state: |
       {% if is_state('media_player.loft_tv', 'on') %}

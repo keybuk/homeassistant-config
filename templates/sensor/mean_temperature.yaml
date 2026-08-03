@@ -6,7 +6,7 @@
         - sensor.bedroom_airgradient_one_temperature
         - sensor.bedroom_ecobee_temperature
         - sensor.bedroom_eve_room_temperature
-  name: Bedroom Temperature
+  name: Temperature
   unique_id: bedroom_temperature
 
 - use_blueprint:
@@ -16,7 +16,7 @@
         - sensor.dining_room_ceiling_temperature
         - sensor.dining_room_ecobee_temperature
         - sensor.dining_room_eve_room_temperature
-  name: Dining Room Temperature
+  name: Temperature
   unique_id: dining_room_temperature
 
 - use_blueprint:
@@ -25,7 +25,7 @@
       sensors:
         - sensor.downstairs_ecobee_current_temperature
         - sensor.kitchen_airgradient_one_temperature
-  name: Kitchen Temperature
+  name: Temperature
   unique_id: kitchen_temperature
 
 - use_blueprint:
@@ -33,7 +33,7 @@
     input:
       sensors:
         - sensor.loft_ecobee_temperature
-  name: Loft Temperature
+  name: Temperature
   unique_id: loft_temperature
 
 - use_blueprint:
@@ -41,7 +41,7 @@
     input:
       sensors:
         - sensor.office_ecobee_temperature
-  name: Office Temperature
+  name: Temperature
   unique_id: office_temperature
 
 - use_blueprint:
@@ -49,5 +49,5 @@
     input:
       sensors:
         - sensor.upstairs_ecobee_current_temperature
-  name: Stairs Temperature
+  name: Temperature
   unique_id: stairs_temperature
