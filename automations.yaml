@@ -359,7 +359,8 @@
   - action: media_player.media_pause
     continue_on_error: true
     target:
-      entity_id: media_player.bathroom
+      entity_id: media_player.bathroom_sonos
+    data: {}
   mode: single
 - id: '1783217502651'
   alias: Lights
@@ -371,7 +372,7 @@
   - note: Trigger using the Eve Motion, as it's the most reliable.
     trigger: state
     entity_id:
-    - binary_sensor.dining_room_motion_occupancy
+    - binary_sensor.dining_room_eve_motion_occupancy
     to:
     - 'on'
   - trigger: state
@@ -526,7 +527,8 @@
   - action: media_player.media_pause
     continue_on_error: true
     target:
-      entity_id: media_player.bedroom
+      entity_id: media_player.bedroom_sonos
+    data: {}
   mode: single
 - id: '1783369660478'
   alias: 'Off'
@@ -564,7 +566,8 @@
   - action: media_player.media_pause
     continue_on_error: true
     target:
-      entity_id: media_player.dining_room
+      entity_id: media_player.dining_room_sonos
+    data: {}
   mode: single
 - id: '1783369934660'
   alias: Tabletop
@@ -634,7 +637,8 @@
   - action: media_player.media_pause
     continue_on_error: true
     target:
-      entity_id: media_player.downstairs_bathroom
+      entity_id: media_player.downstairs_bathroom_sonos
+    data: {}
   mode: single
 - id: '1783370044973'
   alias: Door Opened Notification
@@ -675,12 +679,14 @@
   actions:
   - action: light.turn_on
     target:
-      entity_id: light.entrance
+      entity_id: light.kitchen_entrance
+    data: {}
   - delay:
       minutes: 15
   - action: light.turn_off
     target:
-      entity_id: light.entrance
+      entity_id: light.kitchen_entrance
+    data: {}
   mode: restart
 - id: '1783370159944'
   alias: 'Off'
@@ -710,7 +716,8 @@
   - action: media_player.media_pause
     continue_on_error: true
     target:
-      entity_id: media_player.kitchen
+      entity_id: media_player.kitchen_sonos
+    data: {}
   mode: single
 - id: '1783370234814'
   alias: 'Off'
@@ -742,7 +749,8 @@
   - action: media_player.media_pause
     continue_on_error: true
     target:
-      entity_id: media_player.loft
+      entity_id: media_player.loft_sonos
+    data: {}
   - action: media_player.turn_off
     continue_on_error: true
     target:
@@ -814,7 +822,8 @@
   - action: media_player.media_pause
     continue_on_error: true
     target:
-      entity_id: media_player.office
+      entity_id: media_player.office_sonos
+    data: {}
   mode: single
 - id: '1783370384948'
   alias: 'Off'
