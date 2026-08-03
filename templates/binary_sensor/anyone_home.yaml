@@ -48,3 +48,11 @@
                 'binary_sensor.doors_opened_while_not_occupied',
                 'lock.front_door',
                 'zone.home' ] }}
+        home: |
+          {% if state_attr('zone.home', 'persons') %}
+            {{ state_attr('zone.home', 'persons') | select('is_state', 'home') | map('state_attr', 'friendly_name') | list }}
+          {% elif is_state('binary_sensor.anyone_home', 'on') %}
+            {{ state_translated('binary_sensor.home_occupancy') }}
+          {% else %}
+            Clear
+          {% endif %}
