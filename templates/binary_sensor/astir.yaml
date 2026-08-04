@@ -16,13 +16,6 @@
 - use_blueprint:
     path: astir.yaml
     input:
-      occupancy: binary_sensor.home_occupancy
-  name: Home Astir
-  unique_id: home_astir
-
-- use_blueprint:
-    path: astir.yaml
-    input:
       occupancy: binary_sensor.kitchen_occupancy
   name: Astir
   unique_id: kitchen_astir
