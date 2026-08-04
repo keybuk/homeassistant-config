@@ -1,5 +1,5 @@
 blueprint:
-  name: Room Astir
+  name: Astir
   description: >
     Creates an occupancy sensor that combines room occupancy with home occupancy
     to filter out false positives when no-one is home, while also keeping lights

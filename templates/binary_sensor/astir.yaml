@@ -1,48 +1,55 @@
 # Occupancy sensors for rooms, checking for anyone home and awake.
 - use_blueprint:
-    path: room_astir.yaml
+    path: astir.yaml
     input:
       occupancy: binary_sensor.bedroom_occupancy
   name: Astir
   unique_id: bedroom_astir
 
 - use_blueprint:
-    path: room_astir.yaml
+    path: astir.yaml
     input:
       occupancy: binary_sensor.dining_room_occupancy
   name: Astir
   unique_id: dining_room_astir
 
 - use_blueprint:
-    path: room_astir.yaml
+    path: astir.yaml
+    input:
+      occupancy: binary_sensor.home_occupancy
+  name: Home Astir
+  unique_id: home_astir
+
+- use_blueprint:
+    path: astir.yaml
     input:
       occupancy: binary_sensor.kitchen_occupancy
   name: Astir
   unique_id: kitchen_astir
 
 - use_blueprint:
-    path: room_astir.yaml
+    path: astir.yaml
     input:
       occupancy: binary_sensor.loft_occupancy
   name: Astir
   unique_id: loft_astir
 
 - use_blueprint:
-    path: room_astir.yaml
+    path: astir.yaml
     input:
       occupancy: binary_sensor.office_occupancy
   name: Astir
   unique_id: office_astir
 
 - use_blueprint:
-    path: room_astir.yaml
+    path: astir.yaml
     input:
       occupancy: binary_sensor.roof_occupancy
   name: Astir
   unique_id: roof_astir
 
 - use_blueprint:
-    path: room_astir.yaml
+    path: astir.yaml
     input:
       occupancy: binary_sensor.stairs_occupancy
   name: Astir
