@@ -1,41 +1,33 @@
 # Occupancy sensors for rooms that combine occupancy with weather conditions
 # and privacy latches to determine whether lights in a room should be on.
 - use_blueprint:
-    path: latched_occupancy.yaml
+    path: aziz.yaml
     input:
-      sensors:
-        - binary_sensor.bedroom_astir
-        - binary_sensor.dark_outside
+      occupancy: binary_sensor.bedroom_astir
       latch: input_boolean.bedroom_privacy
   name: Aziz
   unique_id: bedroom_aziz
 
 - use_blueprint:
-    path: latched_occupancy.yaml
+    path: aziz.yaml
     input:
-      sensors:
-        - binary_sensor.home_astir
-        - binary_sensor.dark_outside
+      occupancy: binary_sensor.home_astir
       latch: input_boolean.dining_room_privacy
   name: Aziz
   unique_id: dining_room_aziz
 
 - use_blueprint:
-    path: latched_occupancy.yaml
+    path: aziz.yaml
     input:
-      sensors:
-        - binary_sensor.loft_astir
-        - binary_sensor.dark_outside
+      occupancy: binary_sensor.loft_astir
       latch: input_boolean.loft_privacy
   name: Aziz
   unique_id: loft_aziz
 
 - use_blueprint:
-    path: latched_occupancy.yaml
+    path: aziz.yaml
     input:
-      sensors:
-        - binary_sensor.office_astir
-        - binary_sensor.dark_outside
+      occupancy: binary_sensor.office_astir
       latch: input_boolean.office_privacy
   name: Aziz
   unique_id: office_aziz
