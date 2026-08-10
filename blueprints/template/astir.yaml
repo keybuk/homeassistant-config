@@ -3,7 +3,7 @@ blueprint:
   description: >
     Creates an occupancy sensor that combines room occupancy with home occupancy
     to filter out false positives when no-one is home, while also keeping lights
-    off while everyone is asleep without turning them off immediately.
+    off while everyone is asleep, without turning them off immediately.
   author: "Scott James Remnant <scott@netsplit.com>"
   domain: template
   input:
@@ -16,13 +16,28 @@ blueprint:
           filter:
             - domain: binary_sensor
               device_class: occupancy
+    delay:
+      name: Delay
+      description: >
+        The delay before considering the room unoccupied.
+      selector:
+        duration:
+      default:
+        hours: 0
+        minutes: 5
+        seconds: 0
 
 triggers:
+  # Update when occupied.
   - trigger: state
     entity_id: !input occupancy
-    to:
-      - "on"
-      - "off"
+    to: "on"
+  # Update when not occupied for five minutes.
+  - trigger: state
+    entity_id: !input occupancy
+    to: "off"
+    for: !input delay
+  # Update with home occupancy.
   - trigger: state
     entity_id: binary_sensor.anyone_home
     to:

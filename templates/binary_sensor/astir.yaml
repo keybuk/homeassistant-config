@@ -45,5 +45,9 @@
     path: astir.yaml
     input:
       occupancy: binary_sensor.stairs_occupancy
+      delay:
+        hours: 0
+        minutes: 0
+        seconds: 0
   name: Astir
   unique_id: stairs_astir
