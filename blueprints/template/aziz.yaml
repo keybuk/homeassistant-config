@@ -49,7 +49,7 @@ variables:
 binary_sensor:
   device_class: occupancy
   state: |
-    {{ 'off' if is_state(occupancy, 'off')
+    {{ 'off' if (is_state(occupancy, 'off') or is_state('binary_sensor.dark_outside', 'off'))
        and is_state(latch, 'off') else 'on' }}
   attributes:
     entity_id: "{{ [ occupancy, 'binary_sensor.dark_outside', latch ] }}"
